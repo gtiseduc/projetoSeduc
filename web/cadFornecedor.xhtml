@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="menuesquerdo">
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>CARGO - FUNÇÃO</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="cadFornecedor.jsf">Cadastro fornecedor </a></li>
+
+                            <li><a href="cadProduto.jsf">Cadastro produto</a></li>
+                        </ul></li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="gerPedido.jsf">Gerenciar pedidos</a></li>
+                        </ul></li>
+                    <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                 class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu" style="display: none">
+                             <li><a href="general_elements.html">Gerar chamados</a></li>
+                             
+                         </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar relatório</a></li>
+
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar grafico</a></li>
+
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+    <ui:define name="formulario">
+
+
+
+        <!--<p:toolbar>
+                 <p:toolbarGroup>
+                    
+                     <p:spacer width="20"  />
+                     <p:inputMask mask="99.999.999/9999-99" value="{pessoaBean.parametro}" >  </p:inputMask>
+                 
+                     <p:spacer width="10"  />
+                     <p:commandButton value="BUSCAR" action="{pessoaBean.buscar(pessoaBean.parametro)}"  update="@form"></p:commandButton>  
+                      
+                 </p:toolbarGroup>
+ 
+ 
+             </p:toolbar>-->
+        <h:form>
+             <p:growl id="growl" life="3500" />
+            <p:fieldset legend="Dados da empresa" >
+                <div class="form-group col-md-2">
+                    <label>Tipo de Pessoa</label>
+                    <p:selectOneMenu id="console" value="#{fornecedorBean.fornecedor.pessoa}" >
+                        <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                        <f:selectItem itemLabel="PESSOA FÍSICA" itemValue="F" />
+                        <f:selectItem itemLabel="PESSOA JURÍDICA" itemValue="J" />            
+                    </p:selectOneMenu>
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Razão Social</label>
+                    <p:inputText type="text" value="#{fornecedorBean.fornecedor.rzSocial}" class="form-control"/>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Cnpj</label>
+                    <p:inputMask mask="99.999.999/9999-99" value="#{fornecedorBean.fornecedor.cnpj}"  class="form-control"/>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Nome fantasia</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.fantasia}" />
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Inscrição municipal</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.municipal}" />
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Inscrição estadual</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.estadual}" />
+                </div>
+            </p:fieldset>
+            <br/>
+            <p:fieldset legend="Endereço">
+                <div class="form-group col-md-1">
+                    <label>CEP</label>
+                    <p:inputMask mask="99.999-999" class="form-control" value="#{fornecedorBean.fornecedor.cep}" />
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Endereço</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.endereco}" />
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <label>Complemento</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.complemento}" />
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label>Número</label>
+                    <p:inputText  class="form-control" value="#{fornecedorBean.fornecedor.numero}" />
+                </div>
+
+
+
+
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.bairro}" />
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Cidade</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.cidade}" />
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label>Estado</label>
+                    <p:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}"  >
+                        <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                        <f:selectItem itemLabel="PE" itemValue="PE" />
+                        <f:selectItem itemLabel="PB" itemValue="PB" />            
+                    </p:selectOneMenu>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label>Pais</label>
+                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.pais}" />
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Telefone</label>
+                    <p:inputMask mask="(99)99999-9999"  class="form-control" value="#{fornecedorBean.fornecedor.telefone1}" />
+                </div>  
+
+                <div class="form-group col-md-2">
+                    <label>Telefone</label>
+                    <p:inputMask mask="(99)99999-9999"  class="form-control" value="#{fornecedorBean.fornecedor.telefone2}"  />
+                </div>
+                <div class="form-group col-md-8">
+                    <label>Email</label>
+                    <p:inputText  class="form-control" value="#{fornecedorBean.fornecedor.email}" />
+                </div>
+
+
+            </p:fieldset>
+            <br/>
+
+            <p:commandButton value="Salvar" action="#{fornecedorBean.salvar()}"  update="@form"/>
+            
+            <br/>
+            <br/>
+
+            <p:dataTable value="#{fornecedorBean.fornecedores}" var="fornecedor" rendered="true">
+
+                <p:column headerText="Fornecedores">
+                    <p:commandButton value="EDITAR" action="#{fornecedorBean.editar(fornecedor)}"  update="@form" />  
+                    <p:commandButton value="Excluir" action="#{fornecedorBean.excluir(fornecedor)}" update="@form" />
+                </p:column>
+                <!-- <p:commandButton value="EXCLUIR" action="{pessoaBean.deletar(pessoa)}" update="@form"></p:commandButton> 
+                <p:commandButton value="EXCLUIR"  update="@form"></p:commandButton>  -->
+
+
+
+                <p:column headerText="cnpj">
+                    <h:outputText value="#{fornecedor.cnpj}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+                <p:column headerText="Rz social">
+                    <h:outputText value="#{fornecedor.rzSocial}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+
+                <p:column headerText="endereco">
+                    <h:outputText value="#{fornecedor.endereco}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+
+                <p:column headerText="cidade">
+                    <h:outputText value="#{fornecedor.cidade}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+
+                <p:column headerText="telefone">
+                    <h:outputText value="#{fornecedor.telefone1}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+                <p:column headerText="telefone">
+                    <h:outputText value="#{fornecedor.telefone2}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+                <p:column headerText="email">
+                    <h:outputText value="#{fornecedor.email}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:decorate>
+
+
+
+
+
+

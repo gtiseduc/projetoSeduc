@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <h:head>
+        <title>Secretaria Municipal de Educação</title>
+
+
+        <link rel="stylesheet" type="text/css"  href="#{request.contextPath}/resources/fonts/css/font-awesome.css"/>
+        <link rel="stylesheet" type="text/css"  href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="custom.css" />
+      
+        <h:outputStylesheet library="css" name="animate.min.css" />
+
+
+    </h:head>
+
+
+
+
+
+
+
+
+
+    <h:body style="background:#F7F7F7;">
+
+        <div class="">
+
+
+            <div id="wrapper">
+                <div id="login" class="animate form">
+                    <section class="login_content">
+                        <h:form id="formLogin">
+                            <p:growl id="growl" life="3500" />
+
+                            <h1>Login </h1>
+                            <div>
+                                <p:inputMask mask="999.999.999-99" placeholder="Usuario"  value="#{loginBean.login.cpf}"/>
+                            </div>
+                            <div>
+                                <p:inputText placeholder="Senha" type="password" value="#{loginBean.login.senha}" />
+                            </div>
+                            <div>
+                                <a>
+                                    <p:commandButton  value="Log in" id="ajax" update="formLogin"   action="#{loginBean.buscarLogin()}"  />
+                                </a>
+
+                                <a class="reset_pass" href="#">Esqueceu sua senha?</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="separator">
+
+
+                                <div class="clearfix"></div>
+                                <br />
+                                <div>
+                                    <h1><i class="fa fa-book" style="font-size: 26px;"></i> Sistema de administração geral</h1>
+
+                                    <p>© 2019 Todos os direitos reservados a Secretaria Municipal de Educação do Paudalho</p>
+                                </div>
+                            </div>
+                        </h:form>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+
+
+       
+
+
+
+    </h:body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
