@@ -72,11 +72,11 @@
 
             <div class="form-group col-md-4">
                 <label>Fornecedor</label>
-                <h:selectOneMenu id="console" value="#{fornecedorBean.fornecedor}" >
+                <p:selectOneMenu id="console" value="#{fornecedorBean.fornecedor}" >
                     <f:selectItem itemLabel="Selecione" itemValue=""/> 
                   <!--  <f:selectItems   value="{fornecedorBean.listarFornecedores()}" var="f" itemValue="{f}" itemLabel="{f.cnpj}" /> -->          
                   <f:selectItems   value="#{fornecedorBean.selectFornecedores}" />         
-                    </h:selectOneMenu>
+                    </p:selectOneMenu>
             </div>
 
             <div class="form-group col-md-4">

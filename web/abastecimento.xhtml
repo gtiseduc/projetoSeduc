@@ -1,0 +1,161 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="menuesquerdo">
+
+
+
+
+
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>CARGO - FUNÇÃO</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="cadVeiculo.jsf">Cadastro veiculo </a></li>
+
+                          <!--  <li><a href="gerAbastecimento.jsf">Cadastro produto</a></li>-->
+                        </ul></li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href=".jsf">Gerenciar abastecimento</a></li>
+                        </ul></li>
+                    <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                 class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu" style="display: none">
+                             <li><a href="general_elements.html">Gerar chamados</a></li>
+                             
+                         </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar relatório</a></li>
+
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar grafico</a></li>
+
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+    <ui:define name="formulario">
+
+
+        <!--<h3 style="margin-top:0">Cadastro veiculos</h3>-->
+        <h:form>
+
+            <br/>
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i  class="fa fa-car"></i></span>
+                        <p:inputText placeholder="Placa veiculo" />      
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-5">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-edit"></i></span>
+                        <p:inputText placeholder="Descrição veiculo" />      
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-5">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                        <p:inputText placeholder="Responsável veiculo" />      
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+
+
+                <div class="ui-g-12 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-phone-square"></i></span>
+                        <p:inputMask  mask="(99) 99999-9999" placeholder="Telefone - 1" />      
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-phone-square"></i></span>
+                        <p:inputMask  mask="(99) 99999-9999" placeholder="Telefone - 2" />      
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                        <p:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}"  >
+                            <f:selectItem itemLabel="SELECIONE A SECRETARIA" itemValue="" />
+                            <f:selectItem itemLabel="Secretaria de obras" itemValue="PE" />
+                            <f:selectItem itemLabel="Secretaria de educação" itemValue="PE" />
+                            <f:selectItem itemLabel="Secretaria de saúde" itemValue="PE" />
+                            <f:selectItem itemLabel="Secretaria de agricultura" itemValue="PE" />
+
+                        </p:selectOneMenu>      
+                    </div>
+                </div>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <p:commandButton value="Salvar"/>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <p:dataTable var="veiculo" value="#{dtBasicView.cars}" rendered="true">
+                    <p:column headerText="Lista de veiculos">
+                        <p:commandButton value="Editar"/>
+                        <p:commandButton value="Excluir"/>
+                    </p:column>
+
+                    <p:column headerText="Placa">
+                        <h:outputText value="#{car.id}" />
+                    </p:column>
+
+                    <p:column headerText="Descrição" priority="3">
+                        <h:outputText value="#{car.year}" />
+                    </p:column>
+
+                    <p:column headerText="Responsável" priority="2">
+                        <h:outputText value="#{car.brand}" />
+                    </p:column>
+
+                    <p:column headerText="Secretaria" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Telefone - 1" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Telefone - 2" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                </p:dataTable>
+
+
+            </div>
+        </h:form>
+       
+    </ui:define>  
+
+</ui:decorate>
