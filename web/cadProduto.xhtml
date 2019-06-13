@@ -8,11 +8,11 @@
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="menuesquerdo">
-      
-        
-        
-        
-        
+
+
+
+
+
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -24,12 +24,12 @@
                         <ul class="nav child_menu" style="display: none">
                             <li><a href="cadFornecedor.jsf">Cadastro fornecedor </a></li>
 
-                             <li><a href="cadProduto.jsf">Cadastro produto</a></li>
+                            <li><a href="cadProduto.jsf">Cadastro produto</a></li>
                         </ul></li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                             <li><a href="gerPedido.jsf">Gerenciar pedidos</a></li>
+                            <li><a href="gerPedido.jsf">Gerenciar pedidos</a></li>
                         </ul></li>
                     <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
                                  class="fa fa-chevron-down"></span></a>
@@ -56,63 +56,146 @@
 
     <ui:define name="formulario">
 
-
-
+        
+              
         <p:fieldset legend="Cadastro produto">
 
-            <div class="form-group col-md-2">
-                <label>Código do Produto</label>
-                <input type="text" class="form-control"/>
+
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
+                        <p:inputText placeholder="Código produto" />      
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-5">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-edit"></i></span>
+                        <p:inputText placeholder="Descrição produto" />      
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-5">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-registered"></i></span>
+                        <p:inputText placeholder="Marca" />      
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                           <p:selectOneMenu id="fornecedor" value="#{fornecedorBean.fornecedor}" >
+                              <f:selectItem itemLabel="Selecione" itemValue=""/> 
+                                    
+                              <f:selectItems   value="#{fornecedorBean.selectFornecedores}" />         
+                          </p:selectOneMenu>    
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-balance-scale"></i></span>
+                        <p:selectOneMenu id="unidade" value="{fornecedorBean.fornecedor}" >
+
+                            <f:selectItem itemLabel="Pç,Kg,Un,L,Mão..." itemValue=""/> 
+                            <f:selectItem itemLabel="Pç" itemValue=""/> 
+                            <f:selectItem itemLabel="Kg" itemValue=""/> 
+                            <f:selectItem itemLabel="Un" itemValue=""/> 
+                            <f:selectItem itemLabel="L" itemValue=""/> 
+                            <f:selectItem itemLabel="Mão" itemValue=""/> 
+
+
+                        </p:selectOneMenu>         
+                    </div>
+                </div>
+
+
+
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-balance-scale"></i></span>
+                        <p:inputText placeholder="Peso em - Kg" />      
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
+                        <p:inputText placeholder="Valor unitario" />      
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-2">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
+                        <p:inputText placeholder="Valor total" />      
+                    </div>
+                </div>
+             
+                <br/>
+                <br/>
+                <br/>
+                
+                <div class="ui-g-12 ui-md-8">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-pencil-square-o"></i></span>
+                        <p:inputTextarea placeholder="Especificação do produto" />      
+                    </div>
+               
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <p:commandButton value="Salvar"/>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <p:dataTable var="produto" value="#{dtBasicView.cars}" rendered="true">
+                    <p:column headerText="Lista de produtos">
+                        <p:commandButton value="Editar"/>
+                        <p:commandButton value="Excluir"/>
+                    </p:column>
+
+                    <p:column headerText="Código">
+                        <h:outputText value="#{car.id}" />
+                    </p:column>
+
+                    <p:column headerText="Descrição" priority="3">
+                        <h:outputText value="#{car.year}" />
+                    </p:column>
+
+                    <p:column headerText="Marca" priority="2">
+                        <h:outputText value="#{car.brand}" />
+                    </p:column>
+
+                    <p:column headerText="Fornecedor" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Unidade -medida" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Peso" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Valor unitario" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                    <p:column headerText="Valor total" priority="4">
+                        <h:outputText value="#{car.color}" />
+                    </p:column>
+                </p:dataTable>
+
+
             </div>
-            <div class="form-group col-md-6">
 
-                <label>Nome do Produto</label>
-                <input type="text" class="form-control"/>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label>Fornecedor</label>
-                <p:selectOneMenu id="console" value="#{fornecedorBean.fornecedor}" >
-                    <f:selectItem itemLabel="Selecione" itemValue=""/> 
-                  <!--  <f:selectItems   value="{fornecedorBean.listarFornecedores()}" var="f" itemValue="{f}" itemLabel="{f.cnpj}" /> -->          
-                  <f:selectItems   value="#{fornecedorBean.selectFornecedores}" />         
-                    </p:selectOneMenu>
-            </div>
-
-            <div class="form-group col-md-4">
-                <label>Marca</label>
-                <input type="text" class="form-control"/>
-            </div>
-            <div class="form-group col-md-2">
-                <label>Unidade</label>
-                <select id="inputState" class="form-control">
-                    <option selected="selected">Pç,Kg,Un,L,Mão...</option>
-                    <option>Pç</option>
-                    <option>Kg</option>
-                    <option>Un</option>
-                    <option>L</option>
-                    <option>Mão</option>
-
-                </select>
-            </div>
-
-            <div class="form-group col-md-2">
-                <label>Peso em - Kg</label>
-                <input type="text" class="form-control"/>
-            </div>      
-
-            <div class="form-group col-md-2">
-                <label>Valor unitario</label>
-                <input type="text" class="form-control"/>
-            </div>  
-            <div class="form-group col-md-2">
-                <label>Valor total</label>
-                <input type="text" class="form-control"/>
-            </div> 
-            <div class="form-group col-md-4">
-                <label>Especificação do produto</label>
-                <p:inputTextarea   class="form-control"/>
-            </div>  	
         </p:fieldset>
 
 

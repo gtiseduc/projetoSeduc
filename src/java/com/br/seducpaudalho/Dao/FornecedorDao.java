@@ -82,6 +82,60 @@ public class FornecedorDao {
         return fornecedores;
     
     }
+    public List<Fornecedor> lFornecedorCodigo(Integer codigo) throws ErroSistema {
+
+       System.out.println("entrou no lFornecedorCodigo fornecedor ---------------------" );
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from fornecedor where idFornecedor = ?";
+       
+        List<Fornecedor> fornecedores = new ArrayList<>();
+        
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            
+            ResultSet rs = ps.executeQuery();
+
+           
+
+            while (rs.next()) {
+                Fornecedor fornecedor = new Fornecedor();
+                
+                fornecedor.setIdFornecedor(rs.getInt("idFornecedor"));
+                fornecedor.setPessoa(rs.getString("tPessoa"));
+                fornecedor.setRzSocial(rs.getString("rzSocial"));
+                fornecedor.setCnpj(rs.getString("cnpj"));
+                fornecedor.setFantasia(rs.getString("nFantasia"));
+                fornecedor.setMunicipal(rs.getString("iMunicipal"));
+                fornecedor.setEstadual(rs.getString("iEstadual"));
+                fornecedor.setCep(rs.getString("cep"));
+                fornecedor.setEndereco(rs.getString("endereco"));
+                fornecedor.setComplemento(rs.getString("complemento"));
+                fornecedor.setNumero(rs.getString("numero"));
+                fornecedor.setBairro(rs.getString("bairro"));
+                fornecedor.setCidade(rs.getString("cidade"));
+                fornecedor.setEstado(rs.getString("estado"));
+                fornecedor.setTelefone1(rs.getString("telefone1"));
+                fornecedor.setTelefone2(rs.getString("telefone2"));
+                fornecedor.setEmail(rs.getString("email"));
+                fornecedores.add(fornecedor);
+                System.out.println("tamanho da lista de fornecedor " + fornecedor.getPessoa()); 
+            }
+          
+        } catch (Exception e) {
+            System.out.println("erro ao listar fornecedor " +e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+ System.out.println("tamanho da lista de fornecedores " + fornecedores.size() );
+        FabricaConexao.fecharConexao();
+        return fornecedores;
+    
+    }
 
     public Fornecedor buscarLoginN(Fornecedor fornecedor) throws ErroSistema {
 
