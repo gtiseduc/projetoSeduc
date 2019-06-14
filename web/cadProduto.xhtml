@@ -56,149 +56,155 @@
 
     <ui:define name="formulario">
 
-        
-              
-        <p:fieldset legend="Cadastro produto">
 
 
-            <div class="ui-g ui-fluid">
 
-                <div class="ui-g-12 ui-md-2">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
-                        <p:inputText placeholder="Código produto" />      
+
+
+        <h:form> 
+  
+
+            <p:fieldset legend="Cadastro produto">
+
+ 
+                <div class="ui-g ui-fluid">
+
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
+                            <p:inputText placeholder="Código produto" value="" disabled="true"/>      
+                        </div>
                     </div>
-                </div>
-                <div class="ui-g-12 ui-md-5">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-edit"></i></span>
-                        <p:inputText placeholder="Descrição produto" />      
+                    <div class="ui-g-12 ui-md-5">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-edit"></i></span>
+                            <p:inputText placeholder="Descrição produto" value="#{produtoBean.produto.nomeProduto}" />      
+                        </div>
                     </div>
-                </div>
 
-                <div class="ui-g-12 ui-md-5">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-registered"></i></span>
-                        <p:inputText placeholder="Marca" />      
+                    <div class="ui-g-12 ui-md-5">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-registered"></i></span>
+                            <p:inputText placeholder="Marca" value="#{produtoBean.produto.marcaProduto}"/>      
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <br/>
-                <br/>
-                <div class="ui-g-12 ui-md-4">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                           <p:selectOneMenu id="fornecedor" value="#{fornecedorBean.fornecedor}" >
-                              <f:selectItem itemLabel="Selecione" itemValue=""/> 
-                                    
-                              <f:selectItems   value="#{fornecedorBean.selectFornecedores}" />         
-                          </p:selectOneMenu>    
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="fornecedor" value="#{produtoBean.produto.idFornecedor}" >
+                                <f:selectItem itemLabel="Selecione" />       
+                                <f:selectItems   value="#{produtoBean.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.rzSocial}" itemValue="#{fornecedor.idFornecedor}"/>         
+                            </p:selectOneMenu>    
+                        </div>
                     </div>
-                </div>
 
-                <div class="ui-g-12 ui-md-2">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-balance-scale"></i></span>
-                        <p:selectOneMenu id="unidade" value="{fornecedorBean.fornecedor}" >
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-balance-scale"></i></span>
+                            <p:selectOneMenu id="unidade" value="#{produtoBean.produto.unidadeProduto}" >
 
-                            <f:selectItem itemLabel="Pç,Kg,Un,L,Mão..." itemValue=""/> 
-                            <f:selectItem itemLabel="Pç" itemValue=""/> 
-                            <f:selectItem itemLabel="Kg" itemValue=""/> 
-                            <f:selectItem itemLabel="Un" itemValue=""/> 
-                            <f:selectItem itemLabel="L" itemValue=""/> 
-                            <f:selectItem itemLabel="Mão" itemValue=""/> 
+                                <f:selectItem itemLabel="Pç,Kg,Un,L,Mão..." /> 
+                                <f:selectItem itemLabel="Pç" itemValue="Pç"/> 
+                                <f:selectItem itemLabel="Kg" itemValue="Kg"/> 
+                                <f:selectItem itemLabel="Un" itemValue="Un"/> 
+                                <f:selectItem itemLabel="L" itemValue="L"/> 
+                                <f:selectItem itemLabel="Mão" itemValue="Mao"/> 
 
 
-                        </p:selectOneMenu>         
+                            </p:selectOneMenu>         
+                        </div>
                     </div>
-                </div>
 
 
 
-                <div class="ui-g-12 ui-md-2">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-balance-scale"></i></span>
-                        <p:inputText placeholder="Peso em - Kg" />      
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-balance-scale"></i></span>
+                            <p:inputNumber placeholder="Código produto" value="#{produtoBean.produto.kiloProduto}" symbol="Kg "/>      
+                        </div>
                     </div>
-                </div>
-                <div class="ui-g-12 ui-md-2">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                        <p:inputText placeholder="Valor unitario" />      
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
+                            <p:inputNumber placeholder="Código produto" value="#{produtoBean.produto.valorUnitario}" symbol="R$ "/>  
+                            
+                        </div>
                     </div>
-                </div>
-                <div class="ui-g-12 ui-md-2">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                        <p:inputText placeholder="Valor total" />      
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-money"></i></span>
+                            <p:inputNumber placeholder="Código produto" value="#{produtoBean.produto.valorTotal}" symbol="R$ "/>      
+                        </div>
                     </div>
-                </div>
-             
-                <br/>
-                <br/>
-                <br/>
-                
-                <div class="ui-g-12 ui-md-8">
-                    <div class="ui-inputgroup">
-                        <span class="ui-inputgroup-addon"><i class="fa fa-pencil-square-o"></i></span>
-                        <p:inputTextarea placeholder="Especificação do produto" />      
+                   
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div class="ui-g-12 ui-md-8">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-pencil-square-o"></i></span>
+                            <p:inputTextarea placeholder="Especificação do produto" value="#{produtoBean.produto.especificacaoProduto}"/>      
+                        </div>
+
                     </div>
-               
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <p:commandButton value="Salvar" action="#{produtoBean.salvar()}"/>
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <p:dataTable var="produtos" value="#{produtoBean.produtos}" rendered="true">
+                        <p:column headerText="Lista de produtos">
+                            <p:commandButton value="Editar"/>
+                            <p:commandButton value="Excluir"/>
+                        </p:column>
+
+                        <p:column headerText="Código">
+                            <h:outputText value="#{produtos.idProduto}" />
+                        </p:column>
+
+                        <p:column headerText="Descrição" priority="3">
+                            <h:outputText value="#{produtos.especificacaoProduto}" />
+                        </p:column>
+
+                        <p:column headerText="Marca" priority="2">
+                            <h:outputText value="#{produtos.marcaProduto}" />
+                        </p:column>
+
+                        <p:column headerText="Fornecedor" priority="4">
+                            <h:outputText value="#{produtos.idFornecedor}" />
+                        </p:column>
+                        <p:column headerText="Unidade -medida" priority="4">
+                            <h:outputText value="#{produtos.unidadeProduto}" />
+                        </p:column>
+                        <p:column headerText="Peso" priority="4">
+                            <h:outputText value="#{produtos.kiloProduto}" />
+                        </p:column>
+                        <p:column headerText="Valor unitario" priority="4">
+                            <h:outputText value="#{produtos.valorUnitario}" />
+                        </p:column>
+                        <p:column headerText="Valor total" priority="4">
+                            <h:outputText value="#{produtos.valorTotal}" />
+                        </p:column>
+                    </p:dataTable>
+
+
                 </div>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
 
-                <p:commandButton value="Salvar"/>
-
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
-                <p:dataTable var="produto" value="#{dtBasicView.cars}" rendered="true">
-                    <p:column headerText="Lista de produtos">
-                        <p:commandButton value="Editar"/>
-                        <p:commandButton value="Excluir"/>
-                    </p:column>
-
-                    <p:column headerText="Código">
-                        <h:outputText value="#{car.id}" />
-                    </p:column>
-
-                    <p:column headerText="Descrição" priority="3">
-                        <h:outputText value="#{car.year}" />
-                    </p:column>
-
-                    <p:column headerText="Marca" priority="2">
-                        <h:outputText value="#{car.brand}" />
-                    </p:column>
-
-                    <p:column headerText="Fornecedor" priority="4">
-                        <h:outputText value="#{car.color}" />
-                    </p:column>
-                    <p:column headerText="Unidade -medida" priority="4">
-                        <h:outputText value="#{car.color}" />
-                    </p:column>
-                    <p:column headerText="Peso" priority="4">
-                        <h:outputText value="#{car.color}" />
-                    </p:column>
-                    <p:column headerText="Valor unitario" priority="4">
-                        <h:outputText value="#{car.color}" />
-                    </p:column>
-                    <p:column headerText="Valor total" priority="4">
-                        <h:outputText value="#{car.color}" />
-                    </p:column>
-                </p:dataTable>
-
-
-            </div>
-
-        </p:fieldset>
-
-
+            </p:fieldset>
+        </h:form>
 
 
 

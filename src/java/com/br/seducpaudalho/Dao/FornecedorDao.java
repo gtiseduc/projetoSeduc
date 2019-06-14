@@ -12,6 +12,7 @@ package com.br.seducpaudalho.Dao;
 
 
 import com.br.seducpaudalho.Entidade.Fornecedor;
+import com.br.seducpaudalho.Entidade.Produto;
 import com.br.seducpaudalho.Util.Excepition.ErroSistema;
 import com.br.seducpaudalho.Util.FabricaConexao;
 import java.sql.Connection;
@@ -65,6 +66,7 @@ public class FornecedorDao {
                 fornecedor.setBairro(rs.getString("bairro"));
                 fornecedor.setCidade(rs.getString("cidade"));
                 fornecedor.setEstado(rs.getString("estado"));
+                fornecedor.setEstado(rs.getString("pais"));
                 fornecedor.setTelefone1(rs.getString("telefone1"));
                 fornecedor.setTelefone2(rs.getString("telefone2"));
                 fornecedor.setEmail(rs.getString("email"));
@@ -119,6 +121,7 @@ public class FornecedorDao {
                 fornecedor.setBairro(rs.getString("bairro"));
                 fornecedor.setCidade(rs.getString("cidade"));
                 fornecedor.setEstado(rs.getString("estado"));
+                fornecedor.setEstado(rs.getString("pais"));
                 fornecedor.setTelefone1(rs.getString("telefone1"));
                 fornecedor.setTelefone2(rs.getString("telefone2"));
                 fornecedor.setEmail(rs.getString("email"));
@@ -222,6 +225,40 @@ public class FornecedorDao {
             FabricaConexao.fecharConexao();
 
         } catch (Exception e) {
+            System.out.println("erro fornecedor---------------------------------------" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+
+    }
+    public void salvarProduto(Produto p) throws ErroSistema {
+
+        System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.salvar() "+ p.getEspecificacaoProduto());
+
+        String sql = "INSERT INTO produto(idFornecedor,nProduto,mProduto,eProduto,uProduto,kProduto,vUnitario,vTotal)VALUES (?,?,?,?,?,?,?,?)";
+
+        try {
+            
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            
+            ps.setInt(1, p.getIdFornecedor());
+            ps.setString(2, p.getNomeProduto());
+            ps.setString(3, p.getMarcaProduto());
+            ps.setString(4, p.getUnidadeProduto());
+            ps.setString(5, "asd");
+            ps.setString(6, "asd");
+            ps.setString(7, "asd");
+            ps.setString(8, "asd");
+            
+           
+           
+
+            ps.execute();
+            System.out.println("inserindo fornecedor---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("erro fornecedor---------------------------------------" + e);
             throw new ErroSistema("erroooooo--------------------", e);
         }
 

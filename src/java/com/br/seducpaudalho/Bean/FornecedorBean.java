@@ -33,7 +33,6 @@ public class FornecedorBean {
 
     private Fornecedor fornecedor = new Fornecedor();
     private List<Fornecedor> fornecedores = new ArrayList<>();
-    
     private FornecedorDao fornecedorDao = new FornecedorDao();
     private List<SelectItem> selectFornecedores;
     private String parametro;
