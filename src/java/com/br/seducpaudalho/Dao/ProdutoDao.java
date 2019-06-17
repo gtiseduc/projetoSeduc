@@ -44,26 +44,27 @@ public class ProdutoDao {
             while (rs.next()) {
                 Produto produto = new Produto();
 
-                produto.setIdFornecedor(rs.getInt("idProduto"));
+                produto.setIdProduto(rs.getInt("idProduto"));
                 produto.setIdFornecedor(rs.getInt("idFornecedor"));
                 produto.setNomeProduto(rs.getString("nProduto"));
                 produto.setMarcaProduto(rs.getString("mProduto"));
-                produto.setEspecificacaoProduto(rs.getString("eProdutoj"));
+                produto.setEspecificacaoProduto(rs.getString("eProduto"));
                 produto.setUnidadeProduto(rs.getString("uProduto"));
+                System.out.println("olha o kilo produtos " + produto.getIdProduto());
                 produto.setKiloProduto(rs.getDouble("kProduto"));
-                produto.setValorUnitario(rs.getDouble("vProduto"));
+                produto.setValorUnitario(rs.getDouble("vUnitario"));
                 produto.setValorTotal(rs.getDouble("vTotal"));
 
                 produtos.add(produto);
-                System.out.println("tamanho da lista de fornecedor " + produto.getNomeProduto());
+                System.out.println("tamanho da lista de produtos " + produto.getNomeProduto());
             }
 
         } catch (Exception e) {
-            System.out.println("erro ao listar fornecedor " + e);
+            System.out.println("erro ao listar produtos " + e);
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
-        System.out.println("tamanho da lista de fornecedores " + produtos.size());
+        System.out.println("tamanho da lista de produtos " + produtos.size());
         FabricaConexao.fecharConexao();
         return produtos;
 

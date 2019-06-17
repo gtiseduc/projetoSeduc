@@ -1,0 +1,314 @@
+
+
+   
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+
+    <ui:define name="centro">
+
+
+        <div class="formulario">
+
+            <div class="teste">
+
+                <h:form id="form" enctype="multipart/form-data">
+
+                    <p:fieldset legend="CADASTRO DO PROFESSOR ORIENTADOR"> 
+
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <p:inputMask mask="999.999.999-99" value="#{orientadorBean.orientador.cpf}" placeholder="CPF" />   
+                        </div>
+                        <br></br>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <p:inputText placeholder="NOME" value="#{orientadorBean.orientador.nome}" />  
+                        </div>
+                        <br></br>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <p:inputMask mask="(99)99999-9999" placeholder="TELEFONE" value="#{orientadorBean.orientador.telefone}"/>  
+                        </div>
+                        <br></br>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <p:inputText placeholder="EMAIL" value="#{orientadorBean.orientador.email}" />  
+                        </div>
+                        <br></br>
+                        <h:outputLabel value="FORMAÇÃO DO ORIENTADOR" style="font-weight:bold"></h:outputLabel> 
+                        <br></br>
+                        <br></br>
+                        <p:selectManyCheckbox id="basic" value="#{orientadorBean.selectedConsoles}">
+                            <f:selectItem itemLabel="DOUTORADO" itemValue="curso1" />
+                            <f:selectItem itemLabel="MESTRADO" itemValue="curso2" />
+                            <f:selectItem itemLabel="ESPECIALIZAÇÃO" itemValue="curso3" />
+                            <f:selectItem itemLabel="GRADUAÇÃO" itemValue="curso4" />
+                        </p:selectManyCheckbox>
+
+                        <br></br>
+                        <h:outputLabel value="PRODUÇÃO CURRICULAR " style="font-weight:bold"></h:outputLabel> 
+                        <br></br>
+                        <br></br>
+
+                        <p:selectManyCheckbox id="artig" value="#{orientadorBean.selectedArtigos}" layout="pageDirection" columns="1">
+                            <f:selectItem itemLabel="LIVRO PUBLICADO COM ISBN" itemValue="art1" />
+                            <f:selectItem itemLabel="LIVRO ORGANIZADO E/OU TRADUÇÃO COM ISBN" itemValue="art2" />
+                            <f:selectItem itemLabel="CAPÍTULO PUBLICADO E/OU TRADUÇÃO DE CAPÍTULO DE LIVRO PUBLICADO COM ISBN" itemValue="art3" />
+                            <f:selectItem itemLabel="PATENTES" itemValue="art4" />
+                            <f:selectItem itemLabel="TRABALHOS COMPLETOS EM ANAIS OU EM SUPLEMENTO DE PERIÓDICO" itemValue="art5" />
+                            <f:selectItem itemLabel="RESUMOS EXPANDIDOS" itemValue="art6" />
+                            <f:selectItem itemLabel="RESUMO SIMPLES" itemValue="art7" />
+                            <f:selectItem itemLabel="ATIVIDADE DE ENSINO-PESQUISA-EXTENSÃO PARA POPULARIZAÇÃO DA CIÊNCIA(DIVULGAÇÃO CIENTIFICA, 
+                                          OLIMPIADA,FERIAS OU EQUIVALENTES),VOLTADAS PARA O ENSINO MÉDIO OU FUNDAMENTAL" itemValue="art8" />
+                            <f:selectItem itemLabel="APRESENTAÇÃO ORAL,PALESTRA,CONFERÊNCIA,MINICURSO,OFICINAS OU EQUIVALENTE EM EVENTO CIENTIFICO" itemValue="art9" />
+
+
+                        </p:selectManyCheckbox>
+
+
+
+                    </p:fieldset>
+
+                    <br></br>
+
+                    <p:fieldset legend="CADASTRO ALUNO">
+
+
+                        <p:panelGrid columns="3">
+                            <p:panelGrid columns="1" rendered="true">
+
+                                <p:messages  id="msgAlunom" showDetail="true" autoUpdate="true" closable="true"></p:messages>
+                                <p:growl id="msgAlunog" showDetail="true" />
+
+                                <h:outputLabel value="NOME ALUNO"></h:outputLabel> 
+                                <p:inputText value="#{orientadorBean.aluno.nome}" style="text-transform:uppercase;width:300px;" ></p:inputText>
+
+                                <h:outputLabel value="ESCOLA"></h:outputLabel> 
+
+                                <p:selectOneMenu id="escola1" value="#{orientadorBean.aluno.escola}" style="width:290px">
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="ESCOLA M.SINHO BANDEIRA" itemValue="26091526" />
+                                    <f:selectItem itemLabel="ESCOLA M.ELIZA FIDELIS DA SILVA" itemValue="26091372" />
+                                    <f:selectItem itemLabel="ESCOLA M.JOSE BONIFACIO" itemValue="26091410" />
+                                    <f:selectItem itemLabel="COLEGIO M.DO PAUDALHO" itemValue="26091194" />
+                                    <f:selectItem itemLabel="COLEGIO M.DE GUADALAJARA" itemValue="26091208" />
+                                    <f:selectItem itemLabel="COLEGIO M.TANCREDO NEVES" itemValue="26091232" />
+                                    <f:selectItem itemLabel="COLEGIO M.MARIA DE FATIMA" itemValue="26091224" />
+                                    <f:selectItem itemLabel="ESCOLA M.MANOEL DA ROSA" itemValue="26091437" />
+
+                                </p:selectOneMenu>
+                                <h:outputLabel value="SERIE"></h:outputLabel> 
+
+                                <p:selectOneMenu id="ser" value="#{orientadorBean.aluno.serie}" style="width:290px">
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="6º ANO" itemValue="6" />
+                                    <f:selectItem itemLabel="7º ANO" itemValue="7" />
+                                    <f:selectItem itemLabel="8º ANO" itemValue="8" />
+                                    <f:selectItem itemLabel="9º ANO" itemValue="9" />
+
+
+                                </p:selectOneMenu>
+                                <h:outputLabel value="TITULO DO PLANO DE TRABALHO"></h:outputLabel> 
+                                <!--ARQIVO DO PLANO DE TRABALHO-->
+                                <p:inputText value="#{orientadorBean.aluno.tituloTrabalho}" style="text-transform:uppercase;width:300px;" ></p:inputText>
+
+                                <h:form enctype="multipart/form-data" rendered="#{orientadorBean.uparquivo == true}">
+                                    <p:fileUpload value="#{orientadorBean.uploadedFile}" mode="simple" label="ESCOLHER ARQUIVO" skinSimple="true"/>
+                                    <p:commandButton value="Enviar" ajax="false"
+                                                     actionListener="#{orientadorBean.upload}" />
+                                </h:form>
+
+                                <p:commandButton value="SALVAR" action="#{orientadorBean.salvarAluno()}" update="@form" rendered="#{orientadorBean.btnSalvar == true}" ></p:commandButton>
+
+                                <!-- <p:fileUpload fileUploadListener="{orientadorBean.uploadPrime}"
+                                               sizeLimit="5000000"  fileLimit="1" label="Escolha o arquivo" uploadLabel="Enviar" cancelLabel="Cancelar"
+                                               invalidSizeMessage="O tamanho máximo permitido é de 5MB." 
+                                               allowTypes="/(\.|\/)(pdf)$/" 
+                                               invalidFileMessage="São permitidas somente arquivos (pdf)">
+ 
+ 
+ 
+                                 </p:fileUpload>
+ 
+                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                     <p:commandButton value="SIM" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                     <p:commandButton value="NÃO" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                                 </p:confirmDialog>    
+ 
+                                 <p:growl id="message" showDetail="true" />
+ 
+                                 <p:commandButton value="ENVIAR" action="{orientadorBean.salvar()}" update="message">
+                                     <p:confirm header="CONFIRMAÇÃO" message="VOCÊ DESEJA CADASTRAR OUTRO ALUNO ?" />
+                                 </p:commandButton>
+ 
+                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                     <p:commandButton value="SIM" type="button" />
+                                     <p:commandButton value="NÃO" type="button"  />
+                                 </p:confirmDialog>    -->
+
+
+
+                                <!-- <h:form id="form" enctype="multipart/form-data" rendered="false" >     
+                                     <h:inputFile value="{orientadorBean.file}" required="true" requiredMessage="o arquivo do p">
+                                     </h:inputFile>
+                                     <h:commandButton value="ENVIAR" action="{orientadorBean.salvar()}"></h:commandButton>
+ 
+                                 </h:form>-->
+
+
+                            </p:panelGrid>
+                            <p:panelGrid columns="1" rendered="false">
+                                <h:outputLabel value="NOME ALUNO"></h:outputLabel> 
+                                <p:inputText value="#{orientadorBean.orientador.nomeAluno}" style="text-transform:uppercase;width:300px;" ></p:inputText>
+
+                                <h:outputLabel value="ESCOLA"></h:outputLabel> 
+
+                                <p:selectOneMenu id="escola2" value="#{orientadorBean.orientador.codEscola}" style="width:290px">
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="ESCOLA M.SINHO BANDEIRA" itemValue="26091526" />
+                                    <f:selectItem itemLabel="ESCOLA M.ELIZA FIDELIS DA SILVA" itemValue="26091372" />
+                                    <f:selectItem itemLabel="ESCOLA M.JOSE BONIFACIO" itemValue="26091410" />
+                                    <f:selectItem itemLabel="COLEGIO M.DO PAUDALHO" itemValue="26091194" />
+                                    <f:selectItem itemLabel="COLEGIO M.DE GUADALAJARA" itemValue="26091208" />
+                                    <f:selectItem itemLabel="COLEGIO M.TANCREDO NEVES" itemValue="26091232" />
+                                    <f:selectItem itemLabel="COLEGIO M.MARIA DE FATIMA" itemValue="26091224" />
+                                    <f:selectItem itemLabel="ESCOLA M.MANOEL DA ROSA" itemValue="26091437" />
+
+                                </p:selectOneMenu>
+                                <h:outputLabel value="SERIE"></h:outputLabel> 
+
+                                <p:selectOneMenu id="serie2" value="#{orientadorBean.orientador.serie}" style="width:290px">
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="6º ANO" itemValue="6" />
+                                    <f:selectItem itemLabel="7º ANO" itemValue="7" />
+                                    <f:selectItem itemLabel="8º ANO" itemValue="8" />
+                                    <f:selectItem itemLabel="9º ANO" itemValue="9" />
+
+
+                                </p:selectOneMenu>
+                                <h:outputLabel value="TITULO DO PLANO DE TRABALHO"></h:outputLabel> 
+                                <!--ARQIVO DO PLANO DE TRABALHO-->
+                                <p:inputText value="#{orientadorBean.orientador.nomeProjeto}" style="text-transform:uppercase;width:300px;" ></p:inputText>
+
+                                <h:inputFile value="#{orientadorBean.file}" required="true" requiredMessage="o arquivo do p">
+
+                                </h:inputFile>
+                                <h:commandButton value="ENVIAR" action="#{orientadorBean.salvar()}"></h:commandButton>
+
+
+
+                            </p:panelGrid>
+                            <p:panelGrid columns="1" rendered="false">
+                                <h:outputLabel value="NOME ALUNO"></h:outputLabel> 
+                                <p:inputText value="#{orientadorBean.orientador.nomeAluno}" style="text-transform:uppercase;width:300px;" ></p:inputText>
+
+                                <h:outputLabel value="ESCOLA"></h:outputLabel> 
+
+                                <p:selectOneMenu id="escola3" value="#{orientadorBean.orientador.codEscola}" style="width:290px">
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="ESCOLA M.SINHO BANDEIRA" itemValue="26091526" />
+                                    <f:selectItem itemLabel="ESCOLA M.ELIZA FIDELIS DA SILVA" itemValue="26091372" />
+                                    <f:selectItem itemLabel="ESCOLA M.JOSE BONIFACIO" itemValue="26091410" />
+                                    <f:selectItem itemLabel="COLEGIO M.DO PAUDALHO" itemValue="26091194" />
+                                    <f:selectItem itemLabel="COLEGIO M.DE GUADALAJARA" itemValue="26091208" />
+                                    <f:selectItem itemLabel="COLEGIO M.TANCREDO NEVES" itemValue="26091232" />
+                                    <f:selectItem itemLabel="COLEGIO M.MARIA DE FATIMA" itemValue="26091224" />
+                                    <f:selectItem itemLabel="ESCOLA M.MANOEL DA ROSA" itemValue="26091437" />
+
+                                </p:selectOneMenu>
+                                <h:outputLabel value="SERIE"></h:outputLabel> 
+
+                                <p:selectOneMenu id="serie3" value="#{orientadorBean.orientador.serie}" style="width:290px">
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="6º ANO" itemValue="6" />
+                                    <f:selectItem itemLabel="7º ANO" itemValue="7" />
+                                    <f:selectItem itemLabel="8º ANO" itemValue="8" />
+                                    <f:selectItem itemLabel="9º ANO" itemValue="9" />
+
+
+                                </p:selectOneMenu>
+                                <h:outputLabel value="TITULO DO PLANO DE TRABALHO"></h:outputLabel> 
+                                <!--ARQIVO DO PLANO DE TRABALHO-->
+                                <p:inputText value="#{orientadorBean.orientador.nomeProjeto}" style="text-transform:uppercase;width:300px;" ></p:inputText>
+
+                                <h:form id="for" enctype="multipart/form-data" >
+                                    <h:inputFile value="#{orientadorBean.file}" required="true" requiredMessage="o arquivo do p">
+
+                                    </h:inputFile>
+                                    <h:commandButton value="ENVIAR" action="#{orientadorBean.salvar()}"></h:commandButton>
+
+                                </h:form>
+
+                            </p:panelGrid>
+
+                        </p:panelGrid>
+
+                    </p:fieldset>
+                    <br></br>
+                    <br></br>
+                    <div class="botao">
+                        <p:messages  id="messages" showDetail="true" autoUpdate="true" closable="true"></p:messages>
+                        <p:growl id="mess" showDetail="true" />
+
+                        <!-- USANDO O DIALOG NO JSF -->
+
+                        <p:commandButton value="SALVAR" action="#{orientadorBean.salvar()}" update="@form"  >
+                        </p:commandButton>
+
+
+                        <p:confirmDialog  header="AVISO!"  message="PARA CONCLUIR SEU CADASTRO ENVIE SEU PROJETO NO CAMPO ESCOLHER ARQUIVO" id="myDialogVar" widgetVar="myDialogVar"  >
+
+                            <!--
+                                                        <h:form enctype="multipart/form-data">
+                                                            <p:fileUpload value="{orientadorBean.uploadedFile}" mode="simple"/>
+                                                            <p:commandButton value="Enviar" ajax="false"
+                                                                             actionListener="{orientadorBean.upload}" />
+                                                        </h:form>
+                            
+                            
+                                                       <p:commandButton  value="SIM" action="{dialogView.destroyWorld()}" onclick="myDialogVar.hide()"/>
+                            
+                                                        <p:commandButton value="CANCELAR" action="{orientadorBean.cancelar()}" onclick="myDialogVar.hide()" /> -->
+                        </p:confirmDialog>
+
+
+                        <!--
+                        <p:commandButton value="SALVAR 2" action="{orientadorBean.salvar()}" update="@form"  >
+                        </p:commandButton>
+
+                        <p:confirmDialog  header="CADASTRO ALUNO"  message="PARA CONCLUIR SEU CADASTRO ENVIE SEU PROJETO  ?" id="confirmationDialogExclui" widgetVar="confirmationDialogExclui"  >
+
+
+
+                            <p:fileUpload fileUploadListener="{orientadorBean.uploadPrime}"
+                                          sizeLimit="5000000"  fileLimit="1" label="Escolha o arquivo" uploadLabel="Enviar" cancelLabel="Cancelar"
+                                          invalidSizeMessage="O tamanho máximo permitido é de 5MB." 
+                                          allowTypes="/(\.|\/)(pdf)$/" 
+                                          invalidFileMessage="São permitidas somente arquivos (pdf)"></p:fileUpload>
+
+                            <p:commandButton  value="SIM" action="{dialogView.destroyWorld()}" onclick="confirmationDialogExclui.hide()"/>
+                            <p:commandButton value="NÃO" onclick="confirmationDialogExclui.hide()" />
+                        </p:confirmDialog>
+                        -->
+
+                    </div>
+                </h:form>
+
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:decorate>
+
+
+

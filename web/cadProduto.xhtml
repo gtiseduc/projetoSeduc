@@ -63,7 +63,8 @@
 
         <h:form> 
   
-
+            <p:growl id="growl" life="3500" />
+              <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
             <p:fieldset legend="Cadastro produto">
 
  
@@ -100,7 +101,7 @@
                                 <f:selectItems   value="#{produtoBean.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.rzSocial}" itemValue="#{fornecedor.idFornecedor}"/>         
                             </p:selectOneMenu>    
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
@@ -158,7 +159,7 @@
                     <br/>
                     <br/>
 
-                    <p:commandButton value="Salvar" action="#{produtoBean.salvar()}"/>
+                    <p:commandButton value="Salvar" action="#{produtoBean.salvar()}" update="@form"/>
 
                     <br/>
                     <br/>
@@ -167,8 +168,8 @@
 
                     <p:dataTable var="produtos" value="#{produtoBean.produtos}" rendered="true">
                         <p:column headerText="Lista de produtos">
-                            <p:commandButton value="Editar"/>
-                            <p:commandButton value="Excluir"/>
+                            <p:commandButton value="Editar" action="#{produtoBean.editar(produtos)}" update="@form"  />
+                            <p:commandButton value="Excluir" action="#{produtoBean.excluir(produtos)}" update="@form" />
                         </p:column>
 
                         <p:column headerText="Código">
@@ -212,6 +213,7 @@
     </ui:define>
 
 </ui:decorate>
+
 
 
 

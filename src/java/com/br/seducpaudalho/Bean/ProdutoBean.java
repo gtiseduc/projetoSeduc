@@ -5,11 +5,6 @@ package com.br.seducpaudalho.Bean;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
-
-
 import com.br.seducpaudalho.Entidade.Fornecedor;
 import com.br.seducpaudalho.Dao.FornecedorDao;
 import com.br.seducpaudalho.Dao.ProdutoDao;
@@ -36,70 +31,91 @@ public class ProdutoBean {
     private Produto produto = new Produto();
     private List<Produto> produtos = new ArrayList<>();
     private ProdutoDao produtoDao = new ProdutoDao();
-    
+
     private List<SelectItem> selectFornecedores;
-    private Fornecedor fornecedor ;
+    private Fornecedor fornecedor;
     private List<Fornecedor> fornecedores = new ArrayList<>();
-     private FornecedorDao fornecedorDao = new FornecedorDao();
+    private FornecedorDao fornecedorDao = new FornecedorDao();
     private String parametro;
-   
-    
-    
-   
+
     public void salvar() {
 
-       
-         try {    
-          
-/*
+        try {
+
+            System.out.println("olha aqui o fornecedor "+produto.getIdFornecedor()+ " kilo "+produto.getKiloProduto()+ "Un "+ produto.getUnidadeProduto());
+            if (produto.getNomeProduto().equals("")) {
+
+                adicionarMensagem("O CAMPO DESCRIÇÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                return;
+
+            }
+            if (produto.getMarcaProduto().equals("")) {
+
+                adicionarMensagem("O MARCA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                return;
+
+            }
+
+            if (produto.getIdFornecedor() == null) {
+
+                adicionarMensagem("O CAMPO FORNECEDOR É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                return;
+
+            }
+
+            if (produto.getUnidadeProduto().equals("")) {
+
+                adicionarMensagem("O CAMPO UNIDADE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+
+                return;
+
+            }
            
+            if (produto.getKiloProduto() == 0.0) {
 
-            if (produto.getNome().equals("")) {
+                adicionarMensagem("O CAMPO KILO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
                 return;
 
             }
-            if (produto.getCpf().equals("")) {
+            if (produto.getValorUnitario() == 0.0) {
 
-                adicionarMensagem("O CAMPO CPF É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem("O CAMPO VALOR UNITÁRIO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+
                 return;
 
             }
+            if (produto.getValorTotal() == 0.0) {
 
-            if (produto.getSenha().equals("")) {
+                adicionarMensagem("O CAMPO VALOR TOTAL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("O CAMPO SENHA É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
                 return;
 
             }
-           
-            if (produto.getNivel().equals("")) {
+            if (produto.getEspecificacaoProduto().equals("")) {
 
-                adicionarMensagem("O CAMPO ACESSO É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
-               
-                
+                adicionarMensagem("O CAMPO ESPECIFICAÇÃO DO PRODUTO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+
                 return;
 
-            }
-            else{*/
+            } else {
 
-             System.out.println("entrou no salvar----------"); 
-        produtoDao.salvar(produto);
-        produto = new Produto();
-        // produtos = produtoDao.listarProdutos();
-            
-        adicionarMensagem("SALVO!", "SALVO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+                System.out.println("entrou no salvar----------");
+                produtoDao.salvar(produto);
+                produto = new Produto();
+                produtos = produtoDao.listarProdutos();
+
+                adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+           }
         } catch (ErroSistema ex) {
-             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-            
-            
-           // }
-      
+
+        // }
     }
+
     public void alterar() {
-/*
+        /*
         try {
             loginDao.salvar(produto);
             produto = new Login();
@@ -107,54 +123,52 @@ public class ProdutoBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-*/
+         */
     }
+
     public void excluir(Produto p) {
         System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p);
         try {
             produtoDao.deletar(p);
             produto = new Produto();
+            produtos = produtoDao.listarProdutos();
             adicionarMensagem("EXCLUIDO!", "EXCLUIDO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
- 
+
     }
 
-    
-    
-
-    
-    
-    
-     public void editar(Produto entidade) {
+    public void editar(Produto entidade) {
         this.produto = entidade;
-       // mudarParaAltera(); 
+        // mudarParaAltera(); 
     }
+
     public void listarProdutos() {
-       
+
         System.out.println("entrou no metodo listar");
         try {
-          produtos = produtoDao.listarProdutos();
+            produtos = produtoDao.listarProdutos();
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+
     public void listarFornecedores() {
-       
+
         System.out.println("entrou no metodo listar");
         try {
-         fornecedores = fornecedorDao.listarFornecedores();
+            fornecedores = fornecedorDao.listarFornecedores();
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
-   
 
     public String buscarLogin() {
-/*
+        /*
        
        String retorno = "";
         System.out.println("entrou no buscar login");
@@ -225,21 +239,17 @@ public class ProdutoBean {
           // return retorno; 
           
         }*/
-    
-    return null;
+
+        return null;
     }
 
-    
     public void adicionarMensagem(String sumario, String detalhe, FacesMessage.Severity tipoErro) {
         FacesContext context = FacesContext.getCurrentInstance();
         FacesMessage message = new FacesMessage(tipoErro, sumario, detalhe);
         context.addMessage(null, message);
     }
 
-   
-    
-    
-  public String getParametro() {
+    public String getParametro() {
         return parametro;
     }
 
@@ -263,33 +273,28 @@ public class ProdutoBean {
         this.produtos = produtos;
     }
 
-  
+    public List<SelectItem> getSelectFornecedores() throws ErroSistema {
 
-    
-   
-
-     public List<SelectItem> getSelectFornecedores() throws ErroSistema {
-      
         System.out.println("----------------------------------------------");
-        if(selectFornecedores == null){
+        if (selectFornecedores == null) {
             selectFornecedores = new ArrayList<SelectItem>();
             fornecedor = new Fornecedor();
             fornecedores = fornecedorDao.listarFornecedores();
-            
-            if(fornecedores != null && !fornecedores.isEmpty()){
-                
+
+            if (fornecedores != null && !fornecedores.isEmpty()) {
+
                 SelectItem item;
                 for (Fornecedor fornecedorLista : fornecedores) {
-                   
-                    item = new SelectItem(fornecedorLista,fornecedorLista.getRzSocial());
+
+                    item = new SelectItem(fornecedorLista, fornecedorLista.getRzSocial());
                     selectFornecedores.add(item);
                 }
             }
-            
+
         }
-       
-       return selectFornecedores;
-    }  
+
+        return selectFornecedores;
+    }
 
     public Fornecedor getFornecedor() {
         System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.getFornecedor()");
@@ -301,7 +306,7 @@ public class ProdutoBean {
     }
 
     public List<Fornecedor> getFornecedores() throws ErroSistema {
-         fornecedores = fornecedorDao.listarFornecedores();
+        fornecedores = fornecedorDao.listarFornecedores();
         return fornecedores;
     }
 
@@ -324,7 +329,5 @@ public class ProdutoBean {
     public void setFornecedorDao(FornecedorDao fornecedorDao) {
         this.fornecedorDao = fornecedorDao;
     }
-    
 
-    
 }

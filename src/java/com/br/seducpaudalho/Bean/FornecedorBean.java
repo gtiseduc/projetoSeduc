@@ -45,38 +45,126 @@ public class FornecedorBean {
        
          try {    
           
-/*
+
            
 
-            if (fornecedor.getNome().equals("")) {
+            if (fornecedor.getPessoa().equals("")) {
 
-                adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem("O CAMPO TIPO DE PESSOA É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
                 return;
 
             }
-            if (fornecedor.getCpf().equals("")) {
+            if (fornecedor.getRzSocial().equals("")) {
 
-                adicionarMensagem("O CAMPO CPF É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem("O CAMPO RAZAÇÃO SOCIAL É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
                 return;
 
             }
 
-            if (fornecedor.getSenha().equals("")) {
+            if (fornecedor.getCnpj().equals("")) {
 
-                adicionarMensagem("O CAMPO SENHA É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem("O CAMPO CNPJ É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
                 return;
 
             }
            
-            if (fornecedor.getNivel().equals("")) {
+            if (fornecedor.getFantasia().equals("")) {
 
-                adicionarMensagem("O CAMPO ACESSO É OBRIGATÓRIO !","", FacesMessage.SEVERITY_WARN);
+                adicionarMensagem("O CAMPO NOME FANTASIA É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
                
                 
                 return;
 
             }
-            else{*/
+            if (fornecedor.getMunicipal().equals("")) {
+
+                adicionarMensagem("O CAMPO NOME INSCRIÇÃO MUNICIPAL É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getEstadual().equals("")) {
+
+                adicionarMensagem("O CAMPO NOME INSCRIÇÃO ESTADUAL É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getCep().equals("")) {
+
+                adicionarMensagem("O CAMPO CEP  É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getEndereco().equals("")) {
+
+                adicionarMensagem("O CAMPO ENDEREÇO É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getNumero().equals("")) {
+
+                adicionarMensagem("O CAMPO NÚMERO É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getBairro().equals("")) {
+
+                adicionarMensagem("O CAMPO BAIRRO É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getCidade().equals("")) {
+
+                adicionarMensagem("O CAMPO CIDADE É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getEstado().equals("")) {
+
+                adicionarMensagem("O CAMPO ESTADO É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getPais().equals("")) {
+
+                adicionarMensagem("O CAMPO PAÍS É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getTelefone1().equals("") && fornecedor.getTelefone2().equals("") ) {
+
+                adicionarMensagem("VOCÊ TEM QUE CADASTRAR UM TELEFONE!","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            if (fornecedor.getEmail().equals("")) {
+
+                adicionarMensagem("O CAMPO EMAIL É OBRIGATÓRIO !","", FacesMessage.SEVERITY_INFO);
+               
+                
+                return;
+
+            }
+            else{
 
             
         fornecedorDao.salvar(fornecedor);
@@ -84,6 +172,7 @@ public class FornecedorBean {
          fornecedores = fornecedorDao.listarFornecedores();
             
         adicionarMensagem("SALVO!", "SALVO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            }
         } catch (ErroSistema ex) {
              adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
