@@ -67,114 +67,197 @@
  
              </p:toolbar>-->
         <h:form>
-             <p:growl id="growl" life="3500" />
-             <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
-             <p:fieldset legend="Dados da empresa" >
-                <div class="form-group col-md-2">
-                    <label>Tipo de Pessoa</label>
-                    <p:selectOneMenu id="console" value="#{fornecedorBean.fornecedor.pessoa}" >
-                        <f:selectItem itemLabel="SELECIONE" itemValue="" />
-                        <f:selectItem itemLabel="PESSOA FÍSICA" itemValue="F" />
-                        <f:selectItem itemLabel="PESSOA JURÍDICA" itemValue="J" />            
-                    </p:selectOneMenu>
+            <p:growl id="growl" life="3500" />
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
 
+            <p:fieldset legend="Dados da empresa" >
+
+                <div class="ui-g ui-fluid">
+
+                   
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-male"></i></span>
+                            <p:selectOneMenu  id="console" value="#{fornecedorBean.fornecedor.pessoa}" >
+                                <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                <f:selectItem itemLabel="PESSOA FÍSICA" itemValue="F" />
+                                <f:selectItem itemLabel="PESSOA JURÍDICA" itemValue="J" />            
+                            </p:selectOneMenu>      
+
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-institution"></i></span>
+                            <p:inputMask mask="99.999.999/9999-99" value="#{fornecedorBean.fornecedor.cnpj}"  class="form-control"/>     
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-institution"></i></span>
+                            <p:inputText placeholder="Razão social" value="#{fornecedorBean.fornecedor.rzSocial}" />      
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-institution"></i></span>
+                            <p:inputText placeholder="Nome fantasia" value="#{fornecedorBean.fornecedor.fantasia}" />      
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-institution"></i></span>
+                            <p:inputText placeholder="Inscrição Municipal" value="#{fornecedorBean.fornecedor.municipal}" />      
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-institution"></i></span>
+                            <p:inputText placeholder="Inscrição Estadual" value="#{fornecedorBean.fornecedor.estadual}" />      
+
+                        </div>
+                    </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <p:fieldset legend="Endereço">
+
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-envelope-square"></i></span>
+
+                                <p:inputMask mask="99.999-999" placeholder="CEP" class="form-control" value="#{fornecedorBean.fornecedor.cep}" />
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="Endereço" value="#{fornecedorBean.fornecedor.endereco}" />
+
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="Complemento" value="#{fornecedorBean.fornecedor.complemento}" />
+
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="Número" value="#{fornecedorBean.fornecedor.numero}" />
+
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="Bairro" value="#{fornecedorBean.fornecedor.bairro}" />
+
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="Cidade" value="#{fornecedorBean.fornecedor.cidade}" />
+
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}"  >
+                                    <f:selectItem itemLabel="SELECIONE" itemValue="" />
+                                    <f:selectItem itemLabel="PE" itemValue="PE" />
+                                    <f:selectItem itemLabel="PB" itemValue="PB" />            
+                                </p:selectOneMenu>
+
+                            </div>
+                        </div>
+
+
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-map-marker"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="País" value="#{fornecedorBean.fornecedor.pais}" />
+
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-phone-square"></i></span>
+
+                                <p:inputMask mask="(99)99999-9999"  class="form-control" placeholder="Telefone - 1" value="#{fornecedorBean.fornecedor.telefone1}" />
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-phone-square"></i></span>
+
+                                <p:inputMask mask="(99)99999-9999"  class="form-control" placeholder="Telefone - 2" value="#{fornecedorBean.fornecedor.telefone2}" />
+                            </div>
+                        </div>
+
+
+
+                        <div class="ui-g-12 ui-md-5">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-envelope"></i></span>
+                                <p:inputText type="text" class="form-control" placeholder="Email" value="#{fornecedorBean.fornecedor.email}" />
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </p:fieldset>
+
+
+                    <br/>
+
+                    <br/>
+
+                    <p:commandButton value="Salvar" action="#{fornecedorBean.salvar()}"  update="@form"/>
+
+                    <br/>
+                    <br/>
                 </div>
 
-                <div class="form-group col-md-3">
-                    <label>Razão Social</label>
-                    <p:inputText type="text" value="#{fornecedorBean.fornecedor.rzSocial}" class="form-control"/>
-                </div>
 
-                <div class="form-group col-md-3">
-                    <label>Cnpj</label>
-                    <p:inputMask mask="99.999.999/9999-99" value="#{fornecedorBean.fornecedor.cnpj}"  class="form-control"/>
-                </div>
 
-                <div class="form-group col-md-3">
-                    <label>Nome fantasia</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.fantasia}" />
-                </div>
 
-                <div class="form-group col-md-3">
-                    <label>Inscrição municipal</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.municipal}" />
-                </div>
 
-                <div class="form-group col-md-3">
-                    <label>Inscrição estadual</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.estadual}" />
-                </div>
+
+
+
+
+
+
             </p:fieldset>
-            <br/>
-            <p:fieldset legend="Endereço">
-                <div class="form-group col-md-1">
-                    <label>CEP</label>
-                    <p:inputMask mask="99.999-999" class="form-control" value="#{fornecedorBean.fornecedor.cep}" />
-                </div>
 
-                <div class="form-group col-md-4">
-                    <label>Endereço</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.endereco}" />
-                </div>
-
-
-                <div class="form-group col-md-4">
-                    <label>Complemento</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.complemento}" />
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label>Número</label>
-                    <p:inputText  class="form-control" value="#{fornecedorBean.fornecedor.numero}" />
-                </div>
-
-
-
-
-                <div class="form-group col-md-4">
-                    <label>Bairro</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.bairro}" />
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label>Cidade</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.cidade}" />
-                </div>
-
-                <div class="form-group col-md-1">
-                    <label>Estado</label>
-                    <p:selectOneMenu id="estado" value="#{fornecedorBean.fornecedor.estado}"  >
-                        <f:selectItem itemLabel="SELECIONE" itemValue="" />
-                        <f:selectItem itemLabel="PE" itemValue="PE" />
-                        <f:selectItem itemLabel="PB" itemValue="PB" />            
-                    </p:selectOneMenu>
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label>País</label>
-                    <p:inputText type="text" class="form-control" value="#{fornecedorBean.fornecedor.pais}" />
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Telefone</label>
-                    <p:inputMask mask="(99)99999-9999"  class="form-control" value="#{fornecedorBean.fornecedor.telefone1}" />
-                </div>  
-
-                <div class="form-group col-md-2">
-                    <label>Telefone</label>
-                    <p:inputMask mask="(99)99999-9999"  class="form-control" value="#{fornecedorBean.fornecedor.telefone2}"  />
-                </div>
-                <div class="form-group col-md-8">
-                    <label>Email</label>
-                    <p:inputText  class="form-control" value="#{fornecedorBean.fornecedor.email}" />
-                </div>
-
-
-            </p:fieldset>
-            <br/>
-
-            <p:commandButton value="Salvar" action="#{fornecedorBean.salvar()}"  update="@form"/>
-            
-            <br/>
             <br/>
 
             <p:dataTable value="#{fornecedorBean.fornecedores}" var="fornecedor" rendered="true">

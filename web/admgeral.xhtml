@@ -7,51 +7,65 @@
              template="template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    
-  
-        <ui:define name="menuesquerdo">
-            <div id="sidebar-menu"
-                                 class="main_menu_side hidden-print main_menu">
 
-                                <div class="menu_section">
-                                    <h3>General</h3>
-                                    <ul class="nav side-menu">
-                                        <li><a><i class="fa fa-home"></i> Home <span
-                                                    class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu" style="display: none">
-                                                <li><a href="index.html">Dashboard</a></li>
-                                            </ul></li>
-                                        <li><a><i class="fa fa-edit"></i> Atendimentos <span
-                                                    class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu" style="display: none">
-                                                <li><a href="form.html">General Form</a></li>
-                                            </ul></li>
-                                     <!--   <li><a><i class="fa fa-desktop"></i> Chamados <span
-                                                    class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu" style="display: none">
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                            </ul></li>-->
-                                        <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
-                                                    class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu" style="display: none">
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                            </ul></li>
-                                        <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
-                                                    class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu" style="display: none">
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                                <li><a href="general_elements.html">General Elements</a></li>
-                                            </ul></li>
-                                    </ul>
-                                </div>
-                            </div> 
-        </ui:define>
-    
+
+    <ui:define name="menuesquerdo">
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="cadVeiculo.jsf">Cadastro veiculo</a></li>
+                        </ul></li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                           <li><a href="abastecimento.jsf">Gerenciar abastecimento</a></li>
+                        </ul></li>
+                    <!--   <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                   class="fa fa-chevron-down"></span></a>
+                           <ul class="nav child_menu" style="display: none">
+                               <li><a href="general_elements.html">General Elements</a></li>
+                               <li><a href="general_elements.html">General Elements</a></li>
+                               <li><a href="general_elements.html">General Elements</a></li>
+                           </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                           <!-- <li><a href="general_elements.html">General Elements</a></li>
+                            <li><a href="general_elements.html">General Elements</a></li>
+                            <li><a href="general_elements.html">General Elements</a></li>-->
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                           <!-- <li><a href="general_elements.html">General Elements</a></li>
+                            <li><a href="general_elements.html">General Elements</a></li>
+                            <li><a href="general_elements.html">General Elements</a></li>-->
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+
+
+    <ui:define name="formulario">
+
+
+
+
+
+
+        <h:form>
+
+            <p:growl id="growl" life="3500" />
+        </h:form>
+    </ui:define>
 </ui:decorate>
 
 
