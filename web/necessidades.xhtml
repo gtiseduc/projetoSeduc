@@ -10,11 +10,17 @@
 
 
     <ui:define name="menuesquerdo">
+
+
+
+
+
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
             <div class="menu_section">
                 <h3>General</h3>
+
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
@@ -36,12 +42,12 @@
                     <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                           
+
                         </ul></li>
                     <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                           
+
                         </ul></li>
                 </ul>
             </div>
@@ -51,11 +57,653 @@
 
     <ui:define name="formulario">
 
-
+       
         <!--<h3 style="margin-top:0">Cadastro veiculos</h3>-->
         <h:form>
             <p:growl id="growl" life="3500" />
+            
+            
+             <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:25%">
+            <f:selectItem itemLabel="Selecione a escola" itemValue="" />
+            <f:selectItem itemLabel="COLEGIO MUNICIPAL DE GUADALAJARA" itemValue="26091208" />
+            <f:selectItem itemLabel="COLEGIO MUNICIPAL DO PAUDALHO" itemValue="26091194" />
+            <f:selectItem itemLabel="COLEGIO MUNICIPAL MARIA DE FATIMA" itemValue="26091224" />
+            <f:selectItem itemLabel="COLEGIO MUNICIPAL TANCREDO NEVES" itemValue="26091232" />
+            <f:selectItem itemLabel="ESC MUL BARTOLOMEU DO REGO CAVALCANTE" itemValue="26091313" />
+            <f:selectItem itemLabel="ESC MUNICIPAL DR ANTONIO MONTENEGRO" itemValue="26091364" />
+            <f:selectItem itemLabel="ESCOLA MUL JOAO FRANCISCO BEZERRA" itemValue="26091402" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL CHA DE CAPOEIRA" itemValue="26091283" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL DO JUNCO" itemValue="26091348" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL DO RODRIZIO" itemValue="26091356" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL DR PAULO ELEUTERIO" itemValue="26140497" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL ELIZA FIDELIS DA SILVA" itemValue="26091372" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL GENILDA MARTINS" itemValue="26154552" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL GILDA BARBOSA" itemValue="26140470" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL GUADALAJARA" itemValue="26091550" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL HERCULANO BANDEIRA DE MELO FILHO" itemValue="26091380" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL JOSE BONIFACIO" itemValue="26091410" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL LIRIO DOS VALES" itemValue="26091429" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL MANOEL DA ROSA" itemValue="26091437" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL MENINO JESUS" itemValue="26091453" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL PAULO VI" itemValue="26091461" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL SAMAP" itemValue="26091470" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL SAO BERNARDO" itemValue="26091496" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL SEVERINO JOSE VALENTIM" itemValue="26091518" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL SEVERINO MAURICIO CARNEIROD DA SILVA" itemValue="26091500" />
+            <f:selectItem itemLabel="ESCOLA MUNICIPAL SINHO BANDEIRA" itemValue="26091526" />
+           
+        </p:selectOneMenu>
+            
+            <br></br>
+            <br></br>
+            <br></br>
+
+            <!--  <h:outputLabel value="ORIENTADOR" style="font-weight:bold"></h:outputLabel> 
+             
+                <p:selectManyCheckbox id="basic" >
+               
+                   <f:selectItem itemLabel="DOUTORADO" itemValue="curso1" />  
+               </p:selectManyCheckbox> -->
+
+            <p:tabView>
+                <p:tab title="NECESSIDADES DA ESCOLA">
+                    <h3>INFORMAR A SITUAÇÃO DE FUNCIONAMENTO</h3>
+                    <div class="ui-g ui-fluid">
+
+
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="NECESSIDADEs DE SERVIÇOS" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Engenharia, (especificar)" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Retirar Bens Inservíveis (Entulhos)" value="" />      
+                            </div>
+                        </div>
+
+
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Laboratório de Informática" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Merenda" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Biblioteca" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Carteiras" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Ventiladores" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Diários de Classe" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Kit Escolar do Aluno" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="LIVROS DIDÁTICOS" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="DEPÓSITO PARA MERENDA/DESPENSA (de acordo com as normas da vigilância sanitária" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="ÁREA DE RECREIO COBERTO" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="ÁREA DE SERVIÇO" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="BANHEIROS PARA ALUNOS" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="TODOS OS ESPAÇOS POSSUEM PLACAS INDICATIVAS" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Qual a qualidade da internet?" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="Existem problemas elétricos que interferem no funcionamento dos computadores?" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputTextarea placeholder="A Escola Recebeu Recursos para Capinação / Pintura (sim ou não)" value="" />      
+                            </div>
+                        </div>
+
+
+
+
+                        <p:commandButton value="SALVAR" />
+
+                    </div>
+                </p:tab>
+                <p:tab title="DIRETORIA">
+
+                    <div class="ui-g ui-fluid">
+
+
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa para Impressora" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa Escrivaninha" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Cadeira" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Armário" value="" />      
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa para Computador" value="" />      
+                            </div>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Telefone/ Ramal/ Fax" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Computador em Rede" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Impressora" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Projetor" value="" />      
+                            </div>
+                        </div>
+
+                        <p:commandButton value="SALVAR" />
+
+                    </div>
+
+
+
+
+
+
+
+                </p:tab>
+                <p:tab title="SECRETARIA">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesas Escrivaninhas" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa para Computador" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa para Impressora" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-4">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Arquivos em aço com quatro gavetas" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Cadeiras" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Armários" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-2">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Impressora" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Computador em rede" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Telefone/ Ramal" value="" />      
+                            </div>
+                        </div>
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+
+                </p:tab>
+                <p:tab title="COORDENAAO">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Armário" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa Escrivaninha" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Cadeiras" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Telefone/ Ramal" value="" />      
+                            </div>
+                        </div>
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+
+                </p:tab>
+                <p:tab title="SALA DOS PROFESSORES">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Armário com divisórias para cada prof. (escaninho)" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Cadeiras" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa de Reunião com 10 lugares" value="" />      
+                            </div>
+                        </div>
+
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+
+
+                </p:tab>
+                <p:tab title="ADMINISTRAÇÃO">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="SALA DE AULA" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Banheiro para administra;'ao" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Quadro Branco ou Verde" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Conjunto de cadeira e mesa estudante" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Conjunto de Cadeira e Mesa do Professor" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Ventiladores" value="" />      
+                            </div>
+                        </div>
+
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+
+                </p:tab>
+                <p:tab title="LABORATÓRIO DE INFORMÁTICA">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Quadro Branco" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Ar Condicionado" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesas para Computador" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Conjunto de Cadeira e Mesa do Professor" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa para Impressora" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Cadeiras" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Impressora" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Computadores em Rede" value="" />      
+                            </div>
+                        </div>
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+                </p:tab>
+                <p:tab title="BIBLIOTECA">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Ar Condicionado" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesas de Leitura Quadradas" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa Escrivaninha" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Cadeiras" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Estantes Dupla Face" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Arquivos" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Acervo com no mínimo 500 títulos" value="" />      
+                            </div>
+                        </div>
+
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+                </p:tab>
+                <p:tab title="COZINHA">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Ventilador" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Armários de Parede" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mesa para preparo de alimentos" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Botijão de Gás" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Merenda por Estudante - Caneca, Bandejão, Prato e Talheres" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Freezer horizontal" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Fogão Industrial" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Liquidificador Industrial" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Geladeira" value="" />      
+                            </div>
+                        </div>
+
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+
+                </p:tab>
+                <p:tab title="MATERIAIS PEDAGÓGICOS">
+
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="conjunto de livros didáticos por aluno" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Camisas por estudante" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Mochila por estudante" value="" />      
+                            </div>
+                        </div>
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
+                                <p:inputNumber placeholder="Kit material escolar por aluno, contendo: cadernos, lápis, borrachas, régua e apontadores" value="" />      
+                            </div>
+                        </div>
+
+                        <p:commandButton value="SALVAR" />
+                    </div>
+
+
+                </p:tab>
+
+
+            </p:tabView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </h:form>
+
     </ui:define>
 </ui:decorate>
 
