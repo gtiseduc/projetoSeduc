@@ -1,0 +1,75 @@
+body{
+    
+    background-color: black;
+}
+
+#teste{
+    color: red !important;
+  writing-mode: vertical-lr !important;
+   
+}
+.verticalText{
+   
+ 
+   -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);  
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  
+}
+
+.ui-datatable th { writing-mode: vertical-lr; }
+
+.verticalHeader table thead tr th .rotate90 {
+  
+}
+/*
+.mystyle.ui-datatable .ui-datatable-header { 
+background: # 003946! importante; 
+
+} 
+
+.mystyle.ui-datatable .ui-datatable-header { 
+background: # 003946! importante; 
+
+} 
+
+.mystyle.ui-datatable .ui-datatable-even { 
+background: branco; 
+
+
+} 
+
+.mystyle.ui-datatable .ui-datatable-odd.ui-state-hover { 
+segundo plano: # F4E7C1; 
+
+} 
+
+.mystyle.ui-datatable .ui-datatable-even.ui-state-hover { 
+background: # F4E7C1; 
+
+} 
+
+.mystyle.ui-datatable .ui-datatable-even.ui-state-highlight { 
+segundo plano: # fff9e5; 
+
+} 
+
+.mystyle.ui-datatable .ui-datatable-odd.ui-state-highlight { 
+segundo plano: # fff9e5; 
+
+}
+
+.mystyle.ui-datatable .ui-datatable-data-vazio td { 
+cor: vermelho; 
+intensidade da fonte: Negrito; 
+} 
+.ui-datatable.mystyle th { 
+background: EAAB00; 
+font-family: verdana; 
+tamanho da fonte: 1em; 
+} 
+
+
+.mystyle.ui-datatable .ui-expandido-row-content { 
+background: branco; 
+} */

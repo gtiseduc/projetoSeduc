@@ -250,6 +250,12 @@ public class LoginBean {
            // mudarParaLocalidade();
             retorno = "/materiais?faces-redirect=true";
             }
+            if(login.getNivel().equals("D")){
+           // System.out.println("entrou na pagina de administrador");
+            //mudarParaAdmin();
+           // mudarParaLocalidade();
+            retorno = "/monitoramento?faces-redirect=true";
+            }
             
             else{
                 //System.out.println("entrou na pagina index");

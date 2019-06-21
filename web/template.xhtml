@@ -21,7 +21,7 @@
               href="#{request.contextPath}/resources/fonts/css/font-awesome.css" />
         <link rel="stylesheet" type="text/css"
               href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css" />
-
+        <h:outputStylesheet library="css" name="style.css" />
 
     </h:head>
     <h:body class="nav-md">
@@ -56,7 +56,7 @@
 
                         <!-- sidebar menu -->
                         <ui:insert name="menuesquerdo"> 
-                          
+
                         </ui:insert>
                         <!-- /sidebar menu -->
 
@@ -89,7 +89,7 @@
                                 <li class=""><a href="javascript:;"
                                                 class="user-profile dropdown-toggle" data-toggle="dropdown"
                                                 aria-expanded="false"> 
-                                        
+
                                         <h:graphicImage library="images" name="#{session.getAttribute('url')}"/>#{session.getAttribute('nome')} <span class=" fa fa-angle-down"></span>
                                     </a>
                                     <ul
@@ -154,35 +154,35 @@
 
                         </div>
 
-                     <div class="row">
+                        <div class="row">
 
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="x_panel" style="height: 900px;">
                                     <ui:insert name="formulario">
-                                    <div class="x_title">
-                                        <h2>Plain Page</h2>
-                                        <ul class="nav navbar-right panel_toolbox">
-                                            <li><a class="collapse-link"><i
-                                                        class="fa fa-chevron-up"></i></a></li>
-                                            <li class="dropdown"><a href="#" class="dropdown-toggle"
-                                                                    data-toggle="dropdown" role="button" aria-expanded="false"><i
-                                                        class="fa fa-wrench"></i></a>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="#">Configurações 1</a></li>
-                                                    <li><a href="#">Configurações 2</a></li>
-                                                </ul></li>
-                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                            </li>
-                                        </ul>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                   
+                                        <div class="x_title">
+                                            <h2>Plain Page</h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i
+                                                            class="fa fa-chevron-up"></i></a></li>
+                                                <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                                        data-toggle="dropdown" role="button" aria-expanded="false"><i
+                                                            class="fa fa-wrench"></i></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="#">Configurações 1</a></li>
+                                                        <li><a href="#">Configurações 2</a></li>
+                                                    </ul></li>
+                                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+
                                     </ui:insert>
                                 </div>
                             </div>
-                         
+
                         </div> 
-                        
+
                     </div>
 
                     <!-- footer content -->

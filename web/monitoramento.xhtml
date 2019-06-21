@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="menuesquerdo">
+
+
+       
+          
+        
+
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>CARGO - FUNÇÃO</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="cadFornecedor.jsf">Cadastro fornecedor </a></li>
+
+                            <li><a href="cadProduto.jsf">Cadastro produto</a></li>
+                        </ul></li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="gerPedido.jsf">Gerenciar pedidos</a></li>
+                        </ul></li>
+                    <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                 class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu" style="display: none">
+                             <li><a href="general_elements.html">Gerar chamados</a></li>
+                             
+                         </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar relatório</a></li>
+
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar grafico</a></li>
+
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+    <ui:define name="formulario">
+
+
+
+
+
+
+        <h:form> 
+
+            <p:growl id="growl" life="3500" />
+
+            <div id="teste">
+                victor hugo
+            </div>
+            
+            
+
+            <p:dataTable var="sale" value="#{dtGroupView.sales}">
+                <f:facet name="header" >
+                    AVALIAÇÃO DA LEITURA E ESCRITA 
+                </f:facet>
+
+                <p:columnGroup type="header" >
+                    <p:row >
+                        <p:column rowspan="3" headerText="TURMAS"  styleClass="verticalText" />
+                        <p:column colspan="7" headerText="LEITURA" />
+                        <p:column colspan="5" headerText="ESCRITA" />
+                        <p:column colspan="5" headerText="ESCRITA" />
+
+                    </p:row>
+
+
+                    <p:row>
+                        <p:column rowspan="3" headerText="1" />
+                        <p:column colspan="2" headerText="A"   />
+                        <p:column colspan="2" headerText="B" />
+                        <p:column colspan="2" headerText="C" />
+                        <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" />
+                        <p:column rowspan="3" headerText="1" />
+                        <p:column colspan="2" headerText="D" />
+                        <p:column colspan="2" headerText="E" />
+
+                    </p:row>
+                    <p:row>
+
+                 <p:column headerText="1" />
+                 <p:column headerText="2" />
+                 <p:column headerText="3" />
+                 <p:column headerText="4" />
+                 <p:column headerText="5" />
+                 <p:column headerText="6" />
+                 <p:column headerText="7" />
+                 <p:column headerText="8" />
+                 <p:column headerText="9" />
+                 <p:column headerText="10" />
+                 <p:column headerText="11" />
+                 <p:column headerText="12" />
+                 <p:column headerText="13" />
+                 <p:column headerText="14" />
+                 <p:column headerText="15" />
+                 
+
+
+
+                    </p:row>
+
+
+                </p:columnGroup>
+
+                <p:column>
+                    <h:outputText value="#{sale.manufacturer}" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.lastYearProfit}%" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.thisYearProfit}%" />
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.lastYearSale}">
+                        <f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{sale.thisYearSale}">
+                        <f:convertNumber type="currency" currencySymbol="$" />
+                    </h:outputText>
+                </p:column>
+
+                <p:columnGroup type="footer">
+                    <p:row>
+                        <p:column colspan="3" style="text-align:right" footerText="Totals:" />
+                        <p:column footerText="\$#{dtGroupView.lastYearTotal}" />
+
+                        <p:column footerText="\$#{dtGroupView.thisYearTotal}" />
+                    </p:row>
+                </p:columnGroup>
+
+                <f:facet name="footer">
+                    Data between 2013-2014
+                </f:facet>
+            </p:dataTable>
+
+        </h:form>
+
+
+
+
+    </ui:define>
+
+</ui:decorate>
+
+
+
+
+
+
+
+
+
+
+
+
+
