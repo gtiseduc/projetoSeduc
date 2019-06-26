@@ -131,14 +131,14 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor unitário" value="#{produtoBean.produto.valorUnitario}" symbol="R$ "/>  
+                            <p:inputNumber placeholder="Valor unitário" value="#{produtoBean.produto.valorUnitario}" />  
                             
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor total" value="#{produtoBean.produto.valorTotal}" symbol="R$ "/>      
+                            <p:inputNumber placeholder="Valor total" value="#{produtoBean.produto.valorTotal}" />      
                         </div>
                     </div>
                    
@@ -165,7 +165,7 @@
                     <br/>
                     <br/>
                     <br/>
-
+                    #{produtoBean.listarProdutos()}
                     <p:dataTable var="produtos" value="#{produtoBean.produtos}" rendered="true">
                         <p:column headerText="Lista de produtos">
                             <p:commandButton value="Editar" action="#{produtoBean.editar(produtos)}" update="@form"  />
@@ -177,7 +177,7 @@
                         </p:column>
 
                         <p:column headerText="Descrição" priority="3">
-                            <h:outputText value="#{produtos.especificacaoProduto}" />
+                            <h:outputText value="#{produtos.nomeProduto}" />
                         </p:column>
 
                         <p:column headerText="Marca" priority="2">
