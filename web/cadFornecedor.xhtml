@@ -259,7 +259,7 @@
             </p:fieldset>
 
             <br/>
-
+            #{fornecedorBean.listarFornecedores()}
             <p:dataTable value="#{fornecedorBean.fornecedores}" var="fornecedor" rendered="true">
 
                 <p:column headerText="Fornecedores">
@@ -284,6 +284,9 @@
 
                 <p:column headerText="cidade">
                     <h:outputText value="#{fornecedor.cidade}" style="text-transform:uppercase;"></h:outputText>
+                </p:column>
+                <p:column headerText="estado">
+                    <h:outputText value="#{fornecedor.estado}" style="text-transform:uppercase;"></h:outputText>
                 </p:column>
 
                 <p:column headerText="telefone">
