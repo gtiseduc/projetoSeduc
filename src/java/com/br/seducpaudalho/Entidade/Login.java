@@ -25,6 +25,7 @@ public class Login {
     private String mensagem;
     private String nivel;
     private String url;
+    private String instituicao;
     private static final Logger LOG = Logger.getLogger(Login.class.getName());
 
     public Login() {

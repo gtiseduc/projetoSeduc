@@ -41,6 +41,7 @@ public class NecessidadesBean {
            
 
                 System.out.println("entrou no salvar----------");
+                necessidade.setCodInep(1234567);
                 necessidadeDao.salvar(necessidade);
                 necessidade = new Necessidade();
                 //necessidades = necessidadeDao.listarProdutos();
@@ -196,6 +197,32 @@ public class NecessidadesBean {
     public void setParametro(String parametro) {
         this.parametro = parametro;
     }
+
+    public Necessidade getNecessidade() {
+        return necessidade;
+    }
+
+    public void setNecessidade(Necessidade necessidade) {
+        this.necessidade = necessidade;
+    }
+
+    public List<Necessidade> getNecessidades() {
+        return necessidades;
+    }
+
+    public void setNecessidades(List<Necessidade> necessidades) {
+        this.necessidades = necessidades;
+    }
+
+    public NecessidadeDao getNecessidadeDao() {
+        return necessidadeDao;
+    }
+
+    public void setNecessidadeDao(NecessidadeDao necessidadeDao) {
+        this.necessidadeDao = necessidadeDao;
+    }
+    
+    
 
     
 }

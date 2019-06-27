@@ -66,7 +66,7 @@ public class FornecedorDao {
                 fornecedor.setBairro(rs.getString("bairro"));
                 fornecedor.setCidade(rs.getString("cidade"));
                 fornecedor.setEstado(rs.getString("estado"));
-                fornecedor.setEstado(rs.getString("pais"));
+                fornecedor.setPais(rs.getString("pais"));
                 fornecedor.setTelefone1(rs.getString("telefone1"));
                 fornecedor.setTelefone2(rs.getString("telefone2"));
                 fornecedor.setEmail(rs.getString("email"));
@@ -191,14 +191,24 @@ public class FornecedorDao {
 
     public void salvar(Fornecedor fornecedor) throws ErroSistema {
 
-        System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.salvar() "+ fornecedor.getNumero());
-
-        String sql = "INSERT INTO fornecedor(tPessoa,rzSocial,cnpj,nFantasia,iMunicipal,iEstadual,cep,endereco,complemento,numero,bairro,cidade,estado,pais,telefone1,telefone2,email)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
+        
         try {
             
+             String sql = "";
             Connection conexao = FabricaConexao.getConnection();
-            PreparedStatement ps = conexao.prepareStatement(sql);
+            PreparedStatement ps;
+
+             if (fornecedor.getIdFornecedor() == null) {
+                 System.out.println("--------- entrou no if cadastro produto");
+               ps = conexao.prepareStatement("INSERT INTO fornecedor(tPessoa,rzSocial,cnpj,nFantasia,iMunicipal,iEstadual,cep,endereco,complemento,numero,bairro,cidade,estado,pais,telefone1,telefone2,email)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+           } else {
+                 System.out.println("--------- entrou no else cadastro produto" + fornecedor.getIdFornecedor());
+                 ps = conexao.prepareStatement("UPDATE fornecedor SET tPessoa=?,rzSocial=?,cnpj=?,nFantasia=?,iMunicipal=?,iEstadual=?,cep=?,endereco=?,complemento=?,numero=?,bairro=?,cidade=?,estado=?,pais=?,telefone1=?,telefone2=?,email=? where idFornecedor=?");
+                ps.setInt(18, fornecedor.getIdFornecedor());
+           }
+            
+            
+            
             
             ps.setString(1, fornecedor.getPessoa());
             ps.setString(2, fornecedor.getRzSocial());

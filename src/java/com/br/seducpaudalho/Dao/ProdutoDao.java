@@ -173,12 +173,21 @@ public class ProdutoDao {
         
         System.out.println("com.br.seducpaudalho.Dao.ProdutoDao.salvar() " + "N "+ produto.getNomeProduto() + "M " +produto.getMarcaProduto()+ "E " + produto.getEspecificacaoProduto()+ "U "+produto.getUnidadeProduto()+"K "+produto.getKiloProduto()+ "V "+produto.getValorUnitario()+"VT "+produto.getValorTotal());
 
-         String sql = "INSERT INTO produto(idFornecedor,nProduto,mProduto,eProduto,uProduto,kProduto,vUnitario,vTotal)VALUES (?,?,?,?,?,?,?,?)";
-
+        
         try {
-
+            String sql = "";
             Connection conexao = FabricaConexao.getConnection();
-            PreparedStatement ps = conexao.prepareStatement(sql);
+            PreparedStatement ps;
+
+             if (produto.getIdProduto() == null) {
+                 System.out.println("--------- entrou no if cadastro produto");
+               ps = conexao.prepareStatement("INSERT INTO produto(idFornecedor,nProduto,mProduto,eProduto,uProduto,kProduto,vUnitario,vTotal)VALUES (?,?,?,?,?,?,?,?)");
+           } else {
+                 System.out.println("--------- entrou no else cadastro produto" + produto.getIdProduto());
+                 ps = conexao.prepareStatement("UPDATE produto SET idFornecedor=?,nProduto=?,mProduto=?,eProduto=?,uProduto=?,kProduto=?,vUnitario=?,vTotal=? where idProduto=?");
+                ps.setInt(9, produto.getIdProduto());
+           }
+            
           
 
             ps.setInt(1, produto.getIdFornecedor());

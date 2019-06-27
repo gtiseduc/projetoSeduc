@@ -25,7 +25,7 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                            <li><a href="nEscola.jsf">Formulário</a></li>
+                            <li><a href="necessidades.jsf">Formulário</a></li>
                         </ul></li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
@@ -92,18 +92,18 @@
             <f:selectItem itemLabel="ESCOLA MUNICIPAL SEVERINO MAURICIO CARNEIROD DA SILVA" itemValue="26091500" />
             <f:selectItem itemLabel="ESCOLA MUNICIPAL SINHO BANDEIRA" itemValue="26091526" />
            
-        </p:selectOneMenu> 
+        </p:selectOneMenu> -->
             
             <br></br>
             <br></br>
             <br></br>
 
-              <h:outputLabel value="ORIENTADOR" style="font-weight:bold"></h:outputLabel> 
+            <!--  <h:outputLabel value="ORIENTADOR" style="font-weight:bold"></h:outputLabel> 
              
                 <p:selectManyCheckbox id="basic" >
                
                    <f:selectItem itemLabel="DOUTORADO" itemValue="curso1" />  
-               </p:selectManyCheckbox> 
+               </p:selectManyCheckbox> -->
 
             <p:tabView>
                 <p:tab title="NECESSIDADES DA ESCOLA">
@@ -115,13 +115,13 @@
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Engenharia, (especificar)" value="{necessidadesBean.necessidade.q1}" />      
+                                <p:inputTextarea placeholder="Engenharia, (especificar)" value="#{necessidadesBean.necessidade.q1}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Retirar bens inservíveis (entulhos)" value="{necessidadesBean.necessidade.q2}" />      
+                                <p:inputTextarea placeholder="Retirar bens inservíveis (entulhos)" value="#{necessidadesBean.necessidade.q2}" />      
                             </div>
                         </div>
 
@@ -129,49 +129,49 @@
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Laboratório de informática" value="{necessidadesBean.necessidade.q3}" />      
+                                <p:inputTextarea placeholder="Laboratório de informática" value="#{necessidadesBean.necessidade.q3}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Merenda" value="{necessidadesBean.necessidade.q4}" />      
+                                <p:inputTextarea placeholder="Merenda" value="#{necessidadesBean.necessidade.q4}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Biblioteca" value="{necessidadesBean.necessidade.q5}" />      
+                                <p:inputTextarea placeholder="Biblioteca" value="#{necessidadesBean.necessidade.q5}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Carteiras" value="{necessidadesBean.necessidade.q6}" />      
+                                <p:inputTextarea placeholder="Carteiras" value="#{necessidadesBean.necessidade.q6}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Ventiladores" value="{necessidadesBean.necessidade.q7}" />      
+                                <p:inputTextarea placeholder="Ventiladores" value="#{necessidadesBean.necessidade.q7}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Diários de classe" value="{necessidadesBean.necessidade.q8}" />      
+                                <p:inputTextarea placeholder="Diários de classe" value="#{necessidadesBean.necessidade.q8}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Kit escolar do aluno" value="{necessidadesBean.necessidade.q9}" />      
+                                <p:inputTextarea placeholder="Kit escolar do aluno" value="#{necessidadesBean.necessidade.q9}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Livros didáticos" value="{necessidadesBean.necessidade.q10}" />      
+                                <p:inputTextarea placeholder="Livros didáticos" value="#{necessidadesBean.necessidade.q10}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
@@ -183,19 +183,19 @@
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Ária de recreio coberta" value="{necessidadesBean.necessidade.q12}" />      
+                                <p:inputTextarea placeholder="Ária de recreio coberta" value="#{necessidadesBean.necessidade.q12}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Área de serviço" value="{necessidadesBean.necessidade.q13}" />      
+                                <p:inputTextarea placeholder="Área de serviço" value="#{necessidadesBean.necessidade.q13}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Banheiros para alunos" value="{necessidadesBean.necessidade.q14}" />      
+                                <p:inputTextarea placeholder="Banheiros para alunos" value="#{necessidadesBean.necessidade.q14}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
@@ -207,7 +207,7 @@
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="Qual a qualidade da internet?" value="{necessidadesBean.necessidade.q16}" />      
+                                <p:inputTextarea placeholder="Qual a qualidade da internet?" value="#{necessidadesBean.necessidade.q16}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
@@ -219,7 +219,7 @@
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputTextarea placeholder="A Escola Recebeu Recursos para Capinação / Pintura (sim ou não)" value="{necessidadesBean.necessidade.q18}" />      
+                                <p:inputTextarea placeholder="A Escola Recebeu Recursos para Capinação / Pintura (sim ou não)" value="#{necessidadesBean.necessidade.q18}" />      
                             </div>
                         </div>
 
@@ -231,7 +231,7 @@
                         <br/>
                         <br/>
                         <br/>
-                        <p:commandButton value="SALVAR" action="{necessidadesBean.salvar()}" />
+                        <p:commandButton value="SALVAR" action="#{necessidadesBean.salvar()}" />
                         <p:commandButton value="IMPRIMIR" />
                         
                     </div>
@@ -244,61 +244,61 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa para impressora" value="{necessidadesBean.necessidade.q19}" />      
+                                <p:inputNumber placeholder="Mesa para impressora" value="#{necessidadesBean.necessidade.q19}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa escrivaninha" value="{necessidadesBean.necessidade.q20}" />      
+                                <p:inputNumber placeholder="Mesa escrivaninha" value="#{necessidadesBean.necessidade.q20}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Cadeira" value="{necessidadesBean.necessidade.q21}" />      
+                                <p:inputNumber placeholder="Cadeira" value="#{necessidadesBean.necessidade.q21}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Armário" value="{necessidadesBean.necessidade.q22}" />      
+                                <p:inputNumber placeholder="Armário" value="#{necessidadesBean.necessidade.q22}" />      
                             </div>
                         </div>
 
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa para computador" value="{necessidadesBean.necessidade.q23}" />      
+                                <p:inputNumber placeholder="Mesa para computador" value="#{necessidadesBean.necessidade.q23}" />      
                             </div>
                         </div>
 
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Telefone/ Ramal/ Fax" value="{necessidadesBean.necessidade.q24}" />      
+                                <p:inputNumber placeholder="Telefone/ Ramal/ Fax" value="#{necessidadesBean.necessidade.q24}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Computador em rede" value="{necessidadesBean.necessidade.q25}" />      
+                                <p:inputNumber placeholder="Computador em rede" value="#{necessidadesBean.necessidade.q25}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Impressora" value="{necessidadesBean.necessidade.q26}" />      
+                                <p:inputNumber placeholder="Impressora" value="#{necessidadesBean.necessidade.q26}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Projetor" value="{necessidadesBean.necessidade.q27}" />      
+                                <p:inputNumber placeholder="Projetor" value="#{necessidadesBean.necessidade.q27}" />      
                             </div>
                         </div>
 
-                        <p:commandButton value="SALVAR" />
+                        
 
                     </div>
 
@@ -314,59 +314,59 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa escrivaninha" value="{necessidadesBean.necessidade.q28}" />      
+                                <p:inputNumber placeholder="Mesa escrivaninha" value="#{necessidadesBean.necessidade.q28}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa para computador" value="{necessidadesBean.necessidade.q29}" />      
+                                <p:inputNumber placeholder="Mesa para computador" value="#{necessidadesBean.necessidade.q29}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa para impressora" value="{necessidadesBean.necessidade.q30}" />      
+                                <p:inputNumber placeholder="Mesa para impressora" value="#{necessidadesBean.necessidade.q30}" />      
                             </div>
                         </div>
                          <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Cadeiras" value="{necessidadesBean.necessidade.q31}" />      
+                                <p:inputNumber placeholder="Cadeiras" value="#{necessidadesBean.necessidade.q31}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Arquivos em aço com quatro gavetas" value="{necessidadesBean.necessidade.q32}" />      
+                                <p:inputNumber placeholder="Arquivos em aço com quatro gavetas" value="#{necessidadesBean.necessidade.q32}" />      
                             </div>
                         </div>
                        
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Armários" value="{necessidadesBean.necessidade.q33}" />      
+                                <p:inputNumber placeholder="Armários" value="#{necessidadesBean.necessidade.q33}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Impressora" value="{necessidadesBean.necessidade.q34}" />      
+                                <p:inputNumber placeholder="Impressora" value="#{necessidadesBean.necessidade.q34}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Computador em rede" value="{necessidadesBean.necessidade.q35}" />      
+                                <p:inputNumber placeholder="Computador em rede" value="#{necessidadesBean.necessidade.q35}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Telefone/ ramal" value="{necessidadesBean.necessidade.q36}" />      
+                                <p:inputNumber placeholder="Telefone/ ramal" value="#{necessidadesBean.necessidade.q36}" />      
                             </div>
                         </div>
-                        <p:commandButton value="SALVAR" />
+                     
                     </div>
 
 
@@ -378,28 +378,28 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Armário" value="{necessidadesBean.necessidade.q37}" />      
+                                <p:inputNumber placeholder="Armário" value="#{necessidadesBean.necessidade.q37}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa escrivaninha" value="{necessidadesBean.necessidade.q38}" />      
+                                <p:inputNumber placeholder="Mesa escrivaninha" value="#{necessidadesBean.necessidade.q38}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Cadeiras" value="{necessidadesBean.necessidade.q39}" />      
+                                <p:inputNumber placeholder="Cadeiras" value="#{necessidadesBean.necessidade.q39}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Telefone/ Ramal" value="{necessidadesBean.necessidade.q40}" />      
+                                <p:inputNumber placeholder="Telefone/ Ramal" value="#{necessidadesBean.necessidade.q40}" />      
                             </div>
                         </div>
-                        <p:commandButton value="SALVAR" />
+                      
                     </div>
 
 
@@ -411,23 +411,23 @@
                         <div class="ui-g-12 ui-md-5">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Armário com divisórias para cada prof. (escaninho)" value="{necessidadesBean.necessidade.q41}" />      
+                                <p:inputNumber placeholder="Armário com divisórias para cada prof. (escaninho)" value="#{necessidadesBean.necessidade.q41}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Cadeiras" value="{necessidadesBean.necessidade.q42}" />      
+                                <p:inputNumber placeholder="Cadeiras" value="#{necessidadesBean.necessidade.q42}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa de reunião com 10 lugares" value="{necessidadesBean.necessidade.q43}" />      
+                                <p:inputNumber placeholder="Mesa de reunião com 10 lugares" value="#{necessidadesBean.necessidade.q43}" />      
                             </div>
                         </div>
 
-                        <p:commandButton value="SALVAR" />
+                        
                     </div>
 
 
@@ -440,42 +440,42 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Sala de aula" value="{necessidadesBean.necessidade.q44}" />      
+                                <p:inputNumber placeholder="Sala de aula" value="#{necessidadesBean.necessidade.q44}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Banheiro para administração" value="{necessidadesBean.necessidade.q45}" />      
+                                <p:inputNumber placeholder="Banheiro para administração" value="#{necessidadesBean.necessidade.q45}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Quadro branco ou verde" value="{necessidadesBean.necessidade.q46}" />      
+                                <p:inputNumber placeholder="Quadro branco ou verde" value="#{necessidadesBean.necessidade.q46}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Ventiladores" value="{necessidadesBean.necessidade.q47}" />      
+                                <p:inputNumber placeholder="Ventiladores" value="#{necessidadesBean.necessidade.q47}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Conjunto de cadeira e mesa do professor" value="{necessidadesBean.necessidade.q48}" />      
+                                <p:inputNumber placeholder="Conjunto de cadeira e mesa do professor" value="#{necessidadesBean.necessidade.q48}" />      
                             </div>
                         </div>
                          <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Conjunto de cadeira e mesa estudante" value="{necessidadesBean.necessidade.q49}" />      
+                                <p:inputNumber placeholder="Conjunto de cadeira e mesa estudante" value="#{necessidadesBean.necessidade.q49}" />      
                             </div>
                         </div>
                        
 
-                        <p:commandButton value="SALVAR" />
+                        
                     </div>
 
 
@@ -487,53 +487,53 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Quadro branco" value="{necessidadesBean.necessidade.q50}" />      
+                                <p:inputNumber placeholder="Quadro branco" value="#{necessidadesBean.necessidade.q50}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Ar condicionado" value="{necessidadesBean.necessidade.q51}" />      
+                                <p:inputNumber placeholder="Ar condicionado" value="#{necessidadesBean.necessidade.q51}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesas para computador" value="{necessidadesBean.necessidade.q52}" />      
+                                <p:inputNumber placeholder="Mesas para computador" value="#{necessidadesBean.necessidade.q52}" />      
                             </div>
                         </div>
                        
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa para impressora" value="{necessidadesBean.necessidade.q53}" />      
+                                <p:inputNumber placeholder="Mesa para impressora" value="#{necessidadesBean.necessidade.q53}" />      
                             </div>
                         </div>
                          <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Conjunto de cadeira e mesa do professor" value="{necessidadesBean.necessidade.q54}" />      
+                                <p:inputNumber placeholder="Conjunto de cadeira e mesa do professor" value="#{necessidadesBean.necessidade.q54}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Cadeiras" value="{necessidadesBean.necessidade.q55}" />      
+                                <p:inputNumber placeholder="Cadeiras" value="#{necessidadesBean.necessidade.q55}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Impressora" value="{necessidadesBean.necessidade.q56}" />      
+                                <p:inputNumber placeholder="Impressora" value="#{necessidadesBean.necessidade.q56}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Computadores em rede" value="{necessidadesBean.necessidade.q57}" />      
+                                <p:inputNumber placeholder="Computadores em rede" value="#{necessidadesBean.necessidade.q57}" />      
                             </div>
                         </div>
-                        <p:commandButton value="SALVAR" />
+                      
                     </div>
 
 
@@ -544,47 +544,47 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Ar condicionado" value="{necessidadesBean.necessidade.q58}" />      
+                                <p:inputNumber placeholder="Ar condicionado" value="#{necessidadesBean.necessidade.q58}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesas de leitura quadradas" value="{necessidadesBean.necessidade.q59}" />      
+                                <p:inputNumber placeholder="Mesas de leitura quadradas" value="#{necessidadesBean.necessidade.q59}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa escrivaninha" value="{necessidadesBean.necessidade.q60}" />      
+                                <p:inputNumber placeholder="Mesa escrivaninha" value="#{necessidadesBean.necessidade.q60}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Cadeiras" value="{necessidadesBean.necessidade.q61}" />      
+                                <p:inputNumber placeholder="Cadeiras" value="#{necessidadesBean.necessidade.q61}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Estantes dupla face" value="{necessidadesBean.necessidade.q62}" />      
+                                <p:inputNumber placeholder="Estantes dupla face" value="#{necessidadesBean.necessidade.q62}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Arquivos" value="{necessidadesBean.necessidade.q63}" />      
+                                <p:inputNumber placeholder="Arquivos" value="#{necessidadesBean.necessidade.q63}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Acervo com no mínimo 500 títulos" value="{necessidadesBean.necessidade.q64}" />      
+                                <p:inputNumber placeholder="Acervo com no mínimo 500 títulos" value="#{necessidadesBean.necessidade.q64}" />      
                             </div>
                         </div>
 
-                        <p:commandButton value="SALVAR" />
+                        
                     </div>
 
 
@@ -595,61 +595,61 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Ventilador" value="{necessidadesBean.necessidade.q65}" />      
+                                <p:inputNumber placeholder="Ventilador" value="#{necessidadesBean.necessidade.q65}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Armários de parede" value="{necessidadesBean.necessidade.q66}" />      
+                                <p:inputNumber placeholder="Armários de parede" value="#{necessidadesBean.necessidade.q66}" />      
                             </div>
                         </div>
                        
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Botijão de gás" value="{necessidadesBean.necessidade.q67}" />      
+                                <p:inputNumber placeholder="Botijão de gás" value="#{necessidadesBean.necessidade.q67}" />      
                             </div>
                         </div>
                         
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Freezer horizontal" value="{necessidadesBean.necessidade.q68}" />      
+                                <p:inputNumber placeholder="Freezer horizontal" value="#{necessidadesBean.necessidade.q68}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Fogão industrial" value="{necessidadesBean.necessidade.q69}" />      
+                                <p:inputNumber placeholder="Fogão industrial" value="#{necessidadesBean.necessidade.q69}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Liquidificador industrial" value="{necessidadesBean.necessidade.q70}" />      
+                                <p:inputNumber placeholder="Liquidificador industrial" value="#{necessidadesBean.necessidade.q70}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Geladeira" value="{necessidadesBean.necessidade.q71}" />      
+                                <p:inputNumber placeholder="Geladeira" value="#{necessidadesBean.necessidade.q71}" />      
                             </div>
                         </div>
                          <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mesa para preparo de alimentos" value="{necessidadesBean.necessidade.q72}" />      
+                                <p:inputNumber placeholder="Mesa para preparo de alimentos" value="#{necessidadesBean.necessidade.q72}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-6">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Merenda por estudante - caneca, bandejão, prato e talheres" value="{necessidadesBean.necessidade.q73}" />      
+                                <p:inputNumber placeholder="Merenda por estudante - caneca, bandejão, prato e talheres" value="#{necessidadesBean.necessidade.q73}" />      
                             </div>
                         </div>
 
-                        <p:commandButton value="SALVAR" />
+                        
                     </div>
 
 
@@ -662,13 +662,13 @@
                          <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Camisas por estudante" value="{necessidadesBean.necessidade.q74}" />      
+                                <p:inputNumber placeholder="Camisas por estudante" value="#{necessidadesBean.necessidade.q74}" />      
                             </div>
                         </div>
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                <p:inputNumber placeholder="Mochila por estudante" value="{necessidadesBean.necessidade.q75}" />      
+                                <p:inputNumber placeholder="Mochila por estudante" value="#{necessidadesBean.necessidade.q75}" />      
                             </div>
                         </div>
                         
@@ -684,21 +684,21 @@
                                 
                                
                                
-                                <p:inputNumber placeholder="conjunto de livros didáticos por aluno" value="{necessidadesBean.necessidade.q77}" />      
+                                <p:inputNumber placeholder="conjunto de livros didáticos por aluno" value="#{necessidadesBean.necessidade.q77}" />      
                             </div>
                         </div>
                        
                         
                        
 
-                        <p:commandButton value="SALVAR" />
+                       
                     </div>
 
 
                 </p:tab>
 
 
-            </p:tabView> -->
+            </p:tabView>
 
 
 

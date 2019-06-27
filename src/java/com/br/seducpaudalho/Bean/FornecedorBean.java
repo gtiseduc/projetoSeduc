@@ -197,6 +197,7 @@ public class FornecedorBean {
         try {
             fornecedorDao.deletar(f);
             fornecedor = new Fornecedor();
+            fornecedores = fornecedorDao.listarFornecedores();
             adicionarMensagem("EXCLUIDO!", "EXCLUIDO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
