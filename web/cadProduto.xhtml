@@ -57,17 +57,48 @@
     <ui:define name="formulario">
 
 
+        <script type="text/javascript">
+
+            function mascara(o, f) {
+                v_obj = o;
+                v_fun = f;
+                setTimeout("execmascara()", 1);
+            }
+
+            function execmascara() {
+                v_obj.value = v_fun(v_obj.value);
+            }
+
+            function valor(v) {
+                v = v.replace(/\D/g, "");
+                v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+                v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos
+                // Ãºltimos 11 digitos
+                v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos
+                // Ãºltimos 8 digitos
+                v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos
+                // Ãºltimos 5 digitos
+                v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos
+                // Ãºltimos 2 digitos
+                return v;
+            }
+
+
+        </script>
+
+
+
 
 
 
 
         <h:form> 
-  
+
             <p:growl id="growl" life="3500" />
-              <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
             <p:fieldset legend="Cadastro produto">
 
- 
+
                 <div class="ui-g ui-fluid">
 
                     <div class="ui-g-12 ui-md-2">
@@ -132,16 +163,20 @@
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
                             <p:inputNumber placeholder="Valor unitário" value="#{produtoBean.produto.valorUnitario}" />  
-                            
+
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor total" value="#{produtoBean.produto.valorTotal}" />      
+                            <p:inputNumber placeholder="Valor total" value="#{produtoBean.produto.valorTotal}" /> 
+                            
+                             <p:inputText id="preco" value="#{produtoBean.produto.valorTotal}" onkeypress="mascara(this, valor);">
+                                <f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2" />
+                            </p:inputText>
                         </div>
                     </div>
-                   
+
                     <br/>
                     <br/>
                     <br/>
@@ -150,6 +185,9 @@
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-pencil-square-o"></i></span>
                             <p:inputTextarea placeholder="Especificação do produto" value="#{produtoBean.produto.especificacaoProduto}"/>      
+
+                           
+
                         </div>
 
                     </div>
