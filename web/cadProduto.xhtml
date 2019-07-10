@@ -234,10 +234,14 @@
                             <h:outputText value="#{produtos.kiloProduto}" />
                         </p:column>
                         <p:column headerText="Valor unitario" priority="4">
-                            <h:outputText value="#{produtos.valorUnitario}" />
+                            <h:outputText value="#{produtos.valorUnitario}" >
+                             <f:convertNumber currencyCode="BRL" type="currency"/>
+                            </h:outputText>
                         </p:column>
                         <p:column headerText="Valor total" priority="4">
-                            <h:outputText value="#{produtos.valorTotal}" />
+                            <h:outputText value="#{produtos.valorTotal}" >
+                              <f:convertNumber currencyCode="BRL" type="currency"/>
+                            </h:outputText>
                         </p:column>
                     </p:dataTable>
 
