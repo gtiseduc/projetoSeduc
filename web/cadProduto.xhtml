@@ -162,16 +162,18 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor unitário" value="#{produtoBean.produto.valorUnitario}" />  
-
+                          
+                            <p:inputText id="vunitario" value="#{produtoBean.produto.valorUnitario}" onkeypress="mascara(this, valor);">
+                                <f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2" />
+                            </p:inputText>
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor total" value="#{produtoBean.produto.valorTotal}" /> 
-                            
-                             <p:inputText id="preco" value="#{produtoBean.produto.valorTotal}" onkeypress="mascara(this, valor);">
+                            <!-- <p:inputNumber placeholder="Valor total" value="{produtoBean.produto.valorTotal}" /> -->
+
+                            <p:inputText id="vtotal"  value="#{produtoBean.produto.valorTotal}" onkeypress="mascara(this, valor);">
                                 <f:convertNumber groupingUsed="true" minFractionDigits="2" maxFractionDigits="2" />
                             </p:inputText>
                         </div>
@@ -186,7 +188,7 @@
                             <span class="ui-inputgroup-addon"><i class="fa fa-pencil-square-o"></i></span>
                             <p:inputTextarea placeholder="Especificação do produto" value="#{produtoBean.produto.especificacaoProduto}"/>      
 
-                           
+
 
                         </div>
 

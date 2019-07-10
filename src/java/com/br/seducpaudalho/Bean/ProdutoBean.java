@@ -42,7 +42,8 @@ public class ProdutoBean {
 
         try {
 
-            System.out.println("olha aqui o fornecedor "+produto.getIdFornecedor()+ " kilo "+produto.getKiloProduto()+ "Un "+ produto.getUnidadeProduto());
+            System.out.println("olha aqui o fornecedor "+produto.getIdFornecedor()+ " kilo "+produto.getKiloProduto()+ "Un "+ produto.getUnidadeProduto()+ " olha o preço "+produto.getValorTotal());
+          
             if (produto.getNomeProduto().equals("")) {
 
                 adicionarMensagem("O CAMPO DESCRIÇÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
