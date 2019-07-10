@@ -37,13 +37,14 @@ public class ProdutoBean {
     private List<Fornecedor> fornecedores = new ArrayList<>();
     private FornecedorDao fornecedorDao = new FornecedorDao();
     private String parametro;
+    
 
     public void salvar() {
 
         try {
 
-            System.out.println("olha aqui o fornecedor "+produto.getIdFornecedor()+ " kilo "+produto.getKiloProduto()+ "Un "+ produto.getUnidadeProduto()+ " olha o preço "+produto.getValorTotal());
-          
+            System.out.println("olha aqui o fornecedor " + produto.getIdFornecedor() + " kilo " + produto.getKiloProduto() + "Un " + produto.getUnidadeProduto() + " olha o preço " + produto.getValorTotal());
+
             if (produto.getNomeProduto().equals("")) {
 
                 adicionarMensagem("O CAMPO DESCRIÇÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
@@ -71,7 +72,7 @@ public class ProdutoBean {
                 return;
 
             }
-           
+
             if (produto.getKiloProduto() == 0.0) {
 
                 adicionarMensagem("O CAMPO KILO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
@@ -107,7 +108,7 @@ public class ProdutoBean {
                 produtos = produtoDao.listarProdutos();
 
                 adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
-           }
+            }
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -134,7 +135,7 @@ public class ProdutoBean {
             produto = new Produto();
             produtos = produtoDao.listarProdutos();
             adicionarMensagem("EXCLUIDO!", "EXCLUIDO COM SUCESSO", FacesMessage.SEVERITY_INFO);
-            
+
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -330,5 +331,7 @@ public class ProdutoBean {
     public void setFornecedorDao(FornecedorDao fornecedorDao) {
         this.fornecedorDao = fornecedorDao;
     }
+
+   
 
 }
