@@ -65,22 +65,22 @@
                 <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Número cartão" value="#{abastecimentoBean.abastecimento}" />  
+                            <p:inputNumber placeholder="Número cartão" value="#{abastecimentoBean.abastecimento.numeroCartao}" />  
                             
                         </div>
                     </div>
                 
-                  <div class="ui-g-12 ui-md-3">
+                 <!-- <div class="ui-g-12 ui-md-3">
                     <div class="ui-inputgroup">
                         <span class="ui-inputgroup-addon"><i class="fa fa-car"></i></span>
-                        <p:selectOneMenu id="veiculo" value="#{veiculoBean.veiculo.placa}"  >
+                        <p:selectOneMenu id="veiculo" value="{veiculoBean.veiculo.placa}"  >
                              <f:selectItem itemLabel="Selecione o veiculo" /> 
-                             <f:selectItems   value="#{veiculoBean.veiculos}" var="veiculo" itemLabel="#{veiculo.placa}" itemValue="#{veiculo.placa}"/>
+                             <f:selectItems   value="{veiculoBean.veiculos}" var="veiculo" itemLabel="{veiculo.placa}" itemValue="{veiculo.placa}"/>
                            
 
                         </p:selectOneMenu>      
                     </div>
-                </div>
+                </div>-->
             
              <div class="ui-g-12 ui-md-3">
                     <div class="ui-inputgroup">
@@ -119,7 +119,7 @@
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor abastecido" value="#{abastecimentoBean.abastecimento}" symbol="R$ "/>  
+                            <p:inputNumber placeholder="Valor abastecido" value="#{abastecimentoBean.abastecimento.valorAbastecido}" symbol="R$ "/>  
                             
                         </div>
                     </div>
@@ -198,32 +198,32 @@
                 <br/>
                 <br/>
 
-                <p:dataTable var="veiculo" value="#{dtBasicView.cars}" rendered="true">
+                <p:dataTable var="veiculos" value="#{abastecimentoBean.abastecimentos}" rendered="true">
                     <p:column headerText="Tabela de abastecimento">
                         <p:commandButton value="Editar"/>
                         <p:commandButton value="Excluir"/>
                     </p:column>
 
                     <p:column headerText="Veiculo">
-                        <h:outputText value="#{car.id}" />
+                        <h:outputText value="#{veiculos.placa}" />
                     </p:column>
 
                     <p:column headerText="combustivel" priority="3">
-                        <h:outputText value="#{car.year}" />
+                        <h:outputText value="#{veiculos.combustivel}" />
                     </p:column>
 
                     <p:column headerText="Data" priority="2">
-                        <h:outputText value="#{car.brand}" />
+                        <h:outputText value="#{veiculos.data}" />
                     </p:column>
 
                     <p:column headerText="Litros" priority="4">
-                        <h:outputText value="#{car.color}" />
+                        <h:outputText value="#{veiculos.litro}" />
                     </p:column>
                     <p:column headerText="Valor Abastecido " priority="4">
-                        <h:outputText value="#{car.color}" />
+                        <h:outputText value="#{veiculos.valorAbastecido}" />
                     </p:column>
                     <p:column headerText="Preço por litro" priority="4">
-                        <h:outputText value="#{car.color}" />
+                        <h:outputText value="#{veiculos.precoLitro}" />
                     </p:column>
                 </p:dataTable>
 

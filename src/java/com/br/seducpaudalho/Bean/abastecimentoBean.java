@@ -51,12 +51,7 @@ public class abastecimentoBean {
 
             }
 
-            if (abastecimento.getPlaca().equals("")) {
-
-                adicionarMensagem("O CAMPO VEICULO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
-
-            }
+         
 
            /* if (abastecimento.getTelefone1().equals("") && abastecimento.getTelefone2().equals("")) {
 
@@ -79,8 +74,14 @@ public class abastecimentoBean {
                 return;
 
             }
+                 if (abastecimento.getValorAbastecido() == 0.0) {
+
+                adicionarMensagem("O CAMPO VALOR ABASTECIDO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                return;
+
+            }
               
-                if (abastecimento.getKmLitro() == 0.0) {
+                if (abastecimento.getLitro() == 0.0) {
 
                 adicionarMensagem("O CAMPO LITRO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
                 return;
