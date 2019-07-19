@@ -65,7 +65,7 @@
                 <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Número cartão" value="" symbol="R$ "/>  
+                            <p:inputNumber placeholder="Número cartão" value="#{abastecimentoBean.abastecimento}" />  
                             
                         </div>
                     </div>
@@ -73,8 +73,9 @@
                   <div class="ui-g-12 ui-md-3">
                     <div class="ui-inputgroup">
                         <span class="ui-inputgroup-addon"><i class="fa fa-car"></i></span>
-                        <p:selectOneMenu id="veiculo" value=""  >
-                            <f:selectItem itemLabel="SELECIONE O VEICULO" itemValue="" />
+                        <p:selectOneMenu id="veiculo" value="#{veiculoBean.veiculo.placa}"  >
+                             <f:selectItem itemLabel="Selecione o veiculo" /> 
+                             <f:selectItems   value="#{veiculoBean.veiculos}" var="veiculo" itemLabel="#{veiculo.placa}" itemValue="#{veiculo.placa}"/>
                            
 
                         </p:selectOneMenu>      
@@ -84,7 +85,7 @@
              <div class="ui-g-12 ui-md-3">
                     <div class="ui-inputgroup">
                         <span class="ui-inputgroup-addon"><i class="fa fa-filter"></i></span>
-                        <p:selectOneMenu id="combustivel" value="#{fornecedorBean.fornecedor.estado}"  >
+                        <p:selectOneMenu id="combustivel" value="#{abastecimentoBean.abastecimento.combustivel}"  >
                             <f:selectItem itemLabel="TIPO DE COMBUSTIVEL" itemValue="" />
                             <f:selectItem itemLabel="DISEL" itemValue="DISEL" />
                             <f:selectItem itemLabel="ALCOOL" itemValue="ALCOOL" />
@@ -103,14 +104,14 @@
                     <div class="ui-inputgroup">
                         <span class="ui-inputgroup-addon"><i  class="fa fa-calendar"></i></span>
                          
-                    <p:calendar id="popup" placeholder="Data de abastecimento" value="#{calendarView.date2}" />    
+                        <p:calendar id="popup" placeholder="Data de abastecimento" value="#{abastecimentoBean.abastecimento.data}" />    
                     </div>
                 </div>
                 
                   <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Litros" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Litros" value="#{abastecimentoBean.abastecimento.litro}" symbol="L " />  
                             
                         </div>
                     </div>
@@ -118,7 +119,7 @@
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Valor abastecido" value="" symbol="R$ "/>  
+                            <p:inputNumber placeholder="Valor abastecido" value="#{abastecimentoBean.abastecimento}" symbol="R$ "/>  
                             
                         </div>
                     </div>
@@ -126,7 +127,7 @@
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
-                            <p:inputNumber placeholder="Preço por litro" value="" symbol="R$ "/>  
+                            <p:inputNumber placeholder="Preço por litro" value="#{abastecimentoBean.abastecimento.precoLitro}" symbol="R$ " disabled="true"/>  
                             
                         </div>
                     </div>
@@ -134,42 +135,42 @@
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Km por litro" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Km por litro" value="#{abastecimentoBean.abastecimento.kmLitro}" symbol="L "/>  
                             
                         </div>
                     </div>
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Km inicial" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Km inicial" value="#{abastecimentoBean.abastecimento.kmInicial}" symbol="L "/>  
                             
                         </div>
                     </div>
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Km final" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Km final" value="#{abastecimentoBean.abastecimento.kmFinal}" symbol="L "/>  
                             
                         </div>
                     </div>
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Km rodados" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Km rodados" value="#{abastecimentoBean.abastecimento.kmRodados}" symbol="L "/>  
                             
                         </div>
                     </div>
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Média de Km/L" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Média de Km/L" value="#{abastecimentoBean.abastecimento.mediaKm}" symbol="L "/>  
                             
                         </div>
                     </div>
                 <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class=""></i></span>
-                            <p:inputNumber placeholder="Preço / Km rodado" value="" symbol="L "/>  
+                            <p:inputNumber placeholder="Preço / Km rodado" value="#{abastecimentoBean.abastecimento.kmRodados}" symbol="L "/>  
                             
                         </div>
                     </div>
@@ -190,7 +191,7 @@
                 <br/>
                 <br/>
 
-                <p:commandButton value="Salvar"/>
+                <p:commandButton value="#{abastecimentoBean.salvar()}"/>
 
                 <br/>
                 <br/>
