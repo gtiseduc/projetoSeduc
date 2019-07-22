@@ -157,7 +157,8 @@ public class AbastecimentoDao {
 
     public void salvar(Abastecimento abastecimento) throws ErroSistema {
 
-       try {
+        System.out.println("------------------- "+abastecimento.getNumeroCartao());
+        try {
 
             String sql = "";
             Connection conexao = FabricaConexao.getConnection();
@@ -165,11 +166,11 @@ public class AbastecimentoDao {
 
             if (abastecimento.getIdAbastecimento()== null) {
                 System.out.println("--------- entrou no if cadastro Abastecimento");
-                ps = conexao.prepareStatement("INSERT INTO abastecimento(numeroCartao,placa,combustivel,data,litro,valorAbastecimento,precoLitro,kmLitro,kmInicial,kmFinal,kmRodados,mediaKm,precoKm)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                ps = conexao.prepareStatement("INSERT INTO abastecimento(numeroCartao,placa,combustivel,data,litro,valorAbastecimento,precoLitro,kmInicial)VALUES (?,?,?,?,?,?,?,?)");
             } else {
                 System.out.println("--------- entrou no else cadastro produto" + abastecimento.getIdAbastecimento());
-                ps = conexao.prepareStatement("UPDATE abastecimento SET numeroCartao=?,placa=?,combustivel=?,data=?,litro=?,valorAbastecimento=?,precoLitro=?,kmLitro=?,kmInicial=?,kmFinal=?,kmRodados=?,mediaKm=?,precoKm=? where idVeiculo=?");
-                ps.setInt(14, abastecimento.getIdAbastecimento());
+                ps = conexao.prepareStatement("UPDATE abastecimento SET numeroCartao=?,placa=?,combustivel=?,data=?,litro=?,valorAbastecimento=?,precoLitro=?,kmInicial=? where idAbastecimento=?");
+                ps.setInt(9, abastecimento.getIdAbastecimento());
             }
 
             ps.setString(1, abastecimento.getNumeroCartao());
@@ -179,12 +180,9 @@ public class AbastecimentoDao {
             ps.setDouble(5, abastecimento.getLitro());
             ps.setDouble(6, abastecimento.getValorAbastecido());
             ps.setDouble(7, abastecimento.getPrecoLitro());
-            ps.setDouble(8, abastecimento.getKmLitro());
-            ps.setDouble(9, abastecimento.getKmInicial());
-            ps.setDouble(10, abastecimento.getKmFinal());
-            ps.setDouble(11, abastecimento.getKmRodados());
-            ps.setDouble(12, abastecimento.getMediaKm());
-            ps.setDouble(13, abastecimento.getPrecoKm());
+          
+            ps.setDouble(8, abastecimento.getKmInicial());
+            
           
            
 

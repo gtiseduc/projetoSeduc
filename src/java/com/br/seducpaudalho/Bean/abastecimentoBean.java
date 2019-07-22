@@ -36,7 +36,15 @@ public class abastecimentoBean {
 
     public void salvar() {
 
-        try {
+     
+           try {
+         
+          if (abastecimento.getNumeroCartao().equals("")) {
+
+                adicionarMensagem("O CAMPO NÚMERO DO CARTÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                return;
+
+            }
 
             if (abastecimento.getPlaca().equals("")) {
 
@@ -44,22 +52,11 @@ public class abastecimentoBean {
                 return;
 
             }
-            if (abastecimento.getNumeroCartao().equals("")) {
-
-                adicionarMensagem("O CAMPO CARTÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
-
-            }
+            
 
          
 
-           /* if (abastecimento.getTelefone1().equals("") && abastecimento.getTelefone2().equals("")) {
-
-                adicionarMensagem("VOCÊ TEM QUE CADASTRAR UM TELEFONE!", "", FacesMessage.SEVERITY_INFO);
-
-                return;
-
-            }*/
+          
             if (abastecimento.getCombustivel().equals("")) {
 
                 adicionarMensagem("O CAMPO TIPO DE COMBUSTIVEL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
@@ -74,12 +71,7 @@ public class abastecimentoBean {
                 return;
 
             }
-                 if (abastecimento.getValorAbastecido() == 0.0) {
-
-                adicionarMensagem("O CAMPO VALOR ABASTECIDO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
-
-            }
+               
               
                 if (abastecimento.getLitro() == 0.0) {
 
@@ -94,26 +86,27 @@ public class abastecimentoBean {
 
             }
             
-                 if (abastecimento.getPrecoLitro() == 0.0) {
-
-                adicionarMensagem("O CAMPO PREÇO PO LITRO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
-
-            }
+               
             else {
 
                 System.out.println("com.br.seducpaudalho.Bean.VeiculoBean.salvar()");
                 abastecimentoDao.salvar(abastecimento);
                 abastecimento = new Abastecimento();
-                abastecimentos = abastecimentoDao.listarAbastecimentos();
+               // abastecimentos = abastecimentoDao.listarAbastecimentos();
 
                 adicionarMensagem("SALVO!", "SALVO COM SUCESSO", FacesMessage.SEVERITY_INFO);
-            }
-        } catch (ErroSistema ex) {
+           }
+       } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        // }
+         
+    }
+    
+    public void soma(){
+    
+        abastecimento.setPrecoLitro( abastecimento.getValorAbastecido() /abastecimento.getLitro() );
+        
     }
 
     public void alterar() {
