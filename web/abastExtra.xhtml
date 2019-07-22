@@ -1,0 +1,312 @@
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="menuesquerdo">
+
+
+
+
+
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>CARGO - FUNÇÃO</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="cadVeiculo.jsf">Cadastro veiculo </a></li>
+
+                            <!--  <li><a href="gerAbastecimento.jsf">Cadastro produto</a></li>-->
+                        </ul></li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="abastecimento.jsf">Gerenciar abastecimento</a></li>
+                        </ul></li>
+                    <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                 class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu" style="display: none">
+                             <li><a href="general_elements.html">Gerar chamados</a></li>
+                             
+                         </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar relatório</a></li>
+
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <li><a href="general_elements.html">Gerar grafico</a></li>
+
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+    <ui:define name="formulario">
+
+        <script type="text/javascript">
+
+            function mascara(o, f) {
+                v_obj = o;
+                v_fun = f;
+                setTimeout("execmascara()", 1);
+            }
+
+            function execmascara() {
+                v_obj.value = v_fun(v_obj.value);
+            }
+
+            function valor(v) {
+                v = v.replace(/\D/g, "");
+                v = v.replace(/[0-9]{15}/, "invÃ¡lido");
+                v = v.replace(/(\d{1})(\d{11})$/, "$1.$2"); // coloca ponto antes dos
+                // Ãºltimos 11 digitos
+                v = v.replace(/(\d{1})(\d{8})$/, "$1.$2"); // coloca ponto antes dos
+                // Ãºltimos 8 digitos
+                v = v.replace(/(\d{1})(\d{5})$/, "$1.$2"); // coloca ponto antes dos
+                // Ãºltimos 5 digitos
+                v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2"); // coloca virgula antes dos
+                // Ãºltimos 2 digitos
+                return v;
+            }
+
+
+        </script>
+
+
+        <!--<h3 style="margin-top:0">Cadastro veiculos</h3>-->
+        <h:form>
+
+            <p:growl id="growl" life="3500" />
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
+
+
+         
+
+
+                <div class="ui-g ui-fluid">
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                         <!--   <p:inputText placeholder="Número cartão" value="#{abastecimentoBean.abastecimento.numeroCartao}" >
+                            
+                            </p:inputText>  -->
+                            <p:inputMask mask="9?99999999999" placeholder="Número cartão" value="#{abastecimentoBean.abastecimento.numeroCartao}" />
+
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-car"></i></span>
+                            <p:selectOneMenu id="veiculo" value="#{abastecimentoBean.abastecimento.placa}"  >
+                                <f:selectItem itemLabel="Selecione o veiculo" /> 
+                                <f:selectItems   value="#{veiculoBean.veiculos}" var="veiculo" itemLabel="#{veiculo.placa}" itemValue="#{veiculo.placa}"/>
+
+
+                            </p:selectOneMenu>      
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-filter"></i></span>
+                            <p:selectOneMenu id="combustivel" value="#{abastecimentoBean.abastecimento.combustivel}"  >
+                                <f:selectItem itemLabel="TIPO DE COMBUSTIVEL"  />
+                                <f:selectItem itemLabel="DISEL" itemValue="DISEL" />
+                                <f:selectItem itemLabel="ALCOOL" itemValue="ALCOOL" />
+                                <f:selectItem itemLabel="GASOLINA" itemValue="GASOLINA" />
+
+
+                            </p:selectOneMenu>      
+                        </div>
+                    </div>
+
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-calendar"></i></span>
+
+
+                            <p:inputMask mask="99/99/9999" placeholder="Data de abastecimento" value="#{abastecimentoBean.abastecimento.data}"  />    
+                            <!--<p:calendar id="popup" placeholder="Data de abastecimento" value="{abastecimentoBean.abastecimento.data}"  />   --> 
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Litros" value="#{abastecimentoBean.abastecimento.litro}" symbol="L " > 
+                            <p:ajax   listener="#{abastecimentoBean.soma}" update="empname" /></p:inputNumber> 
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
+
+
+                            <p:inputNumber placeholder="Valor abastecido" value="#{abastecimentoBean.abastecimento.valorAbastecido}" >  
+                              <p:ajax  event="blur" listener="#{abastecimentoBean.soma}" update="empname"/>
+                              </p:inputNumber>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-money"></i></span>
+                            <p:inputNumber id="empname" placeholder="Preço por litro" value="#{abastecimentoBean.abastecimento.precoLitro}" symbol="R$ " disabled="true"/>  
+
+                        </div>
+                    </div>
+
+                 <!--   <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Km por litro" value="{abastecimentoBean.abastecimento.kmLitro}"   />  
+
+                        </div>
+                    </div> -->
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Km carro" value="#{abastecimentoBean.abastecimento.kmInicial}" symbol="Km "/>  
+
+                        </div>
+                    </div>
+
+               <!--     <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Km final" value="{abastecimentoBean.abastecimento.kmFinal}" symbol="L "/>  
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Km rodados" value="{abastecimentoBean.abastecimento.kmRodados}" symbol="L "/>  
+
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Média de Km/L" value="{abastecimentoBean.abastecimento.mediaKm}"  />  
+
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class=""></i></span>
+                            <p:inputNumber placeholder="Preço / Km rodado" value="{abastecimentoBean.abastecimento.precoKm}" symbol=" "/>  
+
+                        </div>
+                    </div> -->
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <p:commandButton value="SALVAR" action="#{abastecimentoBean.salvar()}" update="@form"/>
+
+                </div>
+
+
+
+                <!--      
+          <br/>
+          
+              
+               
+          
+           
+              
+              
+              
+              
+              
+              
+              
+               
+              
+             
+            
+           
+            
+              
+              
+              
+              
+              
+              
+              
+          
+          
+              
+          
+             
+          
+             
+          
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+          
+              <p:dataTable var="veiculos" value="{abastecimentoBean.abastecimentos}" rendered="true">
+                  <p:column headerText="Tabela de abastecimento">
+                      <p:commandButton value="Editar"/>
+                      <p:commandButton value="Excluir"/>
+                  </p:column>
+          
+                  <p:column headerText="Veiculo">
+                      <h:outputText value="{veiculos.placa}" />
+                  </p:column>
+          
+                  <p:column headerText="combustivel" priority="3">
+                      <h:outputText value="{veiculos.combustivel}" />
+                  </p:column>
+          
+                  <p:column headerText="Data" priority="2">
+                      <h:outputText value="{veiculos.data}" />
+                  </p:column>
+          
+                  <p:column headerText="Litros" priority="4">
+                      <h:outputText value="{veiculos.litro}" />
+                  </p:column>
+                  <p:column headerText="Valor Abastecido " priority="4">
+                      <h:outputText value="{veiculos.valorAbastecido}" />
+                  </p:column>
+                  <p:column headerText="Preço por litro" priority="4">
+                      <h:outputText value="{veiculos.precoLitro}" />
+                  </p:column>
+              </p:dataTable> 
+          
+          
+          </div> -->
+
+
+        </h:form>
+
+    </ui:define>  
+
+</ui:decorate>
+
+
+
+
+
