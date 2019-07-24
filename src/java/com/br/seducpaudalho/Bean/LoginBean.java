@@ -228,6 +228,7 @@ public class LoginBean {
                 session.setAttribute("cpf", login.getCpf());               
                 session.setAttribute("nivelAcesso", login.getNivel());               
                 session.setAttribute("url", login.getUrl());              
+                session.setAttribute("instituicao", login.getInstituicao());              
                 session.setAttribute("login", login);
                 System.out.println("usuario logado" + login.getNome());
             }
@@ -248,7 +249,7 @@ public class LoginBean {
            // System.out.println("entrou na pagina de administrador");
             //mudarParaAdmin();
            // mudarParaLocalidade();
-            retorno = "/materiais?faces-redirect=true";
+            retorno = "/gNecessidades?faces-redirect=true";
             }
             if(login.getNivel().equals("D")){
            // System.out.println("entrou na pagina de administrador");
@@ -260,7 +261,7 @@ public class LoginBean {
            // System.out.println("entrou na pagina de administrador");
             //mudarParaAdmin();
            // mudarParaLocalidade();
-            retorno = "/nProfessor?faces-redirect=true";
+            retorno = "/nEscola?faces-redirect=true";
             }
             
             else{

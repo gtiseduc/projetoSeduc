@@ -102,6 +102,14 @@ public class Login {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public String getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
+    }
     
     
 

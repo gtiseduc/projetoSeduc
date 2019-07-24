@@ -25,12 +25,12 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                            <li><a href="necessidades.jsf">Formulário</a></li>
+                            <!--<li><a href="necessidades.jsf">Formulário</a></li>-->
                         </ul></li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                            <li><a href="form.html">Gerenciar necessidades</a></li>
+                            <li><a href="gNecessidades.jsf">Gerenciar necessidades</a></li>
                         </ul></li>
                     <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
                                  class="fa fa-chevron-down"></span></a>
@@ -56,7 +56,7 @@
 
 
     <ui:define name="formulario">
-        
+      
        
         <!--<h3 style="margin-top:0">Cadastro veiculos</h3>-->
        
@@ -64,8 +64,8 @@
             <p:growl id="growl" life="3500" />
             
             
-          <!--   <p:selectOneMenu id="console" value="{nececidade}" style="width:25%">
-            <f:selectItem itemLabel="Selecione a escola" itemValue="" />
+            <p:selectOneMenu id="console" value="#{necessidadesBean.necessidade.codInep}" style="width:35%">
+            <f:selectItem itemLabel="SELECIONE A ESCOLA" itemValue="" />
             <f:selectItem itemLabel="COLEGIO MUNICIPAL DE GUADALAJARA" itemValue="26091208" />
             <f:selectItem itemLabel="COLEGIO MUNICIPAL DO PAUDALHO" itemValue="26091194" />
             <f:selectItem itemLabel="COLEGIO MUNICIPAL MARIA DE FATIMA" itemValue="26091224" />
@@ -93,7 +93,7 @@
             <f:selectItem itemLabel="ESCOLA MUNICIPAL SEVERINO MAURICIO CARNEIROD DA SILVA" itemValue="26091500" />
             <f:selectItem itemLabel="ESCOLA MUNICIPAL SINHO BANDEIRA" itemValue="26091526" />
            
-        </p:selectOneMenu> -->
+        </p:selectOneMenu> 
             
             <br></br>
             <br></br>
@@ -232,8 +232,8 @@
                         <br/>
                         <br/>
                         <br/>
-                        <p:commandButton value="SALVAR" action="#{necessidadesBean.salvar(session.getAttribute('instituicao'))}" />
-                        <p:commandButton value="IMPRIMIR" />
+                       <!-- <p:commandButton value="SALVAR" action="{necessidadesBean.salvar(session.getAttribute('instituicao'))}" />
+                        <p:commandButton value="IMPRIMIR" /> -->
                         
                     </div>
                 </p:tab>

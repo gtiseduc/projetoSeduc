@@ -34,14 +34,14 @@ public class NecessidadesBean {
    
     private String parametro;
 
-    public void salvar() {
+    public void salvar(Integer i) {
 
         try {
 
            
 
-                System.out.println("entrou no salvar----------");
-                necessidade.setCodInep(1234567);
+                System.out.println("entrou no salvar----------"+ i);
+                necessidade.setCodInep(i);
                 necessidadeDao.salvar(necessidade);
                 necessidade = new Necessidade();
                 //necessidades = necessidadeDao.listarProdutos();

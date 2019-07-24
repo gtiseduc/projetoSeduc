@@ -104,6 +104,7 @@ public class LoginDao {
                 login.setSenha(rs.getString("senha"));
                 login.setNivel(rs.getString("nivel"));
                 login.setUrl(rs.getString("url"));
+                login.setInstituicao(rs.getString("instituicao"));
                 System.out.println("xxxxxxxxxxxxxxxxxxxxxxx");
                 System.out.println("--------xxxx--------" + login.getNome());
             } else {
