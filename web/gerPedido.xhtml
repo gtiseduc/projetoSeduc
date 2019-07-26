@@ -51,78 +51,75 @@
 
     <ui:define name="formulario">
 
+        <h:form>
+
+            <p:fieldset legend="Gerenciar pedidos">
 
 
-        <p:fieldset legend="Gerenciar pedidos">
-
-
-            <div class="form-group col-md-3">
-                <p:calendar id="button" value="#{calendarView.date3}" showOn="button"  mindate="9/6/19" maxdate="9/6/20" />
-            </div>
-         
-            <div class="form-group col-md-3">
-                <label>Fornecedor</label>
-                <select id="inputState" class="form-control">
-                    <option selected="selected">Escolha...</option>
-                    <option>arros </option>
-                    <option>açucar</option>
-
-
-                </select>
-            </div>
-         
-            <div class="form-group col-md-3">
-                <label>Produto</label>
-                <select id="inputState" class="form-control">
-                    <option selected="selected">Escolha...</option>
-                    <option>jairo </option>
-                    <option>fernando</option>
-
-
-                </select>
-            </div>
-            
-
-
-            <div class="form-group col-md-2">
-                <label>Unidade</label>
-                <select id="inputState" class="form-control">
-                    <option selected="selected">Pç,Kg,Un,L,Mão...</option>
-                    <option>Pç</option>
-                    <option>Kg</option>
-                    <option>Un</option>
-                    <option>L</option>
-                    <option>Mão</option>
-
-                </select>
-            </div>
-            
-            <div class="form-group col-md-3">
-                <label>Programas</label>
-                <select id="inputState" class="form-control">
-                    <option selected="selected">Escolha...</option>
-                    <option>arros </option>
-                    <option>açucar</option>
-
-
-                </select>
-            </div>
-
-            <div class="form-group col-md-2">
-                <label>Peso em - Kg</label>
-                <input type="text" class="form-control"/>
-            </div>      
-
-            <div class="form-group col-md-2">
-                <label>Valor total</label>
-                <input type="text" class="form-control"/>
-            </div>  
-          	
-        </p:fieldset>
+                <div class="form-group col-md-3">
+                    <p:calendar id="button" value="#{calendarView.date3}" showOn="button"  mindate="9/6/19" maxdate="9/6/20" />
+                </div>
 
 
 
+                <!--
+                
+                            <div class="form-group col-md-2">
+                                <label>Unidade</label>
+                                <select id="inputState" class="form-control">
+                                    <option selected="selected">Pç,Kg,Un,L,Mão...</option>
+                                    <option>Pç</option>
+                                    <option>Kg</option>
+                                    <option>Un</option>
+                                    <option>L</option>
+                                    <option>Mão</option>
+                
+                                </select>
+                            </div> -->
 
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                        <p:selectOneMenu id="fornecedor" value="#{produtoBean.produto.idFornecedor}"  >
+                            <f:selectItem itemLabel="Selecione" />       
+                            <f:selectItems   value="#{produtoBean.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.rzSocial}" itemValue="#{fornecedor.idFornecedor}" />         
+                            <p:ajax  event="change" listener="#{produtoBean.listarProdutosParametro(produtoBean.produto.idFornecedor)}" update="@form"/>
+                        </p:selectOneMenu>    
+                    </div>
+                </div> 
+
+                <div class="ui-g-12 ui-md-4">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                        <p:selectOneMenu id="produto" value="#{produtoBean.produto.idProduto}" >
+                            <f:selectItem itemLabel="Selecione" />       
+                            <f:selectItems   value="#{produtoBean.produtos}" var="produto" itemLabel="#{produto.nomeProduto}" itemValue="#{produto.idProduto}"/>      
+                        </p:selectOneMenu>    
+                    </div>
+                </div> 
+                <!--
+                selectOneMenu id="cidade" value="{meuBean.cidade}" converter="converterCidade" >
+    selectItem itemLabel="Selecione" />
+    selectItems value="{meuBean.cidades}" var="c" itemValue="{c}" itemLabel="{c.nome}" />
+    selectOneMenu> -->
+
+
+
+                <div class="form-group col-md-2">
+                    <label>Peso em - Kg</label>
+                    <input type="text" class="form-control"/>
+                </div>      
+
+                <div class="form-group col-md-2">
+                    <label>Valor total</label>
+                    <input type="text" class="form-control"/>
+                </div>  
+
+            </p:fieldset>
+
+
+
+        </h:form>
 
 
     </ui:define>

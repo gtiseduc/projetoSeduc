@@ -6,7 +6,7 @@ body{
 #teste{
     color: red !important;
   writing-mode: vertical-lr !important;
-   
+   writing-mode: horizontal-tb !important; 
 }
 .verticalText{
    

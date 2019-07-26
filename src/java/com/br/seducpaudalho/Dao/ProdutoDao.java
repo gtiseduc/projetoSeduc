@@ -69,6 +69,50 @@ public class ProdutoDao {
         return produtos;
 
     }
+    public List<Produto> listarProdutosParametro(Integer codigo) throws ErroSistema {
+
+        System.out.println("entrou no listarProdutos produto");
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from produto where idFornecedor = ?";
+        List<Produto> produtos = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+
+                produto.setIdProduto(rs.getInt("idProduto"));
+                produto.setIdFornecedor(rs.getInt("idFornecedor"));
+                produto.setNomeProduto(rs.getString("nProduto"));
+                produto.setMarcaProduto(rs.getString("mProduto"));
+                produto.setEspecificacaoProduto(rs.getString("eProduto"));
+                produto.setUnidadeProduto(rs.getString("uProduto"));
+                System.out.println("olha o kilo produtos " + produto.getIdProduto());
+                produto.setKiloProduto(rs.getDouble("kProduto"));
+                produto.setValorUnitario(rs.getDouble("vUnitario"));
+                produto.setValorTotal(rs.getDouble("vTotal"));
+
+                produtos.add(produto);
+                System.out.println("tamanho da lista de produtos " + produto.getNomeProduto());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        System.out.println("tamanho da lista de produtos " + produtos.size());
+        FabricaConexao.fecharConexao();
+        return produtos;
+
+    }
 
     public List<Produto> lFornecedorCodigo(Integer codigo) throws ErroSistema {
 

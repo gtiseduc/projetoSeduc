@@ -157,6 +157,16 @@ public class ProdutoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+    public void listarProdutosParametro(Integer codigo) {
+
+        System.out.println("--------****----***----***------- " + codigo);
+        try {
+            produtos = produtoDao.listarProdutosParametro(codigo);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
 
     public void listarFornecedores() {
 

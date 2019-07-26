@@ -54,6 +54,12 @@ public class NecessidadesBean {
 
         // }
     }
+    
+    public void pesquisarEscola(Integer inep) throws ErroSistema{
+       
+        necessidades = necessidadeDao.buscar(inep);
+    
+    }    
 
     public void alterar() {
         /*
@@ -81,8 +87,8 @@ public class NecessidadesBean {
 */
     }
 
-    public void editar(NecessidadeDao entidade) {
-       // this.necessidade = entidade;
+    public void editar(Necessidade entidade) {
+        this.necessidade = entidade;
         // mudarParaAltera(); 
     }
 
