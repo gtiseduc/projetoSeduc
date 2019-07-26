@@ -56,45 +56,59 @@
 
 
     <ui:define name="formulario">
-      
-       
+
+
         <!--<h3 style="margin-top:0">Cadastro veiculos</h3>-->
-       
+
         <h:form>
             <p:growl id="growl" life="3500" />
+
+          
             
-            
-            <p:selectOneMenu id="console" value="#{necessidadesBean.necessidade.codInep}" style="width:35%">
-            <f:selectItem itemLabel="SELECIONE A ESCOLA" itemValue="" />
-            <f:selectItem itemLabel="COLEGIO MUNICIPAL DE GUADALAJARA" itemValue="26091208" />
-            <f:selectItem itemLabel="COLEGIO MUNICIPAL DO PAUDALHO" itemValue="26091194" />
-            <f:selectItem itemLabel="COLEGIO MUNICIPAL MARIA DE FATIMA" itemValue="26091224" />
-            <f:selectItem itemLabel="COLEGIO MUNICIPAL TANCREDO NEVES" itemValue="26091232" />
-            <f:selectItem itemLabel="ESC MUL BARTOLOMEU DO REGO CAVALCANTE" itemValue="26091313" />
-            <f:selectItem itemLabel="ESC MUNICIPAL DR ANTONIO MONTENEGRO" itemValue="26091364" />
-            <f:selectItem itemLabel="ESCOLA MUL JOAO FRANCISCO BEZERRA" itemValue="26091402" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL CHA DE CAPOEIRA" itemValue="26091283" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL DO JUNCO" itemValue="26091348" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL DO RODRIZIO" itemValue="26091356" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL DR PAULO ELEUTERIO" itemValue="26140497" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL ELIZA FIDELIS DA SILVA" itemValue="26091372" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL GENILDA MARTINS" itemValue="26154552" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL GILDA BARBOSA" itemValue="26140470" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL GUADALAJARA" itemValue="26091550" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL HERCULANO BANDEIRA DE MELO FILHO" itemValue="26091380" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL JOSE BONIFACIO" itemValue="26091410" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL LIRIO DOS VALES" itemValue="26091429" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL MANOEL DA ROSA" itemValue="26091437" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL MENINO JESUS" itemValue="26091453" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL PAULO VI" itemValue="26091461" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL SAMAP" itemValue="26091470" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL SAO BERNARDO" itemValue="26091496" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL SEVERINO JOSE VALENTIM" itemValue="26091518" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL SEVERINO MAURICIO CARNEIROD DA SILVA" itemValue="26091500" />
-            <f:selectItem itemLabel="ESCOLA MUNICIPAL SINHO BANDEIRA" itemValue="26091526" />
-           
-        </p:selectOneMenu> 
-            
+
+            <p:menuButton value="-----------SELECIONE A ESCOLA----------------" style="width:65%" >
+                <p:menuitem value="COLEGIO MUNICIPAL DE GUADALAJARA"   action="#{necessidadesBean.pesquisarEscola('26091208')}" update="@form" style="width:10px"/>
+                <p:menuitem value="COLEGIO MUNICIPAL DO PAUDALHO"   action="#{necessidadesBean.pesquisarEscola('26091194')}" update="@form" />
+                <p:menuitem value="COLEGIO MUNICIPAL MARIA DE FATIMA"   action="#{necessidadesBean.pesquisarEscola('26091224')}" update="@form" />
+                <p:menuitem value="COLEGIO MUNICIPAL TANCREDO NEVES"   action="#{necessidadesBean.pesquisarEscola('26091232')}" update="@form" />
+                <p:menuitem value="ESC MUL BARTOLOMEU DO REGO CAVALCANTE"   action="#{necessidadesBean.pesquisarEscola('26091313')}" update="@form" />
+                <p:menuitem value="ESC MUNICIPAL DR ANTONIO MONTENEGRO"   action="#{necessidadesBean.pesquisarEscola('26091364')}" update="@form" />
+                <p:menuitem value="ESCOLA MUL JOAO FRANCISCO BEZERRA"   action="#{necessidadesBean.pesquisarEscola('26091402')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL CHA DE CAPOEIRA"   action="#{necessidadesBean.pesquisarEscola('26091283')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL DO JUNCO"   action="#{necessidadesBean.pesquisarEscola('26091348')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL DO RODRIZIO"   action="#{necessidadesBean.pesquisarEscola('26091356')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL DR PAULO ELEUTERIO"   action="#{necessidadesBean.pesquisarEscola('26140497')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL ELIZA FIDELIS DA SILVA"   action="#{necessidadesBean.pesquisarEscola('26091372')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL GENILDA MARTINS"   action="#{necessidadesBean.pesquisarEscola('26154552')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL GILDA BARBOSA"   action="#{necessidadesBean.pesquisarEscola('26140470')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL GUADALAJARA"   action="#{necessidadesBean.pesquisarEscola('26091550')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL HERCULANO BANDEIRA DE MELO FILHO"   action="#{necessidadesBean.pesquisarEscola('26091380')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL JOSE BONIFACIO"   action="#{necessidadesBean.pesquisarEscola('26091410')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL MANOEL DA ROSA"   action="#{necessidadesBean.pesquisarEscola('26091437')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL MENINO JESUS"   action="#{necessidadesBean.pesquisarEscola('26091453')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL PAULO VI"   action="#{necessidadesBean.pesquisarEscola('26091461')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL SAMAP"   action="#{necessidadesBean.pesquisarEscola('26091470')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL SAO BERNARDO"   action="#{necessidadesBean.pesquisarEscola('26091496')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL SEVERINO JOSE VALENTIM"   action="#{necessidadesBean.pesquisarEscola('26091518')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL SEVERINO MAURICIO CARNEIROD DA SILVA"   action="#{necessidadesBean.pesquisarEscola('26091500')}" update="@form" />
+                <p:menuitem value="ESCOLA MUNICIPAL SINHO BANDEIRA"   action="#{necessidadesBean.pesquisarEscola('26091526')}" update="@form" />
+
+            </p:menuButton> 
+
+
+<!--
+            <p:selectOneMenu id="console" value="{necessidadesBean.necessidade.codInep}" style="width:35%">
+                <f:selectItem itemLabel="SELECIONE A ESCOLA" itemValue="" />
+               
+                
+              
+                <f:selectItem itemLabel="" itemValue="" />
+                <f:selectItem itemLabel="" itemValue="" />
+                <f:selectItem itemLabel="" itemValue="" />
+                <f:selectItem itemLabel="" itemValue="" />
+
+            </p:selectOneMenu> -->
+
             <br></br>
             <br></br>
             <br></br>
@@ -112,7 +126,7 @@
                     <div class="ui-g ui-fluid">
 
 
-                      
+
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
@@ -226,15 +240,15 @@
 
 
 
-                       
+
                         <br/>
                         <br/>
                         <br/>
                         <br/>
                         <br/>
-                       <!-- <p:commandButton value="SALVAR" action="{necessidadesBean.salvar(session.getAttribute('instituicao'))}" />
-                        <p:commandButton value="IMPRIMIR" /> -->
-                        
+                        <!-- <p:commandButton value="SALVAR" action="{necessidadesBean.salvar(session.getAttribute('instituicao'))}" />
+                         <p:commandButton value="IMPRIMIR" /> -->
+
                     </div>
                 </p:tab>
                 <p:tab title="DIRETORIA">
@@ -299,7 +313,7 @@
                             </div>
                         </div>
 
-                        
+
 
                     </div>
 
@@ -330,7 +344,7 @@
                                 <p:inputNumber placeholder="Mesa para impressora" value="#{necessidadesBean.necessidade.q30}" />      
                             </div>
                         </div>
-                         <div class="ui-g-12 ui-md-2">
+                        <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Cadeiras" value="#{necessidadesBean.necessidade.q31}" />      
@@ -342,7 +356,7 @@
                                 <p:inputNumber placeholder="Arquivos em aço com quatro gavetas" value="#{necessidadesBean.necessidade.q32}" />      
                             </div>
                         </div>
-                       
+
                         <div class="ui-g-12 ui-md-2">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
@@ -367,7 +381,7 @@
                                 <p:inputNumber placeholder="Telefone/ ramal" value="#{necessidadesBean.necessidade.q36}" />      
                             </div>
                         </div>
-                     
+
                     </div>
 
 
@@ -400,7 +414,7 @@
                                 <p:inputNumber placeholder="Telefone/ Ramal" value="#{necessidadesBean.necessidade.q40}" />      
                             </div>
                         </div>
-                      
+
                     </div>
 
 
@@ -428,7 +442,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
 
 
@@ -468,15 +482,15 @@
                                 <p:inputNumber placeholder="Conjunto de cadeira e mesa do professor" value="#{necessidadesBean.necessidade.q48}" />      
                             </div>
                         </div>
-                         <div class="ui-g-12 ui-md-4">
+                        <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Conjunto de cadeira e mesa estudante" value="#{necessidadesBean.necessidade.q49}" />      
                             </div>
                         </div>
-                       
 
-                        
+
+
                     </div>
 
 
@@ -503,14 +517,14 @@
                                 <p:inputNumber placeholder="Mesas para computador" value="#{necessidadesBean.necessidade.q52}" />      
                             </div>
                         </div>
-                       
+
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Mesa para impressora" value="#{necessidadesBean.necessidade.q53}" />      
                             </div>
                         </div>
-                         <div class="ui-g-12 ui-md-4">
+                        <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Conjunto de cadeira e mesa do professor" value="#{necessidadesBean.necessidade.q54}" />      
@@ -534,7 +548,7 @@
                                 <p:inputNumber placeholder="Computadores em rede" value="#{necessidadesBean.necessidade.q57}" />      
                             </div>
                         </div>
-                      
+
                     </div>
 
 
@@ -585,7 +599,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
 
 
@@ -605,14 +619,14 @@
                                 <p:inputNumber placeholder="Armários de parede" value="#{necessidadesBean.necessidade.q66}" />      
                             </div>
                         </div>
-                       
+
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Botijão de gás" value="#{necessidadesBean.necessidade.q67}" />      
                             </div>
                         </div>
-                        
+
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
@@ -637,7 +651,7 @@
                                 <p:inputNumber placeholder="Geladeira" value="#{necessidadesBean.necessidade.q71}" />      
                             </div>
                         </div>
-                         <div class="ui-g-12 ui-md-4">
+                        <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Mesa para preparo de alimentos" value="#{necessidadesBean.necessidade.q72}" />      
@@ -650,7 +664,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
 
 
@@ -659,8 +673,8 @@
                 <p:tab title="MATERIAIS PEDAGÓGICOS">
 
                     <div class="ui-g ui-fluid">
-                       
-                         <div class="ui-g-12 ui-md-3">
+
+                        <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Camisas por estudante" value="#{necessidadesBean.necessidade.q74}" />      
@@ -672,8 +686,8 @@
                                 <p:inputNumber placeholder="Mochila por estudante" value="#{necessidadesBean.necessidade.q75}" />      
                             </div>
                         </div>
-                        
-                         <div class="ui-g-12 ui-md-6">
+
+                        <div class="ui-g-12 ui-md-6">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
                                 <p:inputNumber placeholder="Kit material escolar por aluno, contendo: cadernos, lápis, borrachas ..." value="#{necessidadesBean.necessidade.q76}" />      
@@ -682,17 +696,17 @@
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i  class="fa fa-edit"></i></span>
-                                
-                               
-                               
+
+
+
                                 <p:inputNumber placeholder="conjunto de livros didáticos por aluno" value="#{necessidadesBean.necessidade.q77}" />      
                             </div>
                         </div>
-                       
-                        
-                       
 
-                       
+
+
+
+
                     </div>
 
 
@@ -703,12 +717,24 @@
 
 
 
+           
+            
 
 
 
+ <p:dataTable var="necessidades" value="#{necessidadesBean.necessidades}" rendered="true" >
+                <p:column headerText="Lista de necessidades">
+                    <p:commandButton value="Selecionar" action="#{necessidadesBean.editar(necessidades)}" update="@form"  />
+                    <!--   <p:commandButton value="Excluir" update="@form" /> -->
+                </p:column>
+
+                <p:column headerText="Código">
+                    <h:outputText value="#{necessidades.codInep}" />
+                </p:column>
+               
 
 
-
+            </p:dataTable>
 
 
 
