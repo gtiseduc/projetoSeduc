@@ -263,6 +263,12 @@ public class LoginBean {
            // mudarParaLocalidade();
             retorno = "/nEscola?faces-redirect=true";
             }
+              if(login.getNivel().equals("F")){
+           // System.out.println("entrou na pagina de administrador");
+            //mudarParaAdmin();
+           // mudarParaLocalidade();
+            retorno = "/saepa?faces-redirect=true";
+            }
             
             else{
                 //System.out.println("entrou na pagina index");
