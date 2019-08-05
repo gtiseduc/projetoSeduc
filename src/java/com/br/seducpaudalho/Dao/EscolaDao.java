@@ -64,7 +64,7 @@ public class EscolaDao {
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
- System.out.println("tamanho da lista de fornecedores " + escolas.size() );
+ //System.out.println("tamanho da lista de fornecedores " + escolas.size() );
         FabricaConexao.fecharConexao();
         return escolas;
     

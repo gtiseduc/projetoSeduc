@@ -180,6 +180,7 @@ public class AlunoBean {
 
         System.out.println("--------****----***----***------- " + codigo);
         try {
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx " );
             series = serieDao.listarSerieParametro(codigo);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
@@ -399,7 +400,7 @@ public class AlunoBean {
 
     public List<SelectItem> getSelectSerie() throws ErroSistema {
         
-         System.out.println("----------------------------------------------");
+     /* System.out.println("----------------------------------------------");
         if (selectSerie == null) {
             selectSerie = new ArrayList<SelectItem>();
             serie = new Serie();
@@ -415,7 +416,7 @@ public class AlunoBean {
                 }
             }
 
-        }
+        }*/
         
         return selectSerie;
     }
@@ -433,8 +434,7 @@ public class AlunoBean {
     }
 
     public List<Serie> getSeries() throws ErroSistema {
-       
-       
+       // series = serieDao.listarSerieParametro(Integer.SIZE);
         return series;
     }
 
@@ -452,7 +452,7 @@ public class AlunoBean {
 
     public List<SelectItem> getSelectTurma() throws ErroSistema {
        
-          System.out.println("----------------------------------------------");
+        /*  System.out.println("----------------------------------------------");
         if (selectTurma == null) {
             selectTurma = new ArrayList<SelectItem>();
             turma = new Turma();
@@ -468,7 +468,7 @@ public class AlunoBean {
                 }
             }
 
-        }
+        }*/
         
         return selectTurma;
     }

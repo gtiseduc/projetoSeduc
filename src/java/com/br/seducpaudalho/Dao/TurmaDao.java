@@ -86,7 +86,7 @@ public class TurmaDao {
 
                 turma.setIdTurma(rs.getInt("idTurma"));
                 turma.setIdSerie(rs.getInt("idSerie"));
-                turma.setNome(rs.getString("nome"));
+                turma.setNome(rs.getString("nomeTurma"));
 
                 series.add(turma);
 

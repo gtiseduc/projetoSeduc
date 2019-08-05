@@ -72,7 +72,8 @@ public class SerieDao {
     }
   
     public List<Serie> listarSerieParametro(Integer codigo) throws ErroSistema {
-
+ 
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " +codigo);
      //codigo = 26091437;
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
@@ -89,14 +90,18 @@ public class SerieDao {
             
             ResultSet rs = ps.executeQuery();
 
-           
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " +codigo);
 
             while (rs.next()) {
-               Serie serie = new Serie();
+              
+                 System.out.println("ddddddddddddddddddddddd " +codigo);
+                
+                Serie serie = new Serie();
                 
                 serie.setIdSerie(rs.getInt("idSerie"));
                 serie.setInepEscola(rs.getInt("inepEscola"));
-                serie.setNome(rs.getString("nome"));
+                serie.setNome(rs.getString("nomeSerie"));
+                System.out.println("******************* "+serie.getNome());
                
                 series.add(serie);
               
