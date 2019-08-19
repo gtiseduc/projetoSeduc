@@ -22,7 +22,9 @@ public class FabricaConexao {
     //private static final String URL_CONEXAO = "jdbc:mysql://localhost:8080/Pessoa";
     private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/db_seduc";
     private static final String USUARIO = "root";
-    private static final String SENHA = "seducvic2019#*#";
+    private static final String SENHA = "";
+   // private static final String USUARIO = "victor";
+    //private static final String SENHA = "seducvic2019#*#";
 
     public static Connection getConnection() throws ErroSistema {
 
