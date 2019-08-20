@@ -197,11 +197,11 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
-    public void imprimirAlunos(Integer codigo,Integer inep) {
+    public void imprimirAlunos(Integer codTurma,Integer inep,Integer codSerie) {
 
-        System.out.println("olha o codigo --------****----***----***------- " + codigo);
+        System.out.println("olha o codigo --------"+codTurma+"****----***"+inep+"----***------- " + codSerie);
         try {
-            alunos = alunoDao.imprimirAlunos(codigo, inep);
+            alunos = alunoDao.imprimirAlunos(codTurma, inep,codSerie);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);

@@ -19,6 +19,7 @@ public class Serie implements Serializable{
     private Integer inepEscola;
     private String nome;
     
+    
 
     public Serie(Integer idSerie,Integer inepEscola, String nome) {
         this.idSerie = idSerie;

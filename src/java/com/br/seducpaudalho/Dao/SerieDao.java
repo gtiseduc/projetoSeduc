@@ -98,9 +98,10 @@ public class SerieDao {
                 
                 Serie serie = new Serie();
                 
-                serie.setIdSerie(rs.getInt("idSerie"));
+                serie.setIdSerie(rs.getInt("codSerie"));
                 serie.setInepEscola(rs.getInt("inepEscola"));
                 serie.setNome(rs.getString("nomeSerie"));
+              
                 System.out.println("******************* "+serie.getNome());
                
                 series.add(serie);

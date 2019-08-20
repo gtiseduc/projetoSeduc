@@ -69,7 +69,7 @@ public class TurmaDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from turma where idSerie = ?";
+        String sql = "select * from turma where codSerie = ?";
 
         List<Turma> series = new ArrayList<>();
 
@@ -84,8 +84,8 @@ public class TurmaDao {
             while (rs.next()) {
                 Turma turma = new Turma();
 
-                turma.setIdTurma(rs.getInt("idTurma"));
-                turma.setIdSerie(rs.getInt("idSerie"));
+                turma.setIdTurma(rs.getInt("codTurma"));
+                turma.setIdSerie(rs.getInt("codSerie"));
                 turma.setNome(rs.getString("nomeTurma"));
 
                 series.add(turma);

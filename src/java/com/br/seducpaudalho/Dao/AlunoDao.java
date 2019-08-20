@@ -110,18 +110,19 @@ public class AlunoDao {
 
     }
 
-    public List<Aluno> imprimirAlunos(Integer codigoTurma,Integer  inepEscola) throws ErroSistema {
+    public List<Aluno> imprimirAlunos(Integer codigoTurma, Integer inepEscola, Integer codSerie) throws ErroSistema {
 
         System.out.println("**************" + codigoTurma);
         System.out.println("**************" + inepEscola);
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select e.inepEscola,a.idAluno,s.idSerie,t.idTurma,e.nomeEscola,s.nomeSerie,t.nomeTurma,a.nome from escola e\n"
-                + "join serie s on e.inepEscola = ?\n"
-                + "join turma t on t.idTurma = ?\n"
-                + "join aluno a on s.idSerie = t.idSerie\n"
-                + "where a.idTurma = ?;";
+        String sql = "select e.inepEscola,e.nomeEscola,codAluno, nome,s.codSerie,s.nomeSerie,t.codTurma,t.nomeTurma from aluno as a \n"
+                + "join escola e on e.inepEscola = ? \n"
+                + "join serie s on s.codSerie = ?\n"
+                + "join turma t on t.codTurma = a.codTurma \n"
+                + "where a.codTurma = ? order by nome;";
+        
         List<Aluno> alunos = new ArrayList<>();
 
         try {
@@ -129,16 +130,16 @@ public class AlunoDao {
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inepEscola);
-            ps.setInt(2, codigoTurma);
+            ps.setInt(2, codSerie);
             ps.setInt(3, codigoTurma);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 System.out.println("ENTROUUUUUUUUUUUUUUUU");
                 Aluno aluno = new Aluno();
-                aluno.setIdAluno(rs.getInt("idAluno"));
-                aluno.setIdSerie(rs.getInt("idSerie"));
-                aluno.setIdTurma(rs.getInt("idTurma"));
+                aluno.setIdAluno(rs.getInt("codAluno"));
+                aluno.setIdSerie(rs.getInt("codSerie"));
+                aluno.setIdTurma(rs.getInt("codTurma"));
 
                 aluno.setNomeEscola(rs.getString("nomeEscola"));
                 aluno.setNome(rs.getString("nome"));
