@@ -22,6 +22,7 @@ public class Aluno {
     private String nomeEscola;
     private String nomeSerie;
     private String nomeTurma;
+    private String turno;
 
     public Integer getIdAluno() {
         return idAluno;
@@ -86,6 +87,16 @@ public class Aluno {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getTurno() {
+        return turno;
+    }
+
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+    
+    
 
     @Override
     public int hashCode() {

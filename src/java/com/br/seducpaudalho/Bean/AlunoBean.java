@@ -18,15 +18,26 @@ import com.br.seducpaudalho.Entidade.Serie;
 import com.br.seducpaudalho.Entidade.Turma;
 
 import com.br.seducpaudalho.Util.Excepition.ErroSistema;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
@@ -197,15 +208,64 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
-    public void imprimirAlunos(Integer codTurma,Integer inep,Integer codSerie) {
+    public void listarAlunos(Integer codTurma,Integer inep,Integer codSerie) throws ErroSistema {
 
         System.out.println("olha o codigo --------"+codTurma+"****----***"+inep+"----***------- " + codSerie);
+        
+      
+        
         try {
             alunos = alunoDao.imprimirAlunos(codTurma, inep,codSerie);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            
+            
+            
+            
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
+        
+        
+         
+        
+        
+        
+    }
+    public void imprimirAlunos() throws ErroSistema {
+
+       
+        
+        Map<String, Object> params = new HashMap<String, Object>();
+        String a = "report";
+        
+      
+        
+        
+         try {
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.responseComplete();
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+            String path = scontext.getRealPath("/WEB-INF/relatorios/");
+            params.put("SUBREPORT_DIR", path + File.separator);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    scontext.getRealPath("/WEB-INF/relatorios/") + a + ".jasper", params, dataSource);
+            HttpServletResponse res = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            int codigo = (int) (Math.random() * 1000);
+            res.setHeader("Content-disposition", "inline;filename=relatorio_" + codigo + ".pdf");
+            byte[] b = JasperExportManager.exportReportToPdf(jasperPrint);
+            res.getOutputStream().write(b);
+            res.getCharacterEncoding();
+            facesContext.responseComplete();
+        } catch (Exception e) {
+            Logger.getLogger("ERRO").log(Level.SEVERE, null, e);
+            //adicionarMensagem(e.getMessage(), FacesMessage.SEVERITY_ERROR);
+            e.printStackTrace();
+        }
+        
+        
+        
     }
 
     public void listarFornecedores() {

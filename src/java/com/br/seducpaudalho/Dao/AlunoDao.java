@@ -117,7 +117,7 @@ public class AlunoDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select e.inepEscola,e.nomeEscola,codAluno, nome,s.codSerie,s.nomeSerie,t.codTurma,t.nomeTurma from aluno as a \n"
+        String sql = "select e.inepEscola,e.nomeEscola,codAluno, nome,s.codSerie,s.nomeSerie,t.codTurma,t.nomeTurma,t.turno from aluno as a \n"
                 + "join escola e on e.inepEscola = ? \n"
                 + "join serie s on s.codSerie = ?\n"
                 + "join turma t on t.codTurma = a.codTurma \n"
@@ -145,7 +145,8 @@ public class AlunoDao {
                 aluno.setNome(rs.getString("nome"));
                 aluno.setNomeSerie(rs.getString("nomeSerie"));
                 aluno.setNomeTurma(rs.getString("nomeTurma"));
-                System.out.println("OLHA O NOME DO ALUNO :" + aluno.getNome());
+                aluno.setTurno(rs.getString("turno"));
+                System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
 
                 alunos.add(aluno);
             }
