@@ -3,10 +3,11 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="nis" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
-	<field name="cpf" class="java.lang.String"/>
-	<field name="grupo" class="java.lang.String"/>
+	<field name="nomeEscola" class="java.lang.String"/>
+	<field name="nomeSerie" class="java.lang.String"/>
+	<field name="nomeTurma" class="java.lang.String"/>
+	<field name="turno" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
@@ -14,124 +15,127 @@
 		<band/>
 	</title>
 	<pageHeader>
-		<band height="85">
-			<frame>
-				<reportElement mode="Opaque" x="472" y="3" width="271" height="82" backcolor="#006699" uuid="fd79b809-6e38-4774-80b0-8b1cc67eaf77"/>
-				<staticText>
-					<reportElement x="164" y="16" width="107" height="43" forecolor="#FFFFFF" uuid="9db39ee5-78b2-4ca5-b74e-206fdf92982b"/>
-					<textElement textAlignment="Justified">
-						<font size="33" isBold="true"/>
-					</textElement>
-					<text><![CDATA[LISTA DE SORTEADOS]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="198" y="59" width="73" height="20" forecolor="#FFFFFF" uuid="6ec2cdd7-d66e-4051-84a8-94aee10c8410"/>
-					<textElement textAlignment="Right">
-						<font size="14" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Secretaria de Assistencia Social do Paudalho]]></text>
-				</staticText>
-				<image>
-					<reportElement x="8" y="8" width="153" height="71" uuid="8565dbcf-03b9-48f6-a35d-53e85e1c5ef0"/>
-					<imageExpression><![CDATA["C:\\Users\\VICTOR HUGO\\Desktop\\Bagunça\\lop.png"]]></imageExpression>
-				</image>
-			</frame>
-			<frame>
-				<reportElement mode="Opaque" x="19" y="0" width="271" height="82" backcolor="#006699" uuid="298c4b22-d748-430c-a7ab-d9f10ae22585"/>
-				<staticText>
-					<reportElement x="164" y="16" width="107" height="43" forecolor="#FFFFFF" uuid="eb164914-d288-4f76-ad04-26ac9d06153a"/>
-					<textElement textAlignment="Justified">
-						<font size="33" isBold="true"/>
-					</textElement>
-					<text><![CDATA[LISTA DE SORTEADOS]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="198" y="59" width="73" height="20" forecolor="#FFFFFF" uuid="7641374f-d705-4abc-9f0e-3ed1835730f7"/>
-					<textElement textAlignment="Right">
-						<font size="14" isBold="false"/>
-					</textElement>
-					<text><![CDATA[Secretaria de Assistencia Social do Paudalho]]></text>
-				</staticText>
-				<image>
-					<reportElement x="8" y="8" width="153" height="71" uuid="721de2c6-a288-4013-a45f-4720a8285d5f"/>
-					<imageExpression><![CDATA["C:\\Users\\VICTOR HUGO\\Desktop\\Bagunça\\lop.png"]]></imageExpression>
-				</image>
-			</frame>
-		</band>
+		<band height="38"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="47"/>
+		<band height="31">
+			<staticText>
+				<reportElement x="51" y="2" width="100" height="20" uuid="975ef26a-a75e-4121-abda-aa332b102e1a"/>
+				<text><![CDATA[nomeEscola]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="2" width="100" height="20" uuid="33b602af-cff6-4c43-8679-bb12c194b442"/>
+				<text><![CDATA[nomeSerie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="2" width="100" height="20" uuid="f85282a0-c2c5-422b-8063-c6b9e087d4c9"/>
+				<text><![CDATA[nomeTurma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="2" width="100" height="20" uuid="ff04bfa5-d247-416a-88e3-2fc6ba6c5d73"/>
+				<text><![CDATA[turno]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="380">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="-10" y="0" width="555" height="1" uuid="837506b3-f71d-40be-9f73-b99c27812c65"/>
-			</line>
+		<band height="398">
 			<image scaleImage="FillFrame">
-				<reportElement positionType="Float" x="0" y="-132" width="399" height="512" uuid="46b6735d-f4d8-4ba3-9acc-68ea1a3ee7b2"/>
-				<box leftPadding="0" rightPadding="0"/>
-				<imageExpression><![CDATA["C:\\Users\\VICTOR HUGO\\Desktop\\gaba1.jpg"]]></imageExpression>
+				<reportElement x="-19" y="-88" width="418" height="486" uuid="f175caad-80ca-443c-b897-d6541db92d7e"/>
+				<imageExpression><![CDATA["C:\\Users\\VICTOR HUGO\\Desktop\\gaba.jpg"]]></imageExpression>
 			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="157" y="24" width="63" height="57" uuid="93338cd4-38cd-4b73-9243-d06b36819a48"/>
+				<imageExpression><![CDATA[new java.net.URL("https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3A"+"vic"+"%3B%3B")]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="17" y="87" width="45" height="17" uuid="b92ef660-5217-4644-a56d-4a5f1f8ec487"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ESCOLA:]]></text>
+			</staticText>
 			<textField>
-				<reportElement x="124" y="226" width="100" height="20" uuid="e4b4545a-0f2c-4460-bcb6-4a514cdaab17"/>
-				<textFieldExpression><![CDATA[$F{nis}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="124" y="210" width="151" height="20" uuid="55f8e364-7e95-4ba8-b910-309d815699c2"/>
+				<reportElement x="62" y="104" width="151" height="16" uuid="dc181422-7c8c-4655-bf23-3343d30ae5ef"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="124" y="246" width="100" height="20" uuid="af5d5950-eee0-4eef-96ec-7370b9c06675"/>
-				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+				<reportElement mode="Opaque" x="3" y="376" width="305" height="13" backcolor="#E6E6E6" uuid="cfca2cfe-4a64-45af-ba83-3ebacd2b4a76"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
-			<textField pattern="">
-				<reportElement x="210" y="286" width="92" height="20" uuid="709f7d0d-d543-4a58-9fdd-7af431c1a413"/>
-				<textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="308" y="377" width="40" height="13" backcolor="#E6E6E6" uuid="6a170cba-ece6-4157-8329-2618461b4695"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="3" y="373" width="100" height="13" uuid="cca43623-6dee-415a-a990-fbbdab22f9a7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="87" width="100" height="16" uuid="ce83532e-f9d1-4b85-b840-a4cd5bbeb7a7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeEscola}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="138" y="297" width="100" height="20" uuid="c12005f9-4f4c-4eda-b676-c203dbf338b1"/>
-				<text><![CDATA[NIS]]></text>
+				<reportElement x="17" y="103" width="45" height="17" uuid="d713db3e-9731-4ad1-b14a-b0b0705e08e1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOME:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="17" y="120" width="100" height="17" uuid="c0b54c78-00e3-49c9-95a7-52cc06093728"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeSerie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="120" width="30" height="17" uuid="4b8a4bc0-68a5-440a-b4d8-c381b40c2655"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="120" width="88" height="17" uuid="9d18863f-95c6-4483-a2b5-cd427d5892b4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="116" y="120" width="38" height="17" uuid="a4b7d0f6-71fb-404b-a991-1f9b871f7f83"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="124" y="266" width="100" height="20" uuid="66c522ad-e686-496e-b57c-260c989a7861"/>
-				<text><![CDATA[CPF]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="210" y="266" width="92" height="20" uuid="4d05f85d-deca-497a-a526-3e4144ca9ad2"/>
-				<text><![CDATA[GRUPO]]></text>
+				<reportElement x="184" y="120" width="38" height="17" uuid="94375654-f93f-4768-9a25-f6e2c84e2726"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TURNO:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="4" y="17" width="395" height="1" forecolor="#666666" uuid="a7d91d4d-4a0e-4115-9f82-815f521a5776"/>
+				<reportElement x="-20" y="-88" width="1" height="467" uuid="642698e9-5de9-4904-8f3e-fdafc026d2d6"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
 			</line>
-			<image scaleImage="FillFrame">
-				<reportElement x="168" y="2" width="63" height="57" uuid="0d81ca1a-353c-4623-bcaf-d821c0853d93"/>
-				<imageExpression><![CDATA[new java.net.URL("https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3A"+$F{cpf}+"%3B%3B")]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="124" y="190" width="100" height="20" uuid="5f465669-3857-47a0-abf8-addf305983a1"/>
-				<text><![CDATA[NOME]]></text>
-			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="17">
-			<textField>
-				<reportElement mode="Opaque" x="3" y="3" width="515" height="13" backcolor="#E6E6E6" uuid="cfca2cfe-4a64-45af-ba83-3ebacd2b4a76"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="519" y="3" width="40" height="13" backcolor="#E6E6E6" uuid="6a170cba-ece6-4157-8329-2618461b4695"/>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13" uuid="cca43623-6dee-415a-a990-fbbdab22f9a7"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
+		<band/>
 	</pageFooter>
 	<summary>
 		<band/>
