@@ -41,7 +41,7 @@
 		<band height="398">
 			<image scaleImage="FillFrame">
 				<reportElement x="-19" y="-88" width="418" height="486" uuid="f175caad-80ca-443c-b897-d6541db92d7e"/>
-				<imageExpression><![CDATA["C:\\Users\\VICTOR HUGO\\Desktop\\gaba.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["gaba.jpg"]]></imageExpression>
 			</image>
 			<image scaleImage="FillFrame">
 				<reportElement x="157" y="24" width="63" height="57" uuid="93338cd4-38cd-4b73-9243-d06b36819a48"/>
