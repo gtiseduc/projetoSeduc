@@ -123,12 +123,6 @@
 				</textElement>
 				<text><![CDATA[TURNO:]]></text>
 			</staticText>
-			<line>
-				<reportElement x="-20" y="-88" width="1" height="467" uuid="642698e9-5de9-4904-8f3e-fdafc026d2d6"/>
-				<graphicElement>
-					<pen lineWidth="3.0"/>
-				</graphicElement>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>
