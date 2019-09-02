@@ -41,6 +41,10 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 /**
  *
@@ -82,6 +86,8 @@ public class AlunoBean {
     List<Avaliacao> resul = new ArrayList<>();
     List<String> descri = new ArrayList<>();
     private String parametro;
+    
+    private BarChartModel  barra;
 
     public void salvar() {
         /*
@@ -249,6 +255,30 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
+    }
+    
+    public void grafico(){
+    
+        barra = new BarChartModel();
+        
+        for (int i = 0; i < resul.size(); i++) {
+            ChartSeries serie = new ChartSeries();
+            serie.setLabel(resul.get(i).getNomeAluno());
+            serie.set(resul.get(i).getNomeAluno(), resul.get(i).getNumeroAcertos());
+            barra.addSeries(serie);
+        }
+        
+        barra.setTitle("titulo do grafico");
+        barra.setLegendPosition("ne");
+        barra.setAnimate(true);
+        
+        Axis xAxis = barra.getAxis(AxisType.X);
+        xAxis.setLabel("eventos");
+        Axis yAxis = barra.getAxis(AxisType.Y);
+        yAxis.setLabel("eventos 2");
+        
+        yAxis.setMin(50000);
+        yAxis.setMax(500000);
     }
 
     public void listarGabaritosAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
@@ -844,4 +874,15 @@ public class AlunoBean {
         this.descri = descri;
     }
 
+    public BarChartModel getBarra() {
+        return barra;
+    }
+
+    public void setBarra(BarChartModel barra) {
+        this.barra = barra;
+    }
+
+    
+    
+    
 }

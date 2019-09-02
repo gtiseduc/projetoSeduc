@@ -251,10 +251,8 @@
 
             
             
-            <p:lineChart value="#{alunoBean.resul}" var="aluno" xfield="#{aluno.nomeAluno}" style="chartstyle">
-                <p:chartSeries value="#{aluno.numeroAcertos}"/> 
-            </p:lineChart>
-
+            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barra != null}" />
+               
         </h:form>
 
 
