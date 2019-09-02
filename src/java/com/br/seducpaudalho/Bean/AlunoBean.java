@@ -13,6 +13,9 @@ import com.br.seducpaudalho.Dao.ProdutoDao;
 import com.br.seducpaudalho.Dao.SerieDao;
 import com.br.seducpaudalho.Dao.TurmaDao;
 import com.br.seducpaudalho.Entidade.Aluno;
+import com.br.seducpaudalho.Entidade.Avaliacao;
+import com.br.seducpaudalho.Entidade.Correcao;
+import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Entidade.Serie;
 import com.br.seducpaudalho.Entidade.Turma;
@@ -49,28 +52,39 @@ public class AlunoBean {
 
     private Aluno aluno = new Aluno();
     private List<Aluno> alunos = new ArrayList<>();
+    private Correcao correcao = new Correcao();
+    private List<Correcao> correcoes = new ArrayList<>();
     private AlunoDao alunoDao = new AlunoDao();
 
     private List<SelectItem> selectEscolas;
     private Escola escola;
     private List<Escola> escolas = new ArrayList<>();
     private EscolaDao escolaDao = new EscolaDao();
-    
+
     private List<SelectItem> selectSerie;
     private Serie serie;
     private List<Serie> series = new ArrayList<>();
     private SerieDao serieDao = new SerieDao();
-    
+
     private List<SelectItem> selectTurma;
     private Turma turma;
     private List<Turma> turmas = new ArrayList<>();
     private TurmaDao turmaDao = new TurmaDao();
-   
+
+    private List<SelectItem> selectDisciplina;
+    private Disciplina disciplina = new Disciplina();
+    private List<Disciplina> disciplinas = new ArrayList<>();
+    //private DisciplinaDao disciplinaDao = new DisciplinaDao();
+
+    private Avaliacao avaliacao = new Avaliacao();
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
+    //private DisciplinaDao disciplinaDao = new DisciplinaDao();
+    List<Avaliacao> resul = new ArrayList<>();
+    List<String> descri = new ArrayList<>();
     private String parametro;
-    
 
     public void salvar() {
-/*
+        /*
         try {
 
             System.out.println("olha aqui o escola " + aluno.getIdFornecedor() + " kilo " + aluno.getKiloProduto() + "Un " + aluno.getUnidadeProduto() + " olha o preço " + aluno.getValorTotal());
@@ -159,7 +173,7 @@ public class AlunoBean {
     }
 
     public void excluir(Aluno p) {
-       /* System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p);
+        /* System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p);
         try {
             alunoDao.deletar(p);
             aluno = new Produto();
@@ -187,17 +201,31 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+
     public void listarSerieParametro(Integer codigo) {
 
         System.out.println("--------****----***----***------- " + codigo);
         try {
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx " );
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
             series = serieDao.listarSerieParametro(codigo);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+
+    public void listarDisciplinaParametro(Integer codigo) {
+
+        System.out.println("--------****----***----***------- " + codigo);
+        try {
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+            disciplinas = serieDao.listarDisciplinaParametro(codigo);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
     public void listarTurmasParametro(Integer codigo) {
 
         System.out.println("olha o codigo --------****----***----***------- " + codigo);
@@ -208,14 +236,29 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
-    public void listarAlunos(Integer codTurma,Integer inep,Integer codSerie) throws ErroSistema {
 
-        System.out.println("olha o codigo --------"+codTurma+"****----***"+inep+"----***------- " + codSerie);
+    public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
+
+        System.out.println("olha o codigo --------" + codTurma + "****----***" + inep + "----***------- " + codSerie);
+
+        try {
+            alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+
+    }
+
+    public void listarGabaritosAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
+
+        /*  System.out.println("olha o codigo --------"+codTurma+"****----***"+inep+"----***------- " + codSerie);
         
       
         
         try {
-            alunos = alunoDao.imprimirAlunos(codTurma, inep,codSerie);
+          //  alunos = alunoDao.listarGabaritosAlunos(codTurma, inep,codSerie);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
             
             
@@ -225,23 +268,182 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
         
-        
-         
-        
-        
-        
+         */
     }
+
+    public void listarGabaritosDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+
+        System.out.println("olha o codigo --------" + codSerie + "****----***" + codDisciplina + "----***------- " + codSerie);
+
+        try {
+            correcoes = alunoDao.listarGabaritosDisciplina(codSerie, codDisciplina);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+
+            avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+
+        String gaba = "";
+
+        for (int co = 0; co < correcoes.size(); co++) {
+
+            Correcao gabarito = correcoes.get(co);
+            gaba = gabarito.getGabarito();
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + gabarito.getGabarito());
+
+        }
+
+        List<String> listaDeGabarito = new ArrayList<String>();
+
+        String resp = "";
+        for (int av = 0; av < avaliacoes.size(); av++) {
+
+            Avaliacao ava = avaliacoes.get(av);
+            listaDeGabarito.add(ava.getRespPortugues());
+
+            resp = ava.getRespPortugues();
+            // System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX "+ gabarito.getGabarito());
+
+        }
+
+        String frase = "00149/007587/10987";
+        String array[] = new String[3];
+        array = frase.split("/");
+        System.out.println(array[0]);
+        System.out.println(array[1]);
+        System.out.println(array[2]);
+
+        String gabarito = gaba;
+        //String gabarito = "ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE";
+
+        String compara = "";
+        Integer resultado = 0;
+
+        List<String> listaDeResultado = new ArrayList<String>();
+        //123456789
+        //listaDeGabarito.add("BBCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
+        // listaDeGabarito.add("CBCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
+        // listaDeGabarito.add("EBCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
+        // listaDeGabarito.add("ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
+
+        int[][] data = new int[listaDeGabarito.size()][gabarito.length()];
+
+        List<Integer> meuGabarito = new ArrayList<Integer>();
+
+        for (int b = 0; b < listaDeGabarito.size(); b++) {
+
+            String a = listaDeGabarito.get(b);
+
+            for (int i = 0; i < a.length(); i++) {
+
+                if (a.charAt(i) == gabarito.charAt(i)) {
+
+                    compara = compara + "1";
+                    //resultado = resultado + Integer.parseInt(compara);
+
+                } else {
+                    compara = compara + "0";
+                }
+            }
+
+            listaDeResultado.add(compara);
+            System.out.println("lista de resultado " + compara);
+            compara = "";
+            resultado = 0;
+        }
+
+        String var = "";
+        String nome = "";
+
+        int s = 0;
+        for (int i = 0; i < listaDeResultado.size(); i++) {
+
+            Avaliacao aa = new Avaliacao();
+            var = listaDeResultado.get(i);
+
+            Avaliacao ava = avaliacoes.get(i);
+            nome = ava.getNomeAluno();
+            for (int j = 0; j < var.length(); j++) {
+
+                //  int a =  var.charAt(j
+                int v = Character.getNumericValue(var.charAt(j));
+                s = s + v;
+                // System.out.println("***** - - ****" + s);
+                //  System.out.println( "yyyyyy"+v + "uuuuu"+var.charAt(j));
+                //data[i][j] = var.charAt(j);
+                data[i][j] = v;
+                // System.out.println("olha ****" + v++);
+
+            }
+            aa.setNomeAluno(nome);
+            aa.setNumeroAcertos(s);
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + codDisciplina);
+
+            if (codDisciplina == 1) {
+                aa.setDisciplina("PORTUGUÊS");
+                aa.setAvDisciplina(ava.getRespPortugues());
+                aa.setRespPortugues(ava.getRespPortugues());
+            }
+            if (codDisciplina == 2) {
+                aa.setDisciplina("MATEMÁTICA");
+                aa.setAvDisciplina(ava.getRespMatematica());
+                aa.setRespMatematica(ava.getRespMatematica());
+            }
+            if (codDisciplina == 3) {
+                aa.setDisciplina("CIÊNCIAS HUMANAS");
+                aa.setAvDisciplina(ava.getRespCienciasHumanas());
+                aa.setRespCienciasHumanas(ava.getRespCienciasHumanas());
+            }
+            if (codDisciplina == 4) {
+                aa.setDisciplina("CIÊNCIAS NATUREZA");
+                aa.setAvDisciplina(ava.getRespCienciasNatureza());
+                aa.setRespCienciasNatureza(ava.getRespCienciasNatureza());
+            }
+
+            resul.add(aa);
+            System.out.println("A SOMA DAS LINHAS É " + s);
+
+            System.out.println("OLHA O NOME " + nome);
+            s = 0;
+        }
+
+        int size = data.length, largestRow = 0, sum = 0, col = 0;
+
+        for (int check = 0; check <= (size - 1); check++) {
+            if (largestRow < data[check].length) {
+                largestRow = data[check].length;
+            }
+        }
+
+        do {
+            for (int row = 0; row < data.length; row++) {
+                //System.out.println("row(long): "+data[row].length+", col: "+col);
+                //System.out.println(col>=(data[row].length-1));
+
+                if (col >= (data[row].length)) {
+                } else {
+                    sum += data[row][col];
+                }
+            }
+            col += 1;
+
+            System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
+            descri.add(Integer.toString(sum));
+// System.out.println(sum + "%");
+            sum = 0;
+        } while (col != largestRow);
+
+    }
+
     public void imprimirAlunos() throws ErroSistema {
 
-       
-        
         Map<String, Object> params = new HashMap<String, Object>();
         String a = "report";
-        
-      
-        
-        
-         try {
+
+        try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
@@ -263,14 +465,12 @@ public class AlunoBean {
             //adicionarMensagem(e.getMessage(), FacesMessage.SEVERITY_ERROR);
             e.printStackTrace();
         }
-        
-        
-        
+
     }
 
     public void listarFornecedores() {
 
-      /*  System.out.println("entrou no metodo listar");
+        /*  System.out.println("entrou no metodo listar");
         try {
             escolas = escolaDao.listarFornecedores();
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
@@ -369,18 +569,13 @@ public class AlunoBean {
         this.parametro = parametro;
     }
 
-  
-
     public List<SelectItem> getSelectFornecedores() throws ErroSistema {
-
-       
 
         return selectEscolas;
     }
 
     public List<SelectItem> getSelectEscolas() throws ErroSistema {
-       
-        
+
         System.out.println("----------------------------------------------");
         if (selectEscolas == null) {
             selectEscolas = new ArrayList<SelectItem>();
@@ -398,8 +593,52 @@ public class AlunoBean {
             }
 
         }
-        
+
         return selectEscolas;
+    }
+
+    public List<SelectItem> getSelectDisciplina() {
+
+        System.out.println("----------------------------------------------");
+        if (selectDisciplina == null) {
+            selectDisciplina = new ArrayList<SelectItem>();
+            disciplina = new Disciplina();
+            //escolas = escolaDao.listarEscolas();
+
+            if (disciplinas != null && !disciplinas.isEmpty()) {
+
+                SelectItem item;
+                for (Disciplina disciplinaLista : disciplinas) {
+
+                    item = new SelectItem(disciplinaLista, disciplinaLista.getNomeDisciplina());
+                    selectDisciplina.add(item);
+                }
+            }
+
+        }
+
+        return selectDisciplina;
+    }
+
+    public void setSelectDisciplina(List<SelectItem> selectDisciplina) {
+        this.selectDisciplina = selectDisciplina;
+    }
+
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
+
+    public List<Disciplina> getDisciplinas() throws ErroSistema {
+        // disciplinas = escolaDao.listarDisciplinas();
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
     }
 
     public void setSelectEscolas(List<SelectItem> selectEscolas) {
@@ -415,8 +654,8 @@ public class AlunoBean {
     }
 
     public List<Escola> getEscolas() throws ErroSistema {
-       escolas = escolaDao.listarEscolas();
-        
+        escolas = escolaDao.listarEscolas();
+
         return escolas;
     }
 
@@ -431,8 +670,6 @@ public class AlunoBean {
     public void setEscolaDao(EscolaDao escolaDao) {
         this.escolaDao = escolaDao;
     }
-
-   
 
     public Aluno getAluno() {
         return aluno;
@@ -459,8 +696,8 @@ public class AlunoBean {
     }
 
     public List<SelectItem> getSelectSerie() throws ErroSistema {
-        
-     /* System.out.println("----------------------------------------------");
+
+        /* System.out.println("----------------------------------------------");
         if (selectSerie == null) {
             selectSerie = new ArrayList<SelectItem>();
             serie = new Serie();
@@ -477,7 +714,6 @@ public class AlunoBean {
             }
 
         }*/
-        
         return selectSerie;
     }
 
@@ -494,7 +730,7 @@ public class AlunoBean {
     }
 
     public List<Serie> getSeries() throws ErroSistema {
-       // series = serieDao.listarSerieParametro(Integer.SIZE);
+        // series = serieDao.listarSerieParametro(Integer.SIZE);
         return series;
     }
 
@@ -511,7 +747,7 @@ public class AlunoBean {
     }
 
     public List<SelectItem> getSelectTurma() throws ErroSistema {
-       
+
         /*  System.out.println("----------------------------------------------");
         if (selectTurma == null) {
             selectTurma = new ArrayList<SelectItem>();
@@ -529,7 +765,6 @@ public class AlunoBean {
             }
 
         }*/
-        
         return selectTurma;
     }
 
@@ -561,6 +796,52 @@ public class AlunoBean {
         this.turmaDao = turmaDao;
     }
 
-   
+    public Correcao getCorrecao() {
+        return correcao;
+    }
+
+    public void setCorrecao(Correcao correcao) {
+        this.correcao = correcao;
+    }
+
+    public List<Correcao> getCorrecoes() {
+        return correcoes;
+    }
+
+    public void setCorrecoes(List<Correcao> correcoes) {
+        this.correcoes = correcoes;
+    }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public List<Avaliacao> getResul() {
+        return resul;
+    }
+
+    public void setResul(List<Avaliacao> resul) {
+        this.resul = resul;
+    }
+
+    public List<String> getDescri() {
+        return descri;
+    }
+
+    public void setDescri(List<String> descri) {
+        this.descri = descri;
+    }
 
 }

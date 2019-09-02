@@ -11,6 +11,7 @@ package com.br.seducpaudalho.Dao;
 
 
 
+import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Entidade.Serie;
 import com.br.seducpaudalho.Util.Excepition.ErroSistema;
@@ -116,6 +117,51 @@ public class SerieDao {
  
         FabricaConexao.fecharConexao();
         return series;
+    
+    }
+    public List<Disciplina> listarDisciplinaParametro(Integer codigo) throws ErroSistema {
+ 
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " +codigo);
+     //codigo = 26091437;
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from disciplina where codSerie = ?";
+       
+         List<Disciplina> disciplinas = new ArrayList<>();
+        
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codigo);
+            
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " +codigo);
+
+            while (rs.next()) {
+              
+               Disciplina disciplina = new Disciplina();
+                
+                disciplina.setCodDisciplina(rs.getInt("codDisciplina"));
+                disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
+              
+               
+                disciplinas.add(disciplina);
+                System.out.println("nome da disciplina " + disciplina.getNomeDisciplina()); 
+                System.out.println("codigo da disciplina " + disciplina.getCodDisciplina()); 
+              
+            }
+          
+        } catch (Exception e) {
+           
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+ 
+        FabricaConexao.fecharConexao();
+        return disciplinas;
     
     }
 

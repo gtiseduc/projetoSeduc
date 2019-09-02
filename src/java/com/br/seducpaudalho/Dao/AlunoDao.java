@@ -6,6 +6,8 @@ package com.br.seducpaudalho.Dao;
  * and open the template in the editor.
  */
 import com.br.seducpaudalho.Entidade.Aluno;
+import com.br.seducpaudalho.Entidade.Avaliacao;
+import com.br.seducpaudalho.Entidade.Correcao;
 import com.br.seducpaudalho.Entidade.Fornecedor;
 import com.br.seducpaudalho.Entidade.Produto;
 import com.br.seducpaudalho.Entidade.Serie;
@@ -122,7 +124,7 @@ public class AlunoDao {
                 + "join serie s on s.codSerie = ?\n"
                 + "join turma t on t.codTurma = a.codTurma \n"
                 + "where a.codTurma = ? order by nome;";
-        
+
         List<Aluno> alunos = new ArrayList<>();
 
         try {
@@ -159,6 +161,101 @@ public class AlunoDao {
 
         FabricaConexao.fecharConexao();
         return alunos;
+
+    }
+
+    public List<Avaliacao> listarGabaritosAlunos(Integer codigoTurma, Integer inepEscola, Integer codSerie) throws ErroSistema {
+
+        System.out.println("**************" + codigoTurma);
+        System.out.println("**************" + inepEscola);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from avaliacao as a \n"
+                + "join aluno al on al.codAluno = a.codAluno\n"
+                + "where a.inepEscola = ? && a.codSerie = ? && a.codTurma = ? ";
+
+        List<Avaliacao> avaliacoes = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+            ps.setInt(3, codigoTurma);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Avaliacao avaliacao = new Avaliacao();
+                avaliacao.setIdAvaliacao(rs.getInt("idAvaliacao"));
+                avaliacao.setCodAluno(rs.getInt("codAluno"));
+                avaliacao.setCodTurma(rs.getInt("codTurma"));
+                avaliacao.setCodSerie(rs.getInt("codSerie"));
+
+                avaliacao.setRespPortugues(rs.getString("respPortugues"));
+                avaliacao.setRespMatematica(rs.getString("respMatematica"));
+                avaliacao.setRespCienciasHumanas(rs.getString("respCienciasHumanas"));
+                avaliacao.setRespCienciasNatureza(rs.getString("respCienciasNatureza"));
+                avaliacao.setNomeAluno(rs.getString("nome"));
+
+                avaliacoes.add(avaliacao);
+
+                System.out.println("__________________________________________________" + avaliacao.getRespPortugues());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return avaliacoes;
+
+    }
+
+    public List<Correcao> listarGabaritosDisciplina(Integer codSerie, Integer codDisciplina) throws ErroSistema {
+
+        System.out.println("**************" + codSerie);
+        System.out.println("**************" + codDisciplina);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from correcao where codSerie = ? && codDisciplina = ?";
+
+        List<Correcao> correcoes = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            ps.setInt(1, codSerie);
+            ps.setInt(2, codDisciplina);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Correcao correcao = new Correcao();
+                correcao.setIdCorrecao(rs.getInt("idCorrecao"));
+
+                correcao.setGabarito(rs.getString("gabarito"));
+                correcao.setDescritores(rs.getString("descritores"));
+
+                correcoes.add(correcao);
+                System.out.println("GABARITO E DESCRITORES " + correcao.getGabarito() + "  " + correcao.getDescritores());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar descritores " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return correcoes;
 
     }
 

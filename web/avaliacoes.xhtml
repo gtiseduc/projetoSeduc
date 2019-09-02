@@ -51,7 +51,7 @@
 
         <h:form>
 
-            <p:fieldset legend="CORREÇÃO DAS AVALIAÇÕES">
+            <p:fieldset legend="RESULTADO DAS AVALIAÇÕES">
 
 
 
@@ -60,50 +60,75 @@
 
                 <div class="ui-g ui-fluid">
 
-                    <div class="ui-g-12 ui-md-5">
+                    <div class="ui-g-12 ui-md-4">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="escola" value="#{produtoBean.produto.idFornecedor}"  >
+                            <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
                                 <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
-                                <f:selectItems   value="#{produtoBean.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.rzSocial}" itemValue="#{fornecedor.idFornecedor}" />         
-                                <p:ajax  event="change" listener="#{produtoBean.listarProdutosParametro(produtoBean.produto.idFornecedor)}" update="@form"/>
+                                <f:selectItems   value="#{alunoBean.escolas}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola.inepEscola}" />         
+                                <p:ajax  event="change" listener="#{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
                             </p:selectOneMenu>    
                         </div>
                     </div> 
 
-                    <div class="ui-g-12 ui-md-2">
+
+
+
+                    <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="serie" value="#{produtoBean.produto.idProduto}" >
+                            <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
                                 <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
-                                <f:selectItems   value="#{produtoBean.produtos}" var="produto" itemLabel="#{produto.nomeProduto}" itemValue="#{produto.idProduto}"/>      
+                                <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
+                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie)}" update="@form"/>
+
                             </p:selectOneMenu>    
                         </div>
-                    </div> 
+                    </div>
+
+
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="turma" value="#{produtoBean.produto.idProduto}" >
+                            <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
                                 <f:selectItem itemLabel="SELECIONE A TURMA" />       
-                                <f:selectItems   value="#{produtoBean.produtos}" var="produto" itemLabel="#{produto.nomeProduto}" itemValue="#{produto.idProduto}"/>      
+                                <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
+                                <p:ajax  event="change" listener="#{alunoBean.listarDisciplinaParametro(alunoBean.aluno.idSerie)}" update="@form"/>                            
+                                <!--  <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> -->
                             </p:selectOneMenu>    
                         </div>
-                    </div> 
+                    </div>  
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="disciplina" value="#{produtoBean.produto.idProduto}" >
+                            <p:selectOneMenu id="disciplina" value="#{alunoBean.disciplina.codDisciplina}" >
                                 <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
-                                <f:selectItems   value="#{produtoBean.produtos}" var="produto" itemLabel="#{produto.nomeProduto}" itemValue="#{produto.idProduto}"/>      
+                                <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
+                                <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/> 
                             </p:selectOneMenu>    
                         </div>
-                    </div> 
+                    </div>  
+
+
+
+                    <!-- <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="disciplina" value="{produtoBean.produto.idProduto}" >
+                                <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
+                                <f:selectItems   value="{produtoBean.produtos}" var="produto" itemLabel="{produto.nomeProduto}" itemValue="{produto.idProduto}"/>      
+                            </p:selectOneMenu>    
+                        </div>
+                    </div> -->
+
+
+
+
+
+
+
                 </div> 
-                <!--
-                selectOneMenu id="cidade" value="{meuBean.cidade}" converter="converterCidade" >
-    selectItem itemLabel="Selecione" />
-    selectItems value="{meuBean.cidades}" var="c" itemValue="{c}" itemLabel="{c.nome}" />
-    selectOneMenu> -->
+
 
 
 
@@ -111,7 +136,124 @@
 
             </p:fieldset>
 
+            <!--     <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="PORTUGUÊS " />
+     
+                             <p:inputSwitch  value="#{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="#{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div>
+                 <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="MATEMÁTICA " />
+     
+                             <p:inputSwitch  value="#{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="#{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div>
+                 <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="CIÊNCIAS HUMANAS " />
+     
+                             <p:inputSwitch  value="#{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="#{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div>
+                 <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="CIÊNCIAS DA NATUREZA " />
+     
+                             <p:inputSwitch  value="#{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="#{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div> -->
 
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+
+
+            <p:dataTable var="resul" value="#{alunoBean.resul}"  >
+
+                <p:columnGroup type="header" >
+                    <p:row >
+                        <p:column rowspan="4" headerText="NOME"   />
+                    </p:row>
+
+                    <p:row >
+                        <p:column colspan="2" headerText="#{resul.disciplina}" />
+                    </p:row>
+
+                    <p:row >
+                        <p:column colspan="2" headerText="D1D3D4D2D7D9D8D7D4D5D6D7D8D8D9" />
+                    </p:row>
+
+                    <p:row >
+                        <p:column colspan="2" headerText="AAAABBBDDDCCCDDAAABBBCC" />
+                    </p:row>
+
+
+                </p:columnGroup>      
+                <p:column headerText="NOME" priority="3">
+                    <h:outputText value="#{resul.nomeAluno}" />
+                </p:column>
+
+                <p:column headerText="#{resul.disciplina}">
+                    <h:outputText value="#{resul.avDisciplina}" />
+                </p:column>
+                <p:column headerText="RESULTADO">
+                    <h:outputText value="#{resul.numeroAcertos}" />
+                </p:column>
+
+            </p:dataTable>
+
+
+            <p:dataTable var="descri" value="#{alunoBean.descri}"  >
+
+                 <p:column headerText="RESULTADO">
+                     <h:outputText value="#{descri}" />
+                </p:column>
+                   
+
+            </p:dataTable>
+            <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
+
+            
+            
+            <p:lineChart value="#{alunoBean.resul}" var="aluno" xfield="#{aluno.nomeAluno}" style="chartstyle">
+                <p:chartSeries value="#{aluno.numeroAcertos}"/> 
+            </p:lineChart>
 
         </h:form>
 

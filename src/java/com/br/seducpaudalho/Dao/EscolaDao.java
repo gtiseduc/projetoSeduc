@@ -11,6 +11,7 @@ package com.br.seducpaudalho.Dao;
 
 
 
+import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Util.Excepition.ErroSistema;
 import com.br.seducpaudalho.Util.FabricaConexao;
@@ -67,6 +68,46 @@ public class EscolaDao {
  //System.out.println("tamanho da lista de fornecedores " + escolas.size() );
         FabricaConexao.fecharConexao();
         return escolas;
+    
+    }
+    public List<Disciplina> listarDisciplinas() throws ErroSistema {
+
+       System.out.println("entrou no listar Disciplina" );
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from disciplina";
+        List<Disciplina> disciplinas = new ArrayList<>();
+        
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+          
+            ResultSet rs = ps.executeQuery();
+
+           
+
+            while (rs.next()) {
+                Disciplina disciplina = new Disciplina();
+                
+                disciplina.setCodDisciplina(rs.getInt("codDisciplina"));
+                disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
+              
+               
+                disciplinas.add(disciplina);
+                System.out.println("nome da disciplina " + disciplina.getNomeDisciplina()); 
+                System.out.println("codigo da disciplina " + disciplina.getCodDisciplina()); 
+            }
+          
+        } catch (Exception e) {
+            System.out.println("erro ao listar disciplina " +e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+ //System.out.println("tamanho da lista de fornecedores " + escolas.size() );
+        FabricaConexao.fecharConexao();
+        return disciplinas;
     
     }
   
