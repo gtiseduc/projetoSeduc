@@ -49,6 +49,8 @@
 
     <ui:define name="formulario">
 
+
+
         <h:form>
 
             <p:fieldset legend="RESULTADO DAS AVALIAÇÕES">
@@ -241,18 +243,38 @@
 
             <p:dataTable var="descri" value="#{alunoBean.descri}"  >
 
-                 <p:column headerText="RESULTADO">
-                     <h:outputText value="#{descri}" />
+                <p:column headerText="RESULTADO">
+                    <h:outputText value="#{descri}" />
                 </p:column>
-                   
+
 
             </p:dataTable>
             <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
+            #{alunoBean.grafico()}
+            #{alunoBean.graficoHorizontal()}
+            #{alunoBean.graficoLinha()}
+            <p:commandButton action="#{alunoBean.grafico()}"  ></p:commandButton>
 
-            
-            
             <p:chart type="bar" model="#{alunoBean.barra}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barra != null}" />
-               
+            <p:chart type="bar" model="#{alunoBean.barraHorizontal}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraHorizontal != null}" >
+                <h:outputScript>
+                    function chartExtender() {
+                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+                    
+                    }
+                    function chartColor() {
+                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+                    
+                    }
+                    function chartColorc() {
+                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+                    
+                    }
+                </h:outputScript>
+            </p:chart>
+            <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
+
+
         </h:form>
 
 

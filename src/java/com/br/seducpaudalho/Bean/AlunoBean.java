@@ -45,6 +45,8 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
+import org.primefaces.model.chart.LineChartModel;
 
 /**
  *
@@ -88,6 +90,8 @@ public class AlunoBean {
     private String parametro;
     
     private BarChartModel  barra;
+    private HorizontalBarChartModel barraHorizontal;
+     private LineChartModel barraLinha;
 
     public void salvar() {
         /*
@@ -264,8 +268,26 @@ public class AlunoBean {
         for (int i = 0; i < resul.size(); i++) {
             ChartSeries serie = new ChartSeries();
             serie.setLabel(resul.get(i).getNomeAluno());
-            serie.set(resul.get(i).getNomeAluno(), resul.get(i).getNumeroAcertos());
+            
+            if(resul.get(i).getNumeroAcertos() < 2){
+            barra.setSeriesColors("DC143C");
+            serie.set("olha", resul.get(i).getNumeroAcertos());
             barra.addSeries(serie);
+                System.out.println("******************************************* 1");
+            }
+            if(resul.get(i).getNumeroAcertos() >= 2){
+            barra.setSeriesColors("00FFFF");
+            serie.set("olha", resul.get(i).getNumeroAcertos());
+            barra.addSeries(serie);
+            System.out.println("******************************************* 2");
+            }
+            if(resul.get(i).getNumeroAcertos() > 7){
+            barra.setSeriesColors("FF1493");
+            serie.set("olha", resul.get(i).getNumeroAcertos());
+            barra.addSeries(serie);
+            System.out.println("******************************************* 3");
+            }
+            
         }
         
         barra.setTitle("titulo do grafico");
@@ -273,12 +295,81 @@ public class AlunoBean {
         barra.setAnimate(true);
         
         Axis xAxis = barra.getAxis(AxisType.X);
-        xAxis.setLabel("eventos");
+        xAxis.setLabel("eventos 1");
         Axis yAxis = barra.getAxis(AxisType.Y);
         yAxis.setLabel("eventos 2");
         
-        yAxis.setMin(50000);
-        yAxis.setMax(500000);
+        yAxis.setMin(0);
+        yAxis.setMax(10);
+    }
+    public void graficoHorizontal(){
+    
+        barraHorizontal = new HorizontalBarChartModel();
+        
+        for (int i = 0; i < resul.size(); i++) {
+            ChartSeries serie = new ChartSeries();
+            serie.setLabel(resul.get(i).getNomeAluno());
+            
+            if(resul.get(i).getNumeroAcertos() < 2){
+            barraHorizontal.setSeriesColors("DC143C");
+            barraHorizontal.setExtender("chartColor");
+            serie.set("olha", resul.get(i).getNumeroAcertos());
+            barraHorizontal.addSeries(serie);
+                System.out.println("******************************************* 1");
+            }
+            if(resul.get(i).getNumeroAcertos() >= 2){
+            barraHorizontal.setSeriesColors("00FFFF");
+            barraHorizontal.setExtender("chartExtender");
+            serie.set("olha", resul.get(i).getNumeroAcertos());
+            barraHorizontal.addSeries(serie);
+            System.out.println("******************************************* 2");
+            }
+            if(resul.get(i).getNumeroAcertos() > 7){
+            barraHorizontal.setSeriesColors("FF1493");
+            barraHorizontal.setExtender("chartColorc");
+            serie.set("olha", resul.get(i).getNumeroAcertos());
+            barraHorizontal.addSeries(serie);
+            System.out.println("******************************************* 3");
+            }
+            
+        }
+        
+        barraHorizontal.setTitle("titulo do grafico");
+        barraHorizontal.setLegendPosition("ne");
+        barraHorizontal.setAnimate(true);
+        
+        Axis xAxis = barraHorizontal.getAxis(AxisType.X);
+        xAxis.setLabel("eventos 1");
+        Axis yAxis = barraHorizontal.getAxis(AxisType.Y);
+        yAxis.setLabel("eventos 2");
+        
+        yAxis.setMin(0);
+        yAxis.setMax(10);
+    }
+    public void graficoLinha(){
+    
+        barraLinha = new LineChartModel();
+        
+        for (int i = 0; i < resul.size(); i++) {
+            ChartSeries serie = new ChartSeries();
+            serie.setLabel(resul.get(i).getNomeAluno());
+            serie.set("olha", resul.get(i).getNumeroAcertos());
+            barraLinha.addSeries(serie);
+              
+            
+        }
+        
+        barraLinha.setTitle("GRAFICO DE LINHA");
+        barraLinha.setLegendPosition("e");
+        barraLinha.setAnimate(true);
+        
+        Axis xAxis = barraLinha.getAxis(AxisType.X);
+        xAxis.setLabel("eventos 1");
+        Axis yAxis = barraLinha.getAxis(AxisType.Y);
+        yAxis.setLabel("eventos 2");
+        
+        yAxis.setMin(0);
+        yAxis.setMax(10);
     }
 
     public void listarGabaritosAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
@@ -880,6 +971,22 @@ public class AlunoBean {
 
     public void setBarra(BarChartModel barra) {
         this.barra = barra;
+    }
+
+    public HorizontalBarChartModel getBarraHorizontal() {
+        return barraHorizontal;
+    }
+
+    public void setBarraHorizontal(HorizontalBarChartModel barraHorizontal) {
+        this.barraHorizontal = barraHorizontal;
+    }
+
+    public LineChartModel getBarraLinha() {
+        return barraLinha;
+    }
+
+    public void setBarraLinha(LineChartModel barraLinha) {
+        this.barraLinha = barraLinha;
     }
 
     
