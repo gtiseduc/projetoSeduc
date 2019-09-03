@@ -238,7 +238,7 @@ public class AlunoBean {
 
     public void listarTurmasParametro(Integer codigo) {
 
-        System.out.println("olha o codigo --------****----***----***------- " + codigo);
+        System.out.println("olha o codigo da turma--------****----***----***------- " + codigo);
         try {
             turmas = turmaDao.listarTurmaParametro(codigo);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);

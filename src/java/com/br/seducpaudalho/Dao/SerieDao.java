@@ -1,16 +1,10 @@
 package com.br.seducpaudalho.Dao;
 
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
-
 import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Entidade.Serie;
@@ -34,138 +28,137 @@ public class SerieDao {
 
     public List<Serie> listarSerie() throws ErroSistema {
 
-       System.out.println("entrou no listarSerie Serie" );
+        System.out.println("entrou no listarSerie Serie");
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
         String sql = "select * from serie";
         List<Serie> escolas = new ArrayList<>();
-        
+
         try {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
-          
-            ResultSet rs = ps.executeQuery();
 
-           
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Escola escola = new Escola();
-                
+
                 escola.setInepEscola(rs.getInt("inepEscola"));
                 escola.setNome(rs.getString("nomeEscola"));
-              
-               
+
                 //escolas.add(escola);
-                System.out.println("tamanho da lista de escola " + escola.getNome()); 
+                System.out.println("tamanho da lista de escola " + escola.getNome());
             }
-          
+
         } catch (Exception e) {
-            System.out.println("erro ao listar fornecedor " +e);
+            System.out.println("erro ao listar fornecedor " + e);
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
- System.out.println("tamanho da lista de fornecedores " + escolas.size() );
+        System.out.println("tamanho da lista de fornecedores " + escolas.size());
         FabricaConexao.fecharConexao();
         return escolas;
-    
+
     }
-  
+
     public List<Serie> listarSerieParametro(Integer codigo) throws ErroSistema {
- 
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " +codigo);
-     //codigo = 26091437;
+
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " + codigo);
+        //codigo = 26091437;
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from serie where inepEscola = ?";
-       
+        String sql = "select * from escolaserie as es\n"
+                + "join serie s on s.codSerie = es.codSerie \n"
+                + "where inepEscola = ?";
+
         List<Serie> series = new ArrayList<>();
-        
+
         try {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
-            
+
             ResultSet rs = ps.executeQuery();
 
-            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " +codigo);
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " + codigo);
 
             while (rs.next()) {
-              
-                 System.out.println("ddddddddddddddddddddddd " +codigo);
-                
+
+                System.out.println("ddddddddddddddddddddddd " + codigo);
+
                 Serie serie = new Serie();
-                
+
                 serie.setIdSerie(rs.getInt("codSerie"));
                 serie.setInepEscola(rs.getInt("inepEscola"));
                 serie.setNome(rs.getString("nomeSerie"));
-              
-                System.out.println("******************* "+serie.getNome());
-               
+
+                System.out.println("******************* " + serie.getNome());
+
                 series.add(serie);
-              
+
             }
-          
+
         } catch (Exception e) {
-           
+
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
- 
+
         FabricaConexao.fecharConexao();
         return series;
-    
+
     }
+
     public List<Disciplina> listarDisciplinaParametro(Integer codigo) throws ErroSistema {
- 
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " +codigo);
-     //codigo = 26091437;
+
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " + codigo);
+        //codigo = 26091437;
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from disciplina where codSerie = ?";
-       
-         List<Disciplina> disciplinas = new ArrayList<>();
-        
+        String sql = "select * from seriedisciplina as sd\n"
+                + "join disciplina d on d.codDisciplina = sd.codDisciplina\n"
+                + "where codSerie = ?";
+
+        List<Disciplina> disciplinas = new ArrayList<>();
+
         try {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
-            
+
             ResultSet rs = ps.executeQuery();
 
-            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " +codigo);
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " + codigo);
 
             while (rs.next()) {
-              
-               Disciplina disciplina = new Disciplina();
-                
+                System.out.println("----------------------------------");
+                Disciplina disciplina = new Disciplina();
+
                 disciplina.setCodDisciplina(rs.getInt("codDisciplina"));
-                disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
-              
-               
+                disciplina.setNomeDisciplina(rs.getString("nome"));
+
                 disciplinas.add(disciplina);
-                System.out.println("nome da disciplina " + disciplina.getNomeDisciplina()); 
-                System.out.println("codigo da disciplina " + disciplina.getCodDisciplina()); 
-              
+                System.out.println("nome da disciplina " + disciplina.getNomeDisciplina());
+                System.out.println("codigo da disciplina " + disciplina.getCodDisciplina());
+
             }
-          
+
         } catch (Exception e) {
-           
+
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
- 
+
         FabricaConexao.fecharConexao();
         return disciplinas;
-    
-    }
 
-   
+    }
 
     public void salvar(Escola fornecedor) throws ErroSistema {
 
@@ -216,11 +209,12 @@ public class SerieDao {
             System.out.println("erro fornecedor---------------------------------------" + e);
             throw new ErroSistema("erroooooo--------------------", e);
         }
-*/
+         */
     }
+
     public void salvarProduto(Escola p) throws ErroSistema {
 
-      /*  System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.salvar() "+ p.getEspecificacaoProduto());
+        /*  System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.salvar() "+ p.getEspecificacaoProduto());
 
         String sql = "INSERT INTO produto(idFornecedor,nProduto,mProduto,eProduto,uProduto,kProduto,vUnitario,vTotal)VALUES (?,?,?,?,?,?,?,?)";
 
@@ -249,12 +243,12 @@ public class SerieDao {
             System.out.println("erro fornecedor---------------------------------------" + e);
             throw new ErroSistema("erroooooo--------------------", e);
         }
-*/
+         */
     }
 
     public List<Escola> buscar() throws ErroSistema {
 
-     /*   String sql = "select * from login";
+        /*   String sql = "select * from login";
 
         try {
             Connection conexao = FabricaConexao.getConnection();
@@ -279,13 +273,13 @@ public class SerieDao {
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
-*/
-     return null;
+         */
+        return null;
     }
 
     public List<Escola> buscarF(String parametro) throws ErroSistema {
 
-       /* System.out.println("entrou no buscarF ----------" + parametro);
+        /* System.out.println("entrou no buscarF ----------" + parametro);
         String sql = "select * from login where cpf = ?";
 
         try {
@@ -311,10 +305,11 @@ public class SerieDao {
             throw new ErroSistema("erroooooo--------------------", e);
 
         }*/
-       return null;
+        return null;
 
     }
-   /* public List<Auditoria> buscarAuditoria(String parametro) throws ErroSistema {
+
+    /* public List<Auditoria> buscarAuditoria(String parametro) throws ErroSistema {
 
         System.out.println("entrou no buscarF ----------" + parametro);
         String sql = "select * from auditoria where cpf = ?";
@@ -344,17 +339,15 @@ public class SerieDao {
         }
 
     }*/
-
     public void deletar(Escola fornecedor) throws ErroSistema {
-        
-       // System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.deletar()"+fornecedor.getCnpj());
-       
+
+        // System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.deletar()"+fornecedor.getCnpj());
         String sql = "delete from fornecedor where cnpj = ?";
 
         try {
             Connection conexao = FabricaConexao.getConnection();
             PreparedStatement ps = conexao.prepareStatement(sql);
-           // ps.setString(1, fornecedor.getCnpj());
+            // ps.setString(1, fornecedor.getCnpj());
             ps.execute();
             FabricaConexao.fecharConexao();
         } catch (Exception e) {
@@ -362,8 +355,5 @@ public class SerieDao {
             throw new ErroSistema("ERRO AO DELETAR FORNECEDOR");
         }
     }
-    
-    
-    
 
 }

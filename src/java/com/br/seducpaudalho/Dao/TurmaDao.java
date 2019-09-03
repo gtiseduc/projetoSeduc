@@ -64,12 +64,15 @@ public class TurmaDao {
     }
 
     public List<Turma> listarTurmaParametro(Integer codigo) throws ErroSistema {
-
+ 
+        System.out.println("XXXXXXXXX-------XXXXXXXX--------XXXXXXXXX"+ codigo);
         //codigo = 26091437;
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from turma where codSerie = ?";
+        String sql = "select * from serieturma as st\n"
+                + "join turma t on t.codTurma = st.codTurma\n"
+                + "where codSerie = ?";
 
         List<Turma> series = new ArrayList<>();
 
@@ -87,7 +90,7 @@ public class TurmaDao {
                 turma.setIdTurma(rs.getInt("codTurma"));
                 turma.setIdSerie(rs.getInt("codSerie"));
                 turma.setNome(rs.getString("nomeTurma"));
-
+                System.out.println("com.br.seducpaudalho.Dao.TurmaDao.listarTurmaParametro()"+ turma.getNome());
                 series.add(turma);
 
             }
@@ -282,7 +285,6 @@ public class TurmaDao {
         }
 
     }*/
-
     public void deletar(Escola fornecedor) throws ErroSistema {
 
         // System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.deletar()"+fornecedor.getCnpj());
