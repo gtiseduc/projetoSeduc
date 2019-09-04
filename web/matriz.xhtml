@@ -5,7 +5,9 @@
              xmlns:p="http://primefaces.org/ui"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="template.xhtml"
-             xmlns:f="http://xmlns.jcp.org/jsf/core">
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="menuesquerdo">
 
@@ -104,20 +106,15 @@
                             </p:selectOneMenu>    
                         </div>
                     </div>  
-                   <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="combustivel" value=""  >
-                                <f:selectItem itemLabel="SELECIONE O DESCRITOR"  />
-                                <f:selectItem itemLabel="D1" itemValue="D1" />
-                                <f:selectItem itemLabel="D2" itemValue="D2" />
-                                <f:selectItem itemLabel="D3" itemValue="D3" />
-                                <f:selectItem itemLabel="D4" itemValue="D4" />
-                                <f:selectItem itemLabel="D5" itemValue="D5" />
-                                <f:selectItem itemLabel="D6" itemValue="D6" />
-                                <f:selectItem itemLabel="D7" itemValue="D7" />
-                                <f:selectItem itemLabel="D8" itemValue="D8" />
-                               
+                            <p:selectOneMenu id="descritor" value=""  >
+
+                                <f:selectItem itemLabel="SELECIONE O DESCRITOR" />       
+                                <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
+                                <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/> 
+
 
 
                             </p:selectOneMenu>      
@@ -129,7 +126,7 @@
                             <p:inputTextarea placeholder="DESCRICAO MATRIZ"></p:inputTextarea>
                         </div>
                     </div>  
-                    <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:inputText placeholder="NOME DA MATRIZ"></p:inputText>
@@ -156,7 +153,13 @@
 
                 </div> 
 
+                <p:dataTable var="v" value="#{bean.dataValues}" rowIndexVar="rowIndex">
 
+                    <p:column headerText="First Column">
+                        <h:outputText value="#{rowIndex+1}"/>
+                    </p:column>
+
+                </p:dataTable>
 
 
 
@@ -231,7 +234,7 @@
 
 
 
-           
+
 
             <p:dataTable var="descri" value="#{alunoBean.descri}"  >
 
@@ -242,7 +245,105 @@
 
             </p:dataTable>
             <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
-          
+
+
+
+            <h:panelGrid id="pnlConResCad">
+                <p:dataTable value="#{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
+                    <f:facet name="header" >
+                        RESULTADO DA AVALIAÇÃO
+                    </f:facet>
+
+                    <!--<p:columnGroup type="header" >
+                     <p:row >
+                         <p:column rowspan="3" headerText="TURMAS"  styleClass="verticalText" />
+                         <p:column colspan="7" headerText="LEITURA" />
+                         <p:column colspan="5" headerText="ESCRITA" />
+                         <p:column colspan="5" headerText="ESCRITA" />
+ 
+                     </p:row>
+ 
+ 
+                     <p:row>
+                         <p:column rowspan="3" headerText="1" />
+                         <p:column colspan="2" headerText="A"   />
+                         <p:column colspan="2" headerText="B" />
+                         <p:column colspan="2" headerText="C" />
+                         <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" />
+                         <p:column rowspan="3" headerText="1" />
+                         <p:column colspan="2" headerText="D" />
+                         <p:column colspan="2" headerText="E" />
+ 
+                     </p:row>
+                     <p:row>
+ 
+                         <p:column headerText="1" />
+                         <p:column headerText="2" />
+                         <p:column headerText="3" />
+                         <p:column headerText="4" />
+                         <p:column headerText="5" />
+                         <p:column headerText="6" />
+                         <p:column headerText="7" />
+                         <p:column headerText="8" />
+                         <p:column headerText="9" />
+                         <p:column headerText="10" />
+                         <p:column headerText="11" />
+                         <p:column headerText="12" />
+                         <p:column headerText="13" />
+                         <p:column headerText="14" />
+                         <p:column headerText="15" />
+ 
+ 
+ 
+ 
+                     </p:row>
+ 
+ 
+                 </p:columnGroup>-->
+
+                   
+                     <p:column footerText="RESULTADO DESCRITORES">
+                        <h:outputText value="#{coluna.nome}" />
+                      
+                    </p:column> 
+
+                    <c:forEach items="#{criaTotalizadorBean.alunos}" var="column">
+
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{column.idAluno}" />
+                            </f:facet>
+
+                            <p:inputText value="#{column.nomeSerie}" />
+                           
+                            <f:facet name="footer">
+                                <h:outputText value="#{column.idSerie}" />
+                            </f:facet>
+
+                        </p:column>
+                       
+                        
+                        
+                    </c:forEach>
+
+                    <!-- <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
+                         <f:facet name="input">
+                                 <p:inputText value="{operacao}" />
+                         </f:facet>
+         <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
+                 <p:cellEditor>
+                         <f:facet name="output">
+                                 <h:outputText value="{operacao}" />
+                         </f:facet>
+                         <f:facet name="input">
+                                 <p:inputText value="{operacao}" />
+                         </f:facet>
+                 </p:cellEditor>
+         </c:forEach> 
+                     </c:forEach>-->
+                </p:dataTable>
+            </h:panelGrid>
+
 
         </h:form>
 

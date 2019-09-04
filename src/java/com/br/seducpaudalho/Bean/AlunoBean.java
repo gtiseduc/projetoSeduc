@@ -589,6 +589,8 @@ public class AlunoBean {
 
     }
 
+   
+    
     public void listarFornecedores() {
 
         /*  System.out.println("entrou no metodo listar");
@@ -600,6 +602,8 @@ public class AlunoBean {
         }*/
     }
 
+    
+    
     public String buscarLogin() {
         /*
        
