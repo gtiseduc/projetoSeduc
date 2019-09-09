@@ -67,12 +67,15 @@
 
 
         <h:form>
-
+            <p:growl id="growl" life="3500" />
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
             <p:fieldset legend="CADASTRO DESCRITORES">
 
 
 
 
+                <br></br>
+                <br></br>
 
 
 
@@ -84,14 +87,14 @@
 
 
 
-
+                        #{alunoBean.listarSeries()}
                         <div class="ui-g-12 ui-md-4">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
-                                <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
+                                <p:selectOneMenu id="serie" value="#{alunoBean.descritor.codSerie}" >
                                     <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
                                     <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
-                                    <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie)}" update="@form"/>
+                                    <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.descritor.codSerie)}" update="@form"/>
 
                                 </p:selectOneMenu>    
                             </div>
@@ -102,38 +105,96 @@
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
-                                <p:selectOneMenu id="disciplina" value="#{alunoBean.disciplina.codDisciplina}" >
+                                <p:selectOneMenu id="disciplina" value="#{alunoBean.descritor.codDisciplina}" >
                                     <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
                                     <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
-                                    <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/> 
+                                    <!--<p:ajax  event="change"  listener="{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/> -->
                                 </p:selectOneMenu>    
                             </div>
                         </div>  
+
+
                         <div class="ui-g-12 ui-md-3">
                             <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
-                                <p:selectOneMenu id="descritor" value=""  >
+                                <p:selectOneMenu id="descritor" value="#{alunoBean.descritor.siglaDescritor}"  >
 
                                     <f:selectItem itemLabel="SELECIONE O DESCRITOR" />       
-                                    <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
-                                    <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/> 
 
-
+                                    <f:selectItem itemLabel="D1" itemValue="D1" />
+                                    <f:selectItem itemLabel="D2" itemValue="D2" />
+                                    <f:selectItem itemLabel="D3" itemValue="D3" />
+                                    <f:selectItem itemLabel="D4" itemValue="D4" />
+                                    <f:selectItem itemLabel="D5" itemValue="D5" />
+                                    <f:selectItem itemLabel="D6" itemValue="D6" />
+                                    <f:selectItem itemLabel="D7" itemValue="D7" />
+                                    <f:selectItem itemLabel="D8" itemValue="D8" />
+                                    <f:selectItem itemLabel="D9" itemValue="D9" />
+                                    <f:selectItem itemLabel="D10" itemValue="D10" />
+                                    <f:selectItem itemLabel="D11" itemValue="D11" />
+                                    <f:selectItem itemLabel="D12" itemValue="D12" />
+                                    <f:selectItem itemLabel="D13" itemValue="D13" />
+                                    <f:selectItem itemLabel="D14" itemValue="D14" />
+                                    <f:selectItem itemLabel="D15" itemValue="D15" />
+                                    <f:selectItem itemLabel="D16" itemValue="D16" />
+                                    <f:selectItem itemLabel="D17" itemValue="D17" />
+                                    <f:selectItem itemLabel="D18" itemValue="D18" />
+                                    <f:selectItem itemLabel="D19" itemValue="D19" />
+                                    <f:selectItem itemLabel="D20" itemValue="D20" />
+                                    <f:selectItem itemLabel="D21" itemValue="D21" />
+                                    <f:selectItem itemLabel="D22" itemValue="D22" />
+                                    <f:selectItem itemLabel="D23" itemValue="D23" />
+                                    <f:selectItem itemLabel="D24" itemValue="D24" />
+                                    <f:selectItem itemLabel="D25" itemValue="D25" />
+                                    <f:selectItem itemLabel="D26" itemValue="D26" />
+                                    <f:selectItem itemLabel="D27" itemValue="D27" />
+                                    <f:selectItem itemLabel="D28" itemValue="D28" />
+                                    <f:selectItem itemLabel="D29" itemValue="D29" />
+                                    <f:selectItem itemLabel="D30" itemValue="D30" />
+                                    <f:selectItem itemLabel="D31" itemValue="D31" />
+                                    <f:selectItem itemLabel="D32" itemValue="D32" />
+                                    <f:selectItem itemLabel="D33" itemValue="D33" />
+                                    <f:selectItem itemLabel="D34" itemValue="D34" />
+                                    <f:selectItem itemLabel="D35" itemValue="D35" />
+                                    <f:selectItem itemLabel="D36" itemValue="D36" />
+                                    <f:selectItem itemLabel="D37" itemValue="D37" />
+                                    <f:selectItem itemLabel="D38" itemValue="D38" />
+                                    <!-- <p:ajax  event="change"  listener="{alunoBean.concatDescritores()}" update="@form"/> -->
 
                                 </p:selectOneMenu>      
                             </div>
                         </div>
-                       
 
-                    </h:panelGrid>
-                    
-                      <div class="ui-g-12 ui-md-6" >
-                          <div class="ui-inputgroup" style="height: 80%">
+                        <!--<div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
                                 <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
-                                <p:inputTextarea placeholder="DESCRICAO MATRIZ" style="height: 200px"></p:inputTextarea>
+                                <p:inputText value="{alunoBean.descritor.siglaDescritor}" disabled="true"/>  
+
                             </div>
                         </div> 
-                    
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
+                                <p:commandButton value="APAGAR SELEÇÃO DE DESCRITORES" action="{alunoBean.apagarSelecao()}" update="@form"/>  
+
+                            </div>
+                        </div> -->
+                    </h:panelGrid>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+
+
+                    <div class="ui-g-12 ui-md-6" >
+                        <div class="ui-inputgroup" style="height: 80%">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
+                            <p:inputTextarea placeholder="DESCRICAO MATRIZ" value="#{alunoBean.descritor.especiDescritor}" style="height: 200px"></p:inputTextarea>
+                        </div>
+                    </div> 
+
                     <br></br>
                     <br></br>
                     <br></br>
@@ -143,15 +204,10 @@
                     <br></br>
                     <br></br>
                     <br></br>
-                    
-                    <p:commandButton value="SALVAR"></p:commandButton>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                   
-                   
+
+                    <p:commandButton value="SALVAR" action="#{alunoBean.salvarDescritor()}" update="@form" ></p:commandButton>
+
+
 
 
 
@@ -161,253 +217,207 @@
 
                 </div> 
 
-                <p:dataTable var="v" value="#{bean.dataValues}" rowIndexVar="rowIndex">
+                <!--<p:dataTable var="v" value="{bean.dataValues}" rowIndexVar="rowIndex">
 
                     <p:column headerText="First Column">
-                        <h:outputText value="#{rowIndex+1}"/>
+                        <h:outputText value="{rowIndex+1}"/>
                     </p:column>
 
                 </p:dataTable>
+                -->
 
 
 
+                <!-- </p:fieldset>
+     
+                     <div class="ui-g-12 ui-md-3">
+                          <div class="ui-inputgroup">
+                              <h:panelGrid columns="2"  cellpadding="5">
+                                  <h:outputText value="PORTUGUÊS " />
+          
+                                  <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                      <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+          
+          
+                                  </p:inputSwitch>
+          
+          
+                              </h:panelGrid>
+                          </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-3">
+                          <div class="ui-inputgroup">
+                              <h:panelGrid columns="2"  cellpadding="5">
+                                  <h:outputText value="MATEMÁTICA " />
+          
+                                  <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                      <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+          
+          
+                                  </p:inputSwitch>
+          
+          
+                              </h:panelGrid>
+                          </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-3">
+                          <div class="ui-inputgroup">
+                              <h:panelGrid columns="2"  cellpadding="5">
+                                  <h:outputText value="CIÊNCIAS HUMANAS " />
+          
+                                  <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                      <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+          
+          
+                                  </p:inputSwitch>
+          
+          
+                              </h:panelGrid>
+                          </div>
+                      </div>
+                      <div class="ui-g-12 ui-md-3">
+                          <div class="ui-inputgroup">
+                              <h:panelGrid columns="2"  cellpadding="5">
+                                  <h:outputText value="CIÊNCIAS DA NATUREZA " />
+          
+                                  <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                      <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+          
+          
+                                  </p:inputSwitch>
+          
+          
+                              </h:panelGrid>
+                          </div>
+                      </div> -->
+
+                <br></br>
+                <br></br>
+
+
+
+
+
+                <!--
+                            <p:dataTable var="descri" value="{alunoBean.descri}"  >
+                
+                                <p:column headerText="LISTAR MATRIZ">
+                                    <h:outputText value="{descri}" />
+                                </p:column>
+                
+                
+                            </p:dataTable> -->
+                <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
+
+
+
+                <!-- <h:panelGrid id="pnlConResCad">
+                     <p:dataTable value="{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
+                         <f:facet name="header" >
+                             RESULTADO DA AVALIAÇÃO
+                         </f:facet>
+     
+     
+     
+     
+                         <p:column footerText="RESULTADO DESCRITORES">
+                             <h:outputText value="{coluna.nome}" />
+     
+                         </p:column> 
+     
+                         <c:forEach items="{criaTotalizadorBean.alunos}" var="column">
+     
+                             <p:column >
+                                 <f:facet name="header">
+                                     <h:outputText value="{column.idAluno}" />
+                                 </f:facet>
+     
+                                 <p:inputText value="{column.nomeSerie}" />
+     
+                                 <f:facet name="footer">
+                                     <h:outputText value="{column.idSerie}" />
+                                 </f:facet>
+     
+                             </p:column>
+     
+     
+     
+                         </c:forEach>
+     
+                          <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
+                              <f:facet name="input">
+                                      <p:inputText value="{operacao}" />
+                              </f:facet>
+              <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
+                      <p:cellEditor>
+                              <f:facet name="output">
+                                      <h:outputText value="{operacao}" />
+                              </f:facet>
+                              <f:facet name="input">
+                                      <p:inputText value="{operacao}" />
+                              </f:facet>
+                      </p:cellEditor>
+              </c:forEach> 
+                          </c:forEach>
+                     </p:dataTable>
+                 </h:panelGrid> -->
+
+                <!--
+                
+                            <p:dataTable id="cars1" var="car" value="{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
+                                <f:facet name="header">
+                                    Row Editing
+                                </f:facet>
+                
+                                <p:ajax event="rowEdit" listener="{dtEditView.onRowEdit}" update=":form:msgs" />
+                                <p:ajax event="rowEditCancel" listener="{dtEditView.onRowCancel}" update=":form:msgs" />
+                
+                                <p:column headerText="Id">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="{car.id}" /></f:facet>
+                                        <f:facet name="input"><p:inputText id="modelInput" value="{car.id}" style="width:100%"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                
+                                <p:column headerText="Year">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="{car.year}" /></f:facet>
+                                        <f:facet name="input"><p:inputText value="{car.year}" style="width:100%" label="Year"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                
+                                <p:column headerText="Brand">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="{car.brand}" /></f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu value="{car.brand}" style="width:100%">
+                                                <f:selectItems value="{dtEditView.brands}" var="man" itemLabel="{man}" itemValue="{man}" />
+                                            </h:selectOneMenu>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                
+                                <p:column headerText="Color">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="{car.color}" /></f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu value="{car.color}" style="width:100%">
+                                                <f:selectItems value="{dtEditView.colors}" var="color" itemLabel="{color}" itemValue="{color}" />
+                                            </h:selectOneMenu>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                
+                                <p:column style="width:35px">
+                                    <p:rowEditor />
+                                </p:column>
+                            </p:dataTable> 
+                <p:contextMenu for="cars2" widgetVar="cMenu">   
+                    <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
+                    <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
+                </p:contextMenu> -->
 
             </p:fieldset>
-
-            <!--     <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="PORTUGUÊS " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div>
-                 <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="MATEMÁTICA " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div>
-                 <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="CIÊNCIAS HUMANAS " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div>
-                 <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="CIÊNCIAS DA NATUREZA " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div> -->
-
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-
-
-
-
-
-            <p:dataTable var="descri" value="#{alunoBean.descri}"  >
-
-                <p:column headerText="LISTAR MATRIZ">
-                    <h:outputText value="#{descri}" />
-                </p:column>
-
-
-            </p:dataTable>
-            <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
-
-
-
-            <h:panelGrid id="pnlConResCad">
-                <p:dataTable value="#{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
-                    <f:facet name="header" >
-                        RESULTADO DA AVALIAÇÃO
-                    </f:facet>
-
-                    <!--<p:columnGroup type="header" >
-                     <p:row >
-                         <p:column rowspan="3" headerText="TURMAS"  styleClass="verticalText" />
-                         <p:column colspan="7" headerText="LEITURA" />
-                         <p:column colspan="5" headerText="ESCRITA" />
-                         <p:column colspan="5" headerText="ESCRITA" />
- 
-                     </p:row>
- 
- 
-                     <p:row>
-                         <p:column rowspan="3" headerText="1" />
-                         <p:column colspan="2" headerText="A"   />
-                         <p:column colspan="2" headerText="B" />
-                         <p:column colspan="2" headerText="C" />
-                         <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" />
-                         <p:column rowspan="3" headerText="1" />
-                         <p:column colspan="2" headerText="D" />
-                         <p:column colspan="2" headerText="E" />
- 
-                     </p:row>
-                     <p:row>
- 
-                         <p:column headerText="1" />
-                         <p:column headerText="2" />
-                         <p:column headerText="3" />
-                         <p:column headerText="4" />
-                         <p:column headerText="5" />
-                         <p:column headerText="6" />
-                         <p:column headerText="7" />
-                         <p:column headerText="8" />
-                         <p:column headerText="9" />
-                         <p:column headerText="10" />
-                         <p:column headerText="11" />
-                         <p:column headerText="12" />
-                         <p:column headerText="13" />
-                         <p:column headerText="14" />
-                         <p:column headerText="15" />
- 
- 
- 
- 
-                     </p:row>
- 
- 
-                 </p:columnGroup>-->
-
-
-                    <p:column footerText="RESULTADO DESCRITORES">
-                        <h:outputText value="#{coluna.nome}" />
-
-                    </p:column> 
-
-                    <c:forEach items="#{criaTotalizadorBean.alunos}" var="column">
-
-                        <p:column >
-                            <f:facet name="header">
-                                <h:outputText value="#{column.idAluno}" />
-                            </f:facet>
-
-                            <p:inputText value="#{column.nomeSerie}" />
-
-                            <f:facet name="footer">
-                                <h:outputText value="#{column.idSerie}" />
-                            </f:facet>
-
-                        </p:column>
-
-
-
-                    </c:forEach>
-
-                    <!-- <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
-                         <f:facet name="input">
-                                 <p:inputText value="{operacao}" />
-                         </f:facet>
-         <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
-                 <p:cellEditor>
-                         <f:facet name="output">
-                                 <h:outputText value="{operacao}" />
-                         </f:facet>
-                         <f:facet name="input">
-                                 <p:inputText value="{operacao}" />
-                         </f:facet>
-                 </p:cellEditor>
-         </c:forEach> 
-                     </c:forEach>-->
-                </p:dataTable>
-            </h:panelGrid>
-
-
-
-            <p:dataTable id="cars1" var="car" value="#{dtEditView.cars1}" editable="true" style="margin-bottom:20px">
-                <f:facet name="header">
-                    Row Editing
-                </f:facet>
-
-                <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update=":form:msgs" />
-
-                <p:column headerText="Id">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{car.id}" /></f:facet>
-                        <f:facet name="input"><p:inputText id="modelInput" value="#{car.id}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-
-                <p:column headerText="Year">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{car.year}" /></f:facet>
-                        <f:facet name="input"><p:inputText value="#{car.year}" style="width:100%" label="Year"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-
-                <p:column headerText="Brand">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{car.brand}" /></f:facet>
-                        <f:facet name="input">
-                            <h:selectOneMenu value="#{car.brand}" style="width:100%">
-                                <f:selectItems value="#{dtEditView.brands}" var="man" itemLabel="#{man}" itemValue="#{man}" />
-                            </h:selectOneMenu>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-
-                <p:column headerText="Color">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{car.color}" /></f:facet>
-                        <f:facet name="input">
-                            <h:selectOneMenu value="#{car.color}" style="width:100%">
-                                <f:selectItems value="#{dtEditView.colors}" var="color" itemLabel="#{color}" itemValue="#{color}" />
-                            </h:selectOneMenu>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-
-                <p:column style="width:35px">
-                    <p:rowEditor />
-                </p:column>
-            </p:dataTable>
-            <p:contextMenu for="cars2" widgetVar="cMenu">   
-                <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
-                <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
-            </p:contextMenu> 
-
-
 
         </h:form>
 

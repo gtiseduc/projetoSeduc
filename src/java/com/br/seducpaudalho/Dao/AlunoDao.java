@@ -6,8 +6,10 @@ package com.br.seducpaudalho.Dao;
  * and open the template in the editor.
  */
 import com.br.seducpaudalho.Entidade.Aluno;
+import com.br.seducpaudalho.Entidade.Associacao;
 import com.br.seducpaudalho.Entidade.Avaliacao;
 import com.br.seducpaudalho.Entidade.Correcao;
+import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Fornecedor;
 import com.br.seducpaudalho.Entidade.Produto;
 import com.br.seducpaudalho.Entidade.Serie;
@@ -390,6 +392,38 @@ public class AlunoDao {
         }
 
     }
+    public void atualizarAssociacao(Associacao associacao) throws ErroSistema {
+
+       
+
+        try {
+           
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+            
+               
+                ps = conexao.prepareStatement("UPDATE associacao SET codSerie=?,codDisciplina=?,descritor=?,questao=?,alternativa=? where codAssociacao=?");
+                ps.setInt(6, associacao.getCodAssociacao());
+            
+
+            ps.setInt(1, associacao.getCodSerie());
+            ps.setInt(2, associacao.getCodDisciplina());
+            ps.setString(3, associacao.getDescritor());
+            ps.setString(4, associacao.getQuestao());
+            ps.setString(5, associacao.getAlternativa());
+            
+
+            ps.execute();
+            System.out.println("inserindo fornecedor---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+
+    }
 
     public List<Fornecedor> buscar() throws ErroSistema {
 
@@ -454,6 +488,32 @@ public class AlunoDao {
 
     }
 
+    public List<Descritor> pesquiDescritors(String sigla, Integer disciplina, Integer serie) throws ErroSistema {
+
+        String sql = "select * from descritor where siglaDescritor = ? && codDisciplina = ? && codSerie = ?";
+        List<Descritor> a = new ArrayList<>();
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, sigla);
+            ps.setInt(2, disciplina);
+            ps.setInt(3, serie);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Descritor d = new Descritor();
+                a.add(d);
+            }
+            return a;
+
+        } catch (Exception e) {
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+    }
+
     /* public List<Auditoria> buscarAuditoria(String parametro) throws ErroSistema {
 
         System.out.println("entrou no buscarF ----------" + parametro);
@@ -500,6 +560,141 @@ public class AlunoDao {
 
             throw new ErroSistema("ERRO AO DELETAR PRODUTO");
         }
+    }
+
+    public void salvarDescritor(Descritor descritor) throws ErroSistema {
+
+        System.out.println("--------- olha o  descritor : " + descritor.getCodSerie() + "  - " + descritor.getCodDisciplina() + "  - " + descritor.getSiglaDescritor());
+        System.out.println("--------- olha o codigo do descritor" + descritor.getCodDescritor());
+
+        Integer p = pesquisarDescritor(descritor.getSiglaDescritor(), descritor.getCodSerie(), descritor.getCodSerie());
+
+        try {
+            String sql = "";
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+            if (p == null) {
+                System.out.println("--------- entrou no if cadastro produto");
+                System.out.println("--------- olha o  descritor : " + descritor.getSiglaDescritor() + "  - " + descritor.getEspeciDescritor() + "  - " + descritor.getCodDisciplina() + "  - " + descritor.getCodSerie());
+                ps = conexao.prepareStatement("INSERT INTO descritor(siglaDescritor,especiDescritor,codDisciplina,codSerie)VALUES (?,?,?,?)");
+            } else {
+                System.out.println("--------- entrou no else cadastro descritor" + p + " - " + descritor.getSiglaDescritor() + "  - " + descritor.getEspeciDescritor() + "  - " + descritor.getCodDisciplina() + "  - " + descritor.getCodSerie());
+                ps = conexao.prepareStatement("UPDATE descritor SET siglaDescritor=?,especiDescritor=?,codDisciplina=?,codSerie=? where codDescritor=?");
+                ps.setInt(5, p);
+            }
+
+            ps.setString(1, descritor.getSiglaDescritor());
+            ps.setString(2, descritor.getEspeciDescritor());
+            ps.setInt(3, descritor.getCodDisciplina());
+            ps.setInt(4, descritor.getCodSerie());
+
+            ps.execute();
+            System.out.println("inserindo fornecedor---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+    }
+
+    public void salvarQuestao(Associacao associacao) throws ErroSistema {
+
+        // System.out.println("--------- olha questao : " + associacao.getCodSerie() + "  - "+ associacao.getCodDisciplina()+ "  - "+associacao.getSiglaDescritor());
+        // System.out.println("--------- olha questao" + associacao.getCodDescritor());
+        //Integer p = pesquisarDescritor(associacao.getSiglaDescritor(),associacao.getCodSerie(),associacao.getCodSerie());
+        List<Associacao> pesquisa = new ArrayList<>();
+
+        pesquisa = pesquiQuestoes(associacao);
+        int cont = pesquisa.size();
+        cont++;
+        for (int i = 0; i < associacao.getNumeroQuestoes(); i++) {
+
+            System.out.println("olha o tamahno da lista " + pesquisa.size());
+            try {
+                //String sql = "";
+                Connection conexao = FabricaConexao.getConnection();
+                PreparedStatement ps;
+
+                //  if (p == null) {
+                // System.out.println("--------- entrou no if cadastro produto");
+                System.out.println("--------- olha a associacao : " + associacao.getCodSerie() + "  - " + associacao.getCodDisciplina());
+                ps = conexao.prepareStatement("INSERT INTO associacao(codSerie,codDisciplina,descritor,questao,alternativa)VALUES (?,?,?,?,?)");
+                /*} else {
+                System.out.println("--------- entrou no else cadastro descritor" + p + " - "+ associacao.getSiglaDescritor() + "  - "+ associacao.getEspeciDescritor()+ "  - "+ associacao.getCodDisciplina()+ "  - "+associacao.getCodSerie());
+                ps = conexao.prepareStatement("UPDATE descritor SET siglaDescritor=?,especiDescritor=?,codDisciplina=?,codSerie=? where codDescritor=?");
+                ps.setInt(5, p);
+            }*/
+                ps.setInt(1, associacao.getCodSerie());
+                ps.setInt(2, associacao.getCodDisciplina());
+                ps.setString(3, "");
+                ps.setString(4, "Q" + Integer.toString(cont++));
+                ps.setString(5, "");
+
+                ps.execute();
+                //System.out.println("inserindo fornecedor---------------------------------------");
+                FabricaConexao.fecharConexao();
+            } catch (Exception e) {
+                System.out.println("#########################" + e);
+                throw new ErroSistema("erroooooo--------------------", e);
+            }
+        }
+
+    }
+
+    public List<Associacao> pesquiQuestoes(Associacao as) throws ErroSistema {
+
+        String sql = "select * from associacao where codSerie = ? && codDisciplina = ?";
+        List<Associacao> a = new ArrayList<>();
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, as.getCodSerie());
+            ps.setInt(2, as.getCodDisciplina());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Associacao associacao = new Associacao();
+                associacao.setCodAssociacao(rs.getInt("codAssociacao"));
+                a.add(associacao);
+            }
+            return a;
+
+        } catch (Exception e) {
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+    }
+
+    private Integer pesquisarDescritor(String siglaDescritor, Integer codSerie, Integer codSerie0) throws ErroSistema {
+
+        String sql = "select * from descritor where siglaDescritor = ? && codDisciplina = ? && codSerie = ?";
+        Integer a = null;
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, siglaDescritor);
+            ps.setInt(2, codSerie);
+            ps.setInt(3, codSerie0);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Descritor d = new Descritor();
+                d.setCodDescritor(rs.getInt("codDescritor"));
+
+                a = d.getCodDescritor();
+            }
+
+        } catch (Exception e) {
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        return a;
     }
 
 }

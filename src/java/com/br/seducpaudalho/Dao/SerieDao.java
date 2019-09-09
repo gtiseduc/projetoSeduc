@@ -33,7 +33,7 @@ public class SerieDao {
         // "Select uname, password from Users where uname = ? and password = ?"
 
         String sql = "select * from serie";
-        List<Serie> escolas = new ArrayList<>();
+        List<Serie> series = new ArrayList<>();
 
         try {
             Connection conexao = FabricaConexao.getConnection();
@@ -43,23 +43,23 @@ public class SerieDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Escola escola = new Escola();
+                Serie serie = new Serie();
 
-                escola.setInepEscola(rs.getInt("inepEscola"));
-                escola.setNome(rs.getString("nomeEscola"));
+                serie.setIdSerie(rs.getInt("codSerie"));
+                serie.setNome(rs.getString("nomeSerie"));
 
-                //escolas.add(escola);
-                System.out.println("tamanho da lista de escola " + escola.getNome());
+                series.add(serie);
+                System.out.println("tamanho da lista de serie " + serie.getNome());
             }
 
         } catch (Exception e) {
-            System.out.println("erro ao listar fornecedor " + e);
+            System.out.println("erro ao listar serie " + e);
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
-        System.out.println("tamanho da lista de fornecedores " + escolas.size());
+        System.out.println("tamanho da lista de serie " + series.size());
         FabricaConexao.fecharConexao();
-        return escolas;
+        return series;
 
     }
 
@@ -123,6 +123,52 @@ public class SerieDao {
         String sql = "select * from seriedisciplina as sd\n"
                 + "join disciplina d on d.codDisciplina = sd.codDisciplina\n"
                 + "where codSerie = ?";
+
+        List<Disciplina> disciplinas = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codigo);
+
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " + codigo);
+
+            while (rs.next()) {
+                System.out.println("----------------------------------");
+                Disciplina disciplina = new Disciplina();
+
+                disciplina.setCodDisciplina(rs.getInt("codDisciplina"));
+                disciplina.setNomeDisciplina(rs.getString("nome"));
+
+                disciplinas.add(disciplina);
+                System.out.println("nome da disciplina " + disciplina.getNomeDisciplina());
+                System.out.println("codigo da disciplina " + disciplina.getCodDisciplina());
+
+            }
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return disciplinas;
+
+    }
+    public List<Disciplina> listarDisciplinasSerie(Integer codigo) throws ErroSistema {
+
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " + codigo);
+        //codigo = 26091437;
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from seriedisciplina as sd\n"
+                + "join disciplina d on d.codDisciplina = sd.codDisciplina\n"
+                + "where sd.codSerie = ?";
 
         List<Disciplina> disciplinas = new ArrayList<>();
 

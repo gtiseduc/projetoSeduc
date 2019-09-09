@@ -13,8 +13,10 @@ import com.br.seducpaudalho.Dao.ProdutoDao;
 import com.br.seducpaudalho.Dao.SerieDao;
 import com.br.seducpaudalho.Dao.TurmaDao;
 import com.br.seducpaudalho.Entidade.Aluno;
+import com.br.seducpaudalho.Entidade.Associacao;
 import com.br.seducpaudalho.Entidade.Avaliacao;
 import com.br.seducpaudalho.Entidade.Correcao;
+import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Entidade.Serie;
@@ -41,6 +43,8 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -88,10 +92,15 @@ public class AlunoBean {
     List<Avaliacao> resul = new ArrayList<>();
     List<String> descri = new ArrayList<>();
     private String parametro;
+
+    private Descritor descritor = new Descritor();
+    private Associacao associacao = new Associacao();
+    List<Associacao> questoes = new ArrayList<>();
     
-    private BarChartModel  barra;
+    private BarChartModel barra;
     private HorizontalBarChartModel barraHorizontal;
-     private LineChartModel barraLinha;
+    private LineChartModel barraLinha;
+    private String concatDescritor = "";
 
     public void salvar() {
         /*
@@ -170,6 +179,23 @@ public class AlunoBean {
         // }
     }
 
+    public void salvarDescritor() throws ErroSistema {
+
+        alunoDao.salvarDescritor(descritor);
+        adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+        
+        descritor = new Descritor();
+    }
+    public void salvarQuestoes() throws ErroSistema {
+
+       
+        
+        alunoDao.salvarQuestao(associacao);
+        adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+        
+        associacao = new Associacao();
+    }
+
     public void alterar() {
         /*
         try {
@@ -212,6 +238,18 @@ public class AlunoBean {
         }
     }
 
+    public void listarSeries() {
+
+        System.out.println("--------****----***----***------- ");
+        try {
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+            series = serieDao.listarSerie();
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
     public void listarSerieParametro(Integer codigo) {
 
         System.out.println("--------****----***----***------- " + codigo);
@@ -224,13 +262,13 @@ public class AlunoBean {
         }
     }
 
-    public void listarDisciplinaParametro(Integer codigo) {
+    public void listarDisciplinasSerie(Integer codigo) {
 
         System.out.println("--------****----***----***------- " + codigo);
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
-            disciplinas = serieDao.listarDisciplinaParametro(codigo);
-            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            disciplinas = serieDao.listarDisciplinasSerie(codigo);
+            // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -241,6 +279,16 @@ public class AlunoBean {
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo);
         try {
             turmas = turmaDao.listarTurmaParametro(codigo);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
+    public void listarAssociacao() {
+
+        System.out.println("olha a lista--------****----***----***------- " );
+        try {
+            questoes = turmaDao.listarAssociacao(associacao);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -260,114 +308,115 @@ public class AlunoBean {
         }
 
     }
-    
-    public void grafico(){
-    
+
+    public void grafico() {
+
         barra = new BarChartModel();
-        
+
         for (int i = 0; i < resul.size(); i++) {
             ChartSeries serie = new ChartSeries();
             serie.setLabel(resul.get(i).getNomeAluno());
-            
-            if(resul.get(i).getNumeroAcertos() < 2){
-            barra.setSeriesColors("DC143C");
-            serie.set("olha", resul.get(i).getNumeroAcertos());
-            barra.addSeries(serie);
+
+            if (resul.get(i).getNumeroAcertos() < 2) {
+                barra.setSeriesColors("DC143C");
+                serie.set("olha", resul.get(i).getNumeroAcertos());
+                barra.addSeries(serie);
                 System.out.println("******************************************* 1");
             }
-            if(resul.get(i).getNumeroAcertos() >= 2){
-            barra.setSeriesColors("00FFFF");
-            serie.set("olha", resul.get(i).getNumeroAcertos());
-            barra.addSeries(serie);
-            System.out.println("******************************************* 2");
+            if (resul.get(i).getNumeroAcertos() >= 2) {
+                barra.setSeriesColors("00FFFF");
+                serie.set("olha", resul.get(i).getNumeroAcertos());
+                barra.addSeries(serie);
+                System.out.println("******************************************* 2");
             }
-            if(resul.get(i).getNumeroAcertos() > 7){
-            barra.setSeriesColors("FF1493");
-            serie.set("olha", resul.get(i).getNumeroAcertos());
-            barra.addSeries(serie);
-            System.out.println("******************************************* 3");
+            if (resul.get(i).getNumeroAcertos() > 7) {
+                barra.setSeriesColors("FF1493");
+                serie.set("olha", resul.get(i).getNumeroAcertos());
+                barra.addSeries(serie);
+                System.out.println("******************************************* 3");
             }
-            
+
         }
-        
+
         barra.setTitle("titulo do grafico");
         barra.setLegendPosition("ne");
         barra.setAnimate(true);
-        
+
         Axis xAxis = barra.getAxis(AxisType.X);
         xAxis.setLabel("eventos 1");
         Axis yAxis = barra.getAxis(AxisType.Y);
         yAxis.setLabel("eventos 2");
-        
+
         yAxis.setMin(0);
         yAxis.setMax(10);
     }
-    public void graficoHorizontal(){
-    
+
+    public void graficoHorizontal() {
+
         barraHorizontal = new HorizontalBarChartModel();
-        
+
         for (int i = 0; i < resul.size(); i++) {
             ChartSeries serie = new ChartSeries();
             serie.setLabel(resul.get(i).getNomeAluno());
-            
-            if(resul.get(i).getNumeroAcertos() < 2){
-            barraHorizontal.setSeriesColors("DC143C");
-            barraHorizontal.setExtender("chartColor");
-            serie.set("olha", resul.get(i).getNumeroAcertos());
-            barraHorizontal.addSeries(serie);
+
+            if (resul.get(i).getNumeroAcertos() < 2) {
+                barraHorizontal.setSeriesColors("DC143C");
+                barraHorizontal.setExtender("chartColor");
+                serie.set("olha", resul.get(i).getNumeroAcertos());
+                barraHorizontal.addSeries(serie);
                 System.out.println("******************************************* 1");
             }
-            if(resul.get(i).getNumeroAcertos() >= 2){
-            barraHorizontal.setSeriesColors("00FFFF");
-            barraHorizontal.setExtender("chartExtender");
-            serie.set("olha", resul.get(i).getNumeroAcertos());
-            barraHorizontal.addSeries(serie);
-            System.out.println("******************************************* 2");
+            if (resul.get(i).getNumeroAcertos() >= 2) {
+                barraHorizontal.setSeriesColors("00FFFF");
+                barraHorizontal.setExtender("chartExtender");
+                serie.set("olha", resul.get(i).getNumeroAcertos());
+                barraHorizontal.addSeries(serie);
+                System.out.println("******************************************* 2");
             }
-            if(resul.get(i).getNumeroAcertos() > 7){
-            barraHorizontal.setSeriesColors("FF1493");
-            barraHorizontal.setExtender("chartColorc");
-            serie.set("olha", resul.get(i).getNumeroAcertos());
-            barraHorizontal.addSeries(serie);
-            System.out.println("******************************************* 3");
+            if (resul.get(i).getNumeroAcertos() > 7) {
+                barraHorizontal.setSeriesColors("FF1493");
+                barraHorizontal.setExtender("chartColorc");
+                serie.set("olha", resul.get(i).getNumeroAcertos());
+                barraHorizontal.addSeries(serie);
+                System.out.println("******************************************* 3");
             }
-            
+
         }
-        
+
         barraHorizontal.setTitle("titulo do grafico");
         barraHorizontal.setLegendPosition("ne");
         barraHorizontal.setAnimate(true);
-        
+
         Axis xAxis = barraHorizontal.getAxis(AxisType.X);
         xAxis.setLabel("eventos 1");
         Axis yAxis = barraHorizontal.getAxis(AxisType.Y);
         yAxis.setLabel("eventos 2");
-        
+
         yAxis.setMin(0);
         yAxis.setMax(10);
     }
-    public void graficoLinha(){
-    
+
+    public void graficoLinha() {
+
         barraLinha = new LineChartModel();
-        
+
         for (int i = 0; i < resul.size(); i++) {
             ChartSeries serie = new ChartSeries();
             serie.setLabel(resul.get(i).getNomeAluno());
             serie.set("olha", resul.get(i).getNumeroAcertos());
             barraLinha.addSeries(serie);
-              
-            
+
         }
-        
+
         barraLinha.setTitle("GRAFICO DE LINHA");
         barraLinha.setLegendPosition("e");
         barraLinha.setAnimate(true);
-        
+
         Axis xAxis = barraLinha.getAxis(AxisType.X);
         xAxis.setLabel("eventos 1");
         Axis yAxis = barraLinha.getAxis(AxisType.Y);
         yAxis.setLabel("eventos 2");
-        
+
         yAxis.setMin(0);
         yAxis.setMax(10);
     }
@@ -589,8 +638,26 @@ public class AlunoBean {
 
     }
 
-   
-    
+    public void concatDescritores() {
+
+        if (!concatDescritor.equals("")) {
+            System.out.println("descritor é diferente de nulo------------");
+            descritor.setSiglaDescritor(concatDescritor + "/" + descritor.getSiglaDescritor());
+        } else {
+            System.out.println("entrou no else descritor não é diferente de nulo------------");
+            descritor.setSiglaDescritor(descritor.getSiglaDescritor());
+        }
+
+        concatDescritor = descritor.getSiglaDescritor();
+        System.out.println("olha avariavel concat ------------ " + concatDescritor);
+    }
+
+    public void apagarSelecao() {
+
+        concatDescritor = "";
+        descritor.setSiglaDescritor(concatDescritor);
+    }
+
     public void listarFornecedores() {
 
         /*  System.out.println("entrou no metodo listar");
@@ -602,8 +669,6 @@ public class AlunoBean {
         }*/
     }
 
-    
-    
     public String buscarLogin() {
         /*
        
@@ -893,6 +958,41 @@ public class AlunoBean {
         return selectTurma;
     }
 
+    
+     public void onRowEdit(RowEditEvent event) throws ErroSistema {
+       
+        
+         Associacao a = (Associacao) event.getObject();
+        a.getCodAssociacao();
+        a.getDescritor();
+        a.getAlternativa();
+        
+        alunoDao.atualizarAssociacao(a);
+        
+         System.out.println("codigo "+ a.getCodAssociacao()+ " descritor "+a.getDescritor()+" alternativa"+a.getAlternativa());
+         FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("CANCELAR", ((Associacao) event.getObject()).getCodAssociacao().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+     public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+         System.out.println("valor velho ------ "+oldValue+"--------valor novo-------------"+newValue);
+         
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+     public void teste(CellEditEvent event) {
+       System.out.println("----------------------------------");
+    }
+    
     public void setSelectTurma(List<SelectItem> selectTurma) {
         this.selectTurma = selectTurma;
     }
@@ -993,7 +1093,39 @@ public class AlunoBean {
         this.barraLinha = barraLinha;
     }
 
+    public Descritor getDescritor() {
+        return descritor;
+    }
+
+    public void setDescritor(Descritor descritor) {
+        this.descritor = descritor;
+    }
+
+    public Associacao getAssociacao() {
+        return associacao;
+    }
+
+    public void setAssociacao(Associacao associacao) {
+        this.associacao = associacao;
+    }
+
+    public String getConcatDescritor() {
+        return concatDescritor;
+    }
+
+    public void setConcatDescritor(String concatDescritor) {
+        this.concatDescritor = concatDescritor;
+    }
+
+    public List<Associacao> getQuestoes() {
+        return questoes;
+    }
+
+    public void setQuestoes(List<Associacao> questoes) {
+        this.questoes = questoes;
+    }
     
     
     
+
 }

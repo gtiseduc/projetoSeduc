@@ -5,6 +5,7 @@ package com.br.seducpaudalho.Dao;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.br.seducpaudalho.Entidade.Associacao;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Entidade.Serie;
 import com.br.seducpaudalho.Entidade.Turma;
@@ -103,6 +104,52 @@ public class TurmaDao {
 
         FabricaConexao.fecharConexao();
         return series;
+
+    }
+    public List<Associacao> listarAssociacao(Associacao associacao) throws ErroSistema {
+ 
+        System.out.println("XXXXXXXXX-------XXXXXXXX--------XXXXXXXXX");
+        //codigo = 26091437;
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from associacao where codSerie = ? && codDisciplina = ? order by codAssociacao";
+
+        List<Associacao> questoes = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, associacao.getCodSerie());
+            ps.setInt(2, associacao.getCodDisciplina());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Associacao a = new Associacao();
+
+                a.setCodAssociacao(rs.getInt("codAssociacao"));
+                a.setCodSerie(rs.getInt("codSerie"));
+                a.setCodDisciplina(rs.getInt("CodDisciplina"));
+                a.setDescritor(rs.getString("descritor"));
+                a.setQuestao(rs.getString("questao"));
+                a.setAlternativa(rs.getString("alternativa"));
+                
+                System.out.println("com.br.seducpaudalho.Dao.TurmaDao.listarTurmaParametro()");
+               
+                questoes.add(a);
+
+            }
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return questoes;
 
     }
 
