@@ -93,14 +93,18 @@ public class AlunoBean {
     List<String> descri = new ArrayList<>();
     private String parametro;
 
+      private List<SelectItem> selectDescritor;
     private Descritor descritor = new Descritor();
+    List<Descritor> descritores = new ArrayList<>();
+    
     private Associacao associacao = new Associacao();
     List<Associacao> questoes = new ArrayList<>();
-    
+
     private BarChartModel barra;
     private HorizontalBarChartModel barraHorizontal;
     private LineChartModel barraLinha;
     private String concatDescritor = "";
+    private List<String> colunas = new ArrayList<String>();
 
     public void salvar() {
         /*
@@ -183,16 +187,15 @@ public class AlunoBean {
 
         alunoDao.salvarDescritor(descritor);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
-        
+
         descritor = new Descritor();
     }
+
     public void salvarQuestoes() throws ErroSistema {
 
-       
-        
         alunoDao.salvarQuestao(associacao);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
-        
+
         associacao = new Associacao();
     }
 
@@ -250,6 +253,27 @@ public class AlunoBean {
         }
     }
 
+    public void teste() {
+
+        colunas.add("coluna1");
+        colunas.add("coluna2");
+        colunas.add("coluna3");
+        colunas.add("coluna4");
+    }
+
+    public void listarDescritores(Integer codSerie, Integer codDisciplina) {
+
+        System.out.println("--------****----***----***------- ");
+        try {
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+
+            descritores = serieDao.listarDescritores(codSerie, codDisciplina);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
     public void listarSerieParametro(Integer codigo) {
 
         System.out.println("--------****----***----***------- " + codigo);
@@ -284,9 +308,10 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+
     public void listarAssociacao() {
 
-        System.out.println("olha a lista--------****----***----***------- " );
+        System.out.println("olha a lista--------****----***----***------- ");
         try {
             questoes = turmaDao.listarAssociacao(associacao);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
@@ -787,6 +812,33 @@ public class AlunoBean {
         return selectEscolas;
     }
 
+    public List<SelectItem> getSelectDescritor() throws ErroSistema {
+       
+         System.out.println("----------------------------------------------");
+        if (selectDescritor == null) {
+            selectDescritor = new ArrayList<SelectItem>();
+            descritor = new Descritor();
+           descritores = serieDao.listarDescritores(1,1);
+
+            if (descritores != null && !descritores.isEmpty()) {
+
+                SelectItem item;
+                for (Descritor descritorLista : descritores) {
+
+                    item = new SelectItem(descritorLista, descritorLista.getSiglaDescritor());
+                    selectDescritor.add(item);
+                }
+            }
+
+        }
+
+        
+        
+        return selectDescritor;
+    }
+
+   
+
     public List<SelectItem> getSelectDisciplina() {
 
         System.out.println("----------------------------------------------");
@@ -958,41 +1010,53 @@ public class AlunoBean {
         return selectTurma;
     }
 
-    
-     public void onRowEdit(RowEditEvent event) throws ErroSistema {
-       
-        
-         Associacao a = (Associacao) event.getObject();
+    public void onRowEdit(RowEditEvent event) throws ErroSistema {
+
+        Associacao a = (Associacao) event.getObject();
         a.getCodAssociacao();
         a.getDescritor();
         a.getAlternativa();
-        
+
         alunoDao.atualizarAssociacao(a);
-        
-         System.out.println("codigo "+ a.getCodAssociacao()+ " descritor "+a.getDescritor()+" alternativa"+a.getAlternativa());
-         FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
+
+        System.out.println("codigo " + a.getCodAssociacao() + " descritor " + a.getDescritor() + " alternativa" + a.getAlternativa());
+        FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("CANCELAR", ((Associacao) event.getObject()).getCodAssociacao().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
-     public void onCellEdit(CellEditEvent event) {
+
+    public void onCellEdit(CellEditEvent event) {
+
         Object oldValue = event.getOldValue();
         Object newValue = event.getNewValue();
-         System.out.println("valor velho ------ "+oldValue+"--------valor novo-------------"+newValue);
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
+
+        System.out.println("olha o concat descritor------------ " + concatDescritor);
+
+        if (!concatDescritor.equals("")) {
+            System.out.println("descritor é diferente de nulo------------");
+            associacao.setDescritor(concatDescritor + "/" + newValue);
+        } else {
+            System.out.println("entrou no else descritor não é diferente de nulo------------");
+            associacao.setDescritor((String) oldValue + newValue);
+        }
+
+        concatDescritor = (String) oldValue + newValue;
+        System.out.println("olha avariavel concat ------XXXXXXXX------ " + concatDescritor);
+
+        if (newValue != null && !newValue.equals(oldValue)) {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-     public void teste(CellEditEvent event) {
-       System.out.println("----------------------------------");
+
+    public void teste(CellEditEvent event) {
+        System.out.println("----------------------------------");
     }
-    
+
     public void setSelectTurma(List<SelectItem> selectTurma) {
         this.selectTurma = selectTurma;
     }
@@ -1124,8 +1188,21 @@ public class AlunoBean {
     public void setQuestoes(List<Associacao> questoes) {
         this.questoes = questoes;
     }
-    
-    
-    
+
+    public List<Descritor> getDescritores() {
+        return descritores;
+    }
+
+    public void setDescritores(List<Descritor> descritores) {
+        this.descritores = descritores;
+    }
+
+    public List<String> getColunas() {
+        return colunas;
+    }
+
+    public void setColunas(List<String> colunas) {
+        this.colunas = colunas;
+    }
 
 }

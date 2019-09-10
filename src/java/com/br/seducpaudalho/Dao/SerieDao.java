@@ -5,6 +5,7 @@ package com.br.seducpaudalho.Dao;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
 import com.br.seducpaudalho.Entidade.Serie;
@@ -60,6 +61,45 @@ public class SerieDao {
         System.out.println("tamanho da lista de serie " + series.size());
         FabricaConexao.fecharConexao();
         return series;
+
+    }
+    public List<Descritor> listarDescritores(Integer codSerie,Integer codDisciplina) throws ErroSistema {
+
+        System.out.println("entrou no listar descritores");
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from descritor where codSerie = ? && codDisciplina = ?";
+        List<Descritor> descritores = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+             ps.setInt(1, codSerie);
+             ps.setInt(2, codDisciplina);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Descritor descritor = new Descritor();
+
+                descritor.setCodDescritor(rs.getInt("codDescritor"));
+                descritor.setSiglaDescritor(rs.getString("siglaDescritor"));
+                descritor.setEspeciDescritor(rs.getString("especiDescritor"));
+                descritor.setCodSerie(rs.getInt("codSerie"));
+                descritor.setCodDisciplina(rs.getInt("codDisciplina"));
+                descritores.add(descritor);
+                System.out.println("tamanho da lista de descritores " + descritor.getSiglaDescritor());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar descritores " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        System.out.println("tamanho da lista de descritores " + descritores.size());
+        FabricaConexao.fecharConexao();
+        return descritores;
 
     }
 
