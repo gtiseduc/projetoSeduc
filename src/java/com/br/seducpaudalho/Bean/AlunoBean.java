@@ -665,15 +665,16 @@ public class AlunoBean {
 
     public void concatDescritores() {
 
+        
         if (!concatDescritor.equals("")) {
             System.out.println("descritor é diferente de nulo------------");
-            descritor.setSiglaDescritor(concatDescritor + "/" + descritor.getSiglaDescritor());
+            associacao.setAlternativa(concatDescritor + "/" + associacao.getAlternativa());
         } else {
             System.out.println("entrou no else descritor não é diferente de nulo------------");
-            descritor.setSiglaDescritor(descritor.getSiglaDescritor());
+            descritor.setSiglaDescritor(associacao.getAlternativa());
         }
 
-        concatDescritor = descritor.getSiglaDescritor();
+        concatDescritor = associacao.getAlternativa();
         System.out.println("olha avariavel concat ------------ " + concatDescritor);
     }
 
