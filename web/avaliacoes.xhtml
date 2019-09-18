@@ -207,7 +207,7 @@
 
 
 
-            <p:dataTable var="resul" value="#{alunoBean.resul}"  >
+           <!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
 
                 <p:columnGroup type="header" >
                     <p:row >
@@ -215,7 +215,7 @@
                     </p:row>
 
                     <p:row >
-                        <p:column colspan="2" headerText="#{resul.disciplina}" />
+                        <p:column colspan="2" headerText="{resul.disciplina}" />
                     </p:row>
 
                     <p:row >
@@ -229,17 +229,17 @@
 
                 </p:columnGroup>      
                 <p:column headerText="NOME" priority="3">
-                    <h:outputText value="#{resul.nomeAluno}" />
+                    <h:outputText value="{resul.nomeAluno}" />
                 </p:column>
 
-                <p:column headerText="#{resul.disciplina}">
-                    <h:outputText value="#{resul.avDisciplina}" />
+                <p:column headerText="{resul.disciplina}">
+                    <h:outputText value="{resul.avDisciplina}" />
                 </p:column>
                 <p:column headerText="RESULTADO">
-                    <h:outputText value="#{resul.numeroAcertos}" />
+                    <h:outputText value="{resul.numeroAcertos}" />
                 </p:column>
 
-            </p:dataTable>
+            </p:dataTable> -->
 
 
             <p:dataTable var="descri" value="#{alunoBean.descri}"  >
@@ -250,26 +250,93 @@
 
 
             </p:dataTable>
+
+
+
+
+            <h:panelGrid id="pnlConResCad">
+                <p:dataTable value="#{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
+                    <f:facet name="header" >
+                        RESULTADO DA AVALIAÇÃO
+                    </f:facet>
+
+
+
+
+                    <p:column footerText="RESULTADO DESCRITORES">
+                        <h:outputText value="#{coluna.nome}" />
+
+                    </p:column> 
+
+                    <c:forEach items="#{criaTotalizadorBean.alunos}" var="column">
+
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="#{column.idAluno}" />
+                            </f:facet>
+
+                            <p:inputText value="#{column.nomeSerie}" />
+
+                            <f:facet name="footer">
+                                <h:outputText value="#{column.idSerie}" />
+                            </f:facet>
+
+                        </p:column>
+
+
+
+                    </c:forEach>
+
+                    <c:forEach items="#{criaTotalizadorBean.operacoes}" var="operacao">
+                        <f:facet name="input">
+                            <p:inputText value="#{operacao}" />
+                        </f:facet>
+                        <c:forEach items="#{criaTotalizadorBean.colunas}" var="coluna">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{operacao}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{operacao}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </c:forEach> 
+                    </c:forEach>
+                </p:dataTable>
+            </h:panelGrid> 
+
+
+
+
+
+
+
+
+
+
+
+
+
             <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
             #{alunoBean.grafico()}
             #{alunoBean.graficoHorizontal()}
             #{alunoBean.graficoLinha()}
-          
+
 
             <p:chart type="bar" model="#{alunoBean.barra}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barra != null}" />
             <p:chart type="bar" model="#{alunoBean.barraHorizontal}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraHorizontal != null}" >
                 <h:outputScript>
                     function chartExtender() {
                     this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-                    
+
                     }
                     function chartColor() {
                     this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-                    
+
                     }
                     function chartColorc() {
                     this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-                    
+
                     }
                 </h:outputScript>
             </p:chart>
@@ -277,16 +344,16 @@
 
 
         </h:form>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <h:form id="frmConResCad">
-			
-		</h:form>
-        
+
+        </h:form>
+
 
 
     </ui:define>

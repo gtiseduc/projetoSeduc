@@ -311,57 +311,6 @@
 
 
 
-                <!-- <h:panelGrid id="pnlConResCad">
-                     <p:dataTable value="{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
-                         <f:facet name="header" >
-                             RESULTADO DA AVALIAÇÃO
-                         </f:facet>
-     
-     
-     
-     
-                         <p:column footerText="RESULTADO DESCRITORES">
-                             <h:outputText value="{coluna.nome}" />
-     
-                         </p:column> 
-     
-                         <c:forEach items="{criaTotalizadorBean.alunos}" var="column">
-     
-                             <p:column >
-                                 <f:facet name="header">
-                                     <h:outputText value="{column.idAluno}" />
-                                 </f:facet>
-     
-                                 <p:inputText value="{column.nomeSerie}" />
-     
-                                 <f:facet name="footer">
-                                     <h:outputText value="{column.idSerie}" />
-                                 </f:facet>
-     
-                             </p:column>
-     
-     
-     
-                         </c:forEach>
-     
-                          <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
-                              <f:facet name="input">
-                                      <p:inputText value="{operacao}" />
-                              </f:facet>
-              <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
-                      <p:cellEditor>
-                              <f:facet name="output">
-                                      <h:outputText value="{operacao}" />
-                              </f:facet>
-                              <f:facet name="input">
-                                      <p:inputText value="{operacao}" />
-                              </f:facet>
-                      </p:cellEditor>
-              </c:forEach> 
-                          </c:forEach>
-                     </p:dataTable>
-                 </h:panelGrid> -->
-
                 <!--
                 
                             <p:dataTable id="cars1" var="car" value="{dtEditView.cars1}" editable="true" style="margin-bottom:20px">

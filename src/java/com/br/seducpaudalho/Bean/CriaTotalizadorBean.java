@@ -50,7 +50,7 @@ public class CriaTotalizadorBean {
          aaaa.setIdSerie(45);
         alunos.add(aaaa);
 
-        colunas.add("coluna1");
+        /*colunas.add("coluna1");
         colunas.add("coluna2");
         colunas.add("coluna3");
         colunas.add("coluna4");
@@ -60,7 +60,7 @@ public class CriaTotalizadorBean {
         operacoes.add("op3");
         operacoes.add("op4");
         operacoes.add("op5");
-        operacoes.add("op6");
+        operacoes.add("op6");*/
     }
 
     public List<String> getColunas() {
