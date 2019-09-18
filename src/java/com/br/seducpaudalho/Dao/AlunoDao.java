@@ -121,11 +121,14 @@ public class AlunoDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select e.inepEscola,e.nomeEscola,codAluno, nome,s.codSerie,s.nomeSerie,t.codTurma,t.nomeTurma,t.turno from aluno as a \n"
-                + "join escola e on e.inepEscola = ? \n"
-                + "join serie s on s.codSerie = ?\n"
-                + "join turma t on t.codTurma = a.codTurma \n"
-                + "where a.codTurma = ? order by nome;";
+        String sql = "select * from aluno as a\n"
+                + "join escolaserie es on es.codSerie = a.codserie\n"
+                + "join escola e on e.inepEscola = es.inepEscola\n"
+                + "join serie s on s.codSerie = es.codSerie\n"
+                + "join turma t on t.codTurma = a.codTurma\n"
+                + "\n"
+                + "where s.codSerie = ? && es.inepEscola = ? && a.codTurma = ?\n"
+                + "order by a.codAluno";
 
         List<Aluno> alunos = new ArrayList<>();
 
@@ -133,8 +136,8 @@ public class AlunoDao {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setInt(1, inepEscola);
-            ps.setInt(2, codSerie);
+            ps.setInt(1, codSerie);
+            ps.setInt(2,inepEscola );
             ps.setInt(3, codigoTurma);
             ResultSet rs = ps.executeQuery();
 
@@ -144,9 +147,10 @@ public class AlunoDao {
                 aluno.setIdAluno(rs.getInt("codAluno"));
                 aluno.setIdSerie(rs.getInt("codSerie"));
                 aluno.setIdTurma(rs.getInt("codTurma"));
+                aluno.setInepEscola(rs.getInt("inepEscola"));
 
                 aluno.setNomeEscola(rs.getString("nomeEscola"));
-                aluno.setNome(rs.getString("nome"));
+                aluno.setNome(rs.getString("nomeAluno"));
                 aluno.setNomeSerie(rs.getString("nomeSerie"));
                 aluno.setNomeTurma(rs.getString("nomeTurma"));
                 aluno.setTurno(rs.getString("turno"));
@@ -392,27 +396,22 @@ public class AlunoDao {
         }
 
     }
+
     public void atualizarAssociacao(Associacao associacao) throws ErroSistema {
 
-       
-
         try {
-           
+
             Connection conexao = FabricaConexao.getConnection();
             PreparedStatement ps;
 
-            
-               
-                ps = conexao.prepareStatement("UPDATE associacao SET codSerie=?,codDisciplina=?,descritor=?,questao=?,alternativa=? where codAssociacao=?");
-                ps.setInt(6, associacao.getCodAssociacao());
-            
+            ps = conexao.prepareStatement("UPDATE associacao SET codSerie=?,codDisciplina=?,descritor=?,questao=?,alternativa=? where codAssociacao=?");
+            ps.setInt(6, associacao.getCodAssociacao());
 
             ps.setInt(1, associacao.getCodSerie());
             ps.setInt(2, associacao.getCodDisciplina());
             ps.setString(3, associacao.getDescritor());
             ps.setString(4, associacao.getQuestao());
             ps.setString(5, associacao.getAlternativa());
-            
 
             ps.execute();
             System.out.println("inserindo fornecedor---------------------------------------");

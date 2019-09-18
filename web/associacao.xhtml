@@ -59,68 +59,68 @@
 
     <ui:define name="formulario">
 
-
-
-
-
-
-        <h:form>
+  <h:form>
             <p:growl id="growl" life="3500" />
             <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
-            <p:fieldset legend="CADASTRO QUESTOES - ALTERNATIVAS">
 
-
-                <div class="ui-g ui-fluid">
-
-                    <h:panelGrid columns="2" width="50%" >
-                        #{alunoBean.listarSeries()}
-                        <div class="ui-g-12 ui-md-4">
-                            <div class="ui-inputgroup">
-                                <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
-                                <p:selectOneMenu id="seri" value="#{alunoBean.associacao.codSerie}" >
-                                    <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
-                                    <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
-                                    <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.associacao.codSerie)}" update="@form"/>
-
-                                </p:selectOneMenu>    
-                            </div>
-                        </div>
-                        <div class="ui-g-12 ui-md-4">
-                            <div class="ui-inputgroup">
-                                <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
-                                <p:selectOneMenu id="disciplin" value="#{alunoBean.associacao.codDisciplina}" >
-                                    <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
-                                    <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
-
-                                </p:selectOneMenu>    
-                            </div>
-                        </div> 
-
-                        <div class="ui-g-12 ui-md-4">
-                            <div class="ui-inputgroup">
-                                <span class="ui-inputgroup-addon"><i class="fa fa-mone"></i></span>
-
-                                <p:inputMask mask="99" value="#{alunoBean.associacao.numeroQuestoes}" placeholder="NÚMERO DE QUESTOES" />
-                            </div>
-                        </div>
-
-
-
-
-                        <p:commandButton value="SALVAR" action="#{alunoBean.salvarQuestoes()}" update="@form"></p:commandButton>
-                    </h:panelGrid>
-                </div> 
-
-
-
-
-            </p:fieldset>
 
             <br/>
             <br/>
 
 
-            <p:fieldset legend="ASSOCIACAO GABARITO - DESCRITORES - QUESTOES">
+        <p:tabView>
+            <p:tab title="CADASTRO QUESTÕES">
+                <p:fieldset legend="CADASTRO QUESTOES - ALTERNATIVAS">
+
+
+                    <div class="ui-g ui-fluid">
+
+                        <h:panelGrid columns="2" width="50%" >
+                            #{alunoBean.listarSeries()}
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
+                                    <p:selectOneMenu id="seri" value="#{alunoBean.associacao.codSerie}" >
+                                        <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
+                                        <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
+                                        <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.associacao.codSerie)}" update="@form"/>
+
+                                    </p:selectOneMenu>    
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fa fa-institutio"></i></span>
+                                    <p:selectOneMenu id="disciplin" value="#{alunoBean.associacao.codDisciplina}" >
+                                        <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
+                                        <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
+
+                                    </p:selectOneMenu>    
+                                </div>
+                            </div> 
+
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <span class="ui-inputgroup-addon"><i class="fa fa-mone"></i></span>
+
+                                    <p:inputMask mask="99" value="#{alunoBean.associacao.numeroQuestoes}" placeholder="NÚMERO DE QUESTOES" />
+                                </div>
+                            </div>
+
+
+
+
+                            <p:commandButton value="SALVAR" action="#{alunoBean.salvarQuestoes()}" update="@form"></p:commandButton>
+                        </h:panelGrid>
+                    </div> 
+
+
+
+
+                </p:fieldset>
+            </p:tab>
+            <p:tab title="ASSOCIAÇÃO GABARITO - DESCRITORES">
+ <p:fieldset legend="ASSOCIACAO GABARITO - DESCRITORES - QUESTOES">
 
                 <div class="ui-g ui-fluid">
                     <h:panelGrid columns="2" width="30%" >
@@ -160,31 +160,12 @@
 
 
                     </h:panelGrid>
-                    <h:panelGrid columns="2" width="30%" >
-
-                        <div class="ui-g-12 ui-md-3">
-                            <div class="ui-inputgroup">
-                                <span class="ui-inputgroup-addon"><i class="fa fa-instituti"></i></span>
-                                <p:inputText value="#{alunoBean.associacao.descritor}" disabled="true"/>  
-
-                            </div>
-                        </div> 
-
-                        <div class="ui-g-12 ui-md-3">
-                            <div class="ui-inputgroup">
-                                <span class="ui-inputgroup-addon"><i class="fa fa-instituti"></i></span>
-                                <p:commandButton value="APAGAR SELEÇÃO DE DESCRITORES" action="#{alunoBean.apagarSelecao()}" update="@form"/>  
-
-                            </div>
-                        </div> 
-
-
-                        <br/>
-
-                    </h:panelGrid>
 
 
 
+                    <br></br>
+                    <br></br>
+                    <br></br>
 
 
                     <p:commandButton value="SALVAR"></p:commandButton>
@@ -210,158 +191,164 @@
 
 
 
+                    <!--
+                    
+                                        <p:dataTable id="cars1" var="asso" value="{alunoBean.questoes}" editable="true"  style="margin-bottom:20px">
+                                            <f:facet name="header">
+                                                Row Editing
+                                            </f:facet>
+                    
+                                            <p:ajax event="rowEdit" listener="{alunoBean.onRowEdit}"  />
+                                            <p:ajax event="rowEditCancel" listener="{alunoBean.onRowCancel}"  />
+                                            <p:ajax event="cellEdit" listener="{alunoBean.onCellEdit}"  />
+                    
+                                            <p:column headerText="QUESTÕES">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="{asso.questao}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText id="modelInput" value="{asso.questao}" style="width:100%"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                    
+                                            <p:column headerText="DESCRITORES">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="{asso.descritor}" /></f:facet>
+                                                    <f:facet name="input">
+                                                        <h:selectOneMenu value="{asso.descritor}" style="width:100%">
+                                                            <f:selectItems value="{alunoBean.descritores}" var="descritor" itemLabel="{descritor.siglaDescritor}" itemValue="{descritor.siglaDescritor}" />
+                                                        </h:selectOneMenu>
+                    
+                    
+                                                    </f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                    
+                                            <p:column headerText="Brand">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="{asso.alternativa}" /></f:facet>
+                                                    <f:facet name="input">
+                                                        <h:selectOneMenu value="{asso.alternativa}" style="width:100%">
+                                                            <f:selectItem itemLabel="A" itemValue="A" />
+                                                            <f:selectItem itemLabel="B" itemValue="B" />
+                                                            <f:selectItem itemLabel="C" itemValue="C" />
+                                                            <f:selectItem itemLabel="D" itemValue="D" />
+                                                        </h:selectOneMenu>
+                                                    </f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                    
+                    
+                    
+                    
+                                            <p:column style="width:35px">
+                                                <p:rowEditor />
+                                            </p:column>
+                                        </p:dataTable> 
+                                        <p:contextMenu for="cars1" widgetVar="cMenu">   
+                                            <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
+                                            <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
+                                        </p:contextMenu> 
+                    
+                                   
+                    
+                    -->
 
 
-                    <p:dataTable id="cars1" var="asso" value="#{alunoBean.questoes}" editable="true"  style="margin-bottom:20px">
-                        <f:facet name="header">
-                            Row Editing
-                        </f:facet>
 
-                        <p:ajax event="rowEdit" listener="#{alunoBean.onRowEdit}"  />
-                        <p:ajax event="rowEditCancel" listener="#{alunoBean.onRowCancel}"  />
-                        <p:ajax event="cellEdit" listener="#{alunoBean.onCellEdit}"  />
-
-                        <p:column headerText="QUESTÕES">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{asso.questao}" /></f:facet>
-                                <f:facet name="input"><p:inputText id="modelInput" value="#{asso.questao}" style="width:100%"/></f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="DESCRITORES">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{asso.descritor}" /></f:facet>
-                                <f:facet name="input">
-                                    <h:selectOneMenu value="#{asso.descritor}" style="width:100%">
-                                        <f:selectItems value="#{alunoBean.descritores}" var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" />
-                                    </h:selectOneMenu>
-
-
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-                        <p:column headerText="Brand">
-                            <p:cellEditor>
-                                <f:facet name="output"><h:outputText value="#{asso.alternativa}" /></f:facet>
-                                <f:facet name="input">
-                                    <h:selectOneMenu value="#{asso.alternativa}" style="width:100%">
-                                        <f:selectItem itemLabel="A" itemValue="A" />
-                                        <f:selectItem itemLabel="B" itemValue="B" />
-                                        <f:selectItem itemLabel="C" itemValue="C" />
-                                        <f:selectItem itemLabel="D" itemValue="D" />
-                                    </h:selectOneMenu>
-                                </f:facet>
-                            </p:cellEditor>
-                        </p:column>
-
-
-
-
-                        <p:column style="width:35px">
-                            <p:rowEditor />
-                        </p:column>
-                    </p:dataTable> 
-                    <p:contextMenu for="cars1" widgetVar="cMenu">   
-                        <p:menuitem value="Edit Cell" icon="pi pi-search" onclick="PF('cellCars').showCellEditor();return false;"/>  
-                        <p:menuitem value="Hide Menu" icon="pi pi-times" onclick="PF('cMenu').hide()"/>  
-                    </p:contextMenu> 
 
                 </div> 
 
+
+
+                <p:dataTable id="basicDT" var="associacao" value="#{alunoBean.questoes}">
+                    <f:facet name="header">
+                        Listagem
+                    </f:facet>
+                    <p:column headerText="QUESTÕES">
+                        <h:outputText value="#{associacao.questao}" />
+                    </p:column>
+                    <p:column headerText="DESCRITORES">
+                        <h:outputText value="#{associacao.descritor}" />
+                    </p:column>
+                    <p:column headerText="ALTERNATIVAS">
+                        <h:outputText value="#{associacao.alternativa}" />
+                    </p:column>
+
+                    <p:column style="width:5%;text-align: center">
+                        <p:commandButton update="@form" oncomplete="PF('carDialog').show()" icon="fa fa-edit" title="View">
+                            <f:setPropertyActionListener value="#{associacao}" target="#{alunoBean.associacao}" />
+                        </p:commandButton>
+                    </p:column>
+
+
+                </p:dataTable>
+                <h:form >
+                    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                        <p:outputPanel id="carDetail" style="text-align:center;">
+                           <!-- <p:panelGrid  columns="2" rendered="#{not empty alunoBean.associacao}" columnClasses="label,value">
+                                <f:facet name="header">
+                                    <p:graphicImage name="demo/images/car/{alunoBean.questoes.brand}-big.gif"/> 
+                                </f:facet>-->
+
+
+                            <h:outputText value="#{alunoBean.associacao.codAssociacao}" rendered="false" />
+
+                            <h:selectOneMenu value="#{alunoBean.associacao.descritor}" style="width:100%">
+                                <f:selectItems value="#{alunoBean.descritores}" var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" />
+                                <p:ajax update="@form:teste" event="change" listener="#{alunoBean.concatDescritores()}"/>
+                            </h:selectOneMenu>
+
+                            <h:outputText value="#{alunoBean.associacao.descritor}" id="teste"/>
+                            <br></br>
+                            <h:outputText value="#{alunoBean.associacao.questao}" />
+                            <br></br>
+
+
+                            <h:selectOneMenu value="#{alunoBean.associacao.alternativa}" style="width:100%" >
+                                <f:selectItem itemLabel="A" itemValue="A" />
+                                <f:selectItem itemLabel="B" itemValue="B" />
+                                <f:selectItem itemLabel="C" itemValue="C" />
+                                <f:selectItem itemLabel="D" itemValue="D" />
+
+
+                            </h:selectOneMenu>
+
+
+
+                            <p:commandButton value="Apagar descritores" action="#{alunoBean.apagarSelecao()}" update="teste">
+
+                            </p:commandButton >
+                            <p:commandButton value="SALVAR" action="#{alunoBean.atualizarAssociacao()}" update="@form">
+
+                            </p:commandButton >
+
+
+                            <!-- </p:panelGrid>-->
+                        </p:outputPanel>
+                    </p:dialog>
+                </h:form>
 
 
 
 
 
             </p:fieldset>
+            </p:tab>
 
+        </p:tabView>
+      
 
-
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-
-
-            <!--
-                        <p:selectCheckboxMenu id="menu" value="{asso.descritor}" label="Cities"
-                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                            <f:selectItems value="{alunoBean.descritores}" var="descritor" itemLabel="{descritor.siglaDescritor}" itemValue="{descritor.siglaDescritor}" />
-                        </p:selectCheckboxMenu>-->
+           
 
 
 
 
 
-            <!--<p:selectCheckboxMenu id="multiple" value="" multiple="true"
-                                   filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                 <f:selectItems value="{alunoBean.selectDescritor}" var="descritor" itemLabel="{descritor.siglaDescritor}" itemValue="{descritor.siglaDescritor}" />
-             </p:selectCheckboxMenu>-->
 
 
 
-            <p:dataTable id="basicDT" var="car" value="#{alunoBean.questoes}">
-                <f:facet name="header">
-                    Basic
-                </f:facet>
-                <p:column headerText="Id">
-                    <h:outputText value="#{car.questao}" />
-                </p:column>
-                <p:column headerText="Year">
-                    <h:outputText value="#{car.descritor}" />
-                </p:column>
-                <p:column headerText="Brand">
-                    <h:outputText value="#{car.alternativa}" />
-                </p:column>
-
-                <p:column style="width:32px;text-align: center">
-                    <p:commandButton update="@form" oncomplete="PF('carDialog').show()" icon="pi pi-search" title="View">
-                        <f:setPropertyActionListener value="#{car}" target="#{alunoBean.associacao}" />
-                    </p:commandButton>
-                </p:column>
 
 
-            </p:dataTable>
-            <h:form >
-                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-                    <p:outputPanel id="carDetail" style="text-align:center;">
-                       <!-- <p:panelGrid  columns="2" rendered="#{not empty alunoBean.associacao}" columnClasses="label,value">
-                            <f:facet name="header">
-                                <p:graphicImage name="demo/images/car/{alunoBean.questoes.brand}-big.gif"/> 
-                            </f:facet>-->
 
-
-                        <h:outputText value="#{alunoBean.associacao.codAssociacao}" />
-
-                        <h:selectOneMenu value="#{alunoBean.associacao.descritor}" style="width:100%">
-                            <f:selectItems value="#{alunoBean.descritores}" var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" />
-                        </h:selectOneMenu>
-
-                        <h:outputText value="#{alunoBean.associacao.questao}" />
-                        <br></br>
-
-
-                        <h:selectOneMenu value="#{alunoBean.associacao.alternativa}" style="width:100%" >
-                            <f:selectItem itemLabel="A" itemValue="A" />
-                            <f:selectItem itemLabel="B" itemValue="B" />
-                            <f:selectItem itemLabel="C" itemValue="C" />
-                            <f:selectItem itemLabel="D" itemValue="D" />
-                            <p:ajax update="@form:teste" event="change" listener="#{alunoBean.concatDescritores()}"/>
-                       
-                        </h:selectOneMenu>
-                        <h:outputText value="#{alunoBean.associacao.alternativa}" id="teste"/>
-
-
-                        <p:commandButton value="Apagar descritores" action="#{alunoBean.apagarSelecao()}" update="teste">
-                           
-                        </p:commandButton >
-
-
-                        <!-- </p:panelGrid>-->
-                    </p:outputPanel>
-                </p:dialog>
-            </h:form>
             <!--
        <p:dialog header="Selected Cars" widgetVar="multiCarDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="520">
            <p:outputPanel id="multiCarDetail" style="text-align:center;">

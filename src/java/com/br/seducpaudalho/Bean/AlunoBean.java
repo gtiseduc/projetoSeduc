@@ -668,13 +668,13 @@ public class AlunoBean {
         
         if (!concatDescritor.equals("")) {
             System.out.println("descritor é diferente de nulo------------");
-            associacao.setAlternativa(concatDescritor + "/" + associacao.getAlternativa());
+            associacao.setDescritor(concatDescritor + "/" + associacao.getDescritor());
         } else {
             System.out.println("entrou no else descritor não é diferente de nulo------------");
-            descritor.setSiglaDescritor(associacao.getAlternativa());
+            descritor.setSiglaDescritor(associacao.getDescritor());
         }
 
-        concatDescritor = associacao.getAlternativa();
+        concatDescritor = associacao.getDescritor();
         System.out.println("olha avariavel concat ------------ " + concatDescritor);
     }
 
@@ -1023,6 +1023,17 @@ public class AlunoBean {
         System.out.println("codigo " + a.getCodAssociacao() + " descritor " + a.getDescritor() + " alternativa" + a.getAlternativa());
         FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    public void atualizarAssociacao() throws ErroSistema {
+
+        System.out.println("XXXXXXXXXXXXXXXXXXX" + concatDescritor);
+           associacao.setDescritor(concatDescritor);
+        
+           alunoDao.atualizarAssociacao(associacao);
+
+     //   System.out.println("codigo " + a.getCodAssociacao() + " descritor " + a.getDescritor() + " alternativa" + a.getAlternativa());
+        //FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
+       // FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void onRowCancel(RowEditEvent event) {
