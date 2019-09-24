@@ -468,10 +468,10 @@ public class AlunoBean {
 
     public void listarGabaritosDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
-        System.out.println("olha o codigo --------" + codSerie + "****----***" + codDisciplina + "----***------- " + codSerie);
+        System.out.println("olha o codigo --------" + inep + "****----***" + codDisciplina + "----***------- " + codSerie);
 
-        try {
-            correcoes = alunoDao.listarGabaritosDisciplina(codSerie, codDisciplina);
+       try {
+            correcoes = alunoDao.listarGabaritosDisciplina(inep, codSerie, codTurma);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
 
             avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
@@ -631,6 +631,8 @@ public class AlunoBean {
             sum = 0;
         } while (col != largestRow);
 
+        
+        
     }
 
     public void imprimirAlunos() throws ErroSistema {

@@ -222,7 +222,7 @@ public class AlunoDao {
 
     }
 
-    public List<Correcao> listarGabaritosDisciplina(Integer codSerie, Integer codDisciplina) throws ErroSistema {
+    public List<Correcao> listarGabaritosDisciplina(Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
         System.out.println("**************" + codSerie);
         System.out.println("**************" + codDisciplina);

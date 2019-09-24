@@ -96,8 +96,8 @@
                             <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
                                 <f:selectItem itemLabel="SELECIONE A TURMA" />       
                                 <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
-                                <p:ajax  event="change" listener="#{alunoBean.listarDisciplinaParametro(alunoBean.aluno.idSerie)}" update="@form"/>                            
-                                <!--  <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> -->
+                                <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.aluno.idSerie)}" update="@form"/>                            
+                                <!--  <p:ajax  event="change"  listener="{alunoBean.listarGabaritosAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> -->
                             </p:selectOneMenu>    
                         </div>
                     </div>  
@@ -207,112 +207,169 @@
 
 
 
-           <!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
+            <!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
+ 
+                 <p:columnGroup type="header" >
+                     <p:row >
+                         <p:column rowspan="4" headerText="NOME"   />
+                     </p:row>
+ 
+                     <p:row >
+                         <p:column colspan="2" headerText="{resul.disciplina}" />
+                     </p:row>
+ 
+                     <p:row >
+                         <p:column colspan="2" headerText="D1D3D4D2D7D9D8D7D4D5D6D7D8D8D9" />
+                     </p:row>
+ 
+                     <p:row >
+                         <p:column colspan="2" headerText="AAAABBBDDDCCCDDAAABBBCC" />
+                     </p:row>
+ 
+ 
+                 </p:columnGroup>      
+                 <p:column headerText="NOME" priority="3">
+                     <h:outputText value="{resul.nomeAluno}" />
+                 </p:column>
+ 
+                 <p:column headerText="{resul.disciplina}">
+                     <h:outputText value="{resul.avDisciplina}" />
+                 </p:column>
+                 <p:column headerText="RESULTADO">
+                     <h:outputText value="{resul.numeroAcertos}" />
+                 </p:column>
+ 
+             </p:dataTable> -->
 
-                <p:columnGroup type="header" >
-                    <p:row >
-                        <p:column rowspan="4" headerText="NOME"   />
-                    </p:row>
 
-                    <p:row >
-                        <p:column colspan="2" headerText="{resul.disciplina}" />
-                    </p:row>
+           <!-- <p:dataTable var="descri" value="{alunoBean.descri}"  >
 
-                    <p:row >
-                        <p:column colspan="2" headerText="D1D3D4D2D7D9D8D7D4D5D6D7D8D8D9" />
-                    </p:row>
-
-                    <p:row >
-                        <p:column colspan="2" headerText="AAAABBBDDDCCCDDAAABBBCC" />
-                    </p:row>
-
-
-                </p:columnGroup>      
-                <p:column headerText="NOME" priority="3">
-                    <h:outputText value="{resul.nomeAluno}" />
-                </p:column>
-
-                <p:column headerText="{resul.disciplina}">
-                    <h:outputText value="{resul.avDisciplina}" />
-                </p:column>
                 <p:column headerText="RESULTADO">
-                    <h:outputText value="{resul.numeroAcertos}" />
-                </p:column>
-
-            </p:dataTable> -->
-
-
-            <p:dataTable var="descri" value="#{alunoBean.descri}"  >
-
-                <p:column headerText="RESULTADO">
-                    <h:outputText value="#{descri}" />
+                    <h:outputText value="{descri}" />
                 </p:column>
 
 
-            </p:dataTable>
+            </p:dataTable>-->
 
 
-
-
-            <h:panelGrid id="pnlConResCad">
-                <p:dataTable value="#{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
-                    <f:facet name="header" >
-                        RESULTADO DA AVALIAÇÃO
-                    </f:facet>
-
-
-
-
-                    <p:column footerText="RESULTADO DESCRITORES">
-                        <h:outputText value="#{coluna.nome}" />
-
-                    </p:column> 
-
-                    <c:forEach items="#{criaTotalizadorBean.alunos}" var="column">
-
-                        <p:column >
-                            <f:facet name="header">
-                                <h:outputText value="#{column.idAluno}" />
-                            </f:facet>
-
-                            <p:inputText value="#{column.nomeSerie}" />
-
-                            <f:facet name="footer">
-                                <h:outputText value="#{column.idSerie}" />
-                            </f:facet>
-
-                        </p:column>
-
-
-
-                    </c:forEach>
-
-                    <c:forEach items="#{criaTotalizadorBean.operacoes}" var="operacao">
-                        <f:facet name="input">
-                            <p:inputText value="#{operacao}" />
-                        </f:facet>
-                        <c:forEach items="#{criaTotalizadorBean.colunas}" var="coluna">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="#{operacao}" />
+            <!--
+            
+                        <h:panelGrid id="pnlConResCad">
+                            <p:dataTable value="{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
+                                <f:facet name="header" >
+                                    RESULTADO DA AVALIAÇÃO
                                 </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="#{operacao}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </c:forEach> 
-                    </c:forEach>
-                </p:dataTable>
-            </h:panelGrid> 
+            
+            
+            
+            
+                                 <p:column footerText="RESULTADO DESCRITORES">
+                                    <h:outputText value="{coluna.nome}" />
+            
+                                </p:column> 
+                                
+                                <p:column footerText="RESULTADO DESCRITORES">
+                                    <h:outputText value="{coluna.nome}" />
+            
+                                </p:column> 
+            
+                                <c:forEach items="{criaTotalizadorBean.alunos}" var="column">
+            
+                                    <p:column >
+                                        <f:facet name="header">
+                                            <h:outputText value="{column.idAluno}" />
+                                        </f:facet>
+            
+                                        <p:inputText value="{column.nomeSerie}" />
+            
+                                        <f:facet name="footer">
+                                            <h:outputText value="{column.idSerie}" />
+                                        </f:facet>
+            
+                                    </p:column>
+            
+            
+            
+                                </c:forEach>
+            
+                                <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
+                                    <f:facet name="input">
+                                        <p:inputText value="{operacao}" />
+                                    </f:facet>
+                                    <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
+                                        <p:cellEditor>
+                                            <f:facet name="output">
+                                                <h:outputText value="{operacao}" />
+                                            </f:facet>
+                                            <f:facet name="input">
+                                                <p:inputText value="{operacao}" />
+                                            </f:facet>
+                                        </p:cellEditor>
+                                    </c:forEach> 
+                                </c:forEach>
+                            </p:dataTable>
+                        </h:panelGrid> -->
 
 
 
 
 
+           <!-- <table id="tblSqlResult">
+                <thead>
+                    <tr>
+                        sql.headers is a List of Strings 
+                        <ui:repeat value="{criaTotalizadorBean.operacoes}" var="h">
+                            <th>{h}</th>
+                        </ui:repeat>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <ui:repeat value="{criaTotalizadorBean.array}" var="row">
+                        <tr>
+                            <ui:repeat value="{row}" var="cell">
+                                <td>{cell}</td>
+                            </ui:repeat>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>-->
 
 
+            <table id="asds" border="3px" width="150px" >
+                <thead>
+                    <tr>
+                        <!-- sql.headers is a List of Strings -->
+                        <ui:repeat value="#{criaTotalizadorBean.alunos}" var="h">
+                            <th>#{h.idSerie}</th>
+                             
+                        </ui:repeat>
+                       
+                    </tr>
+                </thead>
+                <!-- <p:tooltip id="toolTipContent" for="content" position="bottom">
+                               <h:graphicImage library="img" name="d01.png" width="30px" />
+                                <h5>{h.nome}</h5>
+                            </p:tooltip>-->
+                <tbody>
+                    <!-- sql.content is a List of List of Strings, e.g. -->
+                    <!-- { {row1col1Text, row1col2Text, row1col3Text},  -->
+                    <!--    row2col1Text, row2col2Text, row2col3Text} } -->
+                    <ui:repeat value="#{criaTotalizadorBean.dados}" var="row">
+                        <tr>
+                            <ui:repeat value="#{row}" var="cell">
+                                <td>#{cell}</td>
+                            </ui:repeat>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
 
 
+          <!--  <h:outputText value="{criaTotalizadorBean.rowsOfTable}" escape="false"/>-->
+
+
+            
 
 
 
