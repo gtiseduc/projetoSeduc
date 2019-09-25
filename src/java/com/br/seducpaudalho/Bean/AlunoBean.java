@@ -193,6 +193,8 @@ public class AlunoBean {
 
     public void salvarQuestoes() throws ErroSistema {
 
+        System.out.println("XXXXXXXXX "+associacao.getCodSerie()+" - "+associacao.getCodDisciplina()+" - "+associacao.getNumeroQuestoes());
+        
         alunoDao.salvarQuestao(associacao);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
@@ -263,7 +265,7 @@ public class AlunoBean {
 
     public void listarDescritores(Integer codSerie, Integer codDisciplina) {
 
-        System.out.println("--------****----***----***------- ");
+        System.out.println("--------****----***----***------- " + codSerie + codDisciplina );
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
 
@@ -1030,7 +1032,8 @@ public class AlunoBean {
 
         System.out.println("XXXXXXXXXXXXXXXXXXX" + concatDescritor);
            associacao.setDescritor(concatDescritor);
-        
+         System.out.println("################## " + associacao.getAlternativa() + " - " +associacao.getQuestao()+ " - " +associacao.getDescritor());
+           
            alunoDao.atualizarAssociacao(associacao);
 
      //   System.out.println("codigo " + a.getCodAssociacao() + " descritor " + a.getDescritor() + " alternativa" + a.getAlternativa());

@@ -69,7 +69,7 @@ public class SerieDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from descritor where codSerie = ? && codDisciplina = ?";
+        String sql = "select * from associacao where codSerie = ? && codDisciplina = ?";
         List<Descritor> descritores = new ArrayList<>();
 
         try {
@@ -83,11 +83,11 @@ public class SerieDao {
             while (rs.next()) {
                 Descritor descritor = new Descritor();
 
-                descritor.setCodDescritor(rs.getInt("codDescritor"));
-                descritor.setSiglaDescritor(rs.getString("siglaDescritor"));
-                descritor.setEspeciDescritor(rs.getString("especiDescritor"));
-                descritor.setCodSerie(rs.getInt("codSerie"));
-                descritor.setCodDisciplina(rs.getInt("codDisciplina"));
+                descritor.setCodDescritor(rs.getInt("codAssociacao"));
+                descritor.setSiglaDescritor(rs.getString("descritor"));
+                descritor.setEspeciDescritor(rs.getString("alternativa"));
+                //descritor.setCodSerie(rs.getInt("codSerie"));
+               // descritor.setCodDisciplina(rs.getInt("codDisciplina"));
                 descritores.add(descritor);
                 System.out.println("tamanho da lista de descritores " + descritor.getSiglaDescritor());
             }

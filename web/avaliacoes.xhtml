@@ -84,6 +84,7 @@
                                 <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
                                 <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
                                 <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie)}" update="@form"/>
+                               
 
                             </p:selectOneMenu>    
                         </div>
@@ -98,6 +99,7 @@
                                 <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
                                 <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.aluno.idSerie)}" update="@form"/>                            
                                 <!--  <p:ajax  event="change"  listener="{alunoBean.listarGabaritosAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> -->
+                          
                             </p:selectOneMenu>    
                         </div>
                     </div>  
@@ -107,7 +109,8 @@
                             <p:selectOneMenu id="disciplina" value="#{alunoBean.disciplina.codDisciplina}" >
                                 <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
                                 <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
-                                <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/> 
+                             <p:ajax  event="change" listener="#{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>
+                              <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@form"/>
                             </p:selectOneMenu>    
                         </div>
                     </div>  
@@ -139,66 +142,7 @@
 
             </p:fieldset>
 
-            <!--     <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="PORTUGUÊS " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div>
-                 <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="MATEMÁTICA " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div>
-                 <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="CIÊNCIAS HUMANAS " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div>
-                 <div class="ui-g-12 ui-md-3">
-                     <div class="ui-inputgroup">
-                         <h:panelGrid columns="2"  cellpadding="5">
-                             <h:outputText value="CIÊNCIAS DA NATUREZA " />
-     
-                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-     
-     
-                             </p:inputSwitch>
-     
-     
-                         </h:panelGrid>
-                     </div>
-                 </div> -->
+           
 
             <br></br>
             <br></br>
@@ -207,7 +151,103 @@
 
 
 
-            <!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
+          
+
+
+            <table id="asds" border="3px" width="650px" >
+                <thead>
+                    <tr>
+                        <!-- sql.headers is a List of Strings -->
+                        <ui:repeat value="#{alunoBean.descritores}" var="h">
+                            <th>#{h.siglaDescritor}</th>
+                           
+                             
+                        </ui:repeat>
+                       
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <!-- sql.headers is a List of Strings -->
+                        <ui:repeat value="#{alunoBean.descritores}" var="h">
+                          
+                            <th>#{h.especiDescritor}</th>
+                             
+                        </ui:repeat>
+                       
+                    </tr>
+                </thead>
+                <!-- <p:tooltip id="toolTipContent" for="content" position="bottom">
+                               <h:graphicImage library="img" name="d01.png" width="30px" />
+                                <h5>{h.nome}</h5>
+                            </p:tooltip>-->
+                <tbody>
+                    <!-- sql.content is a List of List of Strings, e.g. -->
+                    <!-- { {row1col1Text, row1col2Text, row1col3Text},  -->
+                    <!--    row2col1Text, row2col2Text, row2col3Text} } -->
+                    <ui:repeat value="#{criaTotalizadorBean.dados}" var="row">
+                        <tr>
+                            <ui:repeat value="#{row}" var="cell">
+                                <td>#{cell}</td>
+                            </ui:repeat>
+                        </tr>
+                    </ui:repeat>
+                </tbody>
+            </table>
+
+
+          <!--  <h:outputText value="{criaTotalizadorBean.rowsOfTable}" escape="false"/>-->
+
+
+            
+
+
+
+
+            <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
+            #{alunoBean.grafico()}
+            #{alunoBean.graficoHorizontal()}
+            #{alunoBean.graficoLinha()}
+
+
+            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barra != null}" />
+            <p:chart type="bar" model="#{alunoBean.barraHorizontal}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraHorizontal != null}" >
+                <h:outputScript>
+                    function chartExtender() {
+                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+
+                    }
+                    function chartColor() {
+                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+
+                    }
+                    function chartColorc() {
+                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+
+                    }
+                </h:outputScript>
+            </p:chart>
+            <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
+
+
+        </h:form>
+
+
+
+
+
+
+        <h:form id="frmConResCad">
+
+        </h:form>
+
+
+
+    </ui:define>
+
+</ui:decorate>
+
+  <!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
  
                  <p:columnGroup type="header" >
                      <p:row >
@@ -336,91 +376,66 @@
             </table>-->
 
 
-            <table id="asds" border="3px" width="150px" >
-                <thead>
-                    <tr>
-                        <!-- sql.headers is a List of Strings -->
-                        <ui:repeat value="#{criaTotalizadorBean.alunos}" var="h">
-                            <th>#{h.idSerie}</th>
-                             
-                        </ui:repeat>
-                       
-                    </tr>
-                </thead>
-                <!-- <p:tooltip id="toolTipContent" for="content" position="bottom">
-                               <h:graphicImage library="img" name="d01.png" width="30px" />
-                                <h5>{h.nome}</h5>
-                            </p:tooltip>-->
-                <tbody>
-                    <!-- sql.content is a List of List of Strings, e.g. -->
-                    <!-- { {row1col1Text, row1col2Text, row1col3Text},  -->
-                    <!--    row2col1Text, row2col2Text, row2col3Text} } -->
-                    <ui:repeat value="#{criaTotalizadorBean.dados}" var="row">
-                        <tr>
-                            <ui:repeat value="#{row}" var="cell">
-                                <td>#{cell}</td>
-                            </ui:repeat>
-                        </tr>
-                    </ui:repeat>
-                </tbody>
-            </table>
-
-
-          <!--  <h:outputText value="{criaTotalizadorBean.rowsOfTable}" escape="false"/>-->
-
-
-            
-
-
-
-
-            <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
-            #{alunoBean.grafico()}
-            #{alunoBean.graficoHorizontal()}
-            #{alunoBean.graficoLinha()}
-
-
-            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barra != null}" />
-            <p:chart type="bar" model="#{alunoBean.barraHorizontal}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraHorizontal != null}" >
-                <h:outputScript>
-                    function chartExtender() {
-                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-
-                    }
-                    function chartColor() {
-                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-
-                    }
-                    function chartColorc() {
-                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-
-                    }
-                </h:outputScript>
-            </p:chart>
-            <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
-
-
-        </h:form>
-
-
-
-
-
-
-        <h:form id="frmConResCad">
-
-        </h:form>
-
-
-
-    </ui:define>
-
-</ui:decorate>
-
-
-
-
-
+ <!--     <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="PORTUGUÊS " />
+     
+                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div>
+                 <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="MATEMÁTICA " />
+     
+                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div>
+                 <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="CIÊNCIAS HUMANAS " />
+     
+                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div>
+                 <div class="ui-g-12 ui-md-3">
+                     <div class="ui-inputgroup">
+                         <h:panelGrid columns="2"  cellpadding="5">
+                             <h:outputText value="CIÊNCIAS DA NATUREZA " />
+     
+                             <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                 <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+     
+     
+                             </p:inputSwitch>
+     
+     
+                         </h:panelGrid>
+                     </div>
+                 </div> -->
 
 
 

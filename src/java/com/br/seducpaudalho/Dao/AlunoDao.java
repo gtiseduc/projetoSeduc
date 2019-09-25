@@ -222,14 +222,14 @@ public class AlunoDao {
 
     }
 
-    public List<Correcao> listarGabaritosDisciplina(Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+    public List<Correcao> listarGabaritosDisciplina(Integer inep, Integer codSerie, Integer codTurma) throws ErroSistema {
 
         System.out.println("**************" + codSerie);
-        System.out.println("**************" + codDisciplina);
+        System.out.println("**************" + codTurma);
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from correcao where codSerie = ? && codDisciplina = ?";
+        String sql = "select * from testegabarito where codSerie = ? && inepEscola  = ? && codTurma = ?";
 
         List<Correcao> correcoes = new ArrayList<>();
 
@@ -239,7 +239,8 @@ public class AlunoDao {
             PreparedStatement ps = conexao.prepareStatement(sql);
 
             ps.setInt(1, codSerie);
-            ps.setInt(2, codDisciplina);
+            ps.setInt(2, inep);
+            ps.setInt(3, codTurma);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -600,9 +601,10 @@ public class AlunoDao {
 
     public void salvarQuestao(Associacao associacao) throws ErroSistema {
 
-        // System.out.println("--------- olha questao : " + associacao.getCodSerie() + "  - "+ associacao.getCodDisciplina()+ "  - "+associacao.getSiglaDescritor());
+        System.out.println("--------- olha questao : " + associacao.getCodSerie() + "  - "+ associacao.getCodDisciplina()+ "  - "+associacao.getNumeroQuestoes());
         // System.out.println("--------- olha questao" + associacao.getCodDescritor());
         //Integer p = pesquisarDescritor(associacao.getSiglaDescritor(),associacao.getCodSerie(),associacao.getCodSerie());
+       
         List<Associacao> pesquisa = new ArrayList<>();
 
         pesquisa = pesquiQuestoes(associacao);
