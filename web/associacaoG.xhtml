@@ -69,7 +69,7 @@
 
 
             <p:tabView>
-               
+
                 <p:tab title="ASSOCIAÇÃO GABARITO - DESCRITORES">
                     <p:fieldset legend="ASSOCIACAO GABARITO - DESCRITORES - QUESTOES">
 
@@ -99,7 +99,7 @@
                                             <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
                                             <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
                                             <p:ajax  event="change"  listener="#{alunoBean.listarAssociacao()}" update="@form"/> 
-                                            <p:ajax  event="change" listener="#{alunoBean.listarDescritores(alunoBean.associacao.codSerie,alunoBean.associacao.codDisciplina)}" update="@form"/>
+                                            <p:ajax  event="change" listener="#{alunoBean.listarDescritoresMatriz(alunoBean.associacao.codSerie,alunoBean.associacao.codDisciplina)}" update="@form"/>
                                         </p:selectOneMenu>    
                                     </div>
                                 </div>  
@@ -119,7 +119,7 @@
                             <br></br>
 
 
-                          
+
 
 
                             <br/>
@@ -232,7 +232,7 @@
 
 
                         </p:dataTable>
-                        
+
                         <h:form >
                             <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                 <p:outputPanel id="carDetail" style="text-align:center;">
@@ -245,7 +245,10 @@
                                     <h:outputText value="#{alunoBean.associacao.codAssociacao}" rendered="false" />
 
                                     <h:selectOneMenu value="#{alunoBean.associacao.descritor}" style="width:100%">
-                                        <f:selectItems value="#{alunoBean.descritores}" var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" />
+                                        <f:selectItems value="#{alunoBean.descritores}" var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" itemDescription="#{descritor.especiDescritor}">
+                                         
+                                        </f:selectItems>
+                                        
                                         <p:ajax update="@form:teste" event="change" listener="#{alunoBean.concatDescritores()}"/>
                                     </h:selectOneMenu>
 
@@ -269,8 +272,8 @@
                                     <p:commandButton value="Apagar descritores" action="#{alunoBean.apagarSelecao()}" update="teste">
 
                                     </p:commandButton >
-                                     <p:commandButton value="SALVAR" action="#{alunoBean.atualizarAssociacao()}"  onclick="PF('carDialog').hide();"  update="@all" >
-                                        
+                                    <p:commandButton value="SALVAR" action="#{alunoBean.atualizarAssociacao()}"  onclick="PF('carDialog').hide();"  update="@all" >
+
                                     </p:commandButton >
 
 

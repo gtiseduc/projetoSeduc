@@ -93,10 +93,10 @@ public class AlunoBean {
     List<String> descri = new ArrayList<>();
     private String parametro;
 
-      private List<SelectItem> selectDescritor;
+    private List<SelectItem> selectDescritor;
     private Descritor descritor = new Descritor();
     List<Descritor> descritores = new ArrayList<>();
-    
+
     private Associacao associacao = new Associacao();
     List<Associacao> questoes = new ArrayList<>();
 
@@ -105,6 +105,8 @@ public class AlunoBean {
     private LineChartModel barraLinha;
     private String concatDescritor = "";
     private List<String> colunas = new ArrayList<String>();
+
+    String[][] dados;
 
     public void salvar() {
         /*
@@ -193,8 +195,8 @@ public class AlunoBean {
 
     public void salvarQuestoes() throws ErroSistema {
 
-        System.out.println("XXXXXXXXX "+associacao.getCodSerie()+" - "+associacao.getCodDisciplina()+" - "+associacao.getNumeroQuestoes());
-        
+        System.out.println("XXXXXXXXX " + associacao.getCodSerie() + " - " + associacao.getCodDisciplina() + " - " + associacao.getNumeroQuestoes());
+
         alunoDao.salvarQuestao(associacao);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
@@ -265,7 +267,7 @@ public class AlunoBean {
 
     public void listarDescritores(Integer codSerie, Integer codDisciplina) {
 
-        System.out.println("--------****----***----***------- " + codSerie + codDisciplina );
+        System.out.println("--------****----***----***------- " + codSerie + codDisciplina);
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
 
@@ -274,6 +276,24 @@ public class AlunoBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
+
+        
+
+    }
+    public void listarDescritoresMatriz(Integer codSerie, Integer codDisciplina) {
+
+        System.out.println("--------****----***----***------- " + codSerie + codDisciplina);
+        try {
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+
+            descritores = serieDao.listarDescritorMatriz(codSerie, codDisciplina);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+
+        
+
     }
 
     public void listarSerieParametro(Integer codigo) {
@@ -472,63 +492,117 @@ public class AlunoBean {
 
         System.out.println("olha o codigo --------" + inep + "****----***" + codDisciplina + "----***------- " + codSerie);
 
-       try {
-            correcoes = alunoDao.listarGabaritosDisciplina(inep, codSerie, codTurma);
-            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        try {
 
+            // correcoes = alunoDao.listarGabaritosDisciplina(inep, codSerie, codTurma);
+            //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            descritores = serieDao.listarDescritores(codSerie, codDisciplina);
             avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
+           
+            System.out.println("***** -DESCRITORES - ****" + descritores.size());
+            System.out.println("***** -AVALIAÇÕES - ****" + avaliacoes.size());
+            if (descritores.size() == 0) {
+                adicionarMensagem("LISTADO!", "NÃO TEM DESCRITOR NEM GABARITO CADASTRADO", FacesMessage.SEVERITY_INFO);
+                return;
+            }
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
-
+            System.out.println("***** - - ****" + avaliacoes.size());
+            System.out.println("***** - - ****" + avaliacoes.get(0).getNomeAluno());
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
+        dados = new String[descritores.size()][descritores.size()];
+
         String gaba = "";
 
-        for (int co = 0; co < correcoes.size(); co++) {
+        for (int co = 0; co < descritores.size(); co++) {
 
-            Correcao gabarito = correcoes.get(co);
-            gaba = gabarito.getGabarito();
-            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + gabarito.getGabarito());
-
+            Descritor gabarito = descritores.get(co);
+            gaba += gabarito.getEspeciDescritor();
+            System.out.println("ALTERNATIVAS DOS GABARITOS " + gabarito.getEspeciDescritor());
         }
 
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%% " + gaba);
         List<String> listaDeGabarito = new ArrayList<String>();
 
         String resp = "";
+        char tes = 0;
         for (int av = 0; av < avaliacoes.size(); av++) {
 
             Avaliacao ava = avaliacoes.get(av);
-            listaDeGabarito.add(ava.getRespPortugues());
 
+            if (codDisciplina == 1) {
+                listaDeGabarito.add(ava.getRespPortugues());
             resp = ava.getRespPortugues();
-            // System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX "+ gabarito.getGabarito());
+            }
+            if (codDisciplina == 2) {
+                listaDeGabarito.add(ava.getRespMatematica());
+                  resp = ava.getRespMatematica();
+            }
+            if (codDisciplina == 3) {
+                listaDeGabarito.add(ava.getRespCienciasHumanas());
+                resp = ava.getRespCienciasHumanas();
+            }
+            if (codDisciplina == 4) {
+                listaDeGabarito.add(ava.getRespCienciasNatureza());
+                   resp = ava.getRespCienciasNatureza();
+            }
+
+            System.out.println("LISTA DE QUESTÕES POR ALUNO " + resp);
+
+            for (int j = 0; j < descritores.size(); j++) {
+
+                //System.out.println("_____________***********_________ " + avaliacoes.get(av).getRespPortugues().length());
+                if (codDisciplina == 1) {
+                    tes = avaliacoes.get(av).getRespPortugues().charAt(j);
+                }
+                if (codDisciplina == 2) {
+                    tes = avaliacoes.get(av).getRespMatematica().charAt(j);
+                }
+                if (codDisciplina == 3) {
+                    tes = avaliacoes.get(av).getRespCienciasHumanas().charAt(j);
+                }
+                if (codDisciplina == 4) {
+                    tes = avaliacoes.get(av).getRespCienciasNatureza().charAt(j);
+                }
+
+                String b = String.valueOf(tes);
+                System.out.println("############ " + b);
+                dados[av][j] = b;
+
+            }
 
         }
 
-        String frase = "00149/007587/10987";
+        /*String frase = "00149/007587/10987";
         String array[] = new String[3];
         array = frase.split("/");
         System.out.println(array[0]);
         System.out.println(array[1]);
-        System.out.println(array[2]);
-
+        System.out.println(array[2]);*/
+        //String gabarito = descritores.get(0).getEspeciDescritor();
         String gabarito = gaba;
-        //String gabarito = "ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE";
 
+        // String gabarito = "ABCDEABCDEABCDE";
+        //String gabarito = "ABCDEABCDEABCDE";
+        System.out.println("**********##*********** " + gabarito);
+        System.out.println("***********##********** " + gaba);
         String compara = "";
         Integer resultado = 0;
 
         List<String> listaDeResultado = new ArrayList<String>();
         //123456789
-        //listaDeGabarito.add("BBCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
-        // listaDeGabarito.add("CBCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
-        // listaDeGabarito.add("EBCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
-        // listaDeGabarito.add("ABCDEABCDEABCDEABCDEABCDEABCDEABCDEABCDE");
+        // listaDeGabarito.add("BBCDEABCDEABCDE");
+        // listaDeGabarito.add("CBCDEABCDEABCDE");
+        // listaDeGabarito.add("EBCDEABCDEABCDE");
+        //listaDeGabarito.add("ABCDEABCDEABCDE");
 
         int[][] data = new int[listaDeGabarito.size()][gabarito.length()];
 
         List<Integer> meuGabarito = new ArrayList<Integer>();
+
+        System.out.println("tamano1 " + listaDeGabarito.size() + "tamanho2 " + gabarito.length());
 
         for (int b = 0; b < listaDeGabarito.size(); b++) {
 
@@ -558,11 +632,14 @@ public class AlunoBean {
         int s = 0;
         for (int i = 0; i < listaDeResultado.size(); i++) {
 
+            System.out.println("***** -#######- ****" + listaDeResultado.size());
             Avaliacao aa = new Avaliacao();
             var = listaDeResultado.get(i);
 
-            Avaliacao ava = avaliacoes.get(i);
-            nome = ava.getNomeAluno();
+            System.out.println("***** - - ****" + i);
+            // System.out.println("***** - - ****" + avaliacoes.get(i).getNomeAluno());
+            //Avaliacao ava = avaliacoes.get(i);
+            // nome = ava.getNomeAluno();
             for (int j = 0; j < var.length(); j++) {
 
                 //  int a =  var.charAt(j
@@ -575,11 +652,11 @@ public class AlunoBean {
                 // System.out.println("olha ****" + v++);
 
             }
-            aa.setNomeAluno(nome);
-            aa.setNumeroAcertos(s);
-            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + codDisciplina);
+            // aa.setNomeAluno(nome);
+            // aa.setNumeroAcertos(s);
+            // System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + codDisciplina);
 
-            if (codDisciplina == 1) {
+            /*if (codDisciplina == 1) {
                 aa.setDisciplina("PORTUGUÊS");
                 aa.setAvDisciplina(ava.getRespPortugues());
                 aa.setRespPortugues(ava.getRespPortugues());
@@ -598,12 +675,11 @@ public class AlunoBean {
                 aa.setDisciplina("CIÊNCIAS NATUREZA");
                 aa.setAvDisciplina(ava.getRespCienciasNatureza());
                 aa.setRespCienciasNatureza(ava.getRespCienciasNatureza());
-            }
-
-            resul.add(aa);
+            }*/
+            // resul.add(aa);
             System.out.println("A SOMA DAS LINHAS É " + s);
 
-            System.out.println("OLHA O NOME " + nome);
+            //  System.out.println("OLHA O NOME " + nome);
             s = 0;
         }
 
@@ -633,8 +709,6 @@ public class AlunoBean {
             sum = 0;
         } while (col != largestRow);
 
-        
-        
     }
 
     public void imprimirAlunos() throws ErroSistema {
@@ -669,7 +743,6 @@ public class AlunoBean {
 
     public void concatDescritores() {
 
-        
         if (!concatDescritor.equals("")) {
             System.out.println("descritor é diferente de nulo------------");
             associacao.setDescritor(concatDescritor + "/" + associacao.getDescritor());
@@ -818,12 +891,12 @@ public class AlunoBean {
     }
 
     public List<SelectItem> getSelectDescritor() throws ErroSistema {
-       
-         System.out.println("----------------------------------------------");
+
+        System.out.println("----------------------------------------------");
         if (selectDescritor == null) {
             selectDescritor = new ArrayList<SelectItem>();
             descritor = new Descritor();
-           descritores = serieDao.listarDescritores(1,1);
+            descritores = serieDao.listarDescritores(1, 1);
 
             if (descritores != null && !descritores.isEmpty()) {
 
@@ -837,12 +910,8 @@ public class AlunoBean {
 
         }
 
-        
-        
         return selectDescritor;
     }
-
-   
 
     public List<SelectItem> getSelectDisciplina() {
 
@@ -1028,17 +1097,18 @@ public class AlunoBean {
         FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+
     public void atualizarAssociacao() throws ErroSistema {
 
         System.out.println("XXXXXXXXXXXXXXXXXXX" + concatDescritor);
-           associacao.setDescritor(concatDescritor);
-         System.out.println("################## " + associacao.getAlternativa() + " - " +associacao.getQuestao()+ " - " +associacao.getDescritor());
-           
-           alunoDao.atualizarAssociacao(associacao);
+        associacao.setDescritor(concatDescritor);
+        System.out.println("################## " + associacao.getAlternativa() + " - " + associacao.getQuestao() + " - " + associacao.getDescritor());
 
-     //   System.out.println("codigo " + a.getCodAssociacao() + " descritor " + a.getDescritor() + " alternativa" + a.getAlternativa());
+        alunoDao.atualizarAssociacao(associacao);
+
+        //   System.out.println("codigo " + a.getCodAssociacao() + " descritor " + a.getDescritor() + " alternativa" + a.getAlternativa());
         //FacesMessage msg = new FacesMessage("EDITE ", ((Associacao) event.getObject()).getCodAssociacao().toString());
-       // FacesContext.getCurrentInstance().addMessage(null, msg);
+        // FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void onRowCancel(RowEditEvent event) {
@@ -1220,6 +1290,14 @@ public class AlunoBean {
 
     public void setColunas(List<String> colunas) {
         this.colunas = colunas;
+    }
+
+    public String[][] getDados() {
+        return dados;
+    }
+
+    public void setDados(String[][] dados) {
+        this.dados = dados;
     }
 
 }

@@ -177,9 +177,9 @@ public class AlunoDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from avaliacao as a \n"
-                + "join aluno al on al.codAluno = a.codAluno\n"
-                + "where a.inepEscola = ? && a.codSerie = ? && a.codTurma = ? ";
+        String sql = "select * from testegabarito as a \n" +
+"                join aluno al on al.codAluno = a.codAluno\n" +
+"                where a.inepEscola = ? && a.codSerie = ? && a.codTurma = ?";
 
         List<Avaliacao> avaliacoes = new ArrayList<>();
 
@@ -195,16 +195,16 @@ public class AlunoDao {
             while (rs.next()) {
                 System.out.println("ENTROUUUUUUUUUUUUUUUU");
                 Avaliacao avaliacao = new Avaliacao();
-                avaliacao.setIdAvaliacao(rs.getInt("idAvaliacao"));
+                avaliacao.setIdAvaliacao(rs.getInt("idTesteGabarito"));
                 avaliacao.setCodAluno(rs.getInt("codAluno"));
                 avaliacao.setCodTurma(rs.getInt("codTurma"));
                 avaliacao.setCodSerie(rs.getInt("codSerie"));
 
-                avaliacao.setRespPortugues(rs.getString("respPortugues"));
-                avaliacao.setRespMatematica(rs.getString("respMatematica"));
-                avaliacao.setRespCienciasHumanas(rs.getString("respCienciasHumanas"));
-                avaliacao.setRespCienciasNatureza(rs.getString("respCienciasNatureza"));
-                avaliacao.setNomeAluno(rs.getString("nome"));
+                avaliacao.setRespPortugues(rs.getString("portugues"));
+                avaliacao.setRespMatematica(rs.getString("matematica"));
+                avaliacao.setRespCienciasHumanas(rs.getString("cienciasHumanas"));
+                avaliacao.setRespCienciasNatureza(rs.getString("cienciasNatureza"));
+                avaliacao.setNomeAluno(rs.getString("nomeAluno"));
 
                 avaliacoes.add(avaliacao);
 
