@@ -50,7 +50,9 @@
 
     <ui:define name="formulario">
 
-
+ <link rel="stylesheet" type="text/css"
+              href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css" />
+        <h:outputStylesheet library="css" name="style.css" />
 
         <h:form>
             <p:growl id="growl" life="3500" />
@@ -151,41 +153,40 @@
             <br></br>
 
 
+           
 
+            <table id="resultado1"  border="7px " width="850px" style="text-align: center">
 
-
-
-            <table id="asds" border="3px" width="650px" >
-                <thead>
+                <thead style="font-size: 17px " >
                     <tr>
-                        <!-- sql.headers is a List of Strings -->
+                        <th style="text-align: center">DESCRITOES</th>  <!-- sql.headers is a List of Strings -->
                         <ui:repeat value="#{alunoBean.descritores}" var="h">
-                            <th>#{h.siglaDescritor}</th>
+                            <th title="#{h.especiDescritor}">#{h.siglaDescritor}</th>
+                           
 
 
                         </ui:repeat>
+                        <th style="text-align: center"> RESULTADO </th> 
 
                     </tr>
                 </thead>
-                <thead>
-                    <tr>
-                        <!-- sql.headers is a List of Strings -->
-                        <ui:repeat value="#{alunoBean.descritores}" var="h">
 
-                            <th>#{h.especiDescritor}</th>
+                <thead id="resultado2" style="font-size: 15px">
+                    <tr>
+                        <th style="text-align: center">GABARITO</th>  <!-- sql.headers is a List of Strings -->
+                        <ui:repeat value="#{alunoBean.descritores}" var="h" >
+
+                            <th style="text-align: center">#{h.especiDescritor}</th>
 
                         </ui:repeat>
+                        <th style="text-align: center">  GABARITO </th> 
 
                     </tr>
                 </thead>
-                <!-- <p:tooltip id="toolTipContent" for="content" position="bottom">
-                               <h:graphicImage library="img" name="d01.png" width="30px" />
-                                <h5>{h.nome}</h5>
-                            </p:tooltip>-->
-                <tbody>
-                    <!-- sql.content is a List of List of Strings, e.g. -->
-                    <!-- { {row1col1Text, row1col2Text, row1col3Text},  -->
-                    <!--    row2col1Text, row2col2Text, row2col3Text} } -->
+
+
+                <tbody  >
+
                     <ui:repeat value="#{alunoBean.dados}" var="row">
                         <tr>
                             <ui:repeat value="#{row}" var="cell">
@@ -194,6 +195,18 @@
                         </tr>
                     </ui:repeat>
                 </tbody>
+                
+                <tfoot style="font-size: 15px">
+                    <tr>
+                        <!-- sql.headers is a List of Strings -->
+                        <ui:repeat value="#{alunoBean.resultdescritores}" var="r">
+                            <th style="text-align: center">#{r}</th>
+
+
+                        </ui:repeat>
+                        <th style="text-align: center" >  </th> 
+                    </tr>
+                </tfoot>
             </table>
 
 

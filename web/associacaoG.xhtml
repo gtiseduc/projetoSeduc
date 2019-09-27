@@ -234,7 +234,7 @@
                         </p:dataTable>
 
                         <h:form >
-                            <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <p:dialog header="Descritores - Alternativas" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                                 <p:outputPanel id="carDetail" style="text-align:center;">
                                    <!-- <p:panelGrid  columns="2" rendered="#{not empty alunoBean.associacao}" columnClasses="label,value">
                                         <f:facet name="header">
@@ -245,7 +245,8 @@
                                     <h:outputText value="#{alunoBean.associacao.codAssociacao}" rendered="false" />
 
                                     <h:selectOneMenu value="#{alunoBean.associacao.descritor}" style="width:100%">
-                                        <f:selectItems value="#{alunoBean.descritores}" var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" itemDescription="#{descritor.especiDescritor}">
+                                        <f:selectItem itemLabel="SELECIONE OS DESCRITORES"  />
+                                        <f:selectItems value="#{alunoBean.descritores}"   var="descritor" itemLabel="#{descritor.siglaDescritor}" itemValue="#{descritor.siglaDescritor}" itemDescription="#{descritor.siglaDescritor}" >
                                          
                                         </f:selectItems>
                                         

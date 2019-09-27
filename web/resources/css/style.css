@@ -22,6 +22,21 @@ body{
 .verticalHeader table thead tr th .rotate90 {
   
 }
+
+#resultado1{
+    
+ background-color:   #f0f0f5;   
+ border-color:  #004d66;
+ 
+    
+}
+#resultado2{
+    
+ background-color:  #e6f9ff;   
+ border-color:  #004d66;
+    
+}
+
 /*
 .mystyle.ui-datatable .ui-datatable-header { 
 background: # 003946! importante; 
