@@ -721,7 +721,7 @@ public class AlunoBean {
     public void imprimirAlunos() throws ErroSistema {
 
         Map<String, Object> params = new HashMap<String, Object>();
-        String a = "report";
+        String a = "gaba1";
 
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
