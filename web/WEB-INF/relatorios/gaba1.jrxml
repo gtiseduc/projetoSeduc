@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" columnCount="2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="401" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c012a8f-4d43-4788-bb9f-3d5b1e15165b">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="nomeEscola" class="java.lang.String"/>
 	<field name="nomeSerie" class="java.lang.String"/>
@@ -11,21 +11,22 @@
 	<field name="idAluno" class="java.lang.String"/>
 	<field name="idSerie" class="java.lang.String"/>
 	<field name="idTurma" class="java.lang.String"/>
+	<field name="inepEscola" class="java.lang.String"/>
 	<detail>
 		<band height="555">
 			<image scaleImage="FillFrame">
 				<reportElement x="2" y="0" width="384" height="555" uuid="5039976d-c823-4e9e-a4c3-62d1efc95bea"/>
-				<imageExpression><![CDATA["C:\\Users\\SEC-EDUC02\\Desktop\\gaba1.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["gaba1.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="215" y="199" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>
+				<reportElement x="163" y="199" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="26" y="199" width="158" height="17" uuid="cfebca60-45a4-4806-a359-cf4c80ddbbff"/>
+				<reportElement x="26" y="199" width="92" height="17" uuid="cfebca60-45a4-4806-a359-cf4c80ddbbff"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -47,24 +48,24 @@
 			</textField>
 			<image scaleImage="FillFrame">
 				<reportElement x="166" y="103" width="55" height="57" uuid="af739146-e357-4661-8194-5dbf9c9f2607"/>
-				<imageExpression><![CDATA[new java.net.URL("https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3A"+$F{idAluno}+"/"+$F{idSerie}+"/"+$F{idTurma}+"%3B%3B")]]></imageExpression>
+				<imageExpression><![CDATA[new java.net.URL("https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3A"+$F{inepEscola}+"/"+$F{idAluno}+"/"+$F{idSerie}+"/"+$F{idTurma}+"%3B%3B")]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="282" y="199" width="80" height="17" uuid="ca29e826-3819-4567-aad3-33666d5351f4"/>
+				<reportElement x="230" y="199" width="80" height="17" uuid="ca29e826-3819-4567-aad3-33666d5351f4"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="184" y="199" width="30" height="17" uuid="4076b7e6-8803-449b-8dea-bac6665b1e7f"/>
+				<reportElement x="125" y="199" width="30" height="17" uuid="4076b7e6-8803-449b-8dea-bac6665b1e7f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="245" y="199" width="30" height="17" uuid="6aacf3fc-944c-4746-be2a-0b8248a13f41"/>
+				<reportElement x="193" y="199" width="30" height="17" uuid="6aacf3fc-944c-4746-be2a-0b8248a13f41"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>

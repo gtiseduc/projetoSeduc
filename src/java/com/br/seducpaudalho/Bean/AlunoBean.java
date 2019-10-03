@@ -205,6 +205,7 @@ public class AlunoBean {
         associacao = new Associacao();
     }
 
+   
     public void alterar() {
         /*
         try {
@@ -217,6 +218,8 @@ public class AlunoBean {
          */
     }
 
+    
+    
     public void excluir(Aluno p) {
         /* System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p);
         try {
@@ -230,6 +233,8 @@ public class AlunoBean {
         }*/
 
     }
+    
+    
 
     public void editar(Aluno entidade) {
         this.aluno = entidade;
