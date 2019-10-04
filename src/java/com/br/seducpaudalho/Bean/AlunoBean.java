@@ -110,6 +110,9 @@ public class AlunoBean {
     private List<String> resultdescritores = new ArrayList<String>();
     private List<String> resulAlunos = new ArrayList<String>();
 
+    private Integer quantlunos = 0;
+    private Integer quantPresentes = 0;
+
     public void salvar() {
         /*
         try {
@@ -205,7 +208,6 @@ public class AlunoBean {
         associacao = new Associacao();
     }
 
-   
     public void alterar() {
         /*
         try {
@@ -218,8 +220,6 @@ public class AlunoBean {
          */
     }
 
-    
-    
     public void excluir(Aluno p) {
         /* System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p);
         try {
@@ -233,8 +233,6 @@ public class AlunoBean {
         }*/
 
     }
-    
-    
 
     public void editar(Aluno entidade) {
         this.aluno = entidade;
@@ -306,7 +304,7 @@ public class AlunoBean {
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
             series = serieDao.listarSerieParametro(codigo);
-           // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -498,27 +496,28 @@ public class AlunoBean {
 
         try {
 
-            
             descritores = serieDao.listarDescritores(codSerie, codDisciplina);
             avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
+            alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
+
+            quantPresentes = avaliacoes.size();
+            quantlunos = alunos.size();
+
             resultdescritores = new ArrayList<String>();
             resulAlunos = new ArrayList<String>();
-           
-            
+
             if (descritores.size() == 0) {
                 adicionarMensagem("LISTADO!", "NÃO TEM DESCRITOR NEM GABARITO CADASTRADO", FacesMessage.SEVERITY_INFO);
                 return;
             }
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
-            
+
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-        
 
         dados = new String[descritores.size() + 2][descritores.size() + 2];
         String gaba = "";
-        
 
         for (int co = 0; co < descritores.size(); co++) {
 
@@ -527,19 +526,14 @@ public class AlunoBean {
             System.out.println("ALTERNATIVAS DOS GABARITOS " + gabarito.getEspeciDescritor());
         }
 
-        
-      
         List<String> listaDeGabarito = new ArrayList<String>();
 
         String resp = "";
         char tes = 0;
-        
-        
-        
-        
+
         for (int av = 0; av < avaliacoes.size(); av++) {
-        
-          Avaliacao ava = avaliacoes.get(av);
+
+            Avaliacao ava = avaliacoes.get(av);
 
             if (codDisciplina == 1) {
                 listaDeGabarito.add(ava.getRespPortugues());
@@ -558,20 +552,13 @@ public class AlunoBean {
                 resp = ava.getRespCienciasNatureza();
             }
         }
-        
-        
-        
-       
 
-       
         String gabarito = gaba;
 
-       
         String compara = "";
         Integer resultado = 0;
 
         List<String> listaDeResultado = new ArrayList<String>();
-       
 
         int[][] data = new int[listaDeGabarito.size()][gabarito.length()];
 
@@ -627,10 +614,10 @@ public class AlunoBean {
                 // System.out.println("olha ****" + v++);
 
             }
-           
+
             System.out.println("A SOMA DAS LINHAS É " + s);
             resulAlunos.add(Integer.toString(s));
-          
+
             s = 0;
         }
 
@@ -662,9 +649,8 @@ public class AlunoBean {
             // System.out.println(sum + "%");
             sum = 0;
         } while (col != largestRow);
-        
-        
-         for (int av = 0; av < avaliacoes.size(); av++) {
+
+        for (int av = 0; av < avaliacoes.size(); av++) {
 
             Avaliacao ava = avaliacoes.get(av);
 
@@ -690,36 +676,31 @@ public class AlunoBean {
 
             for (int j = 1; j <= descritores.size() + 1; j++) {
 
-             
-               
                 if (j > descritores.size()) {
                     dados[av][j] = resulAlunos.get(av);
-                }
-                else {
-                if (codDisciplina == 1) {
-                    tes = avaliacoes.get(av).getRespPortugues().charAt(j - 1);
-                }
-                if (codDisciplina == 2) {
-                    tes = avaliacoes.get(av).getRespMatematica().charAt(j - 1);
-                }
-                if (codDisciplina == 3) {
-                    tes = avaliacoes.get(av).getRespCienciasHumanas().charAt(j - 1);
-                }
-                if (codDisciplina == 4) {
-                    tes = avaliacoes.get(av).getRespCienciasNatureza().charAt(j - 1);
-                }
+                } else {
+                    if (codDisciplina == 1) {
+                        tes = avaliacoes.get(av).getRespPortugues().charAt(j - 1);
+                    }
+                    if (codDisciplina == 2) {
+                        tes = avaliacoes.get(av).getRespMatematica().charAt(j - 1);
+                    }
+                    if (codDisciplina == 3) {
+                        tes = avaliacoes.get(av).getRespCienciasHumanas().charAt(j - 1);
+                    }
+                    if (codDisciplina == 4) {
+                        tes = avaliacoes.get(av).getRespCienciasNatureza().charAt(j - 1);
+                    }
 
-                String b = String.valueOf(tes);
-                System.out.println("############ " + b);
-                 
+                    String b = String.valueOf(tes);
+                    System.out.println("############ " + b);
+
                     dados[av][j] = b;
                 }
 
             }
 
         }
-        
-        
 
     }
 
@@ -1328,8 +1309,24 @@ public class AlunoBean {
         this.resulAlunos = resulAlunos;
     }
 
+    public Integer getQuantlunos() {
+        return quantlunos;
+    }
+
+    public void setQuantlunos(Integer quantlunos) {
+        this.quantlunos = quantlunos;
+    }
+
+    public Integer getQuantPresentes() {
+        return quantPresentes;
+    }
+
+    public void setQuantPresentes(Integer quantPresentes) {
+        this.quantPresentes = quantPresentes;
+    }
+
 }
- /*String frase = "00149/007587/10987";
+/*String frase = "00149/007587/10987";
         String array[] = new String[3];
         array = frase.split("/");
         System.out.println(array[0]);

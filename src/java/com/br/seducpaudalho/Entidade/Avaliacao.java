@@ -28,6 +28,7 @@ public class Avaliacao implements Serializable{
     
     private String disciplina;
     private String avDisciplina;
+    private Integer contarAvaliacao;
 
     public Avaliacao(Integer idAvaliacao, Integer codAluno, Integer codTurma, Integer codSerie, Integer inepEscola, String respPortugues, String respMatematica, String respCienciasHumanas, String respCienciasNatureza) {
         this.idAvaliacao = idAvaliacao;
@@ -146,6 +147,14 @@ public class Avaliacao implements Serializable{
 
     public void setAvDisciplina(String avDisciplina) {
         this.avDisciplina = avDisciplina;
+    }
+
+    public Integer getContarAvaliacao() {
+        return contarAvaliacao;
+    }
+
+    public void setContarAvaliacao(Integer contarAvaliacao) {
+        this.contarAvaliacao = contarAvaliacao;
     }
 
    
