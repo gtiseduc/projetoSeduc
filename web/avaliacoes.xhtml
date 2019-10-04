@@ -6,7 +6,8 @@
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
              template="template.xhtml"
              xmlns:f="http://xmlns.jcp.org/jsf/core"
-             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+             xmlns:ct="http://www.chartistjsf.org/charts">
 
     <ui:define name="menuesquerdo">
         <div id="sidebar-menu"
@@ -50,7 +51,17 @@
 
     <ui:define name="formulario">
 
- <link rel="stylesheet" type="text/css"
+        <script>
+            function chartExtender() {        
+    this.cfg.grid = {             
+    background: 'transparent',
+    gridLineColor: '#303030',
+    drawBorder: false,
+};
+            
+             </script>
+        
+        <link rel="stylesheet" type="text/css"
               href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css" />
         <h:outputStylesheet library="css" name="style.css" />
 
@@ -114,6 +125,7 @@
                                 <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
                                 <!-- <p:ajax  event="change" listener="{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>-->
                                 <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>
+                                <p:ajax  event="change"  listener="#{testeGraficos.gerarGrafico()}" update="@form"/>
                             </p:selectOneMenu>    
                         </div>
                     </div>  
@@ -149,18 +161,18 @@
 
             <br></br>
             <br></br>
-            
+
             <p:panel>
                 <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSA TURMA :#{alunoBean.quantlunos}" />
-            <br></br>
-            <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :#{alunoBean.quantPresentes}" />
-                
+                <br></br>
+                <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :#{alunoBean.quantPresentes}" />
+
             </p:panel>
             <br></br>
             <br></br>
 
 
-           
+
 
             <table id="resultado1"  border="7px " width="850px" style="text-align: center">
 
@@ -169,7 +181,7 @@
                         <th style="text-align: center">DESCRITOES</th>  <!-- sql.headers is a List of Strings -->
                         <ui:repeat value="#{alunoBean.descritores}" var="h">
                             <th title="#{h.especiDescritor}">#{h.siglaDescritor}</th>
-                           
+
 
 
                         </ui:repeat>
@@ -202,7 +214,7 @@
                         </tr>
                     </ui:repeat>
                 </tbody>
-                
+
                 <tfoot style="font-size: 15px">
                     <tr>
                         <!-- sql.headers is a List of Strings -->
@@ -216,6 +228,25 @@
                 </tfoot>
             </table>
 
+            <br></br>
+            <br></br>
+            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 30%; height: 30%" rendered="#{alunoBean.barra != null}" >
+
+                
+                   
+<h:outputScript>
+        function chartExtender() {
+            this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+            this.cfg.series = 
+                            [
+                            {seriesColors: ["#4da6ff"]} 
+                            
+                            ]
+        }
+    </h:outputScript>
+               
+            </p:chart>
+
 
             <!--  <h:outputText value="{criaTotalizadorBean.rowsOfTable}" escape="false"/>-->
 
@@ -226,28 +257,28 @@
 
 
             <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
-            #{alunoBean.grafico()}
-            #{alunoBean.graficoHorizontal()}
-            #{alunoBean.graficoLinha()}
 
 
-            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barra != null}" />
+
+
+
             <p:chart type="bar" model="#{alunoBean.barraHorizontal}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraHorizontal != null}" >
-                <h:outputScript>
-                    function chartExtender() {
-                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-
-                    }
-                    function chartColor() {
-                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-
-                    }
-                    function chartColorc() {
-                    this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-
-                    }
-                </h:outputScript>
+                <!-- <h:outputScript>
+                     function chartExtender() {
+                     this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+ 
+                     }
+                     function chartColor() {
+                     this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+ 
+                     }
+                     function chartColorc() {
+                     this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+ 
+                     }
+                 </h:outputScript>-->
             </p:chart>
+
             <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
 
 
@@ -263,6 +294,8 @@
         </h:form>
 
 
+        
+        <ct:chart id="barChart" type="bar" model="#{testeGraficos.barChartModel}"></ct:chart>
 
     </ui:define>
 

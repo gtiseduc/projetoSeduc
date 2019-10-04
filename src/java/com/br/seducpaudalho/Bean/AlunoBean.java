@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -43,11 +44,16 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.chartistjsf.model.chart.AspectRatio;
+import org.chartistjsf.model.chart.PieChartModel;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
+
+import org.chartistjsf.model.chart.BarChartModel;
+import org.chartistjsf.model.chart.LineChartSeries;
+import org.primefaces.model.chart.BarChartSeries;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.HorizontalBarChartModel;
 import org.primefaces.model.chart.LineChartModel;
@@ -112,6 +118,12 @@ public class AlunoBean {
 
     private Integer quantlunos = 0;
     private Integer quantPresentes = 0;
+    private double resultevasaoTurma = 0;
+    private BarChartModel barChartModel;
+    
+    
+    private LineChartModel lineModel;
+      
 
     public void salvar() {
         /*
@@ -360,7 +372,7 @@ public class AlunoBean {
 
     public void grafico() {
 
-        barra = new BarChartModel();
+        /*  barra = new BarChartModel();
 
         for (int i = 0; i < resul.size(); i++) {
             ChartSeries serie = new ChartSeries();
@@ -397,7 +409,95 @@ public class AlunoBean {
         yAxis.setLabel("eventos 2");
 
         yAxis.setMin(0);
-        yAxis.setMax(10);
+        yAxis.setMax(10);*/
+    }
+
+    public void graficoEvasaoTurma() {
+       
+      
+       
+        
+        
+        
+        /*barChartModel = new BarChartModel();
+        barChartModel.setAspectRatio(AspectRatio.GOLDEN_SECTION);
+        barChartModel.addLabel("Measure1");
+        barChartModel.addLabel("Measure2");
+        barChartModel.addLabel("Measure3");
+        barChartModel.addLabel("Measure4");
+        barChartModel.addLabel("Measure5");
+        
+        BarChartSeries series1 = new BarChartSeries();
+        series1.setLabel("zxsd");
+       
+      
+        
+        Axis xAxis = barChartModel.getAxis(AxisType.);
+        xAxis.setShowGrid(false);
+        barChartModel.addSeries(series1);
+      
+        barChartModel.setShowTooltip(true);
+        barChartModel.setSeriesBarDistance(15);
+        barChartModel.setAnimateAdvanced(true);
+
+
+        /* barChartModel = new BarChartModel();
+       // barChartModel.setAspectRatio(AspectRatio.GOLDEN_SECTION);
+       // barChartModel
+       // barChartModel.addLabel("Measure2");
+       // barChartModel.addLabel("Measure3");
+       // barChartModel.addLabel("Measure4");
+       // barChartModel.addLabel("Measure5");
+
+        barra = new BarChartModel();
+
+        ChartSeries serie = new ChartSeries();
+        
+    
+            serie.setLabel("PRESENTES");
+            serie.set("olha", quantlunos);
+            barra.setSeriesColors("4da6ff");
+            barra.addSeries(serie);
+
+        if (resultevasaoTurma <= 50) {
+            ChartSeries serie2 = new ChartSeries();
+            serie2.setLabel("EVASÃO");
+            serie2.set("olha", resultevasaoTurma);
+            barra.setSeriesColors("ff4d4d");
+            barra.setExtender("chartExtender");
+            barra.addSeries(serie2);
+            System.out.println("****************grafico de evasao*************************** 1");
+        }
+        
+        else{
+        
+            ChartSeries serie2 = new ChartSeries();
+            serie2.setLabel("EVASÃO");
+            barra.setSeriesColors("ccffcc");
+            serie2.set("olha", resultevasaoTurma);
+            barra.addSeries(serie2);
+        
+        }
+        
+        
+       
+        //else {
+        //  barra.setSeriesColors("FF1493");
+        //  serie.set("olha", resultevasaoTurma);
+        //  barra.addSeries(serie);
+        //  System.out.println("******************************************* 3");
+        //  }
+        barra.setTitle("GRAFICO DE EVASÃO DA TURMA");
+        barra.setLegendPosition("ne");
+        barra.setAnimate(true);
+
+        Axis xAxis = barra.getAxis(AxisType.X);
+        xAxis.setLabel("eventos 1");
+        Axis yAxis = barra.getAxis(AxisType.Y);
+        yAxis.setLabel("ASASAS");
+
+        yAxis.setMin(0);
+        yAxis.setMax(quantlunos);*/
     }
 
     public void graficoHorizontal() {
@@ -502,6 +602,10 @@ public class AlunoBean {
 
             quantPresentes = avaliacoes.size();
             quantlunos = alunos.size();
+
+            resultevasaoTurma = 100 * quantPresentes / quantlunos;
+
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
 
             resultdescritores = new ArrayList<String>();
             resulAlunos = new ArrayList<String>();
@@ -1323,6 +1427,22 @@ public class AlunoBean {
 
     public void setQuantPresentes(Integer quantPresentes) {
         this.quantPresentes = quantPresentes;
+    }
+
+    public double getResultevasaoTurma() {
+        return resultevasaoTurma;
+    }
+
+    public void setResultevasaoTurma(double resultevasaoTurma) {
+        this.resultevasaoTurma = resultevasaoTurma;
+    }
+
+    public BarChartModel getBarChartModel() {
+        return barChartModel;
+    }
+
+    public void setBarChartModel(BarChartModel barChartModel) {
+        this.barChartModel = barChartModel;
     }
 
 }
