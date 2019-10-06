@@ -51,13 +51,30 @@
 
     <ui:define name="formulario">
 
+        
+        
+        
+        
         <script>
-            function chartExtender() {        
-    this.cfg.grid = {             
-    background: 'transparent',
-    gridLineColor: '#303030',
-    drawBorder: false,
-};
+           function chartExtende() {
+            this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+            this.cfg.series = 
+                            [
+                            {seriesColors: ["#FFCC33"]}, 
+                            {seriesColors: ["#77933c"]}
+                            ]
+        }
+            
+             </script>
+        <script>
+           function chartExtender() {
+            this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+            this.cfg.series = 
+                            [
+                            {seriesColors: ["#ff0066"]}, 
+                            {seriesColors: ["#3399ff"]}
+                            ]
+        }
             
              </script>
         
@@ -125,7 +142,7 @@
                                 <f:selectItems  value="#{alunoBean.disciplinas}" var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
                                 <!-- <p:ajax  event="change" listener="{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>-->
                                 <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>
-                                <p:ajax  event="change"  listener="#{testeGraficos.gerarGrafico()}" update="@form"/>
+                               <!-- <p:ajax  event="change"  listener="{testeGraficos.gerarGrafico()}" update="@form"/>-->
                             </p:selectOneMenu>    
                         </div>
                     </div>  
@@ -235,14 +252,31 @@
                 
                    
 <h:outputScript>
-        function chartExtender() {
+     <!--   function chartExtender() {
             this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
             this.cfg.series = 
                             [
-                            {seriesColors: ["#4da6ff"]} 
+                            {seriesColors: ['#85802b', '#00749F', '#73C774', '#C7754C', '#17BDB8']} 
                             
                             ]
         }
+        
+         function chartExtende() {
+            this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+            this.cfg.series = 
+                            [
+                            {seriesColors: ["#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33"]}, 
+                            {seriesColors: ["#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c"]}
+                            ]
+        }
+         function chartExtend() {
+            this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+            this.cfg.series = 
+                            [
+                             
+                            {seriesColors: ["#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c"]}
+                            ]
+        }-->
     </h:outputScript>
                
             </p:chart>
@@ -295,7 +329,9 @@
 
 
         
-        <ct:chart id="barChart" type="bar" model="#{testeGraficos.barChartModel}"></ct:chart>
+     <!--   <ct:chart id="barChart" type="bar" model="{testeGraficos.barChartModel}"></ct:chart>-->
+        
+        <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:300px" rendered="#{alunoBean.horizontalBarModel != null}"/>
 
     </ui:define>
 
