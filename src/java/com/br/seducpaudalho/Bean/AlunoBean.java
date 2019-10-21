@@ -117,10 +117,15 @@ public class AlunoBean {
     private Integer quantlunos = 0;
     private Integer quantPresentes = 0;
     private double resultevasaoTurma = 0;
+    private double resulPreseTurma = 0;
+    private double quantFaltosos = 0;
     private BarChartModel barChartModel;
     private HorizontalBarChartModel horizontalBarModel;
+    private HorizontalBarChartModel horizontalEvasao;
 
     private LineChartModel lineModel;
+    
+    private boolean visivel = false;
 
     public void salvar() {
         /*
@@ -598,6 +603,7 @@ public class AlunoBean {
 
         try {
 
+            visivel = true;
             descritores = serieDao.listarDescritores(codSerie, codDisciplina);
             avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
             alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
@@ -605,7 +611,11 @@ public class AlunoBean {
             quantPresentes = avaliacoes.size();
             quantlunos = alunos.size();
 
+            quantFaltosos = quantlunos - quantPresentes;
+
             resultevasaoTurma = 100 * quantPresentes / quantlunos;
+           
+            resulPreseTurma = 100 * quantFaltosos / quantlunos;
 
             System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
 
@@ -815,10 +825,10 @@ public class AlunoBean {
         ChartSeries azul = new ChartSeries();
         ChartSeries verde = new ChartSeries();
 
-        vermelho.setLabel("Boys");
-        amarelo.setLabel("Girls");
-        azul.setLabel("Test");
-        verde.setLabel("Tes");
+        vermelho.setLabel("25%");
+        amarelo.setLabel("25% - 50%");
+        azul.setLabel("50% - 75%");
+        verde.setLabel("75% - 100%");
 
         //String a = "A";
         System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
@@ -834,25 +844,25 @@ public class AlunoBean {
 
             int a = Integer.parseInt(resultdescritores.get(b));
 
-            if (a <= 50) {
+            if (a <= 25) {
                 ve = a;
                 ama = 0;
                 az = 0;
                 ver = 0;
             }
-            if (a > 50 && a <= 60) {
+            if (a > 24 && a <= 50) {
                 ve = 0;
                 ama = a;
                 az = 0;
                 ver = 0;
             }
-            if (a > 60 && a <= 70) {
+            if (a > 49 && a <= 75) {
                 ve = 0;
                 ama = 0;
                 az = a;
                 ver = 0;
             }
-            if (a > 70) {
+            if (a > 74) {
                 ve = 0;
                 ama = 0;
                 az = 0;
@@ -880,25 +890,113 @@ public class AlunoBean {
         horizontalBarModel.setSeriesColors("ff0000,ffff00,0000ff,66ff33");
         horizontalBarModel.setLegendPosition("e");
         horizontalBarModel.setStacked(true);
+        horizontalBarModel.setShowPointLabels(true);
 
         Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
         xAxis.setLabel("");
         xAxis.setMin(0);
-        xAxis.setMax(100);
-
+        xAxis.setMax(110);
+        xAxis.setTickFormat("%1$.0f");
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
         yAxis.setLabel("DESCRITORES");
+
+     
         
         
+        horizontalEvasao = new HorizontalBarChartModel();
+        ChartSeries evasao = new ChartSeries();
+        ChartSeries presentes = new ChartSeries();
         
+        evasao.setLabel("PRESENTES");
+        evasao.set("PRESENTES", resultevasaoTurma);
+        horizontalEvasao.addSeries(evasao);
+        
+        presentes.setLabel("EVASÃO");
+        presentes.set("EVASÃO",resulPreseTurma);
+        horizontalEvasao.addSeries(presentes);
+
+        horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
+        horizontalEvasao.setSeriesColors("66ff33,ff0000");
+        horizontalEvasao.setLegendPosition("e");
+        horizontalEvasao.setStacked(true);
+        horizontalEvasao.setShowPointLabels(true);
+
+        Axis xAxi = horizontalEvasao.getAxis(AxisType.X);
+        xAxi.setLabel("");
+        xAxi.setMin(0);
+        xAxi.setMax(110);
+        xAxi.setTickFormat("%1$.0f");
+        Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
+        yAxi.setLabel("EVASÃO");
 
     }
 
-    public void imprimirAlunos() throws ErroSistema {
+    public void imprimirAlunos(String serie) throws ErroSistema {
 
         Map<String, Object> params = new HashMap<String, Object>();
-        String a = "gaba1";
+        
+         String a ="";
+        if(serie.equals("1") || serie.equals("2") ){
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+            a = "gaba1";
+        }
+        if(serie.equals("3") || serie.equals("4") || serie.equals("5")){
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+            a = "gaba2";
+        }
+        if(serie.equals("6") || serie.equals("7") || serie.equals("12")){
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+            a = "gaba3";
+        }
+        if(serie.equals("8")){
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+            a = "gaba4";
+        }
+        if(serie.equals("9")){
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+            a = "gaba5";
+        }
+       
+        
+        
+        
+        
+        
+       
+        
+        
 
+        try {
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.responseComplete();
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+            String path = scontext.getRealPath("/WEB-INF/relatorios/");
+            params.put("SUBREPORT_DIR", path + File.separator);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    scontext.getRealPath("/WEB-INF/relatorios/") + a + ".jasper", params, dataSource);
+            HttpServletResponse res = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            int codigo = (int) (Math.random() * 1000);
+            res.setHeader("Content-disposition", "inline;filename=relatorio_" + codigo + ".pdf");
+            byte[] b = JasperExportManager.exportReportToPdf(jasperPrint);
+            res.getOutputStream().write(b);
+            res.getCharacterEncoding();
+            facesContext.responseComplete();
+        } catch (Exception e) {
+            Logger.getLogger("ERRO").log(Level.SEVERE, null, e);
+            //adicionarMensagem(e.getMessage(), FacesMessage.SEVERITY_ERROR);
+            e.printStackTrace();
+        }
+
+    }
+    public void imprimirReservas() throws ErroSistema {
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        String a = "gabareserva";
+
+        
+        
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -1538,6 +1636,32 @@ public class AlunoBean {
     public void setHorizontalBarModel(HorizontalBarChartModel horizontalBarModel) {
         this.horizontalBarModel = horizontalBarModel;
     }
+
+    public double getQuantFaltosos() {
+        return quantFaltosos;
+    }
+
+    public void setQuantFaltosos(double quantFaltosos) {
+        this.quantFaltosos = quantFaltosos;
+    }
+
+    public HorizontalBarChartModel getHorizontalEvasao() {
+        return horizontalEvasao;
+    }
+
+    public void setHorizontalEvasao(HorizontalBarChartModel horizontalEvasao) {
+        this.horizontalEvasao = horizontalEvasao;
+    }
+
+    public boolean isVisivel() {
+        return visivel;
+    }
+
+    public void setVisivel(boolean visivel) {
+        this.visivel = visivel;
+    }
+    
+    
 
 }
 /*String frase = "00149/007587/10987";

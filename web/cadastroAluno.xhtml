@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="menuesquerdo">
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>CARGO - FUNÇÃO</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+                        </ul></li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+                        </ul></li>
+                    <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                 class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu" style="display: none">
+                             <li><a href="general_elements.html">Gerar chamados</a></li>
+                             
+                         </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+    <ui:define name="formulario">
+
+        <h:form>
+<p:fieldset legend="Cadastro Aluno">
+
+
+                <div class="ui-g ui-fluid">
+
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
+                            <p:inputText placeholder="Código aluno" value="" disabled="true"/>      
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
+                            <p:inputText placeholder="Código inep" value="" disabled="true"/>      
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                            <p:inputText placeholder="Nome Aluno" value="" />      
+                        </div>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
+                            <p:inputText placeholder="Data Nascimento" value=""/>      
+                        </div>
+                    </div>
+                    
+                     <br/>
+                    <br/>
+                    <br/>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-male"></i></span>
+                            <p:inputText placeholder="Nome do Pai" value=""/>      
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-female"></i></span>
+                            <p:inputText placeholder="Nome da Mãe" value=""/>      
+                        </div>
+                    </div>
+                     <br/>
+                    <br/>
+                    <br/>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-users"></i></span>
+                            <p:inputText placeholder="Nome do responsável" value=""/>      
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
+                            <p:inputText placeholder="Ano" value=""/>      
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="instituicao" value="" >
+                                <f:selectItem itemLabel="Instituição" />       
+                                <f:selectItems   value="" var="instituicao" itemLabel="" itemValue=""/>         
+                            </p:selectOneMenu>    
+                        </div>
+                    </div> 
+                   
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
+                                <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
+                                <f:selectItems   value="#{alunoBean.escolas}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola.inepEscola}" />         
+                                <p:ajax  event="change" listener="#{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
+                            </p:selectOneMenu>     
+                        </div>
+                    </div> 
+                   
+                    <div class="ui-g-12 ui-md-5">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-book"></i></span>
+                           <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
+                                <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
+                                <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
+                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie)}" update="@form"/>
+                            </p:selectOneMenu> 
+                        </div>
+                    </div> 
+                   
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-mortar-board"></i></span>
+                            <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
+                                <f:selectItem itemLabel="SELECIONE A TURMA" />       
+                                <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
+                                <p:ajax  event="change"  listener="#{alunoBean.listarAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> 
+                            </p:selectOneMenu>    
+                        </div>
+                    </div> 
+                    
+
+                    
+
+
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                   
+                   
+
+                  
+
+                  
+
+                    <p:commandButton value="Salvar" action="#{produtoBean.salvar()}" update="@form"/>
+
+                   
+                   
+                  
+
+                  
+                </div>
+
+            </p:fieldset>
+           
+
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:decorate>
+
+
+
+
+
+
+
+
+
+
+
+

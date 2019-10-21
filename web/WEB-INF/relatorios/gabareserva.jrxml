@@ -19,14 +19,14 @@
 				<imageExpression><![CDATA["gaba1.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="241" y="235" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>
+				<reportElement x="163" y="235" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="26" y="235" width="177" height="17" uuid="cfebca60-45a4-4806-a359-cf4c80ddbbff"/>
+				<reportElement x="26" y="235" width="92" height="17" uuid="cfebca60-45a4-4806-a359-cf4c80ddbbff"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -40,7 +40,7 @@
 				<text><![CDATA[ESCOLA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="71" y="202" width="293" height="16" uuid="3a545f54-d32b-4b51-a042-7804f86f653c"/>
+				<reportElement x="71" y="202" width="92" height="16" uuid="3a545f54-d32b-4b51-a042-7804f86f653c"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -51,21 +51,21 @@
 				<imageExpression><![CDATA[new java.net.URL("https://zxing.org/w/chart?cht=qr&chs=230x230&chld=L&choe=UTF-8&chl="+$F{idTurma}+"/"+$F{idSerie}+"/"+$F{idAluno}+"/"+$F{inepEscola})]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="308" y="235" width="80" height="17" uuid="ca29e826-3819-4567-aad3-33666d5351f4"/>
+				<reportElement x="230" y="235" width="80" height="17" uuid="ca29e826-3819-4567-aad3-33666d5351f4"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="203" y="235" width="30" height="17" uuid="4076b7e6-8803-449b-8dea-bac6665b1e7f"/>
+				<reportElement x="125" y="235" width="30" height="17" uuid="4076b7e6-8803-449b-8dea-bac6665b1e7f"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="271" y="235" width="30" height="17" uuid="6aacf3fc-944c-4746-be2a-0b8248a13f41"/>
+				<reportElement x="193" y="235" width="30" height="17" uuid="6aacf3fc-944c-4746-be2a-0b8248a13f41"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>

@@ -16,7 +16,7 @@
 		<band height="555">
 			<image scaleImage="FillFrame">
 				<reportElement x="2" y="0" width="384" height="555" uuid="5039976d-c823-4e9e-a4c3-62d1efc95bea"/>
-				<imageExpression><![CDATA["gaba1.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["gaba4.jpg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="241" y="235" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>

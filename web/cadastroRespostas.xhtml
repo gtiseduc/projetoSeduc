@@ -51,7 +51,8 @@
 
         <h:form>
 
-            <p:fieldset legend="IMPRESSÃO DE GABARITOS POR TURMA">
+           
+ <p:fieldset legend="IMPRESSÃO DE GABARITOS POR TURMA">
 
 
 
@@ -60,7 +61,7 @@
 
                 <div class="ui-g ui-fluid">
 
-                    <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-12 ui-md-5">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
@@ -123,35 +124,48 @@
 
             </p:fieldset>
 
-
+            
 
             <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
-                <p:column headerText="Lista de alunos">
+                <p:column headerText="Lista de alunos" priority="3">
                     <p:commandButton value="Editar"  update="@form"  />
                     <p:commandButton value="Excluir"  update="@form" />
                 </p:column>
 
-                <p:column headerText="Nome da Escola">
-                    <h:outputText value="#{alunos.nomeEscola}" />
-                </p:column>
+              
 
-                <p:column headerText="Nome do aluno" priority="3">
+                <p:column headerText="Nome do aluno"  priority="3">
                     <h:outputText value="#{alunos.nome}" />
                 </p:column>
+                
+                <p:column headerText="PORTUGUÊS" priority="3" >
+                    <h:inputText value="" />
+                </p:column>
+                <p:column headerText="MATEMÁTICA" priority="3" >
+                    <h:inputText value="" />
+                </p:column>
+                <p:column headerText="CIÊNCIAS HUMANAS" priority="3" >
+                    <h:inputText value="" />
+                </p:column>
+                <p:column headerText="CIÊNCIAS DA NATUREZA" priority="3" >
+                    <h:inputText value="" />
+                </p:column>
+                
 
-
+                <p:commandButton value="ENVIAR"/>
 
 
             </p:dataTable>
+                
+             
             <div class="ui-g ui-fluid">
                 
-                <p:commandButton value="IMPRIMIR" ajax="false" action="#{alunoBean.imprimirAlunos(alunoBean.aluno.idSerie)}" onclick="this.form.target = '_blank'"/>
-            <p:commandButton value="IMPRIMIR - RESERVA" ajax="false" action="#{alunoBean.imprimirReservas()}" onclick="this.form.target = '_blank'"/>
+          <!--  <p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
             </div>
 
         </h:form>
-
-
+        
+         
     </ui:define>
 
 </ui:decorate>
