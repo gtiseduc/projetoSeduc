@@ -632,7 +632,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[descritores.size() + 2][descritores.size() + 2];
+        dados = new String[quantPresentes][quantPresentes];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
@@ -760,12 +760,19 @@ public class AlunoBean {
             col += 1;
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
-            descri.add(Integer.toString(sum));
-            resultdescritores.add(Integer.toString(sum));
+            Integer dp = 100 * sum / descritores.size();
+            
+            descri.add(Integer.toString(dp));
+            
+            resultdescritores.add(Integer.toString(dp));
+            
             // System.out.println(sum + "%");
             sum = 0;
         } while (col != largestRow);
 
+       
+        
+        
         for (int av = 0; av < avaliacoes.size(); av++) {
 
             Avaliacao ava = avaliacoes.get(av);
@@ -928,6 +935,8 @@ public class AlunoBean {
         xAxi.setTickFormat("%1$.0f");
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
         yAxi.setLabel("EVASÃO");
+        
+        
 
     }
 
@@ -994,6 +1003,54 @@ public class AlunoBean {
 
         Map<String, Object> params = new HashMap<String, Object>();
         String a = "gabareserva";
+       
+        
+        List<Aluno> alunosReserva = new ArrayList<>();
+        
+        for (int i = 0; i < 5; i++) {
+          
+           Aluno aa = new Aluno();
+           
+           aa.setNomeEscola( alunos.get(10).getNomeEscola());
+           aa.setNomeSerie(alunos.get(12).getNomeSerie());
+           aa.setNomeTurma(alunos.get(14).getNomeTurma());
+           aa.setTurno(alunos.get(5).getTurno());
+           
+           alunosReserva.add(aa);
+                  
+        }
+           
+        System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirReservas()"+alunosReserva.size());
+    
+        
+        try {
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunosReserva);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.responseComplete();
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+            String path = scontext.getRealPath("/WEB-INF/relatorios/");
+            params.put("SUBREPORT_DIR", path + File.separator);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+                    scontext.getRealPath("/WEB-INF/relatorios/") + a + ".jasper", params, dataSource);
+            HttpServletResponse res = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+            res.setContentType("application/pdf");
+            int codigo = (int) (Math.random() * 1000);
+            res.setHeader("Content-disposition", "inline;filename=relatorio_" + codigo + ".pdf");
+            byte[] b = JasperExportManager.exportReportToPdf(jasperPrint);
+            res.getOutputStream().write(b);
+            res.getCharacterEncoding();
+            facesContext.responseComplete();
+        } catch (Exception e) {
+            Logger.getLogger("ERRO").log(Level.SEVERE, null, e);
+            //adicionarMensagem(e.getMessage(), FacesMessage.SEVERITY_ERROR);
+            e.printStackTrace();
+        }
+
+    }
+    public void imprimirListaAluno() throws ErroSistema {
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        String a = "listaA";
 
         
         
