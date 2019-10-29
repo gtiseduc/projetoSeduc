@@ -71,36 +71,36 @@
             </div>
 
 
-            
-             <table border="1">
-        <tr>
-            <td>&#160;</td>
-            <td>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
-                  <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)">Example column header</text>
-                </svg>
-            </td>
-            <td>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
-                  <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)">Example column header</text>
-                </svg>
-            </td>
-            <td>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
-                  <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)">Example column header</text>
-                </svg>
-            </td>
-        </tr>
-        <tr>
-            <td>Example row header</td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-        </tr>
-    </table>
-            
-            
-                
+
+            <table border="1">
+                <tr>
+                    <td>&#160;</td>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
+                            <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)">Example column header</text>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
+                            <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)">Example column header</text>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
+                            <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)">Example column header</text>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Example row header</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+            </table>
+
+
+
             <table border= "5" cellspacing= "0" cellpadding= "0" align= "center" >
 
                 <tr>
@@ -113,7 +113,7 @@
                 </tr>
                 <tr>
 
-                  
+
 
                     <td rowspan = "3">1</td>
                     <td colspan = "4">A</td>
@@ -125,7 +125,7 @@
                     <td colspan = "2">E</td>
                 </tr>
 
-              
+
 
                 <tr>
 
@@ -152,6 +152,9 @@
 
 
 
+          
+
+
             <p:dataTable var="sale" value="#{dtGroupView.sales}">
                 <f:facet name="header" >
                     AVALIAÇÃO DA LEITURA E ESCRITA 
@@ -159,21 +162,47 @@
 
                 <p:columnGroup type="header" >
                     <p:row >
-                        <p:column rowspan="3" headerText="TURMAS"  styleClass="verticalText" />
+                        <p:column rowspan="3" headerText="LISTA ALUNOS" style="height:350px" ></p:column>
                         <p:column colspan="7" headerText="LEITURA" />
                         <p:column colspan="5" headerText="ESCRITA" />
                         <p:column colspan="5" headerText="ESCRITA" />
 
                     </p:row>
-
+<!--styleClass="verticalText"-->
 
                     <p:row>
-                        <p:column rowspan="3" headerText="1" />
-                        <p:column colspan="2" headerText="A"   />
-                        <p:column colspan="2" headerText="B" />
+                        <p:column rowspan="3"   >
+                             <f:facet name="header" >
+                                  
+                                   <p:graphicImage library="images"  name="1.png"/>
+                                
+                                    
+                            </f:facet>
+                        </p:column>
+                       
+                        <p:column colspan="2" headerText="A"   >
+                            <f:facet name="header" >
+                                  
+                                   <p:graphicImage library="images"  name="1.png"/>
+                                
+                                    
+                            </f:facet>
+                            
+                        </p:column>
+                        <p:column colspan="2" headerText="B" >
+                            <f:facet name="header" >
+                              
+                            </f:facet>
+                        </p:column>
                         <p:column colspan="2" headerText="C" />
                         <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" />
-                        <p:column rowspan="3" headerText="1" />
+                        <p:column rowspan="3" >
+                            <f:facet name="header" >
+                                E
+                                <br></br>
+                                    SCRITA 
+                            </f:facet>
+                        </p:column>
                         <p:column colspan="2" headerText="D" />
                         <p:column colspan="2" headerText="E" />
 
@@ -233,10 +262,67 @@
                     </p:row>
                 </p:columnGroup>
 
+
                 <f:facet name="footer">
                     Data between 2013-2014
                 </f:facet>
+
+
             </p:dataTable>
+
+
+
+<!--
+            <f:view>
+                <h:form>
+                    <h:dataTable value="" border="1" title="dataTable" style="align-content: center">
+
+
+
+                        <f:facet name="header" >
+                            <h:outputText value="JSF dataTable example" style="align-content: center" />
+                        </f:facet> 
+
+
+
+                        <h:column  >
+                            <f:facet name="header" >
+                                <h:outputText value="LEITURA" />
+                            </f:facet> 
+
+
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
+                                <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)"><h:outputText value="AAAA"/></text>
+                            </svg>
+
+                            <h:outputText value="teste2"/>
+                            <h:outputText value="teste3"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ESCRITA" />
+                            </f:facet> 
+                            <h:outputText value="9328888888" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ESCRITA" />
+                            </f:facet> 
+                            <h:outputText value="9328888888" />
+                        </h:column>
+
+                         <h:column>
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="150">
+                                 <text id="thetext" transform="rotate(270, 12, 0) translate(-140,0)"><h:outputText value="9328888888"/></text>
+                             </svg>
+                         </h:column> 
+                    </h:dataTable>
+
+
+
+                </h:form>
+            </f:view>-->
 
         </h:form>
 
