@@ -336,11 +336,11 @@ public class AlunoBean {
         }
     }
 
-    public void listarTurmasParametro(Integer codigo) {
+    public void listarTurmasParametro(Integer codigo,Integer inep) {
 
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo);
         try {
-            turmas = turmaDao.listarTurmaParametro(codigo);
+            turmas = turmaDao.listarTurmaParametro(codigo,inep);
             //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -605,8 +605,11 @@ public class AlunoBean {
 
             visivel = true;
             descritores = serieDao.listarDescritores(codSerie, codDisciplina);
+             System.out.println("TAMANHO DESCRITORES ------ "+descritores.size());
             avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
+             System.out.println("TAMANHO AVALIAÇÕES ------ "+avaliacoes.size());
             alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
+             System.out.println("TAMANHO ALUNOS ------ "+alunos.size());
 
             quantPresentes = avaliacoes.size();
             quantlunos = alunos.size();
@@ -622,6 +625,11 @@ public class AlunoBean {
             resultdescritores = new ArrayList<String>();
             resulAlunos = new ArrayList<String>();
 
+            if (avaliacoes.size() == 0) {
+                adicionarMensagem("LISTADO!", "NÃO TEM AVALIAÇÂO CADASTRADA NESSA TURMA", FacesMessage.SEVERITY_INFO);
+              
+                return;
+            }
             if (descritores.size() == 0) {
                 adicionarMensagem("LISTADO!", "NÃO TEM DESCRITOR NEM GABARITO CADASTRADO", FacesMessage.SEVERITY_INFO);
                 return;

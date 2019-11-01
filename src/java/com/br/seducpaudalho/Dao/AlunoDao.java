@@ -121,14 +121,12 @@ public class AlunoDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from aluno as a\n"
-                + "join escolaserie es on es.codSerie = a.codserie\n"
-                + "join escola e on e.inepEscola = es.inepEscola\n"
-                + "join serie s on s.codSerie = es.codSerie\n"
+        String sql = "select * from aluno as a \n"
+                + "join escola e on e.inepEscola = a.inepEscola\n"
+                + "join serie s on s.codSerie = a.codSerie\n"
                 + "join turma t on t.codTurma = a.codTurma\n"
-                + "\n"
-                + "where s.codSerie = ? && es.inepEscola = ? && a.codTurma = ?\n"
-                + "order by a.codAluno";
+                + "WHERE a.inepEscola = ? && a.codserie = ? && a.codTurma = ?";
+        //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
 
         List<Aluno> alunos = new ArrayList<>();
 
@@ -136,8 +134,8 @@ public class AlunoDao {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setInt(1, codSerie);
-            ps.setInt(2,inepEscola );
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
             ps.setInt(3, codigoTurma);
             ResultSet rs = ps.executeQuery();
 
@@ -177,9 +175,9 @@ public class AlunoDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from testegabarito as a \n" +
-"                join aluno al on al.codAluno = a.codAluno\n" +
-"                where a.inepEscola = ? && a.codSerie = ? && a.codTurma = ?";
+        String sql = "select * from testegabarito as a \n"
+                + "                join aluno al on al.codAluno = a.codAluno\n"
+                + "                where a.inepEscola = ? && a.codSerie = ? && a.codTurma = ?";
 
         List<Avaliacao> avaliacoes = new ArrayList<>();
 
@@ -601,10 +599,10 @@ public class AlunoDao {
 
     public void salvarQuestao(Associacao associacao) throws ErroSistema {
 
-        System.out.println("--------- olha questao : " + associacao.getCodSerie() + "  - "+ associacao.getCodDisciplina()+ "  - "+associacao.getNumeroQuestoes());
+        System.out.println("--------- olha questao : " + associacao.getCodSerie() + "  - " + associacao.getCodDisciplina() + "  - " + associacao.getNumeroQuestoes());
         // System.out.println("--------- olha questao" + associacao.getCodDescritor());
         //Integer p = pesquisarDescritor(associacao.getSiglaDescritor(),associacao.getCodSerie(),associacao.getCodSerie());
-       
+
         List<Associacao> pesquisa = new ArrayList<>();
 
         pesquisa = pesquiQuestoes(associacao);

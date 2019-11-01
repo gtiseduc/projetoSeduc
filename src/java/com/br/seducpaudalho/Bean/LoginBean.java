@@ -255,7 +255,7 @@ public class LoginBean {
            // System.out.println("entrou na pagina de administrador");
             //mudarParaAdmin();
            // mudarParaLocalidade();
-            retorno = "/monitoramento?faces-redirect=true";
+            retorno = "/rastreamento?faces-redirect=true";
             }
               if(login.getNivel().equals("E")){
            // System.out.println("entrou na pagina de administrador");

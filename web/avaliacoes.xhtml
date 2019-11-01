@@ -135,7 +135,7 @@
                             <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
                                 <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
                                 <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
-                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie)}" update="@form"/>
+                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie,alunoBean.aluno.inepEscola)}" update="@form"/>
 
 
                             </p:selectOneMenu>    

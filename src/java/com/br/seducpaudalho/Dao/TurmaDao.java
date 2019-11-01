@@ -64,7 +64,7 @@ public class TurmaDao {
 
     }
 
-    public List<Turma> listarTurmaParametro(Integer codigo) throws ErroSistema {
+    public List<Turma> listarTurmaParametro(Integer codigo,Integer inep) throws ErroSistema {
  
         System.out.println("XXXXXXXXX-------XXXXXXXX--------XXXXXXXXX"+ codigo);
         //codigo = 26091437;
@@ -73,7 +73,7 @@ public class TurmaDao {
 
         String sql = "select * from serieturma as st\n"
                 + "join turma t on t.codTurma = st.codTurma\n"
-                + "where codSerie = ?";
+                + "where codSerie = ? && inepescola = ?";
 
         List<Turma> series = new ArrayList<>();
 
@@ -82,6 +82,7 @@ public class TurmaDao {
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
+            ps.setInt(2, inep);
 
             ResultSet rs = ps.executeQuery();
 

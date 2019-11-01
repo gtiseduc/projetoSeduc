@@ -67,7 +67,7 @@
             <p:growl id="growl" life="3500" />
 
 
-            <p:fieldset legend="AVALIAÇÃO DA LEITURA ESCRITA">
+            <p:fieldset legend="RASTREAMENTO ESCOLAR">
 
 
 
@@ -142,155 +142,184 @@
             <!-- scrollable="true" scrollWidth="100%"-->
 
             <p:dataTable var="alunos" value="#{alunoBean.alunos}"  >
+
+
+
+
                 <p:columnGroup type="header" >
                     <p:row >
-                        <p:column rowspan="3" headerText="LISTA ALUNOS" style="width: 180px" />
-                        <p:column colspan="7" headerText="LEITURA" />
-                        <p:column colspan="5" headerText="ESCRITA" />
-                        <p:column colspan="5" headerText="ESCRITA" />
+                        <p:column rowspan="2" headerText="LISTA ALUNOS" style="width: 180px" />
+                        <p:column colspan="4" headerText="ARTE" />
+                        <p:column colspan="4" headerText="CIÊNCIAS" />
+                        <p:column colspan="4" headerText="EDUCAÇÃO FÍSICA" />
+                        <p:column colspan="4" headerText="GEOGRAFIA" />
+                        <p:column colspan="4" headerText="HISTÓRIA" />
+                        <p:column colspan="4" headerText="LÍNGUA ESTRANGEIRA" />
+                        <p:column colspan="4" headerText="LÍNGUA PORTUGUESA" />
+                        <p:column colspan="4" headerText="MATEMÁTICA" />
 
                     </p:row>
-                    <p:row>
-                        <p:column colspan="1" >
-                            <f:facet name="header"    >
 
-                                <p:graphicImage library="images"  name="0.png"/>
-
-
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="2" headerText="A"   >
-                            <f:facet name="header" >
-
-                                <p:graphicImage library="images"  name="1.png"/>
-
-
-                            </f:facet>
-
-                        </p:column>
-                        <p:column colspan="2" headerText="B" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="2.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="2" headerText="C" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="3.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" >
-
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="5.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="1" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="6.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="2" headerText="D" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="7.png"/>
-                            </f:facet>
-                        </p:column>
-
-
-                        <p:column colspan="2" headerText="E" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="8.png"/>
-                            </f:facet>
-                        </p:column>
-
-                    </p:row>
                     <p:row>
 
-                        <p:column headerText="" />
+                        <p:column headerText="1" />
                         <p:column headerText="2" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="9.png"/>
+
                             </f:facet>
                         </p:column>
 
                         <p:column headerText="3" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="10.png"/>
+
                             </f:facet>
                         </p:column>
                         <p:column headerText="4" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="9.png"/>
+
                             </f:facet>
                         </p:column>
-                        <p:column headerText="5" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="10.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="6" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="9.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="7" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="10.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="8" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="11.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="9" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="12.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="10" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="13.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="11" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="15.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="12" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="14.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="" >
+                        <p:column headerText="1" >
                             <f:facet name="header" >
 
                             </f:facet>
                         </p:column>
-                        <p:column headerText="14" >
+                        <p:column headerText="2" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="18.png"/>
+
                             </f:facet>
                         </p:column>
-                        <p:column headerText="15" >
+                        <p:column headerText="3" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="19.png"/>
+
                             </f:facet>
                         </p:column>
-                        <p:column headerText="16" >
+                        <p:column headerText="4" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="20.png"/>
+
                             </f:facet>
                         </p:column>
-                        <p:column headerText="17" >
+                        <p:column headerText="1" >
                             <f:facet name="header" >
-                                <p:graphicImage library="images"  name="21.png"/>
+
                             </f:facet>
                         </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+
 
 
 
@@ -300,108 +329,132 @@
                 <p:column headerText="Nome do aluno" priority="3">
                     <h:outputText value="#{alunos.nome}" />
                 </p:column>
+                <p:column headerText=""   >
+                    <p:inputText />
+                </p:column>
+                <p:column priority="3" >
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
                 <p:column headerText="" priority="3" >
-                    <!-- <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÂO" style="width:60px">
-                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />-->
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO"  >
 
-                    </p:inputSwitch>
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3" >
+
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:inputText />
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
 
-                    </p:inputSwitch>
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3" >
+
+                    <p:inputText />
                 </p:column>
 
 
@@ -415,6 +468,327 @@
 
 
 
+
+
+            <p:dataTable id="cars" var="alunos"  value="#{alunoBean.alunos}">
+                
+                <f:facet name="header">
+                    <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="" />
+                    <p:columnToggler datasource="cars" trigger="toggler" />
+                </f:facet>
+                <p:columnGroup type="header" >
+                    <p:row >
+                        <p:column rowspan="2" headerText="LISTA ALUNOS" style="width: 180px" />
+                        <p:column colspan="4" headerText="ARTE" />
+                        <p:column colspan="4" headerText="CIÊNCIAS" />
+                        <p:column colspan="4" headerText="EDUCAÇÃO FÍSICA" />
+                        <p:column colspan="4" headerText="GEOGRAFIA" />
+                        <p:column colspan="4" headerText="HISTÓRIA" />
+                        <p:column colspan="4" headerText="LÍNGUA ESTRANGEIRA" />
+                        <p:column colspan="4" headerText="LÍNGUA PORTUGUESA" />
+                        <p:column colspan="4" headerText="MATEMÁTICA" />
+
+                    </p:row>
+
+                    <p:row>
+
+                        <p:column headerText="1" />
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="1" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="2" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="3" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+                        <p:column headerText="4" >
+                            <f:facet name="header" >
+
+                            </f:facet>
+                        </p:column>
+
+
+
+
+
+                    </p:row>
+                </p:columnGroup>
+                
+                  <p:column headerText="Nome do aluno" priority="3">
+                    <h:outputText value="#{alunos.nome}" />
+                </p:column>
+                <p:column headerText=""   >
+                    <p:inputText />
+                </p:column>
+                <p:column priority="3" >
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3" >
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3" >
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3">
+
+                    <p:inputText />
+                </p:column>
+                <p:column headerText="" priority="3" >
+
+                    <p:inputText />
+                </p:column>
+
+            </p:dataTable>
 
 
 
