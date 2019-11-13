@@ -314,6 +314,8 @@ public class AlunoBean {
 
     public void listarSerieParametro(Integer codigo) {
 
+        series = new ArrayList<>();
+        
         System.out.println("--------****----***----***------- " + codigo);
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
@@ -339,6 +341,8 @@ public class AlunoBean {
     public void listarTurmasParametro(Integer codigo,Integer inep) {
 
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo);
+       
+       turmas = new ArrayList<>();
         try {
             turmas = turmaDao.listarTurmaParametro(codigo,inep);
             //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
