@@ -72,6 +72,13 @@
                 //show the dialog
                 PF('dlg').show();
             }
+            function exportChart3() {
+                //export image
+                $('#output').empty().append(PF('chart3').exportAsImage());
+
+                //show the dialog
+                PF('dlg').show();
+            }
             //]]>
         </script>
 
@@ -319,7 +326,7 @@
 
 
             <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
-           
+
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
             </div>
@@ -330,7 +337,7 @@
             <br></br>
             <br></br>
             <p:chart type="bar" model="#{alunoBean.horizontalEvasao}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalEvasao != null}" widgetVar="chart2"/>
-
+          
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart2()"/>
             </div>
@@ -338,7 +345,14 @@
 
             <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
 
-
+ 
+            <br></br>
+            <br></br>
+            <br></br>
+            <p:chart type="bar" model="#{alunoBean.horizontalRendimento}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalRendimento != null}" widgetVar="chart3"/>
+            <div class="ui-g ui-fluid">
+                <p:commandButton type="button" value="Exportar"  onclick="exportChart3()"/>
+            </div>
         </h:form>
 
 

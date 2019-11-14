@@ -115,6 +115,9 @@ public class AlunoBean {
     private List<String> resulAlunos = new ArrayList<String>();
 
     private Integer quantlunos = 0;
+    private Integer quantDescritores = 0;
+    private Integer quantQuest = 0;
+    private Integer quantAcerto = 0;
     private Integer quantPresentes = 0;
     private double resultevasaoTurma = 0;
     private double resulPreseTurma = 0;
@@ -122,9 +125,10 @@ public class AlunoBean {
     private BarChartModel barChartModel;
     private HorizontalBarChartModel horizontalBarModel;
     private HorizontalBarChartModel horizontalEvasao;
+    private HorizontalBarChartModel horizontalRendimento;
 
     private LineChartModel lineModel;
-    
+
     private boolean visivel = false;
 
     public void salvar() {
@@ -315,7 +319,7 @@ public class AlunoBean {
     public void listarSerieParametro(Integer codigo) {
 
         series = new ArrayList<>();
-        
+
         System.out.println("--------****----***----***------- " + codigo);
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
@@ -338,13 +342,13 @@ public class AlunoBean {
         }
     }
 
-    public void listarTurmasParametro(Integer codigo,Integer inep) {
+    public void listarTurmasParametro(Integer codigo, Integer inep) {
 
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo);
-       
-       turmas = new ArrayList<>();
+
+        turmas = new ArrayList<>();
         try {
-            turmas = turmaDao.listarTurmaParametro(codigo,inep);
+            turmas = turmaDao.listarTurmaParametro(codigo, inep);
             //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -609,19 +613,22 @@ public class AlunoBean {
 
             visivel = true;
             descritores = serieDao.listarDescritores(codSerie, codDisciplina);
-             System.out.println("TAMANHO DESCRITORES ------ "+descritores.size());
+            System.out.println("TAMANHO DESCRITORES ------ " + descritores.size());
             avaliacoes = alunoDao.listarGabaritosAlunos(codTurma, inep, codSerie);
-             System.out.println("TAMANHO AVALIAÇÕES ------ "+avaliacoes.size());
+            System.out.println("TAMANHO AVALIAÇÕES ------ " + avaliacoes.size());
             alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
-             System.out.println("TAMANHO ALUNOS ------ "+alunos.size());
+            System.out.println("TAMANHO ALUNOS ------ " + alunos.size());
 
             quantPresentes = avaliacoes.size();
             quantlunos = alunos.size();
+            quantDescritores = descritores.size();
+
+            quantQuest = quantlunos * quantDescritores;
 
             quantFaltosos = quantlunos - quantPresentes;
 
             resultevasaoTurma = 100 * quantPresentes / quantlunos;
-           
+
             resulPreseTurma = 100 * quantFaltosos / quantlunos;
 
             System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
@@ -631,7 +638,7 @@ public class AlunoBean {
 
             if (avaliacoes.size() == 0) {
                 adicionarMensagem("LISTADO!", "NÃO TEM AVALIAÇÂO CADASTRADA NESSA TURMA", FacesMessage.SEVERITY_INFO);
-              
+
                 return;
             }
             if (descritores.size() == 0) {
@@ -744,6 +751,9 @@ public class AlunoBean {
             }
 
             System.out.println("A SOMA DAS LINHAS É " + s);
+
+            quantAcerto += s;
+            System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
             resulAlunos.add(Integer.toString(s));
 
             s = 0;
@@ -773,18 +783,15 @@ public class AlunoBean {
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
             Integer dp = 100 * sum / descritores.size();
-            
+
             descri.add(Integer.toString(dp));
-            
+
             resultdescritores.add(Integer.toString(dp));
-            
+
             // System.out.println(sum + "%");
             sum = 0;
         } while (col != largestRow);
 
-       
-        
-        
         for (int av = 0; av < avaliacoes.size(); av++) {
 
             Avaliacao ava = avaliacoes.get(av);
@@ -919,19 +926,16 @@ public class AlunoBean {
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
         yAxis.setLabel("DESCRITORES");
 
-     
-        
-        
         horizontalEvasao = new HorizontalBarChartModel();
         ChartSeries evasao = new ChartSeries();
         ChartSeries presentes = new ChartSeries();
-        
+
         evasao.setLabel("PRESENTES");
         evasao.set("PRESENTES", resultevasaoTurma);
         horizontalEvasao.addSeries(evasao);
-        
+
         presentes.setLabel("EVASÃO");
-        presentes.set("EVASÃO",resulPreseTurma);
+        presentes.set("EVASÃO", resulPreseTurma);
         horizontalEvasao.addSeries(presentes);
 
         horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
@@ -947,45 +951,61 @@ public class AlunoBean {
         xAxi.setTickFormat("%1$.0f");
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
         yAxi.setLabel("EVASÃO");
+
+      double rendN = quantQuest - quantAcerto;
         
-        
+        horizontalRendimento = new HorizontalBarChartModel();
+        ChartSeries rendimentoP = new ChartSeries();
+        ChartSeries rendimentoN = new ChartSeries();
+
+        rendimentoP.setLabel("RENDIMENTO POSITIVO");
+        rendimentoP.set("RENDIMENTO POSITIVO", quantAcerto * 100 / quantQuest);
+        horizontalRendimento.addSeries(rendimentoP);
+
+        rendimentoN.setLabel("RENDIMENTO NEGATIVO");
+        rendimentoN.set("NEGATIVO", rendN * 100 / quantQuest);
+        horizontalRendimento.addSeries(rendimentoN);
+        horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO DA TURMA ");
+        horizontalRendimento.setSeriesColors("66ff33,ff0000");
+        horizontalRendimento.setLegendPosition("e");
+        horizontalRendimento.setStacked(true);
+        horizontalRendimento.setShowPointLabels(true);
+
+        Axis rAxi = horizontalRendimento.getAxis(AxisType.X);
+        rAxi.setLabel("");
+        rAxi.setMin(0);
+        rAxi.setMax(110);
+        rAxi.setTickFormat("%1$.0f");
+        Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
+        yrAxi.setLabel("RENDIMENTO");
 
     }
 
     public void imprimirAlunos(String serie) throws ErroSistema {
 
         Map<String, Object> params = new HashMap<String, Object>();
-        
-         String a ="";
-        if(serie.equals("1") || serie.equals("2") ){
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+
+        String a = "";
+        if (serie.equals("1") || serie.equals("2")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba1";
         }
-        if(serie.equals("3") || serie.equals("4") || serie.equals("5")){
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+        if (serie.equals("3") || serie.equals("4") || serie.equals("5")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba2";
         }
-        if(serie.equals("6") || serie.equals("7") || serie.equals("12")){
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+        if (serie.equals("6") || serie.equals("7") || serie.equals("12")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba3";
         }
-        if(serie.equals("8")){
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+        if (serie.equals("8")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba4";
         }
-        if(serie.equals("9")){
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()"+ serie);
+        if (serie.equals("9")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba5";
         }
-       
-        
-        
-        
-        
-        
-       
-        
-        
 
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
@@ -1011,30 +1031,29 @@ public class AlunoBean {
         }
 
     }
+
     public void imprimirReservas() throws ErroSistema {
 
         Map<String, Object> params = new HashMap<String, Object>();
         String a = "gabareserva";
-       
-        
+
         List<Aluno> alunosReserva = new ArrayList<>();
-        
+
         for (int i = 0; i < 5; i++) {
-          
-           Aluno aa = new Aluno();
-           
-           aa.setNomeEscola( alunos.get(10).getNomeEscola());
-           aa.setNomeSerie(alunos.get(12).getNomeSerie());
-           aa.setNomeTurma(alunos.get(14).getNomeTurma());
-           aa.setTurno(alunos.get(5).getTurno());
-           
-           alunosReserva.add(aa);
-                  
+
+            Aluno aa = new Aluno();
+
+            aa.setNomeEscola(alunos.get(10).getNomeEscola());
+            aa.setNomeSerie(alunos.get(12).getNomeSerie());
+            aa.setNomeTurma(alunos.get(14).getNomeTurma());
+            aa.setTurno(alunos.get(5).getTurno());
+
+            alunosReserva.add(aa);
+
         }
-           
-        System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirReservas()"+alunosReserva.size());
-    
-        
+
+        System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirReservas()" + alunosReserva.size());
+
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunosReserva);
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -1059,13 +1078,12 @@ public class AlunoBean {
         }
 
     }
+
     public void imprimirListaAluno() throws ErroSistema {
 
         Map<String, Object> params = new HashMap<String, Object>();
         String a = "listaA";
 
-        
-        
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -1729,8 +1747,14 @@ public class AlunoBean {
     public void setVisivel(boolean visivel) {
         this.visivel = visivel;
     }
-    
-    
+
+    public HorizontalBarChartModel getHorizontalRendimento() {
+        return horizontalRendimento;
+    }
+
+    public void setHorizontalRendimento(HorizontalBarChartModel horizontalRendimento) {
+        this.horizontalRendimento = horizontalRendimento;
+    }
 
 }
 /*String frase = "00149/007587/10987";
