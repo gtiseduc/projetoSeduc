@@ -959,11 +959,11 @@ public class AlunoBean {
         ChartSeries rendimentoN = new ChartSeries();
 
         rendimentoP.setLabel("RENDIMENTO POSITIVO");
-        rendimentoP.set("RENDIMENTO POSITIVO", quantAcerto * 100 / quantQuest);
+        rendimentoP.set("", quantAcerto * 100 / quantQuest);
         horizontalRendimento.addSeries(rendimentoP);
 
         rendimentoN.setLabel("RENDIMENTO NEGATIVO");
-        rendimentoN.set("NEGATIVO", rendN * 100 / quantQuest);
+        rendimentoN.set("", rendN * 100 / quantQuest);
         horizontalRendimento.addSeries(rendimentoN);
         horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO DA TURMA ");
         horizontalRendimento.setSeriesColors("66ff33,ff0000");
@@ -977,7 +977,7 @@ public class AlunoBean {
         rAxi.setMax(110);
         rAxi.setTickFormat("%1$.0f");
         Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
-        yrAxi.setLabel("RENDIMENTO");
+        yrAxi.setLabel("");
 
     }
 
