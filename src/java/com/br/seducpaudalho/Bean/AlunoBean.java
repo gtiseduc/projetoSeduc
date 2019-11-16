@@ -629,6 +629,8 @@ public class AlunoBean {
 
             resultevasaoTurma = 100 * quantPresentes / quantlunos;
 
+            alunoDao.insertFrequeciaTurma(codTurma, inep, codSerie, resultevasaoTurma);
+
             resulPreseTurma = 100 * quantFaltosos / quantlunos;
 
             System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
@@ -952,14 +954,20 @@ public class AlunoBean {
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
         yAxi.setLabel("EVASÃO");
 
-      double rendN = quantQuest - quantAcerto;
-        
+        double rendN = quantQuest - quantAcerto;
+
         horizontalRendimento = new HorizontalBarChartModel();
         ChartSeries rendimentoP = new ChartSeries();
         ChartSeries rendimentoN = new ChartSeries();
 
         rendimentoP.setLabel("RENDIMENTO POSITIVO");
-        rendimentoP.set("", quantAcerto * 100 / quantQuest);
+
+        double rend = quantAcerto * 100 / quantQuest;
+       
+        rendimentoP.set("", rend);
+
+        alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
+
         horizontalRendimento.addSeries(rendimentoP);
 
         rendimentoN.setLabel("RENDIMENTO NEGATIVO");
@@ -978,7 +986,7 @@ public class AlunoBean {
         rAxi.setTickFormat("%1$.0f");
         Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
         yrAxi.setLabel("");
-
+        rend = 0;
     }
 
     public void imprimirAlunos(String serie) throws ErroSistema {
