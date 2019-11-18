@@ -329,6 +329,19 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+    public void listarTodasSerie() {
+
+        series = new ArrayList<>();
+
+        
+        try {
+           
+            series = serieDao.listarTodasSerie();
+            // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
 
     public void listarDisciplinasSerie(Integer codigo) {
 
@@ -974,6 +987,770 @@ public class AlunoBean {
         rendimentoN.set("", rendN * 100 / quantQuest);
         horizontalRendimento.addSeries(rendimentoN);
         horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO DA TURMA ");
+        horizontalRendimento.setSeriesColors("66ff33,ff0000");
+        horizontalRendimento.setLegendPosition("e");
+        horizontalRendimento.setStacked(true);
+        horizontalRendimento.setShowPointLabels(true);
+
+        Axis rAxi = horizontalRendimento.getAxis(AxisType.X);
+        rAxi.setLabel("");
+        rAxi.setMin(0);
+        rAxi.setMax(110);
+        rAxi.setTickFormat("%1$.0f");
+        Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
+        yrAxi.setLabel("");
+        rend = 0;
+    }
+    public void mediaEscolarDescritor(Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+
+        System.out.println("olha o codigo --------" + inep + "****----***" + codDisciplina + "----***------- " + codSerie);
+
+        try {
+
+            visivel = true;
+            descritores = serieDao.listarDescritores(codSerie, codDisciplina);
+            System.out.println("TAMANHO DESCRITORES ------ " + descritores.size());
+            avaliacoes = alunoDao.listarGabaritoMediaEscolar(inep, codSerie);
+            System.out.println("TAMANHO AVALIAÇÕES ------ " + avaliacoes.size());
+            alunos = alunoDao.listarAlunos(inep, codSerie);
+            System.out.println("TAMANHO ALUNOS ------ " + alunos.size());
+
+            
+            
+            
+            quantPresentes = avaliacoes.size();
+            quantlunos = alunos.size();
+            quantDescritores = descritores.size();
+
+            quantQuest = quantlunos * quantDescritores;
+
+            quantFaltosos = quantlunos - quantPresentes;
+
+            resultevasaoTurma = 100 * quantPresentes / quantlunos;
+
+            //------------alunoDao.insertFrequeciaTurma(codTurma, inep, codSerie, resultevasaoTurma);----//
+
+            resulPreseTurma = 100 * quantFaltosos / quantlunos;
+
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
+
+            resultdescritores = new ArrayList<String>();
+            resulAlunos = new ArrayList<String>();
+
+            if (avaliacoes.size() == 0) {
+                adicionarMensagem("LISTADO!", "NÃO TEM AVALIAÇÂO CADASTRADA NESSA TURMA", FacesMessage.SEVERITY_INFO);
+
+                return;
+            }
+            if (descritores.size() == 0) {
+                adicionarMensagem("LISTADO!", "NÃO TEM DESCRITOR NEM GABARITO CADASTRADO", FacesMessage.SEVERITY_INFO);
+                return;
+            }
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+
+        dados = new String[quantPresentes][quantPresentes];
+        String gaba = "";
+
+        for (int co = 0; co < descritores.size(); co++) {
+
+            Descritor gabarito = descritores.get(co);
+            gaba += gabarito.getEspeciDescritor();
+            System.out.println("ALTERNATIVAS DOS GABARITOS " + gabarito.getEspeciDescritor());
+        }
+
+        List<String> listaDeGabarito = new ArrayList<String>();
+
+        String resp = "";
+        char tes = 0;
+
+        for (int av = 0; av < avaliacoes.size(); av++) {
+
+            Avaliacao ava = avaliacoes.get(av);
+
+            if (codDisciplina == 1) {
+                listaDeGabarito.add(ava.getRespPortugues());
+                resp = ava.getRespPortugues();
+            }
+            if (codDisciplina == 2) {
+                listaDeGabarito.add(ava.getRespMatematica());
+                resp = ava.getRespMatematica();
+            }
+            if (codDisciplina == 3) {
+                listaDeGabarito.add(ava.getRespCienciasHumanas());
+                resp = ava.getRespCienciasHumanas();
+            }
+            if (codDisciplina == 4) {
+                listaDeGabarito.add(ava.getRespCienciasNatureza());
+                resp = ava.getRespCienciasNatureza();
+            }
+        }
+
+        String gabarito = gaba;
+
+        String compara = "";
+        Integer resultado = 0;
+
+        List<String> listaDeResultado = new ArrayList<String>();
+
+        int[][] data = new int[listaDeGabarito.size()][gabarito.length()];
+
+        List<Integer> meuGabarito = new ArrayList<Integer>();
+
+        System.out.println("tamano1 " + listaDeGabarito.size() + "tamanho2 " + gabarito.length());
+
+        for (int b = 0; b < listaDeGabarito.size(); b++) {
+
+            String a = listaDeGabarito.get(b);
+
+            for (int i = 0; i < a.length(); i++) {
+
+                if (a.charAt(i) == gabarito.charAt(i)) {
+
+                    compara = compara + "1";
+                    //resultado = resultado + Integer.parseInt(compara);
+
+                } else {
+                    compara = compara + "0";
+                }
+            }
+
+            listaDeResultado.add(compara);
+            System.out.println("lista de resultado " + compara);
+            compara = "";
+            resultado = 0;
+        }
+
+        String var = "";
+        String nome = "";
+
+        int s = 0;
+        for (int i = 0; i < listaDeResultado.size(); i++) {
+
+            System.out.println("***** -#######- ****" + listaDeResultado.size());
+            Avaliacao aa = new Avaliacao();
+            var = listaDeResultado.get(i);
+
+            System.out.println("***** - - ****" + i);
+           
+            for (int j = 0; j < var.length(); j++) {
+
+              
+                int v = Character.getNumericValue(var.charAt(j));
+                s = s + v;
+              
+                data[i][j] = v;
+               
+
+            }
+
+            System.out.println("A SOMA DAS LINHAS É " + s);
+
+            quantAcerto += s;
+            System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
+            resulAlunos.add(Integer.toString(s));
+
+            s = 0;
+        }
+
+        int size = data.length, largestRow = 0, sum = 0, col = 0;
+
+        for (int check = 0; check <= (size - 1); check++) {
+            if (largestRow < data[check].length) {
+                largestRow = data[check].length;
+            }
+        }
+
+        resultdescritores.add("RESULTADO DESCRITORES");
+
+        do {
+            for (int row = 0; row < data.length; row++) {
+                //System.out.println("row(long): "+data[row].length+", col: "+col);
+                //System.out.println(col>=(data[row].length-1));
+
+                if (col >= (data[row].length)) {
+                } else {
+                    sum += data[row][col];
+                }
+            }
+            col += 1;
+
+            System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
+            Integer dp = 100 * sum / descritores.size();
+
+            descri.add(Integer.toString(dp));
+
+            resultdescritores.add(Integer.toString(dp));
+
+            // System.out.println(sum + "%");
+            sum = 0;
+        } while (col != largestRow);
+
+        for (int av = 0; av < avaliacoes.size(); av++) {
+
+            Avaliacao ava = avaliacoes.get(av);
+
+            if (codDisciplina == 1) {
+                listaDeGabarito.add(ava.getRespPortugues());
+                resp = ava.getRespPortugues();
+            }
+            if (codDisciplina == 2) {
+                listaDeGabarito.add(ava.getRespMatematica());
+                resp = ava.getRespMatematica();
+            }
+            if (codDisciplina == 3) {
+                listaDeGabarito.add(ava.getRespCienciasHumanas());
+                resp = ava.getRespCienciasHumanas();
+            }
+            if (codDisciplina == 4) {
+                listaDeGabarito.add(ava.getRespCienciasNatureza());
+                resp = ava.getRespCienciasNatureza();
+            }
+
+            System.out.println("LISTA DE QUESTÕES POR ALUNO " + resp);
+            dados[av][0] = avaliacoes.get(av).getNomeAluno();
+
+            for (int j = 1; j <= descritores.size() + 1; j++) {
+
+                if (j > descritores.size()) {
+                    dados[av][j] = resulAlunos.get(av);
+                } else {
+                    if (codDisciplina == 1) {
+                        tes = avaliacoes.get(av).getRespPortugues().charAt(j - 1);
+                    }
+                    if (codDisciplina == 2) {
+                        tes = avaliacoes.get(av).getRespMatematica().charAt(j - 1);
+                    }
+                    if (codDisciplina == 3) {
+                        tes = avaliacoes.get(av).getRespCienciasHumanas().charAt(j - 1);
+                    }
+                    if (codDisciplina == 4) {
+                        tes = avaliacoes.get(av).getRespCienciasNatureza().charAt(j - 1);
+                    }
+
+                    String b = String.valueOf(tes);
+                    System.out.println("############ " + b);
+
+                    dados[av][j] = b;
+                }
+
+            }
+
+        }
+
+        horizontalBarModel = new HorizontalBarChartModel();
+
+        ChartSeries vermelho = new ChartSeries();
+        ChartSeries amarelo = new ChartSeries();
+        ChartSeries azul = new ChartSeries();
+        ChartSeries verde = new ChartSeries();
+
+        vermelho.setLabel("25%");
+        amarelo.setLabel("25% - 50%");
+        azul.setLabel("50% - 75%");
+        verde.setLabel("75% - 100%");
+
+        //String a = "A";
+        System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
+        System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + descritores.size());
+
+        int ve = 0;
+        int ama = 0;
+        int az = 0;
+        int ver = 0;
+
+        for (int i = 0; i < descritores.size(); i++) {
+            int b = i + 1;
+
+            int a = Integer.parseInt(resultdescritores.get(b));
+
+            if (a <= 25) {
+                ve = a;
+                ama = 0;
+                az = 0;
+                ver = 0;
+            }
+            if (a > 24 && a <= 50) {
+                ve = 0;
+                ama = a;
+                az = 0;
+                ver = 0;
+            }
+            if (a > 49 && a <= 75) {
+                ve = 0;
+                ama = 0;
+                az = a;
+                ver = 0;
+            }
+            if (a > 74) {
+                ve = 0;
+                ama = 0;
+                az = 0;
+                ver = a;
+            }
+
+            System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + a);
+
+            System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
+
+            vermelho.set(i + " - " + descritores.get(i).getSiglaDescritor(), ve);
+            amarelo.set(i + " - " + descritores.get(i).getSiglaDescritor(), ama);
+            azul.set(i + " - " + descritores.get(i).getSiglaDescritor(), az);
+            verde.set(i + " - " + descritores.get(i).getSiglaDescritor(), ver);
+
+        }
+
+        //}
+        horizontalBarModel.addSeries(vermelho);
+        horizontalBarModel.addSeries(amarelo);
+        horizontalBarModel.addSeries(azul);
+        horizontalBarModel.addSeries(verde);
+
+        horizontalBarModel.setTitle("GRAFICO DE DESCRITORES ");
+        horizontalBarModel.setSeriesColors("ff0000,ffff00,0000ff,66ff33");
+        horizontalBarModel.setLegendPosition("e");
+        horizontalBarModel.setStacked(true);
+        horizontalBarModel.setShowPointLabels(true);
+
+        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+        xAxis.setLabel("");
+        xAxis.setMin(0);
+        xAxis.setMax(110);
+        xAxis.setTickFormat("%1$.0f");
+        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+        yAxis.setLabel("DESCRITORES");
+
+        horizontalEvasao = new HorizontalBarChartModel();
+        ChartSeries evasao = new ChartSeries();
+        ChartSeries presentes = new ChartSeries();
+
+        evasao.setLabel("PRESENTES");
+        evasao.set("PRESENTES", resultevasaoTurma);
+        horizontalEvasao.addSeries(evasao);
+
+        presentes.setLabel("EVASÃO");
+        presentes.set("EVASÃO", resulPreseTurma);
+        horizontalEvasao.addSeries(presentes);
+
+        horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
+        horizontalEvasao.setSeriesColors("66ff33,ff0000");
+        horizontalEvasao.setLegendPosition("e");
+        horizontalEvasao.setStacked(true);
+        horizontalEvasao.setShowPointLabels(true);
+
+        Axis xAxi = horizontalEvasao.getAxis(AxisType.X);
+        xAxi.setLabel("");
+        xAxi.setMin(0);
+        xAxi.setMax(110);
+        xAxi.setTickFormat("%1$.0f");
+        Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
+        yAxi.setLabel("EVASÃO");
+
+        double rendN = quantQuest - quantAcerto;
+
+        horizontalRendimento = new HorizontalBarChartModel();
+        ChartSeries rendimentoP = new ChartSeries();
+        ChartSeries rendimentoN = new ChartSeries();
+
+        rendimentoP.setLabel("RENDIMENTO POSITIVO");
+
+        double rend = quantAcerto * 100 / quantQuest;
+       
+        rendimentoP.set("", rend);
+
+       // alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
+
+        horizontalRendimento.addSeries(rendimentoP);
+
+        rendimentoN.setLabel("RENDIMENTO NEGATIVO");
+        rendimentoN.set("", rendN * 100 / quantQuest);
+        horizontalRendimento.addSeries(rendimentoN);
+        horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO DA SÉRIE ");
+        horizontalRendimento.setSeriesColors("66ff33,ff0000");
+        horizontalRendimento.setLegendPosition("e");
+        horizontalRendimento.setStacked(true);
+        horizontalRendimento.setShowPointLabels(true);
+
+        Axis rAxi = horizontalRendimento.getAxis(AxisType.X);
+        rAxi.setLabel("");
+        rAxi.setMin(0);
+        rAxi.setMax(110);
+        rAxi.setTickFormat("%1$.0f");
+        Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
+        yrAxi.setLabel("");
+        rend = 0;
+    }
+    public void mediaGeralDescritor(Integer codSerie, Integer codDisciplina) throws ErroSistema {
+
+       
+
+        try {
+
+            visivel = true;
+            descritores = serieDao.listarDescritores(codSerie, codDisciplina);
+            System.out.println("TAMANHO DESCRITORES ------ " + descritores.size());
+            avaliacoes = alunoDao.listarGabaritoGeral(codSerie);
+            System.out.println("TAMANHO AVALIAÇÕES ------ " + avaliacoes.size());
+            alunos = alunoDao.listarTodosAlunos(codSerie);
+            System.out.println("TAMANHO ALUNOS ------ " + alunos.size());
+
+            
+            
+            
+            quantPresentes = avaliacoes.size();
+            quantlunos = alunos.size();
+            quantDescritores = descritores.size();
+
+            quantQuest = quantlunos * quantDescritores;
+
+            quantFaltosos = quantlunos - quantPresentes;
+
+            resultevasaoTurma = 100 * quantPresentes / quantlunos;
+
+            //------------alunoDao.insertFrequeciaTurma(codTurma, inep, codSerie, resultevasaoTurma);----//
+
+            resulPreseTurma = 100 * quantFaltosos / quantlunos;
+
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
+
+            resultdescritores = new ArrayList<String>();
+            resulAlunos = new ArrayList<String>();
+
+            if (avaliacoes.size() == 0) {
+                adicionarMensagem("LISTADO!", "NÃO TEM AVALIAÇÂO CADASTRADA NESSA TURMA", FacesMessage.SEVERITY_INFO);
+
+                return;
+            }
+            if (descritores.size() == 0) {
+                adicionarMensagem("LISTADO!", "NÃO TEM DESCRITOR NEM GABARITO CADASTRADO", FacesMessage.SEVERITY_INFO);
+                return;
+            }
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+
+        dados = new String[quantPresentes][quantPresentes];
+        String gaba = "";
+
+        for (int co = 0; co < descritores.size(); co++) {
+
+            Descritor gabarito = descritores.get(co);
+            gaba += gabarito.getEspeciDescritor();
+            System.out.println("ALTERNATIVAS DOS GABARITOS " + gabarito.getEspeciDescritor());
+        }
+
+        List<String> listaDeGabarito = new ArrayList<String>();
+
+        String resp = "";
+        char tes = 0;
+
+        for (int av = 0; av < avaliacoes.size(); av++) {
+
+            Avaliacao ava = avaliacoes.get(av);
+
+            if (codDisciplina == 1) {
+                listaDeGabarito.add(ava.getRespPortugues());
+                resp = ava.getRespPortugues();
+            }
+            if (codDisciplina == 2) {
+                listaDeGabarito.add(ava.getRespMatematica());
+                resp = ava.getRespMatematica();
+            }
+            if (codDisciplina == 3) {
+                listaDeGabarito.add(ava.getRespCienciasHumanas());
+                resp = ava.getRespCienciasHumanas();
+            }
+            if (codDisciplina == 4) {
+                listaDeGabarito.add(ava.getRespCienciasNatureza());
+                resp = ava.getRespCienciasNatureza();
+            }
+        }
+
+        String gabarito = gaba;
+
+        String compara = "";
+        Integer resultado = 0;
+
+        List<String> listaDeResultado = new ArrayList<String>();
+
+        int[][] data = new int[listaDeGabarito.size()][gabarito.length()];
+
+        List<Integer> meuGabarito = new ArrayList<Integer>();
+
+        System.out.println("tamano1 " + listaDeGabarito.size() + "tamanho2 " + gabarito.length());
+
+        for (int b = 0; b < listaDeGabarito.size(); b++) {
+
+            String a = listaDeGabarito.get(b);
+
+            for (int i = 0; i < a.length(); i++) {
+
+                if (a.charAt(i) == gabarito.charAt(i)) {
+
+                    compara = compara + "1";
+                    //resultado = resultado + Integer.parseInt(compara);
+
+                } else {
+                    compara = compara + "0";
+                }
+            }
+
+            listaDeResultado.add(compara);
+            System.out.println("lista de resultado " + compara);
+            compara = "";
+            resultado = 0;
+        }
+
+        String var = "";
+        String nome = "";
+
+        int s = 0;
+        for (int i = 0; i < listaDeResultado.size(); i++) {
+
+            System.out.println("***** -#######- ****" + listaDeResultado.size());
+            Avaliacao aa = new Avaliacao();
+            var = listaDeResultado.get(i);
+
+            System.out.println("***** - - ****" + i);
+           
+            for (int j = 0; j < var.length(); j++) {
+
+              
+                int v = Character.getNumericValue(var.charAt(j));
+                s = s + v;
+              
+                data[i][j] = v;
+               
+
+            }
+
+            System.out.println("A SOMA DAS LINHAS É " + s);
+
+            quantAcerto += s;
+            System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
+            resulAlunos.add(Integer.toString(s));
+
+            s = 0;
+        }
+
+        int size = data.length, largestRow = 0, sum = 0, col = 0;
+
+        for (int check = 0; check <= (size - 1); check++) {
+            if (largestRow < data[check].length) {
+                largestRow = data[check].length;
+            }
+        }
+
+        resultdescritores.add("RESULTADO DESCRITORES");
+
+        do {
+            for (int row = 0; row < data.length; row++) {
+                //System.out.println("row(long): "+data[row].length+", col: "+col);
+                //System.out.println(col>=(data[row].length-1));
+
+                if (col >= (data[row].length)) {
+                } else {
+                    sum += data[row][col];
+                }
+            }
+            col += 1;
+
+            System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
+            Integer dp = 100 * sum / descritores.size();
+
+            descri.add(Integer.toString(dp));
+
+            resultdescritores.add(Integer.toString(dp));
+
+            // System.out.println(sum + "%");
+            sum = 0;
+        } while (col != largestRow);
+
+        for (int av = 0; av < avaliacoes.size(); av++) {
+
+            Avaliacao ava = avaliacoes.get(av);
+
+            if (codDisciplina == 1) {
+                listaDeGabarito.add(ava.getRespPortugues());
+                resp = ava.getRespPortugues();
+            }
+            if (codDisciplina == 2) {
+                listaDeGabarito.add(ava.getRespMatematica());
+                resp = ava.getRespMatematica();
+            }
+            if (codDisciplina == 3) {
+                listaDeGabarito.add(ava.getRespCienciasHumanas());
+                resp = ava.getRespCienciasHumanas();
+            }
+            if (codDisciplina == 4) {
+                listaDeGabarito.add(ava.getRespCienciasNatureza());
+                resp = ava.getRespCienciasNatureza();
+            }
+
+            System.out.println("LISTA DE QUESTÕES POR ALUNO " + resp);
+            dados[av][0] = avaliacoes.get(av).getNomeAluno();
+
+            for (int j = 1; j <= descritores.size() + 1; j++) {
+
+                if (j > descritores.size()) {
+                    dados[av][j] = resulAlunos.get(av);
+                } else {
+                    if (codDisciplina == 1) {
+                        tes = avaliacoes.get(av).getRespPortugues().charAt(j - 1);
+                    }
+                    if (codDisciplina == 2) {
+                        tes = avaliacoes.get(av).getRespMatematica().charAt(j - 1);
+                    }
+                    if (codDisciplina == 3) {
+                        tes = avaliacoes.get(av).getRespCienciasHumanas().charAt(j - 1);
+                    }
+                    if (codDisciplina == 4) {
+                        tes = avaliacoes.get(av).getRespCienciasNatureza().charAt(j - 1);
+                    }
+
+                    String b = String.valueOf(tes);
+                    System.out.println("############ " + b);
+
+                    dados[av][j] = b;
+                }
+
+            }
+
+        }
+
+        horizontalBarModel = new HorizontalBarChartModel();
+
+        ChartSeries vermelho = new ChartSeries();
+        ChartSeries amarelo = new ChartSeries();
+        ChartSeries azul = new ChartSeries();
+        ChartSeries verde = new ChartSeries();
+
+        vermelho.setLabel("25%");
+        amarelo.setLabel("25% - 50%");
+        azul.setLabel("50% - 75%");
+        verde.setLabel("75% - 100%");
+
+        //String a = "A";
+        System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
+        System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + descritores.size());
+
+        int ve = 0;
+        int ama = 0;
+        int az = 0;
+        int ver = 0;
+
+        for (int i = 0; i < descritores.size(); i++) {
+            int b = i + 1;
+
+            int a = Integer.parseInt(resultdescritores.get(b));
+
+            if (a <= 25) {
+                ve = a;
+                ama = 0;
+                az = 0;
+                ver = 0;
+            }
+            if (a > 24 && a <= 50) {
+                ve = 0;
+                ama = a;
+                az = 0;
+                ver = 0;
+            }
+            if (a > 49 && a <= 75) {
+                ve = 0;
+                ama = 0;
+                az = a;
+                ver = 0;
+            }
+            if (a > 74) {
+                ve = 0;
+                ama = 0;
+                az = 0;
+                ver = a;
+            }
+
+            System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + a);
+
+            System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
+
+            vermelho.set(i + " - " + descritores.get(i).getSiglaDescritor(), ve);
+            amarelo.set(i + " - " + descritores.get(i).getSiglaDescritor(), ama);
+            azul.set(i + " - " + descritores.get(i).getSiglaDescritor(), az);
+            verde.set(i + " - " + descritores.get(i).getSiglaDescritor(), ver);
+
+        }
+
+        //}
+        horizontalBarModel.addSeries(vermelho);
+        horizontalBarModel.addSeries(amarelo);
+        horizontalBarModel.addSeries(azul);
+        horizontalBarModel.addSeries(verde);
+
+        horizontalBarModel.setTitle("GRAFICO DE DESCRITORES ");
+        horizontalBarModel.setSeriesColors("ff0000,ffff00,0000ff,66ff33");
+        horizontalBarModel.setLegendPosition("e");
+        horizontalBarModel.setStacked(true);
+        horizontalBarModel.setShowPointLabels(true);
+
+        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+        xAxis.setLabel("");
+        xAxis.setMin(0);
+        xAxis.setMax(110);
+        xAxis.setTickFormat("%1$.0f");
+        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+        yAxis.setLabel("DESCRITORES");
+
+        horizontalEvasao = new HorizontalBarChartModel();
+        ChartSeries evasao = new ChartSeries();
+        ChartSeries presentes = new ChartSeries();
+
+        evasao.setLabel("PRESENTES");
+        evasao.set("PRESENTES", resultevasaoTurma);
+        horizontalEvasao.addSeries(evasao);
+
+        presentes.setLabel("EVASÃO");
+        presentes.set("EVASÃO", resulPreseTurma);
+        horizontalEvasao.addSeries(presentes);
+
+        horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
+        horizontalEvasao.setSeriesColors("66ff33,ff0000");
+        horizontalEvasao.setLegendPosition("e");
+        horizontalEvasao.setStacked(true);
+        horizontalEvasao.setShowPointLabels(true);
+
+        Axis xAxi = horizontalEvasao.getAxis(AxisType.X);
+        xAxi.setLabel("");
+        xAxi.setMin(0);
+        xAxi.setMax(110);
+        xAxi.setTickFormat("%1$.0f");
+        Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
+        yAxi.setLabel("EVASÃO");
+
+        double rendN = quantQuest - quantAcerto;
+
+        horizontalRendimento = new HorizontalBarChartModel();
+        ChartSeries rendimentoP = new ChartSeries();
+        ChartSeries rendimentoN = new ChartSeries();
+
+        rendimentoP.setLabel("RENDIMENTO POSITIVO");
+
+        double rend = quantAcerto * 100 / quantQuest;
+       
+        rendimentoP.set("", rend);
+
+       // alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
+
+        horizontalRendimento.addSeries(rendimentoP);
+
+        rendimentoN.setLabel("RENDIMENTO NEGATIVO");
+        rendimentoN.set("", rendN * 100 / quantQuest);
+        horizontalRendimento.addSeries(rendimentoN);
+        horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO GERAL DA SÉRIE ");
         horizontalRendimento.setSeriesColors("66ff33,ff0000");
         horizontalRendimento.setLegendPosition("e");
         horizontalRendimento.setStacked(true);

@@ -169,6 +169,112 @@ public class AlunoDao {
         return alunos;
 
     }
+    public List<Aluno> listarAlunos( Integer inepEscola, Integer codSerie) throws ErroSistema {
+
+        
+        System.out.println("**************" + inepEscola);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from aluno as a \n"
+                + "join escola e on e.inepEscola = a.inepEscola\n"
+                + "join serie s on s.codSerie = a.codSerie\n"
+                + "join turma t on t.codTurma = a.codTurma\n"
+                + "WHERE a.inepEscola = ? && a.codserie = ? ";
+        //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
+
+        List<Aluno> alunos = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Aluno aluno = new Aluno();
+                aluno.setIdAluno(rs.getInt("codAluno"));
+                aluno.setIdSerie(rs.getInt("codSerie"));
+                aluno.setIdTurma(rs.getInt("codTurma"));
+                aluno.setInepEscola(rs.getInt("inepEscola"));
+
+                aluno.setNomeEscola(rs.getString("nomeEscola"));
+                aluno.setNome(rs.getString("nomeAluno"));
+                aluno.setNomeSerie(rs.getString("nomeSerie"));
+                aluno.setNomeTurma(rs.getString("nomeTurma"));
+                aluno.setTurno(rs.getString("turno"));
+                System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
+
+                alunos.add(aluno);
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return alunos;
+
+    }
+    public List<Aluno> listarTodosAlunos(Integer codSerie) throws ErroSistema {
+
+        
+       
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from aluno as a \n"
+                + "join escola e on e.inepEscola = a.inepEscola\n"
+                + "join serie s on s.codSerie = a.codSerie\n"
+                + "join turma t on t.codTurma = a.codTurma\n"
+                + "WHERE a.codserie = ? ";
+        //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
+
+        List<Aluno> alunos = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codSerie);
+            
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Aluno aluno = new Aluno();
+                aluno.setIdAluno(rs.getInt("codAluno"));
+                aluno.setIdSerie(rs.getInt("codSerie"));
+                aluno.setIdTurma(rs.getInt("codTurma"));
+                aluno.setInepEscola(rs.getInt("inepEscola"));
+
+                aluno.setNomeEscola(rs.getString("nomeEscola"));
+                aluno.setNome(rs.getString("nomeAluno"));
+                aluno.setNomeSerie(rs.getString("nomeSerie"));
+                aluno.setNomeTurma(rs.getString("nomeTurma"));
+                aluno.setTurno(rs.getString("turno"));
+                System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
+
+                alunos.add(aluno);
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return alunos;
+
+    }
 
     public List<Avaliacao> listarGabaritosAlunos(Integer codigoTurma, Integer inepEscola, Integer codSerie) throws ErroSistema {
 
@@ -190,6 +296,108 @@ public class AlunoDao {
             ps.setInt(1, inepEscola);
             ps.setInt(2, codSerie);
             ps.setInt(3, codigoTurma);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Avaliacao avaliacao = new Avaliacao();
+                avaliacao.setIdAvaliacao(rs.getInt("idTesteGabarito"));
+                avaliacao.setCodAluno(rs.getInt("codAluno"));
+                avaliacao.setCodTurma(rs.getInt("codTurma"));
+                avaliacao.setCodSerie(rs.getInt("codSerie"));
+
+                avaliacao.setRespPortugues(rs.getString("portugues"));
+                avaliacao.setRespMatematica(rs.getString("matematica"));
+                avaliacao.setRespCienciasHumanas(rs.getString("cienciasHumanas"));
+                avaliacao.setRespCienciasNatureza(rs.getString("cienciasNatureza"));
+                avaliacao.setNomeAluno(rs.getString("nomeAluno"));
+
+                avaliacoes.add(avaliacao);
+
+                System.out.println("__________________________________________________" + avaliacao.getRespPortugues());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return avaliacoes;
+
+    }
+    public List<Avaliacao> listarGabaritoMediaEscolar(Integer inepEscola, Integer codSerie) throws ErroSistema {
+
+        
+        System.out.println("**************" + inepEscola);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from testegabarito as a \n"
+                + "                join aluno al on al.codAluno = a.codAluno\n"
+                + "                where a.inepEscola = ? && a.codSerie = ?";
+
+        List<Avaliacao> avaliacoes = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+           
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Avaliacao avaliacao = new Avaliacao();
+                avaliacao.setIdAvaliacao(rs.getInt("idTesteGabarito"));
+                avaliacao.setCodAluno(rs.getInt("codAluno"));
+                avaliacao.setCodTurma(rs.getInt("codTurma"));
+                avaliacao.setCodSerie(rs.getInt("codSerie"));
+
+                avaliacao.setRespPortugues(rs.getString("portugues"));
+                avaliacao.setRespMatematica(rs.getString("matematica"));
+                avaliacao.setRespCienciasHumanas(rs.getString("cienciasHumanas"));
+                avaliacao.setRespCienciasNatureza(rs.getString("cienciasNatureza"));
+                avaliacao.setNomeAluno(rs.getString("nomeAluno"));
+
+                avaliacoes.add(avaliacao);
+
+                System.out.println("__________________________________________________" + avaliacao.getRespPortugues());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return avaliacoes;
+
+    }
+    public List<Avaliacao> listarGabaritoGeral(Integer codSerie) throws ErroSistema {
+
+        
+       
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from testegabarito as a \n"
+                + "                join aluno al on al.codAluno = a.codAluno\n"
+                + "                where a.codSerie = ?";
+
+        List<Avaliacao> avaliacoes = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codSerie);
+            
+           
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
