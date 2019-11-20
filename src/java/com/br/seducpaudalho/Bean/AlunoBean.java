@@ -1791,6 +1791,10 @@ public class AlunoBean {
             System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba5";
         }
+        if (serie.equals("13")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
+            a = "gaba6";
+        }
 
         try {
             JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(alunos);
