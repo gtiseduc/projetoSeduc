@@ -73,7 +73,7 @@ public class TurmaDao {
 
         String sql = "select * from serieturma as st\n"
                 + "join turma t on t.codTurma = st.codTurma\n"
-                + "where codSerie = ? && inepescola = ?";
+                + "where codSerie = ? && inepescola = ? order by t.nomeTurma";
 
         List<Turma> series = new ArrayList<>();
 

@@ -106,6 +106,7 @@ public class AlunoBean {
 
     private BarChartModel barra;
     private HorizontalBarChartModel barraHorizontal;
+    private HorizontalBarChartModel horizontalBarAluno;
     private LineChartModel barraLinha;
     private String concatDescritor = "";
     private List<String> colunas = new ArrayList<String>();
@@ -329,13 +330,13 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
+
     public void listarTodasSerie() {
 
         series = new ArrayList<>();
 
-        
         try {
-           
+
             series = serieDao.listarTodasSerie();
             // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
@@ -859,6 +860,7 @@ public class AlunoBean {
 
         }
 
+        // -----------------------------------------------------------\\
         horizontalBarModel = new HorizontalBarChartModel();
 
         ChartSeries vermelho = new ChartSeries();
@@ -941,16 +943,107 @@ public class AlunoBean {
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
         yAxis.setLabel("DESCRITORES");
 
+        // -----------------------------------------------------------\\
+      
+        
+        //------------------------------------------------------------\\
+        
+        horizontalBarAluno = new HorizontalBarChartModel();
+
+        ChartSeries verm = new ChartSeries();
+        ChartSeries am = new ChartSeries();
+        ChartSeries azu = new ChartSeries();
+        ChartSeries verd = new ChartSeries();
+
+        verm.setLabel("25%");
+        am.setLabel("25% - 50%");
+        azu.setLabel("50% - 75%");
+        verd.setLabel("75% - 100%");
+
+        //String a = "A";
+      //  System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
+        //System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + descritores.size());
+
+        int vermelho1 = 0;
+        int amamarelo1 = 0;
+        int azul1 = 0;
+        int verde1 = 0;
+
+        for (int i = 0; i < 23; i++) {
+            int b = i + 1;
+
+            //int a = Integer.parseInt(resultdescritores.get(b));
+            int a = Integer.parseInt("10");
+
+            if (a <= 25) {
+                vermelho1 = a;
+                amamarelo1 = 0;
+                azul1 = 0;
+                verde1 = 0;
+            }
+            if (a > 24 && a <= 50) {
+                vermelho1 = 0;
+                amamarelo1 = a;
+                azul1 = 0;
+                verde1 = 0;
+            }
+            if (a > 49 && a <= 75) {
+                vermelho1 = 0;
+                amamarelo1 = 0;
+                azul1 = a;
+                verde1 = 0;
+            }
+            if (a > 74) {
+                vermelho1 = 0;
+                amamarelo1 = 0;
+                azul1 = 0;
+                verde1 = a;
+            }
+
+           // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + a);
+
+           // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
+
+            verm.set(i + " - " + alunos.get(i).getNome(), vermelho1);
+            am.set(i + " - " + alunos.get(i).getNome(), amamarelo1);
+            azu.set(i + " - " + alunos.get(i).getNome(), azul1);
+            verd.set(i + " - " + alunos.get(i).getNome(), verde1);
+
+        }
+
+        //}
+        horizontalBarAluno.addSeries(verm);
+        horizontalBarAluno.addSeries(am);
+        horizontalBarAluno.addSeries(azu);
+        horizontalBarAluno.addSeries(verd);
+
+        horizontalBarAluno.setTitle("GRAFICO DE ALUNOS ");
+        horizontalBarAluno.setSeriesColors("ff0000,ffff00,0000ff,66ff33");
+        horizontalBarAluno.setLegendPosition("e");
+        horizontalBarAluno.setStacked(true);
+        horizontalBarAluno.setShowPointLabels(true);
+
+        Axis xAAxis = horizontalBarAluno.getAxis(AxisType.X);
+        xAAxis.setLabel("");
+        xAAxis.setMin(0);
+        xAAxis.setMax(110);
+        xAAxis.setTickFormat("%1$.0f");
+        Axis yAAxis = horizontalBarAluno.getAxis(AxisType.Y);
+        yAAxis.setLabel("ALUNOS");
+        
+        
+        //------------------------------------\\
+
         horizontalEvasao = new HorizontalBarChartModel();
         ChartSeries evasao = new ChartSeries();
         ChartSeries presentes = new ChartSeries();
 
         evasao.setLabel("PRESENTES");
-        evasao.set("PRESENTES", resultevasaoTurma);
+        evasao.set("", resultevasaoTurma);
         horizontalEvasao.addSeries(evasao);
 
         presentes.setLabel("EVASÃO");
-        presentes.set("EVASÃO", resulPreseTurma);
+        presentes.set("", resulPreseTurma);
         horizontalEvasao.addSeries(presentes);
 
         horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
@@ -965,7 +1058,7 @@ public class AlunoBean {
         xAxi.setMax(110);
         xAxi.setTickFormat("%1$.0f");
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
-        yAxi.setLabel("EVASÃO");
+        yAxi.setLabel("");
 
         double rendN = quantQuest - quantAcerto;
 
@@ -976,7 +1069,7 @@ public class AlunoBean {
         rendimentoP.setLabel("RENDIMENTO POSITIVO");
 
         double rend = quantAcerto * 100 / quantQuest;
-       
+
         rendimentoP.set("", rend);
 
         alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
@@ -1000,7 +1093,10 @@ public class AlunoBean {
         Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
         yrAxi.setLabel("");
         rend = 0;
+        quantAcerto = 0;
+        quantQuest = 0;
     }
+
     public void mediaEscolarDescritor(Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
         System.out.println("olha o codigo --------" + inep + "****----***" + codDisciplina + "----***------- " + codSerie);
@@ -1015,9 +1111,6 @@ public class AlunoBean {
             alunos = alunoDao.listarAlunos(inep, codSerie);
             System.out.println("TAMANHO ALUNOS ------ " + alunos.size());
 
-            
-            
-            
             quantPresentes = avaliacoes.size();
             quantlunos = alunos.size();
             quantDescritores = descritores.size();
@@ -1029,7 +1122,6 @@ public class AlunoBean {
             resultevasaoTurma = 100 * quantPresentes / quantlunos;
 
             //------------alunoDao.insertFrequeciaTurma(codTurma, inep, codSerie, resultevasaoTurma);----//
-
             resulPreseTurma = 100 * quantFaltosos / quantlunos;
 
             System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
@@ -1135,15 +1227,13 @@ public class AlunoBean {
             var = listaDeResultado.get(i);
 
             System.out.println("***** - - ****" + i);
-           
+
             for (int j = 0; j < var.length(); j++) {
 
-              
                 int v = Character.getNumericValue(var.charAt(j));
                 s = s + v;
-              
+
                 data[i][j] = v;
-               
 
             }
 
@@ -1358,11 +1448,10 @@ public class AlunoBean {
         rendimentoP.setLabel("RENDIMENTO POSITIVO");
 
         double rend = quantAcerto * 100 / quantQuest;
-       
+
         rendimentoP.set("", rend);
 
-       // alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
-
+        // alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
         horizontalRendimento.addSeries(rendimentoP);
 
         rendimentoN.setLabel("RENDIMENTO NEGATIVO");
@@ -1383,9 +1472,8 @@ public class AlunoBean {
         yrAxi.setLabel("");
         rend = 0;
     }
-    public void mediaGeralDescritor(Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
-       
+    public void mediaGeralDescritor(Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
         try {
 
@@ -1397,9 +1485,6 @@ public class AlunoBean {
             alunos = alunoDao.listarTodosAlunos(codSerie);
             System.out.println("TAMANHO ALUNOS ------ " + alunos.size());
 
-            
-            
-            
             quantPresentes = avaliacoes.size();
             quantlunos = alunos.size();
             quantDescritores = descritores.size();
@@ -1411,7 +1496,6 @@ public class AlunoBean {
             resultevasaoTurma = 100 * quantPresentes / quantlunos;
 
             //------------alunoDao.insertFrequeciaTurma(codTurma, inep, codSerie, resultevasaoTurma);----//
-
             resulPreseTurma = 100 * quantFaltosos / quantlunos;
 
             System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
@@ -1517,15 +1601,13 @@ public class AlunoBean {
             var = listaDeResultado.get(i);
 
             System.out.println("***** - - ****" + i);
-           
+
             for (int j = 0; j < var.length(); j++) {
 
-              
                 int v = Character.getNumericValue(var.charAt(j));
                 s = s + v;
-              
+
                 data[i][j] = v;
-               
 
             }
 
@@ -1740,11 +1822,10 @@ public class AlunoBean {
         rendimentoP.setLabel("RENDIMENTO POSITIVO");
 
         double rend = quantAcerto * 100 / quantQuest;
-       
+
         rendimentoP.set("", rend);
 
-       // alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
-
+        // alunoDao.insertRendimentoTurma(codTurma, inep, codSerie, codDisciplina, rend);
         horizontalRendimento.addSeries(rendimentoP);
 
         rendimentoN.setLabel("RENDIMENTO NEGATIVO");
@@ -2543,6 +2624,14 @@ public class AlunoBean {
 
     public void setHorizontalRendimento(HorizontalBarChartModel horizontalRendimento) {
         this.horizontalRendimento = horizontalRendimento;
+    }
+
+    public HorizontalBarChartModel getHorizontalBarAluno() {
+        return horizontalBarAluno;
+    }
+
+    public void setHorizontalBarAluno(HorizontalBarChartModel horizontalBarAluno) {
+        this.horizontalBarAluno = horizontalBarAluno;
     }
 
 }
