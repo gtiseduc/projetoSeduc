@@ -767,10 +767,10 @@ public class AlunoBean {
             }
 
             System.out.println("A SOMA DAS LINHAS É " + s);
-
+                Integer ra = 100 * s / descritores.size();
             quantAcerto += s;
             System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
-            resulAlunos.add(Integer.toString(s));
+            resulAlunos.add(Integer.toString(ra));
 
             s = 0;
         }
@@ -938,7 +938,7 @@ public class AlunoBean {
         Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
         xAxis.setLabel("");
         xAxis.setMin(0);
-        xAxis.setMax(110);
+        xAxis.setMax(150);
         xAxis.setTickFormat("%1$.0f");
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
         yAxis.setLabel("DESCRITORES");
@@ -969,11 +969,13 @@ public class AlunoBean {
         int azul1 = 0;
         int verde1 = 0;
 
-        for (int i = 0; i < 23; i++) {
+        for (int i = 0; i < avaliacoes.size(); i++) {
             int b = i + 1;
 
-            //int a = Integer.parseInt(resultdescritores.get(b));
-            int a = Integer.parseInt("10");
+           
+            //System.out.println("quantidade de alunos "+resulAlunos.size());
+            int a = Integer.parseInt(resulAlunos.get(i));
+            //int a = Integer.parseInt("10");
 
             if (a <= 25) {
                 vermelho1 = a;
@@ -1004,10 +1006,10 @@ public class AlunoBean {
 
            // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
 
-            verm.set(i + " - " + alunos.get(i).getNome(), vermelho1);
-            am.set(i + " - " + alunos.get(i).getNome(), amamarelo1);
-            azu.set(i + " - " + alunos.get(i).getNome(), azul1);
-            verd.set(i + " - " + alunos.get(i).getNome(), verde1);
+            verm.set(i + " - " +  avaliacoes.get(i).getNomeAluno(), vermelho1);
+            am.set(i + " - " +  avaliacoes.get(i).getNomeAluno(), amamarelo1);
+            azu.set(i + " - " +  avaliacoes.get(i).getNomeAluno(), azul1);
+            verd.set(i + " - " +  avaliacoes.get(i).getNomeAluno(), verde1);
 
         }
 
@@ -1026,7 +1028,7 @@ public class AlunoBean {
         Axis xAAxis = horizontalBarAluno.getAxis(AxisType.X);
         xAAxis.setLabel("");
         xAAxis.setMin(0);
-        xAAxis.setMax(110);
+        xAAxis.setMax(150);
         xAAxis.setTickFormat("%1$.0f");
         Axis yAAxis = horizontalBarAluno.getAxis(AxisType.Y);
         yAAxis.setLabel("ALUNOS");
@@ -1055,7 +1057,7 @@ public class AlunoBean {
         Axis xAxi = horizontalEvasao.getAxis(AxisType.X);
         xAxi.setLabel("");
         xAxi.setMin(0);
-        xAxi.setMax(110);
+        xAxi.setMax(150);
         xAxi.setTickFormat("%1$.0f");
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
         yAxi.setLabel("");
@@ -1088,7 +1090,7 @@ public class AlunoBean {
         Axis rAxi = horizontalRendimento.getAxis(AxisType.X);
         rAxi.setLabel("");
         rAxi.setMin(0);
-        rAxi.setMax(110);
+        rAxi.setMax(150);
         rAxi.setTickFormat("%1$.0f");
         Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
         yrAxi.setLabel("");

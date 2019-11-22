@@ -42,10 +42,17 @@
 
 
                         </ul></li>
-                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                     <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-
+                            <li><a href="">FREQUÊNCIA POR ESCOLA</a></li>
+                            <li><a href="">FREQUÊNCIA POR TURMA</a></li>
+                           
+                            <li><a href="">FREQUENCIA POR MUNICÍPIO</a></li>
+                            <li><a href="">RENDIMENTO POR ESCOLA</a></li>
+                            <li><a href="">RENDIMENTO POR TURMA</a></li>
+                            <li><a href="mediaEscolarDescritor.jsf">MÉDIA ESCOLAR POR DESCRITORES</a></li>
+                            <li><a href="mediaGeralDescritor.jsf">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
                 </ul>
@@ -75,6 +82,13 @@
             function exportChart3() {
                 //export image
                 $('#output').empty().append(PF('chart3').exportAsImage());
+
+                //show the dialog
+                PF('dlg').show();
+            }
+            function exportChart4() {
+                //export image
+                $('#output').empty().append(PF('chart4').exportAsImage());
 
                 //show the dialog
                 PF('dlg').show();
@@ -237,7 +251,7 @@
 
             <div align="center" >
                 <p:panel rendered="#{alunoBean.visivel}">
-                    <table id="resultado1"  border="1px " width="850px" style="text-align: center" >
+                    <table id="resultado1"  border="5px " width="850px" style="text-align: center" >
 
                         <thead style="font-size: 17px " >
                             <tr>
@@ -253,7 +267,7 @@
                             </tr>
                         </thead>
 
-                        <thead id="resultado2" style="font-size: 15px">
+                        <thead id="resultado2" border="5px " style="font-size: 15px">
                             <tr>
                                 <th style="text-align: center">GABARITO</th>  <!-- sql.headers is a List of Strings -->
                                 <ui:repeat value="#{alunoBean.descritores}" var="h" >
@@ -341,7 +355,7 @@
             <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
 
 
-            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
+            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:40em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
