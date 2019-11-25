@@ -657,17 +657,19 @@ public class AlunoBean {
 
                 return;
             }
+            
             if (descritores.size() == 0) {
                 adicionarMensagem("LISTADO!", "NÃO TEM DESCRITOR NEM GABARITO CADASTRADO", FacesMessage.SEVERITY_INFO);
                 return;
             }
+            
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
 
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[quantPresentes][quantPresentes];
+        dados = new String[quantlunos][quantlunos];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
