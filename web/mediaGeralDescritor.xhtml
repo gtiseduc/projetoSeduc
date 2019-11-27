@@ -10,6 +10,7 @@
              xmlns:ct="http://www.chartistjsf.org/charts">
 
     <ui:define name="menuesquerdo">
+        #{alunoBean.limpar()}
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -46,6 +47,13 @@
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
 
+                            <li><a href="frequenciaPorMunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
+                            <li><a href="frequenciaporTurma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
+
+                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
+                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
+                            <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
                 </ul>
@@ -149,7 +157,7 @@
                                 <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
                                 <f:selectItems  value="#{alunoBean.disciplinas}"  var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
                                 <!-- <p:ajax  event="change" listener="{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>-->
-                                <p:ajax  event="change"  listener="#{alunoBean.mediaGeralDescritor(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@all"/>
+                                <p:ajax  event="change"  listener="#{alunoBean.mediaGeralDescritor(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
                                 <!-- <p:ajax  event="change"  listener="{testeGraficos.gerarGrafico()}" update="@form"/>-->
                             </p:selectOneMenu>    
                         </div>

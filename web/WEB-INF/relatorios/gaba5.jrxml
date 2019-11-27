@@ -19,69 +19,69 @@
 				<imageExpression><![CDATA["gaba9.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="231" y="158" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>
+				<reportElement x="231" y="144" width="22" height="17" uuid="6c8e83fd-5fb7-4776-bda9-d7a06aca528a"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeTurma}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="16" y="158" width="177" height="17" uuid="cfebca60-45a4-4806-a359-cf4c80ddbbff"/>
+				<reportElement x="16" y="144" width="177" height="17" uuid="cfebca60-45a4-4806-a359-cf4c80ddbbff"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeSerie}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="16" y="136" width="37" height="16" uuid="a63d081b-4120-4453-be5b-fc8c1d51f7fb"/>
+				<reportElement x="16" y="122" width="37" height="16" uuid="a63d081b-4120-4453-be5b-fc8c1d51f7fb"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[ESCOLA:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="61" y="136" width="293" height="16" uuid="3a545f54-d32b-4b51-a042-7804f86f653c"/>
+				<reportElement x="61" y="122" width="293" height="16" uuid="3a545f54-d32b-4b51-a042-7804f86f653c"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nomeEscola}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
-				<reportElement x="157" y="54" width="86" height="76" uuid="af739146-e357-4661-8194-5dbf9c9f2607"/>
+				<reportElement x="157" y="39" width="86" height="76" uuid="af739146-e357-4661-8194-5dbf9c9f2607"/>
 				<imageExpression><![CDATA[new java.net.URL("https://zxing.org/w/chart?cht=qr&chs=230x230&chld=L&choe=UTF-8&chl="+$F{idTurma}+"/"+$F{idSerie}+"/"+$F{idAluno}+"/"+$F{inepEscola})]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="298" y="158" width="80" height="17" uuid="ca29e826-3819-4567-aad3-33666d5351f4"/>
+				<reportElement x="298" y="144" width="80" height="17" uuid="ca29e826-3819-4567-aad3-33666d5351f4"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{turno}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="193" y="158" width="30" height="17" uuid="4076b7e6-8803-449b-8dea-bac6665b1e7f"/>
+				<reportElement x="193" y="144" width="30" height="17" uuid="4076b7e6-8803-449b-8dea-bac6665b1e7f"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="261" y="158" width="30" height="17" uuid="6aacf3fc-944c-4746-be2a-0b8248a13f41"/>
+				<reportElement x="261" y="144" width="30" height="17" uuid="6aacf3fc-944c-4746-be2a-0b8248a13f41"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[TURNO:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="61" y="147" width="262" height="18" uuid="1472fae1-2f48-4d6a-8951-e2411e36eb59"/>
+				<reportElement x="61" y="133" width="262" height="18" uuid="1472fae1-2f48-4d6a-8951-e2411e36eb59"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="16" y="148" width="37" height="15" uuid="72065916-3c13-4b68-8fa8-d77d9894f5b3"/>
+				<reportElement x="16" y="134" width="37" height="15" uuid="72065916-3c13-4b68-8fa8-d77d9894f5b3"/>
 				<textElement>
-					<font size="5"/>
+					<font size="8"/>
 				</textElement>
 				<text><![CDATA[NOME:]]></text>
 			</staticText>

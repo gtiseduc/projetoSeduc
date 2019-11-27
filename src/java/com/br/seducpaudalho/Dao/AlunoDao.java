@@ -15,6 +15,7 @@ import com.br.seducpaudalho.Entidade.FrequenciaTurma;
 import com.br.seducpaudalho.Entidade.Produto;
 import com.br.seducpaudalho.Entidade.RendimentoTurma;
 import com.br.seducpaudalho.Entidade.Serie;
+import com.br.seducpaudalho.Entidade.Turma;
 import com.br.seducpaudalho.Util.Excepition.ErroSistema;
 import com.br.seducpaudalho.Util.FabricaConexao;
 import java.sql.Connection;
@@ -169,9 +170,9 @@ public class AlunoDao {
         return alunos;
 
     }
-    public List<Aluno> listarAlunos( Integer inepEscola, Integer codSerie) throws ErroSistema {
+    public List<Aluno> imprimirAlunosSerie(Integer inepEscola, Integer codSerie) throws ErroSistema {
 
-        
+       
         System.out.println("**************" + inepEscola);
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
@@ -180,7 +181,7 @@ public class AlunoDao {
                 + "join escola e on e.inepEscola = a.inepEscola\n"
                 + "join serie s on s.codSerie = a.codSerie\n"
                 + "join turma t on t.codTurma = a.codTurma\n"
-                + "WHERE a.inepEscola = ? && a.codserie = ? ";
+                + "WHERE a.inepEscola = ? && a.codserie = ?";
         //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
 
         List<Aluno> alunos = new ArrayList<>();
@@ -191,7 +192,7 @@ public class AlunoDao {
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inepEscola);
             ps.setInt(2, codSerie);
-            
+          
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -222,10 +223,62 @@ public class AlunoDao {
         return alunos;
 
     }
+
+    public List<Aluno> listarAlunos(Integer inepEscola, Integer codSerie) throws ErroSistema {
+
+        System.out.println("**************" + inepEscola);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from aluno as a \n"
+                + "join escola e on e.inepEscola = a.inepEscola\n"
+                + "join serie s on s.codSerie = a.codSerie\n"
+                + "join turma t on t.codTurma = a.codTurma\n"
+                + "WHERE a.inepEscola = ? && a.codserie = ? ";
+        //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
+
+        List<Aluno> alunos = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Aluno aluno = new Aluno();
+                aluno.setIdAluno(rs.getInt("codAluno"));
+                aluno.setIdSerie(rs.getInt("codSerie"));
+                aluno.setIdTurma(rs.getInt("codTurma"));
+                aluno.setInepEscola(rs.getInt("inepEscola"));
+
+                aluno.setNomeEscola(rs.getString("nomeEscola"));
+                aluno.setNome(rs.getString("nomeAluno"));
+                aluno.setNomeSerie(rs.getString("nomeSerie"));
+                aluno.setNomeTurma(rs.getString("nomeTurma"));
+                aluno.setTurno(rs.getString("turno"));
+                System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
+
+                alunos.add(aluno);
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return alunos;
+
+    }
+
     public List<Aluno> listarTodosAlunos(Integer codSerie) throws ErroSistema {
 
-        
-       
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
@@ -243,8 +296,7 @@ public class AlunoDao {
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codSerie);
-            
-            
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -327,9 +379,162 @@ public class AlunoDao {
         return avaliacoes;
 
     }
-    public List<Avaliacao> listarGabaritoMediaEscolar(Integer inepEscola, Integer codSerie) throws ErroSistema {
+    public List<Avaliacao> listarGabaritosSerie(Integer inepEscola, Integer codSerie) throws ErroSistema {
 
         
+        System.out.println("**************" + inepEscola);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from testegabarito as a \n"
+                + "                join aluno al on al.codAluno = a.codAluno\n"
+                + "                where a.inepEscola = ? && a.codSerie = ? ";
+
+        List<Avaliacao> avaliacoes = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+           
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                Avaliacao avaliacao = new Avaliacao();
+                avaliacao.setIdAvaliacao(rs.getInt("idTesteGabarito"));
+                avaliacao.setCodAluno(rs.getInt("codAluno"));
+                avaliacao.setCodSerie(rs.getInt("codSerie"));
+
+                avaliacao.setRespPortugues(rs.getString("portugues"));
+                avaliacao.setRespMatematica(rs.getString("matematica"));
+                avaliacao.setRespCienciasHumanas(rs.getString("cienciasHumanas"));
+                avaliacao.setRespCienciasNatureza(rs.getString("cienciasNatureza"));
+                avaliacao.setNomeAluno(rs.getString("nomeAluno"));
+
+                avaliacoes.add(avaliacao);
+
+                System.out.println("__________________________________________________" + avaliacao.getRespPortugues());
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return avaliacoes;
+
+    }
+
+    public Integer contarPresentesAvaliacao() throws ErroSistema {
+        Integer a = 0;
+        String sql = "select count(*) from testegabarito";
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+
+            System.out.println("com.br.seducpaudalho.Dao.AlunoDao.contarPresentes()" + a);
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        FabricaConexao.fecharConexao();
+        return a;
+    }
+
+    public Integer contarPresentesEscola(Integer inep) throws ErroSistema {
+        Integer a = 0;
+        String sql = "select count(*) from testegabarito where inepEscola = ?";
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inep);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+
+            System.out.println("com.br.seducpaudalho.Dao.AlunoDao.contarPresentes()" + a);
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        FabricaConexao.fecharConexao();
+        return a;
+    }
+    public Integer contarAlunosEscola(Integer inep) throws ErroSistema {
+        Integer a = 0;
+        String sql = "select count(*) from aluno where inepEscola = ?";
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inep);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+            }
+
+            System.out.println("com.br.seducpaudalho.Dao.AlunoDao.contarPresentes()" + a);
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        FabricaConexao.fecharConexao();
+        return a;
+    }
+
+    public Integer contarAlunosMunicipio() throws ErroSistema {
+        Integer a = 0;
+
+        String sql = "select count(*) from aluno";
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                a = rs.getInt(1);
+
+            }
+
+            System.out.println("---####-----****----####----***-----####" + a);
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        FabricaConexao.fecharConexao();
+        return a;
+    }
+
+    public List<Avaliacao> listarGabaritoMediaEscolar(Integer inepEscola, Integer codSerie) throws ErroSistema {
+
         System.out.println("**************" + inepEscola);
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
@@ -346,7 +551,7 @@ public class AlunoDao {
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inepEscola);
             ps.setInt(2, codSerie);
-           
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -378,10 +583,96 @@ public class AlunoDao {
         return avaliacoes;
 
     }
+    public List<Turma> listarFrequenciaTurma(Integer inepEscola, Integer codSerie) throws ErroSistema {
+
+       
+
+        String sql = "select * from frequenciaturma as a \n" +
+"                join escola e on e.inepEscola = a.inepEscola\n" +
+"                join serie s on s.codSerie = a.codSerie\n" +
+"                join turma t on t.codTurma = a.codTurma\n" +
+"                WHERE a.inepEscola = ? && a.codserie = ? ";
+
+        List<Turma> t = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+               
+                Turma tu = new Turma();
+                tu.setNome(rs.getString("nomeTurma"));
+                tu.setEv(rs.getDouble("resultevasaoTurma"));
+               
+
+                t.add(tu);
+
+               
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar  " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return t;
+
+    }
+    public List<Turma> listarRendimentoTurma(Integer inepEscola, Integer codSerie,Integer disciplina) throws ErroSistema {
+
+       
+
+        String sql = "select * from rendimentoturma as a \n" +
+"                join escola e on e.inepEscola = a.inepEscola\n" +
+"                join serie s on s.codSerie = a.codSerie\n" +
+"                join turma t on t.codTurma = a.codTurma\n" +
+"                WHERE a.inepEscola = ? && a.codserie = ? && a.codDisciplina = ?";
+
+        List<Turma> t = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+            ps.setInt(3, disciplina);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+               
+                Turma tu = new Turma();
+                tu.setNome(rs.getString("nomeTurma"));
+                tu.setEv(rs.getDouble("rendimento"));
+               
+
+                t.add(tu);
+
+               
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar  " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return t;
+
+    }
+
     public List<Avaliacao> listarGabaritoGeral(Integer codSerie) throws ErroSistema {
 
-        
-       
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
@@ -396,8 +687,7 @@ public class AlunoDao {
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codSerie);
-            
-           
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -605,14 +895,13 @@ public class AlunoDao {
         }
 
     }
-    public void insertFrequeciaTurma(Integer codTurma,Integer inep,Integer codSerie, double resultevasaoTurma) throws ErroSistema {
 
-      
+    public void insertFrequeciaTurma(Integer codTurma, Integer inep, Integer codSerie, double resultevasaoTurma) throws ErroSistema {
 
         try {
-            
-          Integer codFrequencia =  pesquisarFrequenciaTurma(codTurma,inep,codSerie);
-            
+
+            Integer codFrequencia = pesquisarFrequenciaTurma(codTurma, inep, codSerie);
+
             String sql = "";
             Connection conexao = FabricaConexao.getConnection();
             PreparedStatement ps;
@@ -621,9 +910,9 @@ public class AlunoDao {
                 System.out.println("--------- entrou no if cadastro produto");
                 ps = conexao.prepareStatement("INSERT INTO frequenciaturma(codTurma,inepEscola,codSerie,resultevasaoTurma)VALUES (?,?,?,?)");
             } else {
-               
+
                 ps = conexao.prepareStatement("UPDATE frequenciaturma SET codTurma=?,inepEscola=?,codSerie=?,resultevasaoTurma=? where codFrequencia=?");
-               ps.setInt(5, codFrequencia);
+                ps.setInt(5, codFrequencia);
             }
 
             ps.setInt(1, codTurma);
@@ -641,12 +930,8 @@ public class AlunoDao {
         }
 
     }
-    
-    
-    
-    
-    
-     private Integer pesquisarFrequenciaTurma(Integer codTurma, Integer inep,Integer codSerie) throws ErroSistema {
+
+    private Integer pesquisarFrequenciaTurma(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
 
         String sql = "select * from frequenciaturma where inepEscola = ? && codTurma = ? && codSerie = ?";
         Integer a = null;
@@ -654,7 +939,7 @@ public class AlunoDao {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
-           
+
             ps.setInt(1, inep);
             ps.setInt(2, codTurma);
             ps.setInt(3, codSerie);
@@ -673,27 +958,24 @@ public class AlunoDao {
         }
         return a;
     }
-    public void insertRendimentoTurma(Integer codTurma,Integer inep,Integer codSerie ,Integer codDisciplina, double rend) throws ErroSistema {
 
+    public void insertRendimentoTurma(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina, double rend) throws ErroSistema {
 
-     
         try {
-            
-          Integer codRendimento =  pesquisarRendimentoTurma(codTurma,inep,codSerie,codDisciplina);
-            
+
+            Integer codRendimento = pesquisarRendimentoTurma(codTurma, inep, codSerie, codDisciplina);
+
             String sql = "";
             Connection conexao = FabricaConexao.getConnection();
             PreparedStatement ps;
 
-           if (codRendimento == null) {
+            if (codRendimento == null) {
                 System.out.println("--------- entrou no if cadastro produto");
                 ps = conexao.prepareStatement("INSERT INTO rendimentoturma(codTurma,inepEscola,codSerie,codDisciplina,rendimento)VALUES (?,?,?,?,?)");
-            } 
-           
-           else {
-               
+            } else {
+
                 ps = conexao.prepareStatement("UPDATE rendimentoturma SET codTurma=?,inepEscola=?,codSerie=?,codDisciplina=?,rendimento=? where codRendimento=?");
-               ps.setInt(6, codRendimento);
+                ps.setInt(6, codRendimento);
             }
 
             ps.setInt(1, codTurma);
@@ -712,12 +994,8 @@ public class AlunoDao {
         }
 
     }
-    
-    
-    
-    
-    
-     private Integer pesquisarRendimentoTurma(Integer codTurma, Integer inep,Integer codSerie,Integer codDisciplina) throws ErroSistema {
+
+    private Integer pesquisarRendimentoTurma(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
         String sql = "select * from rendimentoturma where inepEscola = ? && codTurma = ? && codSerie = ?  && codDisciplina = ?";
         Integer a = null;
@@ -725,7 +1003,7 @@ public class AlunoDao {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
-           
+
             ps.setInt(1, inep);
             ps.setInt(2, codTurma);
             ps.setInt(3, codSerie);
@@ -745,7 +1023,6 @@ public class AlunoDao {
         }
         return a;
     }
-    
 
     public void atualizarAssociacao(Associacao associacao) throws ErroSistema {
 

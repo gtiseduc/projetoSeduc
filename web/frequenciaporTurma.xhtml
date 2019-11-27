@@ -10,7 +10,7 @@
              xmlns:ct="http://www.chartistjsf.org/charts">
 
     <ui:define name="menuesquerdo">
-        #{alunoBean.limpar()}
+         #{alunoBean.limpar()}
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -20,11 +20,11 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                            <li><a href="imprimirG.jsf">IMPRIMIR GABARITOS </a></li>
-                            <li><a href="avaliacoes.jsf">CORREÇÃO DE AVALIAÇÕES </a></li>
-                            <li><a href="descritor.jsf">CADASTRAR DESCRITORES</a></li>
-                            <li><a href="associacaoQ.jsf">CADASTRO QUESTOES - GABARITOS</a></li>
-                            <li><a href="associacaoG.jsf">CADASTRO GABARITOS</a></li>
+                            <li><a href="imprimirG.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
+                            <li><a href="avaliacoes.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
+                            <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
+                            <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>
                         </ul></li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
@@ -130,7 +130,7 @@
 
                 <div class="ui-g ui-fluid">
 
-                    <div class="ui-g-12 ui-md-6">
+                    <div class="ui-g-12 ui-md-5">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
@@ -150,7 +150,7 @@
                             <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
                                 <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
                                 <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
-                                <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.aluno.idSerie)}" update="@form"/>   
+                                <p:ajax  event="change" listener="#{alunoBean.listarFrequenciaturma(alunoBean.aluno.inepEscola, alunoBean.aluno.idSerie)}" update="@form"/>   
 
 
                             </p:selectOneMenu>    
@@ -158,23 +158,12 @@
                     </div>
 
 
-
-                    <div class="ui-g-12 ui-md-3">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="disciplina" value="#{alunoBean.disciplina.codDisciplina}" >
-                                <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
-                                <f:selectItems  value="#{alunoBean.disciplinas}"  var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
-
-                                <p:ajax  event="change"  listener="#{alunoBean.mediaEscolarDescritor(alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
-
-                            </p:selectOneMenu>    
-                        </div>
-                    </div>  
+                      
+                   
 
 
 
-
+                  
 
 
 
@@ -208,81 +197,7 @@
 
 
 
-            <div align="center" >
-                <p:panel rendered="#{alunoBean.visivel}">
-                    <table id="resultado1"  border="1px " width="850px" style="text-align: center" >
-
-                        <thead style="font-size: 17px " >
-                            <tr>
-                                <th style="text-align: center">DESCRITOES</th>  <!-- sql.headers is a List of Strings -->
-                                <ui:repeat value="#{alunoBean.descritores}" var="h">
-                                    <th title="#{h.especiDescritor}">#{h.siglaDescritor}</th>
-
-
-
-                                </ui:repeat>
-                                <th style="text-align: center"> RESULTADO </th> 
-
-                            </tr>
-                        </thead>
-
-                        <thead id="resultado2" style="font-size: 15px">
-                            <tr>
-                                <th style="text-align: center">GABARITO</th>  <!-- sql.headers is a List of Strings -->
-                                <ui:repeat value="#{alunoBean.descritores}" var="h" >
-
-                                    <th style="text-align: center">#{h.especiDescritor}</th>
-
-                                </ui:repeat>
-                                <th style="text-align: center">  GABARITO </th> 
-
-                            </tr>
-                        </thead>
-
-
-                        <tbody  >
-
-                            <ui:repeat value="#{alunoBean.dados}" var="row">
-                                <tr>
-                                    <ui:repeat value="#{row}" var="cell">
-                                        <td>#{cell}</td>
-                                    </ui:repeat>
-                                </tr>
-                            </ui:repeat>
-                        </tbody>
-
-                        <tfoot style="font-size: 15px">
-                            <tr>
-                                <!-- sql.headers is a List of Strings -->
-                                <ui:repeat value="#{alunoBean.resultdescritores}" var="r">
-                                    <th style="text-align: center">#{r}</th>
-
-
-                                </ui:repeat>
-                                <th style="text-align: center" >  </th> 
-                            </tr>
-                        </tfoot>
-                    </table>
-                </p:panel>
-            </div>
-
-            <br></br>
-            <br></br>
-            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 30%; height: 30%" rendered="#{alunoBean.barra != null}" >
-
-
-
-                <h:outputScript>
-
-                </h:outputScript>
-
-            </p:chart>
-
-
-
-
-
-            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
+              <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:20em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
@@ -290,26 +205,6 @@
             <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
                 <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
             </p:dialog>
-            <br></br>
-            <br></br>
-            <br></br>
-            <p:chart type="bar" model="#{alunoBean.horizontalEvasao}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalEvasao != null}" widgetVar="chart2"/>
-
-            <div class="ui-g ui-fluid">
-                <p:commandButton type="button" value="Exportar"  onclick="exportChart2()"/>
-            </div>
-
-
-            <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
-
-
-            <br></br>
-            <br></br>
-            <br></br>
-            <p:chart type="bar" model="#{alunoBean.horizontalRendimento}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalRendimento != null}" widgetVar="chart3"/>
-            <div class="ui-g ui-fluid">
-                <p:commandButton type="button" value="Exportar"  onclick="exportChart3()"/>
-            </div>
         </h:form>
 
 
@@ -323,7 +218,7 @@
 
 
 
-
+      
 
 
 

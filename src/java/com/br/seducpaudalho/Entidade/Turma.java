@@ -18,6 +18,7 @@ public class Turma implements Serializable{
     private Integer idTurma;
     private Integer idSerie;
     private String nome;
+    private double ev;
     
 
     public Turma(Integer idTurma,Integer idSerie, String nome) {
@@ -54,6 +55,16 @@ public class Turma implements Serializable{
     public void setIdTurma(Integer idTurma) {
         this.idTurma = idTurma;
     }
+
+    public double getEv() {
+        return ev;
+    }
+
+    public void setEv(double ev) {
+        this.ev = ev;
+    }
+    
+    
 
     @Override
     public int hashCode() {

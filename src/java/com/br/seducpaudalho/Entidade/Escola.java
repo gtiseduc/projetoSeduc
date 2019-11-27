@@ -16,7 +16,8 @@ public class Escola implements Serializable{
     
     private Integer inepEscola;
     private String nome;
-    
+    private Integer cp;
+    private Integer ca;
 
     public Escola(Integer inepEscola, String nome) {
         this.inepEscola = inepEscola;
@@ -68,6 +69,22 @@ public class Escola implements Serializable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Integer getCp() {
+        return cp;
+    }
+
+    public void setCp(Integer cp) {
+        this.cp = cp;
+    }
+
+    public Integer getCa() {
+        return ca;
+    }
+
+    public void setCa(Integer ca) {
+        this.ca = ca;
     }
 
    
