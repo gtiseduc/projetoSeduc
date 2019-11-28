@@ -50,7 +50,9 @@
     <ui:define name="formulario">
 
         <h:form>
-<p:fieldset legend="Cadastro Aluno">
+            <p:growl id="growl" life="3500" />
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
+            <p:fieldset legend="Cadastro Aluno">
 
 
                 <div class="ui-g ui-fluid">
@@ -58,57 +60,57 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
-                            <p:inputText placeholder="Código aluno" value="" disabled="true"/>      
+                            <p:inputText placeholder="Código aluno" value="#{alunoBean.aluno.idAluno}" disabled="true"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
-                            <p:inputText placeholder="Código inep" value="" disabled="true"/>      
+                            <p:inputText placeholder="Código inep" value="#{alunoBean.aluno.codInep}" disabled="true"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                            <p:inputText placeholder="Nome Aluno" value="" />      
+                            <p:inputText placeholder="Nome Aluno" value="#{alunoBean.aluno.nome}" />      
                         </div>
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
-                            <p:inputText placeholder="Data Nascimento" value=""/>      
+                            <p:inputText placeholder="Data Nascimento" value="#{alunoBean.aluno.dataNascimento}"/>      
                         </div>
                     </div>
-                    
-                     <br/>
+
+                    <br/>
                     <br/>
                     <br/>
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-male"></i></span>
-                            <p:inputText placeholder="Nome do Pai" value=""/>      
+                            <p:inputText placeholder="Nome do Pai" value="#{alunoBean.aluno.nomePai}"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-female"></i></span>
-                            <p:inputText placeholder="Nome da Mãe" value=""/>      
+                            <p:inputText placeholder="Nome da Mãe" value="#{alunoBean.aluno.nomeMae}"/>      
                         </div>
                     </div>
-                     <br/>
+                    <br/>
                     <br/>
                     <br/>
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-users"></i></span>
-                            <p:inputText placeholder="Nome do responsável" value=""/>      
+                            <p:inputText placeholder="Nome do responsável" value="#{alunoBean.aluno.nomeResponsavel}"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
-                            <p:inputText placeholder="Ano" value=""/>      
+                            <p:inputText placeholder="Ano" value="#{alunoBean.aluno.anoCadastro}"/>      
                         </div>
                     </div>
                     <br/>
@@ -118,14 +120,14 @@
                     <div class="ui-g-12 ui-md-4">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="instituicao" value="" >
+                            <p:selectOneMenu id="instituicao" value="#{alunoBean.aluno.instituicao}" >
                                 <f:selectItem itemLabel="Instituição" />       
-                                <f:selectItems   value="" var="instituicao" itemLabel="" itemValue=""/>         
+                                <f:selectItems   value="#{alunoBean.aluno.instituicao}" var="instituicao" itemLabel="#{alunoBean.aluno.instituicao}" itemValue="#{alunoBean.aluno.instituicao}"/>         
                             </p:selectOneMenu>    
                         </div>
                     </div> 
-                   
-                    <div class="ui-g-12 ui-md-4">
+
+                    <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
@@ -135,31 +137,31 @@
                             </p:selectOneMenu>     
                         </div>
                     </div> 
-                   
-                    <div class="ui-g-12 ui-md-5">
+
+                    <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-book"></i></span>
-                           <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
+                            <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
                                 <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
                                 <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
-                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie)}" update="@form"/>
+                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie,alunoBean.aluno.inepEscola)}" update="@form"/>
                             </p:selectOneMenu> 
                         </div>
                     </div> 
-                   
+
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-mortar-board"></i></span>
                             <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
                                 <f:selectItem itemLabel="SELECIONE A TURMA" />       
                                 <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
-                                <p:ajax  event="change"  listener="#{alunoBean.listarAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> 
+
                             </p:selectOneMenu>    
                         </div>
                     </div> 
-                    
 
-                    
+
+
 
 
 
@@ -167,24 +169,24 @@
                     <br/>
                     <br/>
                     <br/>
-                   
-                   
 
-                  
 
-                  
 
-                    <p:commandButton value="Salvar" action="#{produtoBean.salvar()}" update="@form"/>
 
-                   
-                   
-                  
 
-                  
+
+
+                    <p:commandButton value="Salvar" action="#{alunoBean.salvarAluno()}" update="@form"/>
+
+
+
+
+
+
                 </div>
 
             </p:fieldset>
-           
+
 
 
         </h:form>

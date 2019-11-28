@@ -34,6 +34,39 @@ import java.util.logging.Logger;
  */
 public class AlunoDao {
 
+    public void salvarAluno(Aluno aluno) throws ErroSistema {
+        try {
+            String sql = "";
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+            if (aluno.getIdAluno() == null) {
+                System.out.println("--------- entrou no if cadastro aluno");
+                ps = conexao.prepareStatement("INSERT INTO aluno(codSerie,codTurma,inepEscola,nomeAluno,turno)VALUES (?,?,?,?,?)");
+            } else {
+                System.out.println("--------- entrou no else cadastro aluno" + aluno.getIdAluno());
+                ps = conexao.prepareStatement("UPDATE aluno SET codSerie=?,codTurma=?,inepEscola=?,nomeAluno=?,turno=? where codAluno=?");
+                ps.setInt(6, aluno.getIdAluno());
+            }
+
+            ps.setInt(1, aluno.getIdSerie());
+            ps.setInt(2, aluno.getIdTurma());
+            ps.setInt(3, aluno.getInepEscola());
+            ps.setString(4, aluno.getNome());
+            ps.setString(5, aluno.getTurno());
+          
+
+            ps.execute();
+            System.out.println("inserindo aluno---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+        System.out.println("com.br.seducpaudalho.Dao.AlunoDao.salvarAluno()" + aluno.getNome());
+    }
+
     public List<Aluno> listarAlunos() throws ErroSistema {
 
         System.out.println("entrou no listarProdutos produto");
@@ -155,6 +188,10 @@ public class AlunoDao {
                 aluno.setNomeSerie(rs.getString("nomeSerie"));
                 aluno.setNomeTurma(rs.getString("nomeTurma"));
                 aluno.setTurno(rs.getString("turno"));
+                aluno.setPortugues(("AA"));
+                aluno.setMatematica(("AA"));
+                aluno.setCienciasHumanas(("AA"));
+                aluno.setCienciasNatureza(("AA"));
                 System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
 
                 alunos.add(aluno);
@@ -170,9 +207,9 @@ public class AlunoDao {
         return alunos;
 
     }
+
     public List<Aluno> imprimirAlunosSerie(Integer inepEscola, Integer codSerie) throws ErroSistema {
 
-       
         System.out.println("**************" + inepEscola);
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
@@ -192,7 +229,7 @@ public class AlunoDao {
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inepEscola);
             ps.setInt(2, codSerie);
-          
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -379,9 +416,9 @@ public class AlunoDao {
         return avaliacoes;
 
     }
+
     public List<Avaliacao> listarGabaritosSerie(Integer inepEscola, Integer codSerie) throws ErroSistema {
 
-        
         System.out.println("**************" + inepEscola);
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
@@ -398,7 +435,7 @@ public class AlunoDao {
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inepEscola);
             ps.setInt(2, codSerie);
-           
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -464,7 +501,7 @@ public class AlunoDao {
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inep);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 a = rs.getInt(1);
@@ -480,6 +517,7 @@ public class AlunoDao {
         FabricaConexao.fecharConexao();
         return a;
     }
+
     public Integer contarAlunosEscola(Integer inep) throws ErroSistema {
         Integer a = 0;
         String sql = "select count(*) from aluno where inepEscola = ?";
@@ -489,7 +527,7 @@ public class AlunoDao {
 
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, inep);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 a = rs.getInt(1);
@@ -583,15 +621,14 @@ public class AlunoDao {
         return avaliacoes;
 
     }
+
     public List<Turma> listarFrequenciaTurma(Integer inepEscola, Integer codSerie) throws ErroSistema {
 
-       
-
-        String sql = "select * from frequenciaturma as a \n" +
-"                join escola e on e.inepEscola = a.inepEscola\n" +
-"                join serie s on s.codSerie = a.codSerie\n" +
-"                join turma t on t.codTurma = a.codTurma\n" +
-"                WHERE a.inepEscola = ? && a.codserie = ? ";
+        String sql = "select * from frequenciaturma as a \n"
+                + "                join escola e on e.inepEscola = a.inepEscola\n"
+                + "                join serie s on s.codSerie = a.codSerie\n"
+                + "                join turma t on t.codTurma = a.codTurma\n"
+                + "                WHERE a.inepEscola = ? && a.codserie = ? ";
 
         List<Turma> t = new ArrayList<>();
 
@@ -605,15 +642,13 @@ public class AlunoDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-               
+
                 Turma tu = new Turma();
                 tu.setNome(rs.getString("nomeTurma"));
                 tu.setEv(rs.getDouble("resultevasaoTurma"));
-               
 
                 t.add(tu);
 
-               
             }
 
         } catch (Exception e) {
@@ -626,15 +661,14 @@ public class AlunoDao {
         return t;
 
     }
-    public List<Turma> listarRendimentoTurma(Integer inepEscola, Integer codSerie,Integer disciplina) throws ErroSistema {
 
-       
+    public List<Turma> listarRendimentoTurma(Integer inepEscola, Integer codSerie, Integer disciplina) throws ErroSistema {
 
-        String sql = "select * from rendimentoturma as a \n" +
-"                join escola e on e.inepEscola = a.inepEscola\n" +
-"                join serie s on s.codSerie = a.codSerie\n" +
-"                join turma t on t.codTurma = a.codTurma\n" +
-"                WHERE a.inepEscola = ? && a.codserie = ? && a.codDisciplina = ?";
+        String sql = "select * from rendimentoturma as a \n"
+                + "                join escola e on e.inepEscola = a.inepEscola\n"
+                + "                join serie s on s.codSerie = a.codSerie\n"
+                + "                join turma t on t.codTurma = a.codTurma\n"
+                + "                WHERE a.inepEscola = ? && a.codserie = ? && a.codDisciplina = ?";
 
         List<Turma> t = new ArrayList<>();
 
@@ -649,15 +683,13 @@ public class AlunoDao {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-               
+
                 Turma tu = new Turma();
                 tu.setNome(rs.getString("nomeTurma"));
                 tu.setEv(rs.getDouble("rendimento"));
-               
 
                 t.add(tu);
 
-               
             }
 
         } catch (Exception e) {
@@ -1225,6 +1257,48 @@ public class AlunoDao {
         }
     }
 
+    public void salvarGabarito(Aluno aluno) throws ErroSistema {
+
+        System.out.println("--------- olha o  aluno : " + aluno.getIdSerie() + "portugues" + aluno.getPortugues());
+
+
+        /*  Integer p = pesquisarGabarito(aluno.getIdAluno());
+
+        try {
+            String sql = "";
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+            if (p == null) {
+                System.out.println("--------- entrou no if cadastro produto");
+                
+                ps = conexao.prepareStatement("INSERT INTO testegabarito(codTurma,codSerie,codAluno,inepEscola,portugues,matematica,cienciasHumanas,cienciasNatureza)VALUES (?,?,?,?,?,?,?,?)");
+            } else {
+                
+                ps = conexao.prepareStatement("UPDATE testegabarito SET codTurma=?,codSerie=?,inepEscola=?,portugues=?,matematica=? ,cienciasHumanas=? ,cienciasNatureza=?  where codAluno=?");
+                ps.setInt(9, p);
+            }
+
+            ps.setInt(1, aluno.getIdTurma());
+            ps.setInt(2, aluno.getIdSerie());
+            ps.setInt(3, aluno.getIdAluno());
+            ps.setInt(4, aluno.getInepEscola());
+            ps.setString(5, aluno.getPortugues());
+            ps.setString(6, aluno.getMatematica());
+            ps.setString(7, aluno.getCienciasHumanas());
+            ps.setString(8, aluno.getCienciasNatureza());
+           
+
+            ps.execute();
+            System.out.println("inserindo fornecedor---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }*/
+    }
+
     public void salvarQuestao(Associacao associacao) throws ErroSistema {
 
         System.out.println("--------- olha questao : " + associacao.getCodSerie() + "  - " + associacao.getCodDisciplina() + "  - " + associacao.getNumeroQuestoes());
@@ -1315,6 +1389,33 @@ public class AlunoDao {
                 d.setCodDescritor(rs.getInt("codDescritor"));
 
                 a = d.getCodDescritor();
+            }
+
+        } catch (Exception e) {
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        return a;
+    }
+
+    private Integer pesquisarGabarito(Integer codigo) throws ErroSistema {
+
+        String sql = "select * from testegabarito where codAluno = ?";
+        Integer a = null;
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            ps.setInt(1, codigo);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Aluno d = new Aluno();
+                d.setIdAluno(rs.getInt("codAluno"));
+
+                a = d.getIdAluno();
             }
 
         } catch (Exception e) {

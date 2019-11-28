@@ -14,6 +14,7 @@ import java.util.Objects;
 public class Aluno {
     
     private Integer idAluno;
+    private Integer codInep;
     private Integer inepEscola;
     private Integer idSerie;
     private Integer idTurma;
@@ -23,6 +24,16 @@ public class Aluno {
     private String nomeSerie;
     private String nomeTurma;
     private String turno;
+    private String portugues;
+    private String matematica;
+    private String cienciasHumanas;
+    private String cienciasNatureza;
+    private String dataNascimento;
+    private String nomePai;
+    private String nomeMae;
+    private String nomeResponsavel;
+    private String anoCadastro;
+    private String instituicao;
 
     public Integer getIdAluno() {
         return idAluno;
@@ -94,6 +105,94 @@ public class Aluno {
 
     public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public String getPortugues() {
+        return portugues;
+    }
+
+    public void setPortugues(String portugues) {
+        this.portugues = portugues;
+    }
+
+    public String getMatematica() {
+        return matematica;
+    }
+
+    public void setMatematica(String matematica) {
+        this.matematica = matematica;
+    }
+
+    public String getCienciasHumanas() {
+        return cienciasHumanas;
+    }
+
+    public void setCienciasHumanas(String cienciasHumanas) {
+        this.cienciasHumanas = cienciasHumanas;
+    }
+
+    public String getCienciasNatureza() {
+        return cienciasNatureza;
+    }
+
+    public void setCienciasNatureza(String cienciasNatureza) {
+        this.cienciasNatureza = cienciasNatureza;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getNomePai() {
+        return nomePai;
+    }
+
+    public void setNomePai(String nomePai) {
+        this.nomePai = nomePai;
+    }
+
+    public String getNomeMae() {
+        return nomeMae;
+    }
+
+    public void setNomeMae(String nomeMae) {
+        this.nomeMae = nomeMae;
+    }
+
+    public String getNomeResponsavel() {
+        return nomeResponsavel;
+    }
+
+    public void setNomeResponsavel(String nomeResponsavel) {
+        this.nomeResponsavel = nomeResponsavel;
+    }
+
+    public Integer getCodInep() {
+        return codInep;
+    }
+
+    public void setCodInep(Integer codInep) {
+        this.codInep = codInep;
+    }
+
+    public String getAnoCadastro() {
+        return anoCadastro;
+    }
+
+    public void setAnoCadastro(String anoCadastro) {
+        this.anoCadastro = anoCadastro;
+    }
+
+    public String getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
     }
     
     

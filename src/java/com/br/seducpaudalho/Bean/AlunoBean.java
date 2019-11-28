@@ -135,7 +135,7 @@ public class AlunoBean {
     private boolean visivel = false;
 
     public void limpar() {
-       
+
         System.out.println("############## - entrou no metodo limpar()");
         aluno = new Aluno();
         alunos = new ArrayList<>();
@@ -173,89 +173,91 @@ public class AlunoBean {
         quantFaltosos = 0;
         visivel = false;
 
-        
-        
         horizontalBarAluno = null;
         horizontalBarModel = null;
         horizontalEvasao = null;
         horizontalRendimento = null;
     }
 
-    public void salvar() {
-        /*
+    public void salvarAluno() throws ErroSistema {
+        
         try {
 
-            System.out.println("olha aqui o escola " + aluno.getIdFornecedor() + " kilo " + aluno.getKiloProduto() + "Un " + aluno.getUnidadeProduto() + " olha o preço " + aluno.getValorTotal());
+            
 
-            if (aluno.getNomeProduto().equals("")) {
+            if (aluno.getNome().equals("")) {
 
-                adicionarMensagem("O CAMPO DESCRIÇÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
                 return;
 
             }
-            if (aluno.getMarcaProduto().equals("")) {
+            
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.salvarAluno() "+aluno.getIdSerie());
+           
+            if (aluno.getDataNascimento().equals("")) {
 
-                adicionarMensagem("O MARCA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
-
-            }
-
-            if (aluno.getIdFornecedor() == null) {
-
-                adicionarMensagem("O CAMPO FORNECEDOR É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                adicionarMensagem("O CAMPO DATA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
                 return;
 
             }
 
-            if (aluno.getUnidadeProduto().equals("")) {
+            if (aluno.getNomePai().equals("")) {
 
-                adicionarMensagem("O CAMPO UNIDADE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                adicionarMensagem("O NOME DO PAI É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+               
+                return;
 
+            }
+            if (aluno.getNomeMae().equals("")) {
+
+                adicionarMensagem("O NOME DA MÃE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                
+                return;
+
+            }
+            if (aluno.getNomeResponsavel().equals("")) {
+
+                adicionarMensagem("O NOME DO RESPONSÁVEL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                
+                return;
+
+            }
+            if (aluno.getInepEscola() == null) {
+
+                adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                
+                return;
+
+            }
+            if (aluno.getIdSerie() == null) {
+
+                adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                
+                return;
+
+            }
+            if (aluno.getIdTurma() == null) {
+
+                adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+                
                 return;
 
             }
 
-            if (aluno.getKiloProduto() == 0.0) {
+            else {
 
-                adicionarMensagem("O CAMPO KILO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-
-                return;
-
-            }
-            if (aluno.getValorUnitario() == 0.0) {
-
-                adicionarMensagem("O CAMPO VALOR UNITÁRIO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-
-                return;
-
-            }
-            if (aluno.getValorTotal() == 0.0) {
-
-                adicionarMensagem("O CAMPO VALOR TOTAL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-
-                return;
-
-            }
-            if (aluno.getEspecificacaoProduto().equals("")) {
-
-                adicionarMensagem("O CAMPO ESPECIFICAÇÃO DO PRODUTO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-
-                return;
-
-            } else {
-
-                System.out.println("entrou no salvar----------");
-                alunoDao.salvar(aluno);
-                aluno = new Produto();
-                alunos = alunoDao.listarProdutos();
+                 alunoDao.salvarAluno(aluno);
+                
 
                 adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
             }
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
-        }*/
+        }
 
-        // }
+        
+        
+       
     }
 
     public void salvarDescritor() throws ErroSistema {
@@ -264,6 +266,15 @@ public class AlunoBean {
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
         descritor = new Descritor();
+    }
+
+    public void salvarGabarito() throws ErroSistema {
+
+        System.out.println("OLHAAAAA " + aluno.getIdSerie() + aluno.getIdAluno() + aluno.getIdTurma() + aluno.getNome() + aluno.getNomeEscola());
+        alunoDao.salvarGabarito(aluno);
+        adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+
+        //descritor = new Descritor();
     }
 
     public void salvarQuestoes() throws ErroSistema {
@@ -430,7 +441,7 @@ public class AlunoBean {
     }
 
     public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
-
+        
         System.out.println("olha o codigo --------" + codTurma + "****----***" + inep + "----***------- " + codSerie);
 
         try {
@@ -1267,8 +1278,6 @@ public class AlunoBean {
     }
 
     public void listarRendimentoturma(Integer inep, Integer serie, Integer disciplina) throws ErroSistema {
-
-      
 
         List<Turma> t = new ArrayList<>();
 
