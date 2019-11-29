@@ -54,7 +54,6 @@ public class AlunoDao {
             ps.setInt(3, aluno.getInepEscola());
             ps.setString(4, aluno.getNome());
             ps.setString(5, aluno.getTurno());
-          
 
             ps.execute();
             System.out.println("inserindo aluno---------------------------------------");
@@ -188,10 +187,10 @@ public class AlunoDao {
                 aluno.setNomeSerie(rs.getString("nomeSerie"));
                 aluno.setNomeTurma(rs.getString("nomeTurma"));
                 aluno.setTurno(rs.getString("turno"));
-                aluno.setPortugues(("AA"));
-                aluno.setMatematica(("AA"));
-                aluno.setCienciasHumanas(("AA"));
-                aluno.setCienciasNatureza(("AA"));
+                aluno.setPortugues((""));
+                aluno.setMatematica((""));
+                aluno.setCienciasHumanas((""));
+                aluno.setCienciasNatureza((""));
                 System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
 
                 alunos.add(aluno);
@@ -1261,8 +1260,7 @@ public class AlunoDao {
 
         System.out.println("--------- olha o  aluno : " + aluno.getIdSerie() + "portugues" + aluno.getPortugues());
 
-
-        /*  Integer p = pesquisarGabarito(aluno.getIdAluno());
+        Integer p = pesquisarGabarito(aluno.getIdAluno());
 
         try {
             String sql = "";
@@ -1271,10 +1269,10 @@ public class AlunoDao {
 
             if (p == null) {
                 System.out.println("--------- entrou no if cadastro produto");
-                
+
                 ps = conexao.prepareStatement("INSERT INTO testegabarito(codTurma,codSerie,codAluno,inepEscola,portugues,matematica,cienciasHumanas,cienciasNatureza)VALUES (?,?,?,?,?,?,?,?)");
             } else {
-                
+
                 ps = conexao.prepareStatement("UPDATE testegabarito SET codTurma=?,codSerie=?,inepEscola=?,portugues=?,matematica=? ,cienciasHumanas=? ,cienciasNatureza=?  where codAluno=?");
                 ps.setInt(9, p);
             }
@@ -1287,7 +1285,6 @@ public class AlunoDao {
             ps.setString(6, aluno.getMatematica());
             ps.setString(7, aluno.getCienciasHumanas());
             ps.setString(8, aluno.getCienciasNatureza());
-           
 
             ps.execute();
             System.out.println("inserindo fornecedor---------------------------------------");
@@ -1296,7 +1293,7 @@ public class AlunoDao {
         } catch (Exception e) {
             System.out.println("#########################" + e);
             throw new ErroSistema("erroooooo--------------------", e);
-        }*/
+        }
     }
 
     public void salvarQuestao(Associacao associacao) throws ErroSistema {
@@ -1423,6 +1420,25 @@ public class AlunoDao {
 
         }
         return a;
+    }
+
+    public void deletar(Aluno p) throws ErroSistema {
+        
+        System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.deletar()" + p.getIdAluno());
+
+        String sql = "delete from aluno where codAluno = ?";
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, p.getIdAluno());
+            ps.execute();
+            FabricaConexao.fecharConexao();
+        } catch (Exception e) {
+
+            throw new ErroSistema("ERRO AO DELETAR PRODUTO");
+        }
+        
     }
 
 }

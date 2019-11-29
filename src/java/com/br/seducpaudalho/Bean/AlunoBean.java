@@ -268,10 +268,11 @@ public class AlunoBean {
         descritor = new Descritor();
     }
 
-    public void salvarGabarito() throws ErroSistema {
+    public void salvarGabarito(Aluno a) throws ErroSistema {
 
-        System.out.println("OLHAAAAA " + aluno.getIdSerie() + aluno.getIdAluno() + aluno.getIdTurma() + aluno.getNome() + aluno.getNomeEscola());
-        alunoDao.salvarGabarito(aluno);
+      
+       
+        alunoDao.salvarGabarito(a);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
         //descritor = new Descritor();
@@ -299,17 +300,11 @@ public class AlunoBean {
          */
     }
 
-    public void excluir(Aluno p) {
-        /* System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p);
-        try {
-            alunoDao.deletar(p);
-            aluno = new Produto();
-            alunos = alunoDao.listarProdutos();
-            adicionarMensagem("EXCLUIDO!", "EXCLUIDO COM SUCESSO", FacesMessage.SEVERITY_INFO);
-
-        } catch (ErroSistema ex) {
-            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
-        }*/
+    public void excluir(Aluno p) throws ErroSistema{
+        System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p.getIdAluno());
+        alunoDao.deletar(p);
+        alunos = alunoDao.imprimirAlunos(p.getIdTurma(), p.getInepEscola(), p.getIdSerie()); 
+        adicionarMensagem("EXCLUIDO!", "ALUNO EXCLUIDO COM SUCESSO", FacesMessage.SEVERITY_INFO);
 
     }
 
@@ -370,7 +365,7 @@ public class AlunoBean {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
 
             descritores = serieDao.listarDescritorMatriz(codSerie, codDisciplina);
-            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+           // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }

@@ -50,7 +50,8 @@
     <ui:define name="formulario">
 
         <h:form>
-
+            <p:growl id="growl" life="3500" />
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
 
             <p:fieldset legend="INSERIR GABARITOS">
 
@@ -99,42 +100,42 @@
 
             </p:fieldset>
 
-    
-
-                <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
-                    <p:column headerText="Lista de alunos" priority="3" style="width: 7px">
-                        <p:commandButton value="Editar"  update="@form" style="width: 80px" />
-                        <p:commandButton value="Excluir"  update="@form" style="width: 80px"/>
-                    </p:column>
 
 
-
-                    <p:column headerText="Nome do aluno"  priority="3" style="width: 45px">
-                        <h:outputText value="#{alunos.nome}" />
-                    </p:column>
-
-                    <p:column headerText="PORTUGUÊS" priority="3" style="width: 10px" >
-                        <h:inputText value="#{alunos.portugues}" style="width: 100px" />
-                    </p:column>
-                    <p:column headerText="MATEMÁTICA" priority="3" style="width: 10px" >
-                        <h:inputText value="#{alunos.matematica}" style="width: 100px"/>
-                    </p:column>
-                    <p:column headerText="CIÊNCIAS HUMANAS" priority="3" style="width: 10px" >
-                        <h:inputText value="#{alunos.cienciasHumanas}" style="width: 100px"/>
-                    </p:column>
-                    <p:column headerText="CIÊNCIAS DA NATUREZA" priority="3" style="width: 10px" >
-                        <h:inputText value="#{alunos.cienciasNatureza}" style="width: 100px "/>
-                    </p:column>
-                    <p:column headerText="ENVIAR" priority="3" style="width: 10px" >
-                      
-                        <p:commandButton value="ENVIAR"  action="#{alunoBean.salvarGabarito()}" update="@form"/>
-                    </p:column>
+            <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
+                <p:column headerText="Lista de alunos" priority="3" style="width: 7px">
+                    <!--  <p:commandButton value="Editar"  update="@form" style="width: 80px" /> -->
+                    <p:commandButton value="Excluir"  action="#{alunoBean.excluir(alunos)}" update="@form" style="width: 80px"/>
+                </p:column>
 
 
 
+                <p:column headerText="Nome do aluno"  priority="3" style="width: 45px">
+                    <h:outputText value="#{alunos.nome}" />
+                </p:column>
 
-                </p:dataTable>
-            
+                <p:column headerText="PORTUGUÊS" priority="3" style="width: 10px" >
+                    <h:inputText value="#{alunos.portugues}" style="width: 100px" />
+                </p:column>
+                <p:column headerText="MATEMÁTICA" priority="3" style="width: 10px" >
+                    <h:inputText value="#{alunos.matematica}" style="width: 100px"/>
+                </p:column>
+                <p:column headerText="CIÊNCIAS HUMANAS" priority="3" style="width: 10px" >
+                    <h:inputText value="#{alunos.cienciasHumanas}" style="width: 100px"/>
+                </p:column>
+                <p:column headerText="CIÊNCIAS DA NATUREZA" priority="3" style="width: 10px" >
+                    <h:inputText value="#{alunos.cienciasNatureza}" style="width: 100px "/>
+                </p:column>
+                <p:column headerText="ENVIAR" priority="3" style="width: 10px" >
+
+                    <p:commandButton value="ENVIAR"  action="#{alunoBean.salvarGabarito(alunos)}" update="@form"/>
+                </p:column>
+
+
+
+
+            </p:dataTable>
+
 
             <div class="ui-g ui-fluid">
 
