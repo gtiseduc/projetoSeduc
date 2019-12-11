@@ -147,7 +147,7 @@
             <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
                 <p:column headerText="Lista de alunos">
                     <p:commandButton value="Editar"  update="@form"  />
-                    <p:commandButton value="Excluir"  update="@form" />
+                    <p:commandButton value="Excluir" action="#{alunoBean.excluir(alunos)}" update="@form" />
                 </p:column>
 
                 <p:column headerText="Nome da Escola">
@@ -162,6 +162,7 @@
 
 
             </p:dataTable>
+            
             <div class="ui-g ui-fluid">
                 
                 <p:commandButton value="IMPRIMIR - GABARITO" ajax="false" action="#{alunoBean.imprimirAlunos(alunoBean.aluno.idSerie)}" onclick="this.form.target = '_blank'"/>

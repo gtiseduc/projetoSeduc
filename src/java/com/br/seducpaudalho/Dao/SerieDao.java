@@ -69,7 +69,7 @@ public class SerieDao {
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
-        String sql = "select * from associacao where codSerie = ? && codDisciplina = ?";
+        String sql = "select * from associacao where codSerie = ? && codDisciplina = ? order by codassociacao";
         
         List<Descritor> descritores = new ArrayList<>();
 

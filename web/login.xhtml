@@ -17,14 +17,12 @@
         <link rel="stylesheet" type="text/css"  href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css"/>
         <h:outputStylesheet library="css" name="bootstrap.min.css" />
         <h:outputStylesheet library="css" name="custom.css" />
-      
-        <h:outputStylesheet library="css" name="animate.min.css" />
 
+        <h:outputStylesheet library="css" name="animate.min.css" />
+        <h:outputStylesheet library="css" name="estilo.css"/>
 
     </h:head>
 
-    
-                
 
 
 
@@ -35,10 +33,12 @@
 
 
 
-    <h:body style="background:#F7F7F7;">
 
-        <div class="">
 
+    <h:body style="background-image: url('#{resource['images/sae.png']}'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+        
+ <div class="view" >
 
             <div id="wrapper">
                 <div id="login" class="animate form">
@@ -46,7 +46,7 @@
                         <h:form id="formLogin">
                             <p:growl id="growl" life="3500" />
 
-                            <h1>Login </h1>
+                            <h1>Acesso </h1>
                             <div>
                                 <p:inputMask mask="999.999.999-99" placeholder="Usuario"  value="#{loginBean.login.cpf}"/>
                             </div>
@@ -58,7 +58,7 @@
                                     <p:commandButton  value="Log in" id="ajax" update="formLogin"   action="#{loginBean.buscarLogin()}"  />
                                 </a>
 
-                                <a class="reset_pass" href="#">Esqueceu sua senha?</a>
+                               <!-- <a class="reset_pass" href="#">Esqueceu sua senha?</a>-->
                             </div>
                             <div class="clearfix"></div>
                             <div class="separator">
@@ -67,9 +67,9 @@
                                 <div class="clearfix"></div>
                                 <br />
                                 <div>
-                                    <h1><i class="fa fa-book" style="font-size: 26px;"></i> Sistema de administração geral</h1>
+                                    <!--<h1><i class="fa fa-book" style="font-size: 26px;"></i> Sistema de administração geral</h1>
 
-                                    <p>© 2019 Todos os direitos reservados a Secretaria Municipal de Educação do Paudalho</p>
+                                    <p>© 2019 Todos os direitos reservados a Secretaria Municipal de Educação do Paudalho</p>-->
                                 </div>
                             </div>
                         </h:form>
@@ -80,7 +80,7 @@
 
 
 
-       
+
 
 
 

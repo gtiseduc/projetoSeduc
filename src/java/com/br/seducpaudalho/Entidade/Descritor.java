@@ -16,6 +16,7 @@ public class Descritor {
     private Integer codDescritor;
     private Integer codDisciplina;
     private Integer codSerie;
+    private double resultDescritor;
     
     private String siglaDescritor; 
     private String especiDescritor; 
@@ -79,6 +80,14 @@ public class Descritor {
 
     public void setNomeMatriz(String nomeMatriz) {
         this.nomeMatriz = nomeMatriz;
+    }
+
+    public double getResultDescritor() {
+        return resultDescritor;
+    }
+
+    public void setResultDescritor(double resultDescritor) {
+        this.resultDescritor = resultDescritor;
     }
 
    

@@ -1,0 +1,88 @@
+
+body{
+    color: #ffffff;
+}
+.ui-button{
+    color: #fff;
+    display: block;
+    width: 100%;
+  
+   
+    
+    font: 5 23.3333px Segoe UI;
+   
+     border-radius: 0.5rem;
+     border: none;
+    
+   
+    background: #A71601 !important;
+}
+
+.ui-state-hover{
+     background:  #EF7f6D !important;
+}
+
+
+ /* "Segoe UI Emoji", "Segoe UI Symbol"  #0069d9*/
+ 
+ 
+ html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 1000px;
+  }
+}
+@media (min-width: 800px) and (max-width: 850px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 650px;
+  }
+}
+
+.top-nav-collapse {
+  background-color: #3f51b5 !important;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: transparent !important;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #3f51b5 !important;
+  }
+}
+
+
+
+.card {
+ /* background-color: rgba(126, 123, 215, 0.2);
+ padding-top: 50px;
+ */
+
+
+}
+
+.container{
+    
+   padding-top: 100px; 
+  /* padding-left: 250px; */
+}
+.md-form label {
+  color: #ffffff;
+}
+
+h6 {
+  line-height: 1.7;
+}

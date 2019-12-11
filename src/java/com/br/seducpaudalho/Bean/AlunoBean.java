@@ -99,6 +99,7 @@ public class AlunoBean {
 
     private List<SelectItem> selectDescritor;
     private Descritor descritor = new Descritor();
+    private Descritor resultDescritor = new Descritor();
     List<Descritor> descritores = new ArrayList<>();
 
     private Associacao associacao = new Associacao();
@@ -180,10 +181,8 @@ public class AlunoBean {
     }
 
     public void salvarAluno() throws ErroSistema {
-        
-        try {
 
-            
+        try {
 
             if (aluno.getNome().equals("")) {
 
@@ -191,9 +190,9 @@ public class AlunoBean {
                 return;
 
             }
-            
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.salvarAluno() "+aluno.getIdSerie());
-           
+
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.salvarAluno() " + aluno.getIdSerie());
+
             if (aluno.getDataNascimento().equals("")) {
 
                 adicionarMensagem("O CAMPO DATA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
@@ -204,50 +203,47 @@ public class AlunoBean {
             if (aluno.getNomePai().equals("")) {
 
                 adicionarMensagem("O NOME DO PAI É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-               
+
                 return;
 
             }
             if (aluno.getNomeMae().equals("")) {
 
                 adicionarMensagem("O NOME DA MÃE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                
+
                 return;
 
             }
             if (aluno.getNomeResponsavel().equals("")) {
 
                 adicionarMensagem("O NOME DO RESPONSÁVEL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                
+
                 return;
 
             }
             if (aluno.getInepEscola() == null) {
 
                 adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                
+
                 return;
 
             }
             if (aluno.getIdSerie() == null) {
 
                 adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                
+
                 return;
 
             }
             if (aluno.getIdTurma() == null) {
 
                 adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                
+
                 return;
 
-            }
+            } else {
 
-            else {
-
-                 alunoDao.salvarAluno(aluno);
-                
+                alunoDao.salvarAluno(aluno);
 
                 adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
             }
@@ -255,9 +251,6 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        
-        
-       
     }
 
     public void salvarDescritor() throws ErroSistema {
@@ -270,8 +263,6 @@ public class AlunoBean {
 
     public void salvarGabarito(Aluno a) throws ErroSistema {
 
-      
-       
         alunoDao.salvarGabarito(a);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
@@ -300,10 +291,10 @@ public class AlunoBean {
          */
     }
 
-    public void excluir(Aluno p) throws ErroSistema{
+    public void excluir(Aluno p) throws ErroSistema {
         System.out.println("com.br.seducpaudalho.Bean.ProdutoBean.excluir()" + p.getIdAluno());
         alunoDao.deletar(p);
-        alunos = alunoDao.imprimirAlunos(p.getIdTurma(), p.getInepEscola(), p.getIdSerie()); 
+        alunos = alunoDao.imprimirAlunos(p.getIdTurma(), p.getInepEscola(), p.getIdSerie());
         adicionarMensagem("EXCLUIDO!", "ALUNO EXCLUIDO COM SUCESSO", FacesMessage.SEVERITY_INFO);
 
     }
@@ -365,7 +356,7 @@ public class AlunoBean {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
 
             descritores = serieDao.listarDescritorMatriz(codSerie, codDisciplina);
-           // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -380,6 +371,8 @@ public class AlunoBean {
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
             series = serieDao.listarSerieParametro(codigo);
+            
+            disciplinas =  new ArrayList<>();
             // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -422,6 +415,7 @@ public class AlunoBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
+         disciplinas =  new ArrayList<>();
     }
 
     public void listarAssociacao() {
@@ -436,7 +430,7 @@ public class AlunoBean {
     }
 
     public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
-        
+
         System.out.println("olha o codigo --------" + codTurma + "****----***" + inep + "----***------- " + codSerie);
 
         try {
@@ -724,7 +718,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[quantlunos][quantlunos];
+        dados = new String[quantlunos+descritores.size()][quantlunos+descritores.size()];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
@@ -824,7 +818,8 @@ public class AlunoBean {
             }
 
             System.out.println("A SOMA DAS LINHAS É " + s);
-            Integer ra = 100 * s / descritores.size();
+            //Integer ra = 100 * s / descritores.size();
+            Integer ra = s;
             quantAcerto += s;
             System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
             resulAlunos.add(Integer.toString(ra));
@@ -855,7 +850,8 @@ public class AlunoBean {
             col += 1;
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
-            Integer dp = 100 * sum / descritores.size();
+            //Integer dp = 100 * sum / descritores.size();
+            Integer dp =  sum;
 
             descri.add(Integer.toString(dp));
 
@@ -918,6 +914,104 @@ public class AlunoBean {
         }
 
         // -----------------------------------------------------------\\
+        //**********************************************************************************\\
+        ArrayList<Descritor> teste = new ArrayList<>();
+
+        for (int i = 0; i < descritores.size(); i++) {
+
+            int cont = 0;
+            Descritor rd = new Descritor();
+
+            int a = Integer.parseInt(resultdescritores.get(i + 1));
+            double so = 0;
+            
+            for (int j = 0; j < descritores.size(); j++) {
+                System.out.println("descritor 1 " + descritores.get(i).getSiglaDescritor());
+                System.out.println("descritor 2 " + descritores.get(j).getSiglaDescritor());
+              int aa = Integer.parseInt(resultdescritores.get(j + 1));
+                if (descritores.get(i).getSiglaDescritor().equals(descritores.get(j).getSiglaDescritor())) {
+
+                    so += aa;
+                    cont++;
+                }
+
+            }
+            double t = 0;
+            System.out.println("quantidade de repetição " + descritores.get(i).getSiglaDescritor() + " - " + cont);
+            
+            if (cont >= 2) {
+                t = so;
+            }
+            else
+            {
+            t = a;
+            }
+
+            System.out.println("olha o teste " + teste.size());
+            cont = 0;
+
+            if (teste.size() == 0) {
+                rd.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+                System.out.println("************* " + rd.getSiglaDescritor());
+
+                System.out.println("************* porcentagem descritor" + a);
+
+                rd.setResultDescritor(t);
+
+                teste.add(rd);
+            } else {
+
+                for (int d = 0; d < teste.size(); d++) {
+
+                    System.out.println("************* descritor 1 " + descritores.get(i).getSiglaDescritor());
+                    System.out.println("*************  descritor 2 " + teste.get(d).getSiglaDescritor());
+
+                    if (descritores.get(i).getSiglaDescritor().equals(teste.get(d).getSiglaDescritor())) {
+                        cont++;
+                        /*rd.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+
+                        System.out.println("************* " + rd.getSiglaDescritor());
+
+                        System.out.println("************* porcentagem descritor" + a);
+
+                        rd.setResultDescritor(i);
+
+                        teste.add(rd);*/
+                    }
+
+                }
+                if (cont < 1) {
+                    rd.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+
+                    System.out.println("************* " + rd.getSiglaDescritor());
+
+                    System.out.println("************* porcentagem descritor" + a);
+
+                    rd.setResultDescritor(t);
+
+                    teste.add(rd);
+                }
+                
+                cont = 0;
+            }
+            System.out.println("************* tamanho da lista teste ##**##" + teste.size());
+           
+            for (int j = 0; j < teste.size(); j++) {
+               System.out.println("*************" + teste.get(j).getSiglaDescritor()); 
+               System.out.println("*************" + teste.get(j).getResultDescritor()); 
+            }
+            
+            /*  
+            resultDescritor.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+            System.out.println("************* " + resultDescritor.getSiglaDescritor());
+            int a = Integer.parseInt(resultdescritores.get(i + 1));
+            System.out.println("************* porcentagem descritor" + a);
+
+            resultDescritor.setResultDescritor(a);
+            teste.add(resultDescritor);*/
+        }
+
+//*****************************************************************************************\\
         horizontalBarModel = new HorizontalBarChartModel();
 
         ChartSeries vermelho = new ChartSeries();
@@ -934,15 +1028,15 @@ public class AlunoBean {
         System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
         System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + descritores.size());
 
-        int ve = 0;
-        int ama = 0;
-        int az = 0;
-        int ver = 0;
+        double ve = 0;
+        double ama = 0;
+        double az = 0;
+        double ver = 0;
 
-        for (int i = 0; i < descritores.size(); i++) {
+        for (int i = 0; i < teste.size(); i++) {
             int b = i + 1;
 
-            int a = Integer.parseInt(resultdescritores.get(b));
+            double a = teste.get(i).getResultDescritor();
 
             if (a <= 25) {
                 ve = a;
@@ -973,10 +1067,10 @@ public class AlunoBean {
 
             System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
 
-            vermelho.set(i + " - " + descritores.get(i).getSiglaDescritor(), ve);
-            amarelo.set(i + " - " + descritores.get(i).getSiglaDescritor(), ama);
-            azul.set(i + " - " + descritores.get(i).getSiglaDescritor(), az);
-            verde.set(i + " - " + descritores.get(i).getSiglaDescritor(), ver);
+            vermelho.set(i + " - " + teste.get(i).getSiglaDescritor(), ve);
+            amarelo.set(i + " - " + teste.get(i).getSiglaDescritor(), ama);
+            azul.set(i + " - " + teste.get(i).getSiglaDescritor(), az);
+            verde.set(i + " - " + teste.get(i).getSiglaDescritor(), ver);
 
         }
 
@@ -2490,6 +2584,10 @@ public class AlunoBean {
         if (serie.equals("13")) {
             System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
             a = "gaba6";
+        }
+        if (serie.equals("18")) {
+            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.imprimirAlunos()" + serie);
+            a = "saepinha";
         }
 
         try {
