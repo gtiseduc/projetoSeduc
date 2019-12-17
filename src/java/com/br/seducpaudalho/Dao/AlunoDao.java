@@ -160,7 +160,7 @@ public class AlunoDao {
                 + "join escola e on e.inepEscola = a.inepEscola\n"
                 + "join serie s on s.codSerie = a.codSerie\n"
                 + "join turma t on t.codTurma = a.codTurma\n"
-                + "WHERE a.inepEscola = ? && a.codserie = ? && a.codTurma = ?";
+                + "WHERE a.inepEscola = ? && a.codserie = ? && a.codTurma = ? order by nomeAluno";
         //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
 
         List<Aluno> alunos = new ArrayList<>();
@@ -1274,7 +1274,7 @@ public class AlunoDao {
             } else {
 
                 ps = conexao.prepareStatement("UPDATE testegabarito SET codTurma=?,codSerie=?,inepEscola=?,portugues=?,matematica=? ,cienciasHumanas=? ,cienciasNatureza=?  where codAluno=?");
-                ps.setInt(9, p);
+                //ps.setInt(9, p);
             }
 
             ps.setInt(1, aluno.getIdTurma());

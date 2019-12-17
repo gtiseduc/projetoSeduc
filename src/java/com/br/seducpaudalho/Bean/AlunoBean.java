@@ -246,6 +246,8 @@ public class AlunoBean {
                 alunoDao.salvarAluno(aluno);
 
                 adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+                
+                aluno = new Aluno();
             }
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -686,7 +688,7 @@ public class AlunoBean {
             quantlunos = alunos.size();
             quantDescritores = descritores.size();
 
-            quantQuest = quantlunos * quantDescritores;
+            quantQuest = quantPresentes * quantDescritores;
 
             quantFaltosos = quantlunos - quantPresentes;
 
@@ -850,8 +852,8 @@ public class AlunoBean {
             col += 1;
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
-            //Integer dp = 100 * sum / descritores.size();
-            Integer dp =  sum;
+            //Integer dp = 100 * sum / quantPresentes;
+             Integer dp =  sum;
 
             descri.add(Integer.toString(dp));
 
@@ -1038,6 +1040,14 @@ public class AlunoBean {
 
             double a = teste.get(i).getResultDescritor();
 
+            if(a > quantPresentes){
+             a = a * 100 / quantPresentes * 2;
+             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ****** "+a);
+            }else{
+            a = a * 100 / quantPresentes;
+            }
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX "+a);
+            
             if (a <= 25) {
                 ve = a;
                 ama = 0;
@@ -1067,10 +1077,11 @@ public class AlunoBean {
 
             System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
 
-            vermelho.set(i + " - " + teste.get(i).getSiglaDescritor(), ve);
-            amarelo.set(i + " - " + teste.get(i).getSiglaDescritor(), ama);
-            azul.set(i + " - " + teste.get(i).getSiglaDescritor(), az);
-            verde.set(i + " - " + teste.get(i).getSiglaDescritor(), ver);
+             
+            vermelho.set(i + " - " + teste.get(i).getSiglaDescritor(), ve );
+            amarelo.set(i + " - " + teste.get(i).getSiglaDescritor(), ama );
+            azul.set(i + " - " + teste.get(i).getSiglaDescritor(), az );
+            verde.set(i + " - " + teste.get(i).getSiglaDescritor(), ver );
 
         }
 
@@ -1120,7 +1131,11 @@ public class AlunoBean {
             int b = i + 1;
 
             //System.out.println("quantidade de alunos "+resulAlunos.size());
-            int a = Integer.parseInt(resulAlunos.get(i));
+          //  int a = Integer.parseInt(resulAlunos.get(i));
+             int a = Integer.parseInt(resulAlunos.get(i)) ;
+             a = a * 100 / quantDescritores;
+             
+             
             //int a = Integer.parseInt("10");
 
             if (a <= 25) {
@@ -1542,7 +1557,8 @@ public class AlunoBean {
             }
 
             System.out.println("A SOMA DAS LINHAS É " + s);
-            Integer ra = 100 * s / descritores.size();
+            Integer ra = s;
+           // Integer ra = 100 * s / quantPresentes;
             quantAcerto += s;
             System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
             resulAlunos.add(Integer.toString(ra));
@@ -1573,7 +1589,8 @@ public class AlunoBean {
             col += 1;
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
-            Integer dp = 100 * sum / descritores.size();
+            Integer dp =  sum;
+           // Integer dp = 100 * sum / descritores.size();
 
             descri.add(Integer.toString(dp));
 
@@ -1664,6 +1681,8 @@ public class AlunoBean {
 
             int a = Integer.parseInt(resultdescritores.get(b));
 
+            a = a * 100 / quantPresentes;
+           
             if (a <= 25) {
                 ve = a;
                 ama = 0;
@@ -1746,8 +1765,11 @@ public class AlunoBean {
             int b = i + 1;
 
             //System.out.println("quantidade de alunos "+resulAlunos.size());
-            int a = Integer.parseInt(resulAlunos.get(i));
-            //int a = Integer.parseInt("10");
+            //int a = Integer.parseInt(resulAlunos.get(i)) * 100 / quantDescritores;
+            int a = Integer.parseInt(resulAlunos.get(i)) ;
+             a = a * 100 / quantDescritores;
+             
+              //int a = Integer.parseInt("10");
 
             if (a <= 25) {
                 vermelho1 = a;
@@ -2227,7 +2249,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[quantPresentes][quantPresentes];
+         dados = new String[quantlunos+descritores.size()][quantlunos+descritores.size()];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
