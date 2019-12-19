@@ -1096,10 +1096,10 @@ public class AlunoBean {
 
             System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
 
-            vermelho.set(i + " - " + descritores.get(i).getSiglaDescritor(), ve);
-            amarelo.set(i + " - " + descritores.get(i).getSiglaDescritor(), ama);
-            azul.set(i + " - " + descritores.get(i).getSiglaDescritor(), az);
-            verde.set(i + " - " + descritores.get(i).getSiglaDescritor(), ver);
+            vermelho.set(b + " - " + descritores.get(i).getSiglaDescritor(), ve);
+            amarelo.set(b + " - " + descritores.get(i).getSiglaDescritor(), ama);
+            azul.set(b + " - " + descritores.get(i).getSiglaDescritor(), az);
+            verde.set(b + " - " + descritores.get(i).getSiglaDescritor(), ver);
 
         }
 
@@ -1181,10 +1181,10 @@ public class AlunoBean {
 
             // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + a);
             // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
-            verm.set(i + " - " + avaliacoes.get(i).getNomeAluno(), vermelho1);
-            am.set(i + " - " + avaliacoes.get(i).getNomeAluno(), amamarelo1);
-            azu.set(i + " - " + avaliacoes.get(i).getNomeAluno(), azul1);
-            verd.set(i + " - " + avaliacoes.get(i).getNomeAluno(), verde1);
+            verm.set(b + " - " + avaliacoes.get(i).getNomeAluno(), vermelho1);
+            am.set(b + " - " + avaliacoes.get(i).getNomeAluno(), amamarelo1);
+            azu.set(b + " - " + avaliacoes.get(i).getNomeAluno(), azul1);
+            verd.set(b + " - " + avaliacoes.get(i).getNomeAluno(), verde1);
 
         }
 
@@ -1481,7 +1481,7 @@ public class AlunoBean {
         xAxis.setMax(150);
         xAxis.setTickFormat("%1$.0f");
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
-        yAxis.setLabel("--**--");
+        yAxis.setLabel("");
 
     }
 

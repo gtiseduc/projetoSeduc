@@ -9,7 +9,7 @@
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
              xmlns:ct="http://www.chartistjsf.org/charts">
 
-   <ui:define name="menuesquerdo">
+    <ui:define name="menuesquerdo">
 
 
         #{alunoBean.limpar()}
@@ -64,7 +64,7 @@
 
                             <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
                             <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
-                           <!-- <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
+                            <!-- <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
                             <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
@@ -83,14 +83,14 @@
                 $('#output').empty().append(PF('chart1').exportAsImage());
 
                 //show the dialog
-                PF('chart1').show();
+                PF('dlg').show();
             }
             function exportChart2() {
                 //export image
                 $('#output').empty().append(PF('chart2').exportAsImage());
 
                 //show the dialog
-                PF('chart2').show();
+                PF('dlg').show();
             }
             function exportChart3() {
                 //export image
@@ -138,24 +138,24 @@
 
 
 
-              
+
 
                 <div class="ui-g ui-fluid">
 
-                  <!--  <div class="ui-g-12 ui-md-6">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="escola" value="{alunoBean.aluno.inepEscola}"  >
-                                <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
-                                <f:selectItems   value="{alunoBean.escolas}" var="escola" itemLabel="{escola.nome}" itemValue="{escola.inepEscola}" />         
-                                <p:ajax  event="change" listener="{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
-                            </p:selectOneMenu>    
-                        </div>
-                    </div> -->
+                    <!--  <div class="ui-g-12 ui-md-6">
+                          <div class="ui-inputgroup">
+                              <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                              <p:selectOneMenu id="escola" value="{alunoBean.aluno.inepEscola}"  >
+                                  <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
+                                  <f:selectItems   value="{alunoBean.escolas}" var="escola" itemLabel="{escola.nome}" itemValue="{escola.inepEscola}" />         
+                                  <p:ajax  event="change" listener="{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
+                              </p:selectOneMenu>    
+                          </div>
+                      </div> -->
 
-                    
+
                     #{alunoBean.listarSeries()}
-                    
+
 
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
@@ -187,7 +187,11 @@
                     </div>  
 
 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
+                    <p:dialog style="align-content: center" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                        <p:graphicImage name="images/adin.gif" />
+                    </p:dialog>
 
 
 
@@ -217,38 +221,38 @@
 
             <br></br>
             <br></br>
-          <!--  <div align="center" >
-                <p:panel rendered="{alunoBean.visivel}">
-                    <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSA SÉRIE :{alunoBean.quantlunos}" />
-                    <br></br>
-                    <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :{alunoBean.quantPresentes}" />
-
-                </p:panel>
-            </div>-->
+            <!--  <div align="center" >
+                  <p:panel rendered="{alunoBean.visivel}">
+                      <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSA SÉRIE :{alunoBean.quantlunos}" />
+                      <br></br>
+                      <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :{alunoBean.quantPresentes}" />
+  
+                  </p:panel>
+              </div>-->
             <br></br>
             <br></br>
 
 
 
-         
+
 
             <br></br>
             <br></br>
 
-            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:40em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart2" />
+            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:60em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart2" />
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart2()"/>
             </div>
-            <p:dialog widgetVar="chart2" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output2" layout="block" style="width:50%;height:300px"/>
+            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
+                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
             </p:dialog>
 
 
             <br></br>
             <br></br>
 
-         
+
 
 
         </h:form>

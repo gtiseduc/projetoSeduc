@@ -9,7 +9,7 @@
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
              xmlns:ct="http://www.chartistjsf.org/charts">
 
-   <ui:define name="menuesquerdo">
+    <ui:define name="menuesquerdo">
 
 
         #{alunoBean.limpar()}
@@ -83,14 +83,14 @@
                 $('#output').empty().append(PF('chart1').exportAsImage());
 
                 //show the dialog
-                PF('chart1').show();
+                PF('dlg').show();
             }
             function exportChart2() {
                 //export image
                 $('#output').empty().append(PF('chart2').exportAsImage());
 
                 //show the dialog
-                PF('chart2').show();
+                PF('dlg').show();
             }
             function exportChart3() {
                 //export image
@@ -131,6 +131,7 @@
         <h:outputStylesheet library="css" name="style.css" />
 
         <h:form prependId="false">
+
             <p:growl id="growl" life="3500" />
             <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
             <p:fieldset legend="RESULTADO DAS AVALIAÇÕES">
@@ -138,7 +139,7 @@
 
 
 
-              
+
 
                 <div class="ui-g ui-fluid">
 
@@ -183,7 +184,11 @@
                         </div>
                     </div>  
 
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
+                    <p:dialog style="align-content: center" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                        <p:graphicImage name="images/adin.gif" />
+                    </p:dialog>
 
 
 
@@ -227,26 +232,23 @@
 
 
 
-            <p:chart type="bar" model="#{alunoBean.horizontalEvasao}" style="height:20em" responsive="true"  rendered="#{alunoBean.horizontalEvasao != null}" widgetVar="chart1" />
-
-            <div class="ui-g ui-fluid">
-                <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
-            </div>
-            <p:dialog widgetVar="chart1" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output1" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
-
-            <br></br>
-            <br></br>
-
-            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:40em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart2" />
+            <p:chart type="bar" model="#{alunoBean.horizontalEvasao}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalEvasao != null}" widgetVar="chart2"/>
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart2()"/>
             </div>
-            <p:dialog widgetVar="chart2" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output2" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
+
+            <br></br>
+            <br></br>
+            <br></br>
+
+
+
+            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:80em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
+
+            <div class="ui-g ui-fluid">
+                <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
+            </div>
 
 
             <br></br>
@@ -257,10 +259,10 @@
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart3()"/>
             </div>
-            <p:dialog widgetVar="chart3" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output3" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
 
+            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
+                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
+            </p:dialog>
 
         </h:form>
 

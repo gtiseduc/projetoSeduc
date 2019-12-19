@@ -280,9 +280,7 @@
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
             </div>
-            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
+            
             <br></br>
             <br></br>
             <br></br>
@@ -303,6 +301,10 @@
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart3()"/>
             </div>
+            
+            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
+                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
+            </p:dialog>
             
             <p:chart type="bar" model="#{alunoBean.horizontalBarAluno}" style="height:550em" responsive="true"  rendered="#{alunoBean.horizontalBarAluno != null}" />
             
