@@ -10,7 +10,12 @@
              xmlns:ct="http://www.chartistjsf.org/charts">
 
     <ui:define name="menuesquerdo">
+
+
         #{alunoBean.limpar()}
+
+
+
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -20,12 +25,19 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
-                            <li><a href="imprimirG.jsf">IMPRIMIR GABARITOS </a></li>
-                            <li><a href="avaliacoes.jsf">CORREÇÃO DE AVALIAÇÕES </a></li>
-                            <li><a href="descritor.jsf">CADASTRAR DESCRITORES</a></li>
-                            <li><a href="associacaoQ.jsf">CADASTRO QUESTOES - GABARITOS</a></li>
-                            <li><a href="associacaoG.jsf">CADASTRO GABARITOS</a></li>
-                        </ul></li>
+                            <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
+                            <li><a href="cadastroAluno.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
+                            <li><a href="imprimirG.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
+                            <li><a href="avaliacoes.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
+                            <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
+                            <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
+                            <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>
+
+
+                        </ul>
+
+                    </li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
@@ -50,9 +62,9 @@
                             <li><a href="frequenciaPorMunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
                             <li><a href="frequenciaporTurma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
 
-                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
-                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
-                            <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
+                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
+                            <!--<li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
                             <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
@@ -199,28 +211,6 @@
 
 
 
-                    <!--
-                                        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                                      
-                                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                                            <h2>Aguarde...</h2>
-                                            <p:graphicImage value="images/loading.png"/> 
-                                        </p:dialog> -->
-
-                    <!-- <div class="ui-g-12 ui-md-2">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="disciplina" value="{produtoBean.produto.idProduto}" >
-                                <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
-                                <f:selectItems   value="{produtoBean.produtos}" var="produto" itemLabel="{produto.nomeProduto}" itemValue="{produto.idProduto}"/>      
-                            </p:selectOneMenu>    
-                        </div>
-                    </div> -->
-
-
-
-
-
 
 
                 </div> 
@@ -314,55 +304,19 @@
 
 
                 <h:outputScript>
-                    <!--   function chartExtender() {
-                           this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-                           this.cfg.series = 
-                                           [
-                                           {seriesColors: ['#85802b', '#00749F', '#73C774', '#C7754C', '#17BDB8']} 
-                                           
-                                           ]
-                       }
-                       
-                        function chartExtende() {
-                           this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-                           this.cfg.series = 
-                                           [
-                                           {seriesColors: ["#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33", "#FFCC33"]}, 
-                                           {seriesColors: ["#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c"]}
-                                           ]
-                       }
-                        function chartExtend() {
-                           this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
-                           this.cfg.series = 
-                                           [
-                                            
-                                           {seriesColors: ["#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c", "#77933c"]}
-                                           ]
-                       }-->
+                   
                 </h:outputScript>
 
             </p:chart>
 
 
-            <!--  <h:outputText value="{criaTotalizadorBean.rowsOfTable}" escape="false"/>-->
-
-
-
-
-
-
-
-            <!--<p:commandButton value="IMPRIMIR" ajax="false" action="{alunoBean.imprimirAlunos()}" onclick="this.form.target = '_blank'"/>-->
-
-
+          
             <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:40em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
             </div>
-            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
+           
             <br></br>
             <br></br>
             <br></br>
@@ -390,6 +344,10 @@
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart4()"/>
             </div>
+            
+            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
+                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
+            </p:dialog>
         </h:form>
 
 
@@ -401,206 +359,13 @@
 
 
 
-        <!--   <ct:chart id="barChart" type="bar" model="{testeGraficos.barChartModel}"></ct:chart>-->
+  
 
 
 
     </ui:define>
 
 </ui:decorate>
-
-<!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
-
-               <p:columnGroup type="header" >
-                   <p:row >
-                       <p:column rowspan="4" headerText="NOME"   />
-                   </p:row>
-
-                   <p:row >
-                       <p:column colspan="2" headerText="{resul.disciplina}" />
-                   </p:row>
-
-                   <p:row >
-                       <p:column colspan="2" headerText="D1D3D4D2D7D9D8D7D4D5D6D7D8D8D9" />
-                   </p:row>
-
-                   <p:row >
-                       <p:column colspan="2" headerText="AAAABBBDDDCCCDDAAABBBCC" />
-                   </p:row>
-
-
-               </p:columnGroup>      
-               <p:column headerText="NOME" priority="3">
-                   <h:outputText value="{resul.nomeAluno}" />
-               </p:column>
-
-               <p:column headerText="{resul.disciplina}">
-                   <h:outputText value="{resul.avDisciplina}" />
-               </p:column>
-               <p:column headerText="RESULTADO">
-                   <h:outputText value="{resul.numeroAcertos}" />
-               </p:column>
-
-           </p:dataTable> -->
-
-
-<!-- <p:dataTable var="descri" value="{alunoBean.descri}"  >
-
-     <p:column headerText="RESULTADO">
-         <h:outputText value="{descri}" />
-     </p:column>
-
-
- </p:dataTable>-->
-
-
-<!--
-
-            <h:panelGrid id="pnlConResCad">
-                <p:dataTable value="{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
-                    <f:facet name="header" >
-                        RESULTADO DA AVALIAÇÃO
-                    </f:facet>
-
-
-
-
-                     <p:column footerText="RESULTADO DESCRITORES">
-                        <h:outputText value="{coluna.nome}" />
-
-                    </p:column> 
-                    
-                    <p:column footerText="RESULTADO DESCRITORES">
-                        <h:outputText value="{coluna.nome}" />
-
-                    </p:column> 
-
-                    <c:forEach items="{criaTotalizadorBean.alunos}" var="column">
-
-                        <p:column >
-                            <f:facet name="header">
-                                <h:outputText value="{column.idAluno}" />
-                            </f:facet>
-
-                            <p:inputText value="{column.nomeSerie}" />
-
-                            <f:facet name="footer">
-                                <h:outputText value="{column.idSerie}" />
-                            </f:facet>
-
-                        </p:column>
-
-
-
-                    </c:forEach>
-
-                    <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
-                        <f:facet name="input">
-                            <p:inputText value="{operacao}" />
-                        </f:facet>
-                        <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
-                            <p:cellEditor>
-                                <f:facet name="output">
-                                    <h:outputText value="{operacao}" />
-                                </f:facet>
-                                <f:facet name="input">
-                                    <p:inputText value="{operacao}" />
-                                </f:facet>
-                            </p:cellEditor>
-                        </c:forEach> 
-                    </c:forEach>
-                </p:dataTable>
-            </h:panelGrid> -->
-
-
-
-
-
-<!-- <table id="tblSqlResult">
-     <thead>
-         <tr>
-             sql.headers is a List of Strings 
-             <ui:repeat value="{criaTotalizadorBean.operacoes}" var="h">
-                 <th>{h}</th>
-             </ui:repeat>
-         </tr>
-     </thead>
-     <tbody>
-        
-         <ui:repeat value="{criaTotalizadorBean.array}" var="row">
-             <tr>
-                 <ui:repeat value="{row}" var="cell">
-                     <td>{cell}</td>
-                 </ui:repeat>
-             </tr>
-         </ui:repeat>
-     </tbody>
- </table>-->
-
-
-<!--     <div class="ui-g-12 ui-md-3">
-                    <div class="ui-inputgroup">
-                        <h:panelGrid columns="2"  cellpadding="5">
-                            <h:outputText value="PORTUGUÊS " />
-    
-                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-    
-    
-                            </p:inputSwitch>
-    
-    
-                        </h:panelGrid>
-                    </div>
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <div class="ui-inputgroup">
-                        <h:panelGrid columns="2"  cellpadding="5">
-                            <h:outputText value="MATEMÁTICA " />
-    
-                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-    
-    
-                            </p:inputSwitch>
-    
-    
-                        </h:panelGrid>
-                    </div>
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <div class="ui-inputgroup">
-                        <h:panelGrid columns="2"  cellpadding="5">
-                            <h:outputText value="CIÊNCIAS HUMANAS " />
-    
-                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-    
-    
-                            </p:inputSwitch>
-    
-    
-                        </h:panelGrid>
-                    </div>
-                </div>
-                <div class="ui-g-12 ui-md-3">
-                    <div class="ui-inputgroup">
-                        <h:panelGrid columns="2"  cellpadding="5">
-                            <h:outputText value="CIÊNCIAS DA NATUREZA " />
-    
-                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
-                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
-    
-    
-                            </p:inputSwitch>
-    
-    
-                        </h:panelGrid>
-                    </div>
-                </div> -->
-
-
-
 
 
 

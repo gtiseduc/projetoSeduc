@@ -18,6 +18,7 @@ public class Serie implements Serializable{
     private Integer idSerie;
     private Integer inepEscola;
     private String nome;
+     private double ev;
     
     
 
@@ -56,6 +57,16 @@ public class Serie implements Serializable{
         this.nome = nome;
     }
 
+    public double getEv() {
+        return ev;
+    }
+
+    public void setEv(double ev) {
+        this.ev = ev;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;

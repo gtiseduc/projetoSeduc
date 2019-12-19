@@ -396,8 +396,8 @@ public class AlunoDao {
 
                 avaliacao.setRespPortugues(rs.getString("portugues"));
                 avaliacao.setRespMatematica(rs.getString("matematica"));
-                avaliacao.setRespCienciasHumanas(rs.getString("cienciasHumanas"));
-                avaliacao.setRespCienciasNatureza(rs.getString("cienciasNatureza"));
+                avaliacao.setRespCienciasHumanas(rs.getString("cienciasNatureza"));
+                avaliacao.setRespCienciasNatureza(rs.getString("cienciasHumanas"));
                 avaliacao.setNomeAluno(rs.getString("nomeAluno"));
 
                 avaliacoes.add(avaliacao);
@@ -685,6 +685,45 @@ public class AlunoDao {
 
                 Turma tu = new Turma();
                 tu.setNome(rs.getString("nomeTurma"));
+                tu.setEv(rs.getDouble("rendimento"));
+
+                t.add(tu);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar  " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return t;
+
+    }
+    public List<Serie> listarRendimentoSerie( Integer codSerie, Integer disciplina) throws ErroSistema {
+
+        String sql = "select * from rendimentoserie as a \n"
+                + "                join escola e on e.inepEscola = a.inepEscola\n"
+                + "                join serie s on s.codSerie = a.codSerie\n"
+                + "                WHERE  a.codserie = ? && a.codDisciplina = ?";
+
+        List<Serie> t = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            
+            ps.setInt(1, codSerie);
+            ps.setInt(2, disciplina);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Serie tu = new Serie();
+                tu.setNome(rs.getString("nomeEscola"));
                 tu.setEv(rs.getDouble("rendimento"));
 
                 t.add(tu);
@@ -1439,6 +1478,73 @@ public class AlunoDao {
             throw new ErroSistema("ERRO AO DELETAR PRODUTO");
         }
         
+    }
+
+    public void inserirRendimentoSerie(Integer inep, Integer serie, Integer disciplina, double rendSerie) throws ErroSistema {
+       
+         try {
+
+            Integer codRendimento = pesquisarRendimentoSerie(inep, serie, disciplina);
+
+            String sql = "";
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+            if (codRendimento == null) {
+                System.out.println("--------- entrou no if cadastro produto");
+                ps = conexao.prepareStatement("INSERT INTO rendimentoserie(inepEscola,codSerie,codDisciplina,rendimento)VALUES (?,?,?,?)");
+            } else {
+
+                ps = conexao.prepareStatement("UPDATE rendimentoserie SET inepEscola=?,codSerie=?,codDisciplina=?,rendimento=? where codRendimentoserie=?");
+                ps.setInt(5, codRendimento);
+            }
+
+          
+            ps.setInt(1, inep);
+            ps.setInt(2, serie);
+            ps.setInt(3, disciplina);
+            ps.setDouble(4, rendSerie);
+
+            ps.execute();
+            System.out.println("inserindo ---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+
+        
+        
+    }
+
+    private Integer pesquisarRendimentoSerie(Integer inep, Integer serie, Integer disciplina) throws ErroSistema {
+      
+        String sql = "select * from rendimentoserie where inepEscola = ? && codSerie = ?  && codDisciplina = ?";
+        Integer a = null;
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            ps.setInt(1, inep);
+          
+            ps.setInt(2, serie);
+            ps.setInt(3, disciplina);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                RendimentoTurma r = new RendimentoTurma();
+                r.setCodRendimento(rs.getInt("codRendimentoserie"));
+
+                a = r.getCodRendimento();
+            }
+
+        } catch (Exception e) {
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+        return a; 
     }
 
 }

@@ -246,7 +246,7 @@ public class AlunoBean {
                 alunoDao.salvarAluno(aluno);
 
                 adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
-                
+
                 aluno = new Aluno();
             }
         } catch (ErroSistema ex) {
@@ -373,8 +373,24 @@ public class AlunoBean {
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
             series = serieDao.listarSerieParametro(codigo);
-            
-            disciplinas =  new ArrayList<>();
+
+            disciplinas = new ArrayList<>();
+            // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+    }
+
+    public void listarSeries(Integer codigo) {
+
+        series = new ArrayList<>();
+
+        System.out.println("--------****----***----***------- " + codigo);
+        try {
+            System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+            series = serieDao.listarSerieParametro(codigo);
+
+            disciplinas = new ArrayList<>();
             // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -417,7 +433,7 @@ public class AlunoBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-         disciplinas =  new ArrayList<>();
+        disciplinas = new ArrayList<>();
     }
 
     public void listarAssociacao() {
@@ -720,7 +736,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[quantlunos+descritores.size()][quantlunos+descritores.size()];
+        dados = new String[quantlunos + descritores.size()][quantlunos + descritores.size()];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
@@ -853,7 +869,7 @@ public class AlunoBean {
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
             //Integer dp = 100 * sum / quantPresentes;
-             Integer dp =  sum;
+            Integer dp = sum;
 
             descri.add(Integer.toString(dp));
 
@@ -887,7 +903,8 @@ public class AlunoBean {
             System.out.println("LISTA DE QUESTÕES POR ALUNO " + resp);
             dados[av][0] = avaliacoes.get(av).getNomeAluno();
 
-            for (int j = 1; j <= descritores.size() + 1; j++) {
+            //RETIRADO O + 1
+            for (int j = 1; j <= descritores.size(); j++) {
 
                 if (j > descritores.size()) {
                     dados[av][j] = resulAlunos.get(av);
@@ -917,8 +934,8 @@ public class AlunoBean {
 
         // -----------------------------------------------------------\\
         //**********************************************************************************\\
-        ArrayList<Descritor> teste = new ArrayList<>();
-
+        /* ArrayList<Descritor> teste = new ArrayList<>();
+        int cd = 0;
         for (int i = 0; i < descritores.size(); i++) {
 
             int cont = 0;
@@ -926,27 +943,27 @@ public class AlunoBean {
 
             int a = Integer.parseInt(resultdescritores.get(i + 1));
             double so = 0;
-            
+
             for (int j = 0; j < descritores.size(); j++) {
                 System.out.println("descritor 1 " + descritores.get(i).getSiglaDescritor());
                 System.out.println("descritor 2 " + descritores.get(j).getSiglaDescritor());
-              int aa = Integer.parseInt(resultdescritores.get(j + 1));
+                int aa = Integer.parseInt(resultdescritores.get(j + 1));
                 if (descritores.get(i).getSiglaDescritor().equals(descritores.get(j).getSiglaDescritor())) {
 
                     so += aa;
                     cont++;
+                    cd = cont;
                 }
 
             }
             double t = 0;
+
             System.out.println("quantidade de repetição " + descritores.get(i).getSiglaDescritor() + " - " + cont);
-            
+
             if (cont >= 2) {
                 t = so;
-            }
-            else
-            {
-            t = a;
+            } else {
+                t = a;
             }
 
             System.out.println("olha o teste " + teste.size());
@@ -978,7 +995,8 @@ public class AlunoBean {
 
                         rd.setResultDescritor(i);
 
-                        teste.add(rd);*/
+                        teste.add(rd);
+
                     }
 
                 }
@@ -993,26 +1011,17 @@ public class AlunoBean {
 
                     teste.add(rd);
                 }
-                
+
                 cont = 0;
             }
             System.out.println("************* tamanho da lista teste ##**##" + teste.size());
-           
+
             for (int j = 0; j < teste.size(); j++) {
-               System.out.println("*************" + teste.get(j).getSiglaDescritor()); 
-               System.out.println("*************" + teste.get(j).getResultDescritor()); 
+                System.out.println("*************" + teste.get(j).getSiglaDescritor());
+                System.out.println("*************" + teste.get(j).getResultDescritor());
             }
-            
-            /*  
-            resultDescritor.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
-            System.out.println("************* " + resultDescritor.getSiglaDescritor());
-            int a = Integer.parseInt(resultdescritores.get(i + 1));
-            System.out.println("************* porcentagem descritor" + a);
 
-            resultDescritor.setResultDescritor(a);
-            teste.add(resultDescritor);*/
-        }
-
+        }*/
 //*****************************************************************************************\\
         horizontalBarModel = new HorizontalBarChartModel();
 
@@ -1035,19 +1044,29 @@ public class AlunoBean {
         double az = 0;
         double ver = 0;
 
-        for (int i = 0; i < teste.size(); i++) {
+        for (int i = 0; i < descritores.size(); i++) {
             int b = i + 1;
 
-            double a = teste.get(i).getResultDescritor();
+            int a = Integer.parseInt(resultdescritores.get(b));
 
-            if(a > quantPresentes){
-             a = a * 100 / quantPresentes * 2;
-             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ****** "+a);
-            }else{
             a = a * 100 / quantPresentes;
-            }
-            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX "+a);
-            
+            /*
+            double a = teste.get(i).getResultDescritor();
+            double cda = teste.get(i).getResultDescritor();
+     
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ****** " + a);
+            a = a * 100 / quantPresentes;
+           
+            if (a > 100) {
+               
+                a = cda * 100 / quantPresentes * cd;
+                
+                System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ****** " + a);
+                
+            } 
+             */
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " + a);
+
             if (a <= 25) {
                 ve = a;
                 ama = 0;
@@ -1077,11 +1096,10 @@ public class AlunoBean {
 
             System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
 
-             
-            vermelho.set(i + " - " + teste.get(i).getSiglaDescritor(), ve );
-            amarelo.set(i + " - " + teste.get(i).getSiglaDescritor(), ama );
-            azul.set(i + " - " + teste.get(i).getSiglaDescritor(), az );
-            verde.set(i + " - " + teste.get(i).getSiglaDescritor(), ver );
+            vermelho.set(i + " - " + descritores.get(i).getSiglaDescritor(), ve);
+            amarelo.set(i + " - " + descritores.get(i).getSiglaDescritor(), ama);
+            azul.set(i + " - " + descritores.get(i).getSiglaDescritor(), az);
+            verde.set(i + " - " + descritores.get(i).getSiglaDescritor(), ver);
 
         }
 
@@ -1131,13 +1149,11 @@ public class AlunoBean {
             int b = i + 1;
 
             //System.out.println("quantidade de alunos "+resulAlunos.size());
-          //  int a = Integer.parseInt(resulAlunos.get(i));
-             int a = Integer.parseInt(resulAlunos.get(i)) ;
-             a = a * 100 / quantDescritores;
-             
-             
-            //int a = Integer.parseInt("10");
+            //  int a = Integer.parseInt(resulAlunos.get(i));
+            int a = Integer.parseInt(resulAlunos.get(i));
+            a = a * 100 / quantDescritores;
 
+            //int a = Integer.parseInt("10");
             if (a <= 25) {
                 vermelho1 = a;
                 amamarelo1 = 0;
@@ -1381,6 +1397,94 @@ public class AlunoBean {
 
     }
 
+    public void listarRendimentoSerie(Integer serie, Integer disciplina) throws ErroSistema {
+
+        List<Serie> t = new ArrayList<>();
+
+        t = alunoDao.listarRendimentoSerie(serie, disciplina);
+
+        horizontalBarModel = new HorizontalBarChartModel();
+
+        ChartSeries vermelho = new ChartSeries();
+        ChartSeries amarelo = new ChartSeries();
+        ChartSeries azul = new ChartSeries();
+        ChartSeries verde = new ChartSeries();
+
+        vermelho.setLabel("25%");
+        amarelo.setLabel("25% - 50%");
+        azul.setLabel("50% - 75%");
+        verde.setLabel("75% - 100%");
+
+        //String a = "A";
+        System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + t.size());
+        System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + t.get(0).getNome());
+
+        double ve = 0;
+        double ama = 0;
+        double az = 0;
+        double ver = 0;
+
+        for (int i = 0; i < t.size(); i++) {
+            int b = i + 1;
+
+            double a = t.get(i).getEv();
+
+            if (a <= 25) {
+                ve = a;
+                ama = 0;
+                az = 0;
+                ver = 0;
+            }
+            if (a > 24 && a <= 50) {
+                ve = 0;
+                ama = a;
+                az = 0;
+                ver = 0;
+            }
+            if (a > 49 && a <= 75) {
+                ve = 0;
+                ama = 0;
+                az = a;
+                ver = 0;
+            }
+            if (a > 74) {
+                ve = 0;
+                ama = 0;
+                az = 0;
+                ver = a;
+            }
+
+            System.out.println("xxxxxxxxxxxxxxxxxx--serie--xxxxxxxxxxxxxxx " + a);
+
+            vermelho.set(i + " - " + t.get(i).getNome(), ve);
+            amarelo.set(i + " - " + t.get(i).getNome(), ama);
+            azul.set(i + " - " + t.get(i).getNome(), az);
+            verde.set(i + " - " + t.get(i).getNome(), ver);
+
+        }
+
+        //}
+        horizontalBarModel.addSeries(vermelho);
+        horizontalBarModel.addSeries(amarelo);
+        horizontalBarModel.addSeries(azul);
+        horizontalBarModel.addSeries(verde);
+
+        horizontalBarModel.setTitle("GRAFICO DE RENDIMENTO SÉRIE ");
+        horizontalBarModel.setSeriesColors("ff0000,ffff00,0000ff,66ff33");
+        horizontalBarModel.setLegendPosition("e");
+        horizontalBarModel.setStacked(true);
+        horizontalBarModel.setShowPointLabels(true);
+
+        Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
+        xAxis.setLabel("");
+        xAxis.setMin(0);
+        xAxis.setMax(150);
+        xAxis.setTickFormat("%1$.0f");
+        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
+        yAxis.setLabel("--**--");
+
+    }
+
     public void listarRendimentoturma(Integer inep, Integer serie, Integer disciplina) throws ErroSistema {
 
         List<Turma> t = new ArrayList<>();
@@ -1392,9 +1496,16 @@ public class AlunoBean {
         ChartSeries g = new ChartSeries();
         g.setLabel("EVASÃO");
 
+        double rendSerie = 0;
+
         for (int i = 0; i < t.size(); i++) {
             g.set(t.get(i).getNome() + "     ", t.get(i).getEv());
+            rendSerie = rendSerie + t.get(i).getEv();
         }
+
+        System.out.println("OLHA O RENDIMENTO" + rendSerie / t.size());
+
+        alunoDao.inserirRendimentoSerie(inep, serie, disciplina, rendSerie / t.size());
 
         //}
         horizontalEvasao.addSeries(g);
@@ -1457,7 +1568,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[quantlunos][quantlunos];
+        dados = new String[quantlunos + descritores.size()][quantlunos + descritores.size()];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
@@ -1558,7 +1669,7 @@ public class AlunoBean {
 
             System.out.println("A SOMA DAS LINHAS É " + s);
             Integer ra = s;
-           // Integer ra = 100 * s / quantPresentes;
+            // Integer ra = 100 * s / quantPresentes;
             quantAcerto += s;
             System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
             resulAlunos.add(Integer.toString(ra));
@@ -1589,8 +1700,8 @@ public class AlunoBean {
             col += 1;
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
-            Integer dp =  sum;
-           // Integer dp = 100 * sum / descritores.size();
+            Integer dp = sum;
+            // Integer dp = 100 * sum / descritores.size();
 
             descri.add(Integer.toString(dp));
 
@@ -1625,8 +1736,8 @@ public class AlunoBean {
             System.out.println("NOME DOS ALUNO " + avaliacoes.get(av).getNomeAluno());
 
             dados[av][0] = avaliacoes.get(av).getNomeAluno();
-
-            for (int j = 1; j <= descritores.size() + 1; j++) {
+                       //RETIRADO O + 1
+            for (int j = 1; j <= descritores.size() ; j++) {
 
                 if (j > descritores.size()) {
                     dados[av][j] = resulAlunos.get(av);
@@ -1682,7 +1793,7 @@ public class AlunoBean {
             int a = Integer.parseInt(resultdescritores.get(b));
 
             a = a * 100 / quantPresentes;
-           
+
             if (a <= 25) {
                 ve = a;
                 ama = 0;
@@ -1766,11 +1877,10 @@ public class AlunoBean {
 
             //System.out.println("quantidade de alunos "+resulAlunos.size());
             //int a = Integer.parseInt(resulAlunos.get(i)) * 100 / quantDescritores;
-            int a = Integer.parseInt(resulAlunos.get(i)) ;
-             a = a * 100 / quantDescritores;
-             
-              //int a = Integer.parseInt("10");
+            int a = Integer.parseInt(resulAlunos.get(i));
+            a = a * 100 / quantDescritores;
 
+            //int a = Integer.parseInt("10");
             if (a <= 25) {
                 vermelho1 = a;
                 amamarelo1 = 0;
@@ -2249,7 +2359,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-         dados = new String[quantlunos+descritores.size()][quantlunos+descritores.size()];
+        dados = new String[quantPresentes + descritores.size()][quantPresentes + descritores.size()];
         String gaba = "";
 
         for (int co = 0; co < descritores.size(); co++) {
@@ -2332,21 +2442,28 @@ public class AlunoBean {
             var = listaDeResultado.get(i);
 
             System.out.println("***** - - ****" + i);
-
+            // System.out.println("***** - - ****" + avaliacoes.get(i).getNomeAluno());
+            //Avaliacao ava = avaliacoes.get(i);
+            // nome = ava.getNomeAluno();
             for (int j = 0; j < var.length(); j++) {
 
+                //  int a =  var.charAt(j
                 int v = Character.getNumericValue(var.charAt(j));
                 s = s + v;
-
+                // System.out.println("***** - - ****" + s);
+                //  System.out.println( "yyyyyy"+v + "uuuuu"+var.charAt(j));
+                //data[i][j] = var.charAt(j);
                 data[i][j] = v;
+                // System.out.println("olha ****" + v++);
 
             }
 
             System.out.println("A SOMA DAS LINHAS É " + s);
-
+            //Integer ra = 100 * s / descritores.size();
+            Integer ra = s;
             quantAcerto += s;
             System.out.println("A QUANTIDADE DE ACERTOS É " + quantAcerto);
-            resulAlunos.add(Integer.toString(s));
+            resulAlunos.add(Integer.toString(ra));
 
             s = 0;
         }
@@ -2374,7 +2491,8 @@ public class AlunoBean {
             col += 1;
 
             System.out.println("A SOMA DA COLUNA " + col + " É: " + (sum));//made the row +1, to make it understandable
-            Integer dp = 100 * sum / descritores.size();
+            //Integer dp = 100 * sum / quantPresentes;
+            Integer dp = sum;
 
             descri.add(Integer.toString(dp));
 
@@ -2436,6 +2554,102 @@ public class AlunoBean {
 
         }
 
+        // -----------------------------------------------------------\\
+        //**********************************************************************************\\
+        /* ArrayList<Descritor> teste = new ArrayList<>();
+
+        for (int i = 0; i < descritores.size(); i++) {
+
+            int cont = 0;
+            Descritor rd = new Descritor();
+
+            int a = Integer.parseInt(resultdescritores.get(i + 1));
+            double so = 0;
+
+            for (int j = 0; j < descritores.size(); j++) {
+                System.out.println("descritor 1 " + descritores.get(i).getSiglaDescritor());
+                System.out.println("descritor 2 " + descritores.get(j).getSiglaDescritor());
+                int aa = Integer.parseInt(resultdescritores.get(j + 1));
+                if (descritores.get(i).getSiglaDescritor().equals(descritores.get(j).getSiglaDescritor())) {
+
+                    so += aa;
+                    cont++;
+                }
+
+            }
+            double t = 0;
+            System.out.println("quantidade de repetição " + descritores.get(i).getSiglaDescritor() + " - " + cont);
+
+            if (cont >= 2) {
+                t = so;
+            } else {
+                t = a;
+            }
+
+            System.out.println("olha o teste " + teste.size());
+            cont = 0;
+
+            if (teste.size() == 0) {
+                rd.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+                System.out.println("************* " + rd.getSiglaDescritor());
+
+                System.out.println("************* porcentagem descritor" + a);
+
+                rd.setResultDescritor(t);
+
+                teste.add(rd);
+            } else {
+
+                for (int d = 0; d < teste.size(); d++) {
+
+                    System.out.println("************* descritor 1 " + descritores.get(i).getSiglaDescritor());
+                    System.out.println("*************  descritor 2 " + teste.get(d).getSiglaDescritor());
+
+                    if (descritores.get(i).getSiglaDescritor().equals(teste.get(d).getSiglaDescritor())) {
+                        cont++;
+                        /*rd.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+
+                        System.out.println("************* " + rd.getSiglaDescritor());
+
+                        System.out.println("************* porcentagem descritor" + a);
+
+                        rd.setResultDescritor(i);
+
+                        teste.add(rd);
+                    }
+
+                }
+                if (cont < 1) {
+                    rd.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+
+                    System.out.println("************* " + rd.getSiglaDescritor());
+
+                    System.out.println("************* porcentagem descritor" + a);
+
+                    rd.setResultDescritor(t);
+
+                    teste.add(rd);
+                }
+
+                cont = 0;
+            }
+            System.out.println("************* tamanho da lista teste ##**##" + teste.size());
+
+            for (int j = 0; j < teste.size(); j++) {
+                System.out.println("*************" + teste.get(j).getSiglaDescritor());
+                System.out.println("*************" + teste.get(j).getResultDescritor());
+            }
+         */
+ /*  
+            resultDescritor.setSiglaDescritor(descritores.get(i).getSiglaDescritor());
+            System.out.println("************* " + resultDescritor.getSiglaDescritor());
+            int a = Integer.parseInt(resultdescritores.get(i + 1));
+            System.out.println("************* porcentagem descritor" + a);
+
+            resultDescritor.setResultDescritor(a);
+            teste.add(resultDescritor);*/
+        // }
+//*****************************************************************************************\\
         horizontalBarModel = new HorizontalBarChartModel();
 
         ChartSeries vermelho = new ChartSeries();
@@ -2452,15 +2666,21 @@ public class AlunoBean {
         System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
         System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + descritores.size());
 
-        int ve = 0;
-        int ama = 0;
-        int az = 0;
-        int ver = 0;
+        double ve = 0;
+        double ama = 0;
+        double az = 0;
+        double ver = 0;
 
         for (int i = 0; i < descritores.size(); i++) {
             int b = i + 1;
 
             int a = Integer.parseInt(resultdescritores.get(b));
+
+            a = a * 100 / quantPresentes;
+
+            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbb ****** " + a);
+
+          
 
             if (a <= 25) {
                 ve = a;
@@ -2513,21 +2733,107 @@ public class AlunoBean {
         Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
         xAxis.setLabel("");
         xAxis.setMin(0);
-        xAxis.setMax(110);
+        xAxis.setMax(150);
         xAxis.setTickFormat("%1$.0f");
         Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
         yAxis.setLabel("DESCRITORES");
 
+        // -----------------------------------------------------------\\
+        //------------------------------------------------------------\\
+        horizontalBarAluno = new HorizontalBarChartModel();
+
+        ChartSeries verm = new ChartSeries();
+        ChartSeries am = new ChartSeries();
+        ChartSeries azu = new ChartSeries();
+        ChartSeries verd = new ChartSeries();
+
+        verm.setLabel("25%");
+        am.setLabel("25% - 50%");
+        azu.setLabel("50% - 75%");
+        verd.setLabel("75% - 100%");
+
+        //String a = "A";
+        //  System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + resultdescritores.size());
+        //System.out.println("xxxxxxxxxxxxxxxxxx----xxxxxxxxxxxxxxx " + descritores.size());
+        int vermelho1 = 0;
+        int amamarelo1 = 0;
+        int azul1 = 0;
+        int verde1 = 0;
+
+        for (int i = 0; i < avaliacoes.size(); i++) {
+            int b = i + 1;
+
+            //System.out.println("quantidade de alunos "+resulAlunos.size());
+            //  int a = Integer.parseInt(resulAlunos.get(i));
+            int a = Integer.parseInt(resulAlunos.get(i));
+            a = a * 100 / quantDescritores;
+
+            //int a = Integer.parseInt("10");
+            if (a <= 25) {
+                vermelho1 = a;
+                amamarelo1 = 0;
+                azul1 = 0;
+                verde1 = 0;
+            }
+            if (a > 24 && a <= 50) {
+                vermelho1 = 0;
+                amamarelo1 = a;
+                azul1 = 0;
+                verde1 = 0;
+            }
+            if (a > 49 && a <= 75) {
+                vermelho1 = 0;
+                amamarelo1 = 0;
+                azul1 = a;
+                verde1 = 0;
+            }
+            if (a > 74) {
+                vermelho1 = 0;
+                amamarelo1 = 0;
+                azul1 = 0;
+                verde1 = a;
+            }
+
+            // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + a);
+            // System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
+            verm.set(i + " - " + avaliacoes.get(i).getNomeAluno(), vermelho1);
+            am.set(i + " - " + avaliacoes.get(i).getNomeAluno(), amamarelo1);
+            azu.set(i + " - " + avaliacoes.get(i).getNomeAluno(), azul1);
+            verd.set(i + " - " + avaliacoes.get(i).getNomeAluno(), verde1);
+
+        }
+
+        //}
+        horizontalBarAluno.addSeries(verm);
+        horizontalBarAluno.addSeries(am);
+        horizontalBarAluno.addSeries(azu);
+        horizontalBarAluno.addSeries(verd);
+
+        horizontalBarAluno.setTitle("GRAFICO DE ALUNOS ");
+        horizontalBarAluno.setSeriesColors("ff0000,ffff00,0000ff,66ff33");
+        horizontalBarAluno.setLegendPosition("e");
+        horizontalBarAluno.setStacked(true);
+        horizontalBarAluno.setShowPointLabels(true);
+
+        Axis xAAxis = horizontalBarAluno.getAxis(AxisType.X);
+        xAAxis.setLabel("");
+        xAAxis.setMin(0);
+        xAAxis.setMax(150);
+        xAAxis.setTickFormat("%1$.0f");
+        Axis yAAxis = horizontalBarAluno.getAxis(AxisType.Y);
+        yAAxis.setLabel("ALUNOS");
+
+        //------------------------------------\\
         horizontalEvasao = new HorizontalBarChartModel();
         ChartSeries evasao = new ChartSeries();
         ChartSeries presentes = new ChartSeries();
 
         evasao.setLabel("PRESENTES");
-        evasao.set("PRESENTES", resultevasaoTurma);
+        evasao.set("", resultevasaoTurma);
         horizontalEvasao.addSeries(evasao);
 
         presentes.setLabel("EVASÃO");
-        presentes.set("EVASÃO", resulPreseTurma);
+        presentes.set("", resulPreseTurma);
         horizontalEvasao.addSeries(presentes);
 
         horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
@@ -2539,10 +2845,10 @@ public class AlunoBean {
         Axis xAxi = horizontalEvasao.getAxis(AxisType.X);
         xAxi.setLabel("");
         xAxi.setMin(0);
-        xAxi.setMax(110);
+        xAxi.setMax(150);
         xAxi.setTickFormat("%1$.0f");
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
-        yAxi.setLabel("EVASÃO");
+        yAxi.setLabel("");
 
         double rendN = quantQuest - quantAcerto;
 
@@ -2562,7 +2868,7 @@ public class AlunoBean {
         rendimentoN.setLabel("RENDIMENTO NEGATIVO");
         rendimentoN.set("", rendN * 100 / quantQuest);
         horizontalRendimento.addSeries(rendimentoN);
-        horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO GERAL DA SÉRIE ");
+        horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO DO MUNICIPIO ");
         horizontalRendimento.setSeriesColors("66ff33,ff0000");
         horizontalRendimento.setLegendPosition("e");
         horizontalRendimento.setStacked(true);
@@ -2571,11 +2877,14 @@ public class AlunoBean {
         Axis rAxi = horizontalRendimento.getAxis(AxisType.X);
         rAxi.setLabel("");
         rAxi.setMin(0);
-        rAxi.setMax(110);
+        rAxi.setMax(150);
         rAxi.setTickFormat("%1$.0f");
         Axis yrAxi = horizontalRendimento.getAxis(AxisType.Y);
         yrAxi.setLabel("");
         rend = 0;
+        quantAcerto = 0;
+        quantQuest = 0;
+
     }
 
     public void imprimirAlunos(String serie) throws ErroSistema {

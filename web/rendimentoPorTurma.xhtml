@@ -9,8 +9,13 @@
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
              xmlns:ct="http://www.chartistjsf.org/charts">
 
-    <ui:define name="menuesquerdo">
-         #{alunoBean.limpar()}
+   <ui:define name="menuesquerdo">
+
+
+        #{alunoBean.limpar()}
+
+
+
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -20,12 +25,19 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
+                            <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
+                            <li><a href="cadastroAluno.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
                             <li><a href="imprimirG.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
                             <li><a href="avaliacoes.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
                             <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
                             <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
                             <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>
-                        </ul></li>
+
+
+                        </ul>
+
+                    </li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
@@ -43,16 +55,16 @@
 
 
                         </ul></li>
-                     <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
 
                             <li><a href="frequenciaPorMunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
                             <li><a href="frequenciaporTurma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
 
-                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
-                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
-                            <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
+                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
+                           <!-- <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
                             <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
@@ -130,17 +142,20 @@
 
                 <div class="ui-g ui-fluid">
 
-                    <div class="ui-g-12 ui-md-6">
+                  <!--  <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
+                            <p:selectOneMenu id="escola" value="{alunoBean.aluno.inepEscola}"  >
                                 <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
-                                <f:selectItems   value="#{alunoBean.escolas}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola.inepEscola}" />         
-                                <p:ajax  event="change" listener="#{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
+                                <f:selectItems   value="{alunoBean.escolas}" var="escola" itemLabel="{escola.nome}" itemValue="{escola.inepEscola}" />         
+                                <p:ajax  event="change" listener="{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
                             </p:selectOneMenu>    
                         </div>
-                    </div> 
+                    </div> -->
 
+                    
+                    #{alunoBean.listarSeries()}
+                    
 
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
@@ -164,7 +179,7 @@
                                 <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
                                 <f:selectItems  value="#{alunoBean.disciplinas}"  var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
                                 <!-- <p:ajax  event="change" listener="{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>-->
-                                <p:ajax  event="change"  listener="#{alunoBean.listarRendimentoturma(alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
+                                <p:ajax  event="change"  listener="#{alunoBean.listarRendimentoSerie(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
                                 <!-- <p:ajax  event="change"  listener="{testeGraficos.gerarGrafico()}" update="@form"/>-->
 
                             </p:selectOneMenu>    
@@ -202,27 +217,20 @@
 
             <br></br>
             <br></br>
-            <div align="center" >
-                <p:panel rendered="#{alunoBean.visivel}">
-                    <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSA SÉRIE :#{alunoBean.quantlunos}" />
+          <!--  <div align="center" >
+                <p:panel rendered="{alunoBean.visivel}">
+                    <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSA SÉRIE :{alunoBean.quantlunos}" />
                     <br></br>
-                    <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :#{alunoBean.quantPresentes}" />
+                    <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :{alunoBean.quantPresentes}" />
 
                 </p:panel>
-            </div>
+            </div>-->
             <br></br>
             <br></br>
 
 
 
-            <p:chart type="bar" model="#{alunoBean.horizontalEvasao}" style="height:20em" responsive="true"  rendered="#{alunoBean.horizontalEvasao != null}" widgetVar="chart1" />
-
-            <div class="ui-g ui-fluid">
-                <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
-            </div>
-            <p:dialog widgetVar="chart1" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output1" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
+         
 
             <br></br>
             <br></br>
@@ -240,14 +248,7 @@
             <br></br>
             <br></br>
 
-            <p:chart type="bar" model="#{alunoBean.horizontalBarAluno}" style="height:50em" responsive="true"  rendered="#{alunoBean.horizontalBarAluno != null}" widgetVar="chart3" />
-
-            <div class="ui-g ui-fluid">
-                <p:commandButton type="button" value="Exportar"  onclick="exportChart3()"/>
-            </div>
-            <p:dialog widgetVar="chart3" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
-                <p:outputPanel id="output3" layout="block" style="width:50%;height:300px"/>
-            </p:dialog>
+         
 
 
         </h:form>

@@ -9,8 +9,13 @@
              xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
              xmlns:ct="http://www.chartistjsf.org/charts">
 
-    <ui:define name="menuesquerdo">
-         #{alunoBean.limpar()}
+   <ui:define name="menuesquerdo">
+
+
+        #{alunoBean.limpar()}
+
+
+
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -20,12 +25,19 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
+                            <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
+                            <li><a href="cadastroAluno.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
                             <li><a href="imprimirG.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
                             <li><a href="avaliacoes.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
                             <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
                             <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
                             <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>
-                        </ul></li>
+
+
+                        </ul>
+
+                    </li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
@@ -43,15 +55,15 @@
 
 
                         </ul></li>
-                     <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
 
                             <li><a href="frequenciaPorMunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
                             <li><a href="frequenciaporTurma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
 
-                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
-                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
                             <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
                             <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 

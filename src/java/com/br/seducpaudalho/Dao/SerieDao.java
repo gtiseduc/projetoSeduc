@@ -196,6 +196,53 @@ public class SerieDao {
         return series;
 
     }
+    public List<Serie> listarSeries(Integer codigo) throws ErroSistema {
+
+        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh " + codigo);
+        //codigo = 26091437;
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from serie";
+
+        List<Serie> series = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+          
+
+            ResultSet rs = ps.executeQuery();
+
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuu " + codigo);
+
+            while (rs.next()) {
+
+                System.out.println("ddddddddddddddddddddddd " + codigo);
+
+                Serie serie = new Serie();
+
+                serie.setIdSerie(rs.getInt("codSerie"));
+                serie.setInepEscola(rs.getInt("inepEscola"));
+                serie.setNome(rs.getString("nomeSerie"));
+
+                System.out.println("******************* " + serie.getNome());
+
+                series.add(serie);
+
+            }
+
+        } catch (Exception e) {
+
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return series;
+
+    }
     public List<Serie> listarTodasSerie() throws ErroSistema {
 
         

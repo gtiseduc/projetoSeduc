@@ -10,7 +10,12 @@
              xmlns:ct="http://www.chartistjsf.org/charts">
 
     <ui:define name="menuesquerdo">
-         #{alunoBean.limpar()}
+
+
+        #{alunoBean.limpar()}
+
+
+
         <div id="sidebar-menu"
              class="main_menu_side hidden-print main_menu">
 
@@ -20,12 +25,19 @@
                     <li><a><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
+                            <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
+                            <li><a href="cadastroAluno.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
                             <li><a href="imprimirG.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
                             <li><a href="avaliacoes.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
                             <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
                             <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
                             <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>
-                        </ul></li>
+
+
+                        </ul>
+
+                    </li>
                     <li><a><i class="fa fa-edit"></i> Atendimentos <span
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
@@ -50,8 +62,8 @@
                             <li><a href="frequenciaPorMunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
                             <li><a href="frequenciaporTurma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
 
-                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
-                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
                             <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
                             <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
@@ -130,7 +142,7 @@
 
                 <div class="ui-g ui-fluid">
 
-                    <div class="ui-g-12 ui-md-5">
+                    <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
@@ -144,7 +156,7 @@
 
 
 
-                    <div class="ui-g-12 ui-md-3">
+                    <div class="ui-g-12 ui-md-5">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
@@ -197,7 +209,7 @@
 
 
 
-              <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:20em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
+              <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:60em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
