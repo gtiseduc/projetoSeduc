@@ -367,14 +367,14 @@ public class AlunoBean {
 
     public void listarSerieParametro(Integer codigo) {
 
-        series = new ArrayList<>();
-
         System.out.println("--------****----***----***------- " + codigo);
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
             series = serieDao.listarSerieParametro(codigo);
-
+            disciplinas.clear();
             disciplinas = new ArrayList<>();
+            turmas.clear();
+            turmas = new ArrayList<>();
             // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -430,6 +430,9 @@ public class AlunoBean {
         try {
             turmas = turmaDao.listarTurmaParametro(codigo, inep);
             //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            disciplinas.clear();
+            disciplinas = new ArrayList<>();
+
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
@@ -704,17 +707,16 @@ public class AlunoBean {
             quantlunos = alunos.size();
             quantDescritores = descritores.size();
 
-            quantQuest = quantPresentes * quantDescritores;
-
             quantFaltosos = quantlunos - quantPresentes;
 
             resultevasaoTurma = 100 * quantPresentes / quantlunos;
 
             alunoDao.insertFrequeciaTurma(codTurma, inep, codSerie, resultevasaoTurma);
 
-            resulPreseTurma = 100 * quantFaltosos / quantlunos;
-
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@ " + resultevasaoTurma);
+            //resulPreseTurma = 100 * quantFaltosos / quantlunos;
+            resulPreseTurma = 100 - resultevasaoTurma;
+            System.out.println("RESULT RESULTEVASAOTURMA " + resultevasaoTurma);
+            System.out.println("RESULT PRESENTES " + resulPreseTurma);
 
             resultdescritores = new ArrayList<String>();
             resulAlunos = new ArrayList<String>();
@@ -739,13 +741,17 @@ public class AlunoBean {
         dados = new String[quantlunos + descritores.size()][quantlunos + descritores.size()];
         String gaba = "";
 
+        int nulo = 0;
         for (int co = 0; co < descritores.size(); co++) {
 
             Descritor gabarito = descritores.get(co);
             gaba += gabarito.getEspeciDescritor();
-            System.out.println("ALTERNATIVAS DOS GABARITOS " + gabarito.getEspeciDescritor());
+            if (gabarito.getEspeciDescritor().equals("N")) {
+                nulo++;
+            }
         }
-
+        System.out.println("ALTERNATIVAS ANULADAS " + nulo);
+        quantQuest = quantPresentes * quantDescritores - nulo;
         List<String> listaDeGabarito = new ArrayList<String>();
 
         String resp = "";
@@ -1046,7 +1052,7 @@ public class AlunoBean {
 
         for (int i = 0; i < descritores.size(); i++) {
             int b = i + 1;
-
+            String g = "";
             int a = Integer.parseInt(resultdescritores.get(b));
 
             a = a * 100 / quantPresentes;
@@ -1095,11 +1101,12 @@ public class AlunoBean {
             System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + a);
 
             System.out.println("xxxxxxxxxxxxxxxxxx--descritores--xxxxxxxxxxxxxxx " + descritores.get(i).getSiglaDescritor());
-
+            //if (a > 0) {
             vermelho.set(b + " - " + descritores.get(i).getSiglaDescritor(), ve);
             amarelo.set(b + " - " + descritores.get(i).getSiglaDescritor(), ama);
             azul.set(b + " - " + descritores.get(i).getSiglaDescritor(), az);
             verde.set(b + " - " + descritores.get(i).getSiglaDescritor(), ver);
+            // }
 
         }
 
@@ -1235,7 +1242,7 @@ public class AlunoBean {
         Axis yAxi = horizontalEvasao.getAxis(AxisType.Y);
         yAxi.setLabel("");
 
-        double rendN = quantQuest - quantAcerto;
+        double rendN = quantQuest;
 
         horizontalRendimento = new HorizontalBarChartModel();
         ChartSeries rendimentoP = new ChartSeries();
@@ -1252,7 +1259,8 @@ public class AlunoBean {
         horizontalRendimento.addSeries(rendimentoP);
 
         rendimentoN.setLabel("RENDIMENTO NEGATIVO");
-        rendimentoN.set("", rendN * 100 / quantQuest);
+        rendimentoN.set("", 100 - rend);
+
         horizontalRendimento.addSeries(rendimentoN);
         horizontalRendimento.setTitle("GRAFICO DE RENDIMENTO DA TURMA ");
         horizontalRendimento.setSeriesColors("66ff33,ff0000");
@@ -1736,8 +1744,8 @@ public class AlunoBean {
             System.out.println("NOME DOS ALUNO " + avaliacoes.get(av).getNomeAluno());
 
             dados[av][0] = avaliacoes.get(av).getNomeAluno();
-                       //RETIRADO O + 1
-            for (int j = 1; j <= descritores.size() ; j++) {
+            //RETIRADO O + 1
+            for (int j = 1; j <= descritores.size(); j++) {
 
                 if (j > descritores.size()) {
                     dados[av][j] = resulAlunos.get(av);
@@ -2679,8 +2687,6 @@ public class AlunoBean {
             a = a * 100 / quantPresentes;
 
             System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbb ****** " + a);
-
-          
 
             if (a <= 25) {
                 ve = a;

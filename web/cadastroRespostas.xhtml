@@ -105,8 +105,8 @@
             <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
                 <p:column headerText="Lista de alunos" priority="3" style="width: 7px">
                     <!--  <p:commandButton value="Editar"  update="@form" style="width: 80px" /> -->
-                   <p:commandButton value="Excluir"  action="#{alunoBean.excluir(alunos)}" update="@form" style="width: 80px"/>
-                   <!-- <p:commandButton value="Excluir"  update="@form" style="width: 80px"/> -->
+                  <!-- <p:commandButton value="Excluir"  action="{alunoBean.excluir(alunos)}" update="@form" style="width: 80px"/>-->
+                  <p:commandButton value="Excluir"  update="@form" style="width: 80px"/>
                 </p:column>
 
 
@@ -129,8 +129,8 @@
                 </p:column>
                 <p:column headerText="ENVIAR" priority="3" style="width: 10px" >
 
-                  
-                   <p:commandButton value="ENVIAR"  action="#{alunoBean.salvarGabarito(alunos)}" update="@form"/>
+                 <!-- action="{alunoBean.salvarGabarito(alunos)}"-->
+                   <p:commandButton value="ENVIAR"   update="@form"/>
                 </p:column>
 
 
