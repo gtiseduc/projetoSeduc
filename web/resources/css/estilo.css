@@ -1,6 +1,6 @@
 
 body{
-    color: #ffffff;
+    color: #A71601;
 }
 .ui-button{
     color: #fff;
@@ -19,7 +19,7 @@ body{
 }
 
 .ui-state-hover{
-     background:  #EF7f6D !important;
+     background:  #A71601 !important;
 }
 
 
@@ -80,7 +80,7 @@ header,
   /* padding-left: 250px; */
 }
 .md-form label {
-  color: #ffffff;
+  color: #A71601;
 }
 
 h6 {

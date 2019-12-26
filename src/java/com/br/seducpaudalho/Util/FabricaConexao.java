@@ -19,12 +19,12 @@ import java.util.logging.Logger;
 public class FabricaConexao {
 
     public static Connection conexao;
-    //private static final String URL_CONEXAO = "jdbc:mysql://localhost:8080/Pessoa";
-    private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/db_seduc";
+    //private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/db_seduc";
+    //private static final String USUARIO = "root";
+    // private static final String SENHA = "";
+    private static final String URL_CONEXAO = "jdbc:mysql://localhost:80/db_seduc";
     private static final String USUARIO = "root";
-    private static final String SENHA = "";
-   // private static final String USUARIO = "victor";
-    //private static final String SENHA = "seducvic2019#*#";
+    private static final String SENHA = "saepa2020seducvic";
 
     public static Connection getConnection() throws ErroSistema {
 
