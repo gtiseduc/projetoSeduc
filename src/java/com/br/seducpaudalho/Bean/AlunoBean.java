@@ -738,7 +738,7 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        dados = new String[quantlunos + descritores.size()][quantlunos + descritores.size()];
+        dados = new String[quantlunos + descritores.size()+2][quantlunos + descritores.size()+2];
         String gaba = "";
 
         int nulo = 0;
@@ -910,7 +910,7 @@ public class AlunoBean {
             dados[av][0] = avaliacoes.get(av).getNomeAluno();
 
             //RETIRADO O + 1
-            for (int j = 1; j <= descritores.size(); j++) {
+            for (int j = 1; j <= descritores.size() + 1; j++) {
 
                 if (j > descritores.size()) {
                     dados[av][j] = resulAlunos.get(av);

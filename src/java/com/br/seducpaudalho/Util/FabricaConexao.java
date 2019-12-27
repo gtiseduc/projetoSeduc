@@ -18,11 +18,12 @@ import java.util.logging.Logger;
  */
 public class FabricaConexao {
 
-    public static Connection conexao;
-    //private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/db_seduc";
-    //private static final String USUARIO = "root";
-    // private static final String SENHA = "";
-    private static final String URL_CONEXAO = "jdbc:mysql://localhost:80/db_seduc";
+   public static Connection conexao;
+    private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/db_seduc";
+   // private static final String USUARIO = "root";
+    //private static final String SENHA = "";
+    
+   
     private static final String USUARIO = "root";
     private static final String SENHA = "saepa2020seducvic";
 
