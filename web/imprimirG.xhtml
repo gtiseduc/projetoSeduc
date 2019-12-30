@@ -153,7 +153,8 @@
             <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
                 <p:column headerText="Lista de alunos">
                     <p:commandButton value="Editar"  update="@form"  />
-                    <p:commandButton value="Excluir" action="#{alunoBean.excluir(alunos)}" update="@form" />
+                   <!-- <p:commandButton value="Excluir" action="{alunoBean.excluir(alunos)}" update="@form" />-->
+                    <p:commandButton value="Excluir" update="@form" />
                 </p:column>
 
                 <p:column headerText="Nome da Escola">

@@ -181,8 +181,10 @@ public class AlunoBean {
     }
 
     public void salvarAluno() throws ErroSistema {
-
-        try {
+ 
+        adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA REALIZAR O CADASTRAMENTO DE ALUNOS !", "", FacesMessage.SEVERITY_INFO);
+      
+      /*  try {
 
             if (aluno.getNome().equals("")) {
 
@@ -251,34 +253,36 @@ public class AlunoBean {
             }
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
-        }
+        }*/
 
     }
 
     public void salvarDescritor() throws ErroSistema {
 
-        alunoDao.salvarDescritor(descritor);
+        adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR DESCRITORES!", "", FacesMessage.SEVERITY_INFO);
+        /*alunoDao.salvarDescritor(descritor);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
-        descritor = new Descritor();
+        descritor = new Descritor();*/
     }
 
     public void salvarGabarito(Aluno a) throws ErroSistema {
-
+        adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR GABARITO!", "", FacesMessage.SEVERITY_INFO);
+/*
         alunoDao.salvarGabarito(a);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
-
-        //descritor = new Descritor();
+*/
+        
     }
 
     public void salvarQuestoes() throws ErroSistema {
-
-        System.out.println("XXXXXXXXX " + associacao.getCodSerie() + " - " + associacao.getCodDisciplina() + " - " + associacao.getNumeroQuestoes());
+ adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR QUESTÕES!", "", FacesMessage.SEVERITY_INFO);
+    /*    System.out.println("XXXXXXXXX " + associacao.getCodSerie() + " - " + associacao.getCodDisciplina() + " - " + associacao.getNumeroQuestoes());
 
         alunoDao.salvarQuestao(associacao);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
-        associacao = new Associacao();
+        associacao = new Associacao();*/
     }
 
     public void alterar() {

@@ -226,7 +226,7 @@
 
                             <p:column style="width:5%;text-align: center">
                                 <p:commandButton update="@form" oncomplete="PF('carDialog').show()" icon="fa fa-edit" title="View">
-                                    <f:setPropertyActionListener value="#{associacao}" target="#{alunoBean.associacao}" />
+                                    <!--<f:setPropertyActionListener value="{associacao}" target="{alunoBean.associacao}" />-->
                                 </p:commandButton>
                             </p:column>
 
@@ -271,12 +271,12 @@
 
 
 
-                                    <p:commandButton value="Apagar descritores" action="#{alunoBean.apagarSelecao()}" update="teste">
+                                   <!-- <p:commandButton value="Apagar descritores" action="{alunoBean.apagarSelecao()}" update="teste"> 
 
                                     </p:commandButton >
-                                    <p:commandButton value="SALVAR" action="#{alunoBean.atualizarAssociacao()}"  onclick="PF('carDialog').hide();"  update="@all" >
+                                   <p:commandButton value="SALVAR" action="{alunoBean.atualizarAssociacao()}"  onclick="PF('carDialog').hide();"  update="@all" > 
 
-                                    </p:commandButton >
+                                    </p:commandButton >-->
 
 
                                     <!-- </p:panelGrid>-->
