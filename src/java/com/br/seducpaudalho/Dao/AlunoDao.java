@@ -706,7 +706,7 @@ public class AlunoDao {
         String sql = "select * from rendimentoserie as a \n"
                 + "                join escola e on e.inepEscola = a.inepEscola\n"
                 + "                join serie s on s.codSerie = a.codSerie\n"
-                + "                WHERE  a.codserie = ? && a.codDisciplina = ?";
+                + "                WHERE  a.codserie = ? && a.codDisciplina = ? order by rendimento desc"  ;
 
         List<Serie> t = new ArrayList<>();
 

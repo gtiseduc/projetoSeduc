@@ -52,7 +52,7 @@
 
                             <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
                             <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
-                            <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
+                           <!-- <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
                             <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
@@ -203,15 +203,15 @@
 
 
 
-            <div align="center" >
-                <p:panel rendered="#{alunoBean.visivel}">
+          <!--  <div align="center" >
+                <p:panel rendered="{alunoBean.visivel}">
                     <table id="resultado1"  border="1px " width="850px" style="text-align: center" >
 
                         <thead style="font-size: 17px " >
                             <tr>
-                                <th style="text-align: center">DESCRITOES</th>  <!-- sql.headers is a List of Strings -->
-                                <ui:repeat value="#{alunoBean.descritores}" var="h">
-                                    <th title="#{h.especiDescritor}">#{h.siglaDescritor}</th>
+                                <th style="text-align: center">DESCRITOES</th>  
+                                <ui:repeat value="{alunoBean.descritores}" var="h">
+                                    <th title="{h.especiDescritor}">{h.siglaDescritor}</th>
 
 
 
@@ -223,10 +223,10 @@
 
                         <thead id="resultado2" style="font-size: 15px">
                             <tr>
-                                <th style="text-align: center">GABARITO</th>  <!-- sql.headers is a List of Strings -->
-                                <ui:repeat value="#{alunoBean.descritores}" var="h" >
+                                <th style="text-align: center">GABARITO</th>  
+                                <ui:repeat value="{alunoBean.descritores}" var="h" >
 
-                                    <th style="text-align: center">#{h.especiDescritor}</th>
+                                    <th style="text-align: center">{h.especiDescritor}</th>
 
                                 </ui:repeat>
                                 <th style="text-align: center">  GABARITO </th> 
@@ -237,10 +237,10 @@
 
                         <tbody  >
 
-                            <ui:repeat value="#{alunoBean.dados}" var="row">
+                            <ui:repeat value="{alunoBean.dados}" var="row">
                                 <tr>
-                                    <ui:repeat value="#{row}" var="cell">
-                                        <td>#{cell}</td>
+                                    <ui:repeat value="{row}" var="cell">
+                                        <td>{cell}</td>
                                     </ui:repeat>
                                 </tr>
                             </ui:repeat>
@@ -248,9 +248,9 @@
 
                         <tfoot style="font-size: 15px">
                             <tr>
-                                <!-- sql.headers is a List of Strings -->
-                                <ui:repeat value="#{alunoBean.resultdescritores}" var="r">
-                                    <th style="text-align: center">#{r}</th>
+                                
+                                <ui:repeat value="{alunoBean.resultdescritores}" var="r">
+                                    <th style="text-align: center">{r}</th>
 
 
                                 </ui:repeat>
@@ -259,7 +259,7 @@
                         </tfoot>
                     </table>
                 </p:panel>
-            </div>
+            </div> -->
 
             <br></br>
             <br></br>
@@ -275,7 +275,7 @@
 
 
            
-            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:110%" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
+            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:50em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
 
             <div class="ui-g ui-fluid">
                 <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
@@ -306,7 +306,7 @@
                 <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
             </p:dialog>
             
-            <p:chart type="bar" model="#{alunoBean.horizontalBarAluno}" style="height:550em" responsive="true"  rendered="#{alunoBean.horizontalBarAluno != null}" />
+            <!--<p:chart type="bar" model="{alunoBean.horizontalBarAluno}" style="height:550em" responsive="true"  rendered="{alunoBean.horizontalBarAluno != null}" />-->
             
         </h:form>
 
