@@ -258,11 +258,11 @@ public class AlunoBean {
 
     public void salvarDescritor() throws ErroSistema {
 
-        adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR DESCRITORES!", "", FacesMessage.SEVERITY_INFO);
-        /*alunoDao.salvarDescritor(descritor);
+      //  adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR DESCRITORES!", "", FacesMessage.SEVERITY_INFO);
+        alunoDao.salvarDescritor(descritor);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
-        descritor = new Descritor();*/
+        descritor = new Descritor();
     }
 
     public void salvarGabarito(Aluno a) throws ErroSistema {
@@ -275,13 +275,13 @@ public class AlunoBean {
     }
 
     public void salvarQuestoes() throws ErroSistema {
-        adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR QUESTÕES!", "", FacesMessage.SEVERITY_INFO);
-        /*    System.out.println("XXXXXXXXX " + associacao.getCodSerie() + " - " + associacao.getCodDisciplina() + " - " + associacao.getNumeroQuestoes());
+       // adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA SALVAR QUESTÕES!", "", FacesMessage.SEVERITY_INFO);
+          System.out.println("XXXXXXXXX " + associacao.getCodSerie() + " - " + associacao.getCodDisciplina() + " - " + associacao.getNumeroQuestoes());
 
         alunoDao.salvarQuestao(associacao);
         adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
-        associacao = new Associacao();*/
+        associacao = new Associacao();
     }
 
     public void alterar() {
@@ -428,7 +428,7 @@ public class AlunoBean {
     public void listarTurmasParametro(Integer codigo, Integer inep) {
 
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo);
-
+         turmas.clear();
         turmas = new ArrayList<>();
         try {
             turmas = turmaDao.listarTurmaParametro(codigo, inep);
@@ -439,6 +439,7 @@ public class AlunoBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
+       
         disciplinas = new ArrayList<>();
     }
 
@@ -754,7 +755,9 @@ public class AlunoBean {
             }
         }
         System.out.println("ALTERNATIVAS ANULADAS " + nulo);
-        quantQuest = quantPresentes * quantDescritores - nulo;
+        int re = quantDescritores - nulo;
+        quantQuest = quantPresentes * re;
+       
         List<String> listaDeGabarito = new ArrayList<String>();
 
         String resp = "";
@@ -2751,7 +2754,7 @@ public class AlunoBean {
 
         // -----------------------------------------------------------\\
         //------------------------------------------------------------\\
-        /* horizontalBarAluno = new HorizontalBarChartModel();
+         horizontalBarAluno = new HorizontalBarChartModel();
 
         ChartSeries verm = new ChartSeries();
         ChartSeries am = new ChartSeries();
@@ -2832,7 +2835,7 @@ public class AlunoBean {
         xAAxis.setMax(150);
         xAAxis.setTickFormat("%1$.0f");
         Axis yAAxis = horizontalBarAluno.getAxis(AxisType.Y);
-        yAAxis.setLabel("ALUNOS");*/
+        yAAxis.setLabel("ALUNOS");
         //------------------------------------\\
         horizontalEvasao = new HorizontalBarChartModel();
         ChartSeries evasao = new ChartSeries();
