@@ -1,0 +1,533 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:f="http://xmlns.jcp.org/jsf/core"
+             xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+             xmlns:ct="http://www.chartistjsf.org/charts">
+
+    <ui:define name="menuesquerdo">
+        #{alunoBean.limpar()}
+        <div id="sidebar-menu"
+             class="main_menu_side hidden-print main_menu">
+
+            <div class="menu_section">
+                <h3>CARGO - FUNÇÃO</h3>
+                <ul class="nav side-menu">
+                    <li><a><i class="fa fa-home"></i> Home <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+                            <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
+                          
+                            <li><a href="imprimirT.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
+                            <li><a href="avaliacoesT.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <!--<li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
+                            <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
+                            <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
+                            <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>-->
+
+
+                        </ul>
+
+                    </li>
+                    <li><a><i class="fa fa-edit"></i> Atendimentos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+                        </ul></li>
+                    <!-- <li><a><i class="fa fa-desktop"></i> Chamados <span
+                                 class="fa fa-chevron-down"></span></a>
+                         <ul class="nav child_menu" style="display: none">
+                             <li><a href="general_elements.html">Gerar chamados</a></li>
+                             
+                         </ul></li>-->
+                    <li><a><i class="fa fa-newspaper-o"></i> Relatórios <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+
+                        </ul></li>
+                    <li><a><i class="fa fa-pie-chart"></i> Gráficos <span
+                                class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none">
+
+                            <li><a href="frequenciaPmunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
+                            <li><a href="frequenciaPturma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
+                            <li><a href="rendimentoPescola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPturma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
+                           <!-- <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
+                            <li><a href="mediaGdescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
+
+                        </ul></li>
+                </ul>
+            </div>
+        </div> 
+    </ui:define>
+
+    <ui:define name="formulario">
+
+
+        <script type="text/javascript">
+            //<![CDATA[
+            function exportChart1() {
+                //export image
+                $('#output').empty().append(PF('chart1').exportAsImage());
+
+                //show the dialog
+                PF('dlg').show();
+            }
+            function exportChart2() {
+                //export image
+                $('#output').empty().append(PF('chart2').exportAsImage());
+
+                //show the dialog
+                PF('dlg').show();
+            }
+            function exportChart3() {
+                //export image
+                $('#output').empty().append(PF('chart3').exportAsImage());
+
+                //show the dialog
+                PF('dlg').show();
+            }
+            //]]>
+        </script>
+
+
+        <script>
+            function chartExtende() {
+                this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+                this.cfg.series =
+                        [
+                            {seriesColors: ["#FFCC33"]},
+                            {seriesColors: ["#77933c"]}
+                        ]
+            }
+
+        </script>
+        <script>
+            function chartExtender() {
+                this.cfg.seriesDefaults.rendererOptions.varyBarColor = true;
+                this.cfg.series =
+                        [
+                            {seriesColors: ["#ff0066"]},
+                            {seriesColors: ["#3399ff"]}
+                        ]
+            }
+
+        </script>
+
+        <link rel="stylesheet" type="text/css"
+              href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css" />
+        <h:outputStylesheet library="css" name="style.css" />
+
+        <h:form prependId="false">
+            <p:growl id="growl" life="3500" />
+            <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
+            <p:fieldset legend="RESULTADO DAS AVALIAÇÕES">
+
+
+
+
+
+
+                <div class="ui-g ui-fluid">
+
+
+
+                    #{alunoBean.listarTodasSerie()}
+
+
+                    <div class="ui-g-12 ui-md-3">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
+                                <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
+                                <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
+                                <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.aluno.idSerie)}" update="@form"/>
+
+
+                            </p:selectOneMenu>    
+                        </div>
+                    </div>
+
+
+
+                    <div class="ui-g-12 ui-md-4">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="disciplina" value="#{alunoBean.disciplina.codDisciplina}" >
+                                <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
+                                <f:selectItems  value="#{alunoBean.disciplinas}"  var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
+                                <!-- <p:ajax  event="change" listener="{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>-->
+                                <p:ajax  event="change"  listener="#{alunoBean.mediaGeralDescritor(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
+                                <!-- <p:ajax  event="change"  listener="{testeGraficos.gerarGrafico()}" update="@form"/>-->
+                            </p:selectOneMenu>    
+                        </div>
+                    </div>  
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+                    <p:dialog style="align-content: center" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                        <p:graphicImage name="images/adin.gif" />
+                    </p:dialog>
+
+
+                  
+
+
+
+
+
+
+
+                </div> 
+
+
+
+
+
+
+            </p:fieldset>
+
+
+
+            <br></br>
+            <br></br>
+            <div align="center" >
+                <p:panel rendered="#{alunoBean.visivel}">
+                    <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSA SÉRIE :#{alunoBean.quantlunos}" />
+                    <br></br>
+                    <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :#{alunoBean.quantPresentes}" />
+
+                </p:panel>
+            </div>
+            <br></br>
+            <br></br>
+
+
+
+            <div align="center" >
+                <p:panel rendered="#{alunoBean.visivel}">
+                    <table id="resultado1"  border="1px " width="850px" style="text-align: center" >
+
+                        <thead style="font-size: 17px " >
+                            <tr>
+                                <th style="text-align: center">DESCRITOES</th>  
+                                <ui:repeat value="#{alunoBean.descritores}" var="h">
+                                    <th title="#{h.especiDescritor}">#{h.siglaDescritor}</th>
+
+
+
+                                </ui:repeat>
+                                <th style="text-align: center"> RESULTADO </th> 
+
+                            </tr>
+                        </thead>
+
+                        <thead id="resultado2" style="font-size: 15px">
+                            <tr>
+                                <th style="text-align: center">GABARITO</th>  
+                                <ui:repeat value="#{alunoBean.descritores}" var="h" >
+
+                                    <th style="text-align: center">#{h.especiDescritor}</th>
+
+                                </ui:repeat>
+                                <th style="text-align: center">  GABARITO </th> 
+
+                            </tr>
+                        </thead>
+
+
+                        <tbody  >
+
+                            <ui:repeat value="#{alunoBean.dados}" var="row">
+                                <tr>
+                                    <ui:repeat value="#{row}" var="cell">
+                                        <td>#{cell}</td>
+                                    </ui:repeat>
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+
+                        <tfoot style="font-size: 15px">
+                            <tr>
+                                
+                                <ui:repeat value="#{alunoBean.resultdescritores}" var="r">
+                                    <th style="text-align: center">#{r}</th>
+
+
+                                </ui:repeat>
+                                <th style="text-align: center" >  </th> 
+                            </tr>
+                        </tfoot>
+                    </table>
+                </p:panel>
+            </div> 
+
+            <br></br>
+            <br></br>
+            <p:chart type="bar" model="#{alunoBean.barra}" style="width: 30%; height: 30%" rendered="#{alunoBean.barra != null}" >
+
+
+
+                <h:outputScript>
+                   
+                </h:outputScript>
+
+            </p:chart>
+
+
+           
+            <p:chart type="bar" model="#{alunoBean.horizontalBarModel}" style="height:50em" responsive="true"  rendered="#{alunoBean.horizontalBarModel != null}" widgetVar="chart1" />
+
+            <div class="ui-g ui-fluid">
+                <p:commandButton type="button" value="Exportar"  onclick="exportChart1()"/>
+            </div>
+            
+            <br></br>
+            <br></br>
+            <br></br>
+            <p:chart type="bar" model="#{alunoBean.horizontalEvasao}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalEvasao != null}" widgetVar="chart2"/>
+
+            <div class="ui-g ui-fluid">
+                <p:commandButton type="button" value="Exportar"  onclick="exportChart2()"/>
+            </div>
+
+
+            <p:chart type="line" model="#{alunoBean.barraLinha}" style="width: 1000px; height: 1000px" rendered="#{alunoBean.barraLinha != null}" />
+
+
+            <br></br>
+            <br></br>
+            <br></br>
+            <p:chart type="bar" model="#{alunoBean.horizontalRendimento}" style="height:50%" responsive="true"  rendered="#{alunoBean.horizontalRendimento != null}" widgetVar="chart3"/>
+            <div class="ui-g ui-fluid">
+                <p:commandButton type="button" value="Exportar"  onclick="exportChart3()"/>
+            </div>
+            
+            <p:dialog widgetVar="dlg" showEffect="fade" modal="true" header="EXPORTAÇÃO DE GRAFICOS" resizable="false">
+                <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
+            </p:dialog>
+            
+            <p:chart type="bar" model="#{alunoBean.horizontalBarAluno}" style="height:550em" responsive="true"  rendered="#{alunoBean.horizontalBarAluno != null}" />
+            
+        </h:form>
+
+
+
+
+
+
+        <h:form id="frmConResCad">
+
+        </h:form>
+
+
+
+        <!--   <ct:chart id="barChart" type="bar" model="{testeGraficos.barChartModel}"></ct:chart>-->
+
+
+
+    </ui:define>
+
+</ui:decorate>
+
+<!-- <p:dataTable var="resul" value="{alunoBean.resul}"  >
+
+               <p:columnGroup type="header" >
+                   <p:row >
+                       <p:column rowspan="4" headerText="NOME"   />
+                   </p:row>
+
+                   <p:row >
+                       <p:column colspan="2" headerText="{resul.disciplina}" />
+                   </p:row>
+
+                   <p:row >
+                       <p:column colspan="2" headerText="D1D3D4D2D7D9D8D7D4D5D6D7D8D8D9" />
+                   </p:row>
+
+                   <p:row >
+                       <p:column colspan="2" headerText="AAAABBBDDDCCCDDAAABBBCC" />
+                   </p:row>
+
+
+               </p:columnGroup>      
+               <p:column headerText="NOME" priority="3">
+                   <h:outputText value="{resul.nomeAluno}" />
+               </p:column>
+
+               <p:column headerText="{resul.disciplina}">
+                   <h:outputText value="{resul.avDisciplina}" />
+               </p:column>
+               <p:column headerText="RESULTADO">
+                   <h:outputText value="{resul.numeroAcertos}" />
+               </p:column>
+
+           </p:dataTable> -->
+
+
+<!-- <p:dataTable var="descri" value="{alunoBean.descri}"  >
+
+     <p:column headerText="RESULTADO">
+         <h:outputText value="{descri}" />
+     </p:column>
+
+
+ </p:dataTable>-->
+
+
+<!--
+
+            <h:panelGrid id="pnlConResCad">
+                <p:dataTable value="{criaTotalizadorBean.alunos}" var="coluna" editable="true" editMode="cell">
+                    <f:facet name="header" >
+                        RESULTADO DA AVALIAÇÃO
+                    </f:facet>
+
+
+
+
+                     <p:column footerText="RESULTADO DESCRITORES">
+                        <h:outputText value="{coluna.nome}" />
+
+                    </p:column> 
+                    
+                    <p:column footerText="RESULTADO DESCRITORES">
+                        <h:outputText value="{coluna.nome}" />
+
+                    </p:column> 
+
+                    <c:forEach items="{criaTotalizadorBean.alunos}" var="column">
+
+                        <p:column >
+                            <f:facet name="header">
+                                <h:outputText value="{column.idAluno}" />
+                            </f:facet>
+
+                            <p:inputText value="{column.nomeSerie}" />
+
+                            <f:facet name="footer">
+                                <h:outputText value="{column.idSerie}" />
+                            </f:facet>
+
+                        </p:column>
+
+
+
+                    </c:forEach>
+
+                    <c:forEach items="{criaTotalizadorBean.operacoes}" var="operacao">
+                        <f:facet name="input">
+                            <p:inputText value="{operacao}" />
+                        </f:facet>
+                        <c:forEach items="{criaTotalizadorBean.colunas}" var="coluna">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="{operacao}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="{operacao}" />
+                                </f:facet>
+                            </p:cellEditor>
+                        </c:forEach> 
+                    </c:forEach>
+                </p:dataTable>
+            </h:panelGrid> -->
+
+
+
+
+
+<!-- <table id="tblSqlResult">
+     <thead>
+         <tr>
+             sql.headers is a List of Strings 
+             <ui:repeat value="{criaTotalizadorBean.operacoes}" var="h">
+                 <th>{h}</th>
+             </ui:repeat>
+         </tr>
+     </thead>
+     <tbody>
+        
+         <ui:repeat value="{criaTotalizadorBean.array}" var="row">
+             <tr>
+                 <ui:repeat value="{row}" var="cell">
+                     <td>{cell}</td>
+                 </ui:repeat>
+             </tr>
+         </ui:repeat>
+     </tbody>
+ </table>-->
+
+
+<!--     <div class="ui-g-12 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <h:panelGrid columns="2"  cellpadding="5">
+                            <h:outputText value="PORTUGUÊS " />
+    
+                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+    
+    
+                            </p:inputSwitch>
+    
+    
+                        </h:panelGrid>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <h:panelGrid columns="2"  cellpadding="5">
+                            <h:outputText value="MATEMÁTICA " />
+    
+                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+    
+    
+                            </p:inputSwitch>
+    
+    
+                        </h:panelGrid>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <h:panelGrid columns="2"  cellpadding="5">
+                            <h:outputText value="CIÊNCIAS HUMANAS " />
+    
+                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+    
+    
+                            </p:inputSwitch>
+    
+    
+                        </h:panelGrid>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <h:panelGrid columns="2"  cellpadding="5">
+                            <h:outputText value="CIÊNCIAS DA NATUREZA " />
+    
+                            <p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÃO" style="width:60px">
+                                <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   />
+    
+    
+                            </p:inputSwitch>
+    
+    
+                        </h:panelGrid>
+                    </div>
+                </div> -->
+
+
+
+
+
+
+

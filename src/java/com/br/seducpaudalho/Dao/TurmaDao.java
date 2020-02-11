@@ -66,7 +66,7 @@ public class TurmaDao {
 
     public List<Turma> listarTurmaParametro(Integer codigo,Integer inep) throws ErroSistema {
  
-        System.out.println("XXXXXXXXX-------XXXXXXXX--------XXXXXXXXX"+ codigo);
+        System.out.println("XXXXXXXXX-------XXXXXXXX--------XXXXXXXXX - codigo -"+ codigo + "- inep - "+inep);
         //codigo = 26091437;
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"

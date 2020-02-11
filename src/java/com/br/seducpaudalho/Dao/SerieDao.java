@@ -180,7 +180,7 @@ public class SerieDao {
                 serie.setInepEscola(rs.getInt("inepEscola"));
                 serie.setNome(rs.getString("nomeSerie"));
 
-                System.out.println("******************* " + serie.getNome());
+                System.out.println("******************* serie " + serie.getNome()+" inep "+ serie.getInepEscola()+ " nome  "+serie.getNome());
 
                 series.add(serie);
 

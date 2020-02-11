@@ -261,13 +261,19 @@ public class LoginBean {
            // System.out.println("entrou na pagina de administrador");
             //mudarParaAdmin();
            // mudarParaLocalidade();
-            retorno = "/nEscola?faces-redirect=true";
+            retorno = "/escola?faces-redirect=true";
             }
               if(login.getNivel().equals("F")){
            // System.out.println("entrou na pagina de administrador");
             //mudarParaAdmin();
            // mudarParaLocalidade();
             retorno = "/saepa?faces-redirect=true";
+            }
+              if(login.getNivel().equals("T")){
+           // System.out.println("entrou na pagina de administrador");
+            //mudarParaAdmin();
+           // mudarParaLocalidade();
+            retorno = "/saepaTec?faces-redirect=true";
             }
             
             else{

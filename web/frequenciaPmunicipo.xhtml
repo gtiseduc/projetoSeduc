@@ -12,7 +12,7 @@
     <ui:define name="menuesquerdo">
 
 
-
+       
 
 
 
@@ -26,13 +26,13 @@
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
                             <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
-                            <li><a href="cadastroAluno.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
-                            <li><a href="imprimirG.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
-                            <li><a href="avaliacoes.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
-                            <li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
+                          
+                            <li><a href="imprimirT.jsf" onclick="limpar()">IMPRIMIR GABARITOS </a></li>
+                            <li><a href="avaliacoesT.jsf" onclick="limpar()">CORREÇÃO DE AVALIAÇÕES </a></li>
+                            <!--<li><a href="cadastroRespostas.jsf" onclick="limpar()">INSERIR GABARITO</a></li>
                             <li><a href="descritor.jsf" onclick="limpar()">CADASTRAR DESCRITORES</a></li>
                             <li><a href="associacaoQ.jsf" onclick="limpar()">CADASTRO QUESTOES - GABARITOS</a></li>
-                            <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>
+                            <li><a href="associacaoG.jsf" onclick="limpar()">CADASTRO GABARITOS</a></li>-->
 
 
                         </ul>
@@ -59,13 +59,12 @@
                                 class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: none">
 
-                            <li><a href="frequenciaPorMunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
-                            <li><a href="frequenciaporTurma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
-
-                            <li><a href="rendimentoPorEscola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
-                            <li><a href="rendimentoPorTurma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
-                            <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>
-                            <li><a href="mediaGeralDescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
+                            <li><a href="frequenciaPmunicipo.jsf" onclick="limpar()">FREQUENCIA POR MUNICÍPIO</a></li>
+                            <li><a href="frequenciaPturma.jsf" onclick="limpar()">FREQUÊNCIA POR TURMAS</a></li>
+                            <li><a href="rendimentoPescola.jsf" onclick="limpar()">RENDIMENTO POR TURMAS</a></li>
+                            <li><a href="rendimentoPturma.jsf" onclick="limpar()">RENDIMENTO POR ESCOLA</a></li>
+                           <!-- <li><a href="mediaEscolarDescritor.jsf" onclick="limpar()">MÉDIA ESCOLAR POR DESCRITORES</a></li>-->
+                            <li><a href="mediaGdescritor.jsf" onclick="limpar()">MÉDIA GERAL POR DESCRITORES</a></li>
 
                         </ul></li>
                 </ul>
@@ -123,28 +122,28 @@
         <link rel="stylesheet" type="text/css"
               href="#{request.contextPath}/resources/fonts/css/font-awesome.min.css" />
         <h:outputStylesheet library="css" name="style.css" />
-        #{alunoBean.pesquisarFrequenciaPorMunicipio()}
+
         <h:form prependId="false">
             <p:growl id="growl" life="3500" />
             <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
             <p:fieldset legend="GRAFICO DE FREQUÊNCIA ESCOLAR NA AVALIAÇÃO SAEPA">
                 <div align="center" >
-                    <p:panel >
-                        <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSE MUNICÍPIO :#{alunoBean.ca}" />
-                        <br></br>
-                        <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :#{alunoBean.cp}" />
+                <p:panel >
+                    <p:outputLabel value="QUANTIDADE DE ALUNOS MATRICULADOS NESSE MUNICÍPIO :#{alunoBean.ca}" />
+                    <br></br>
+                    <p:outputLabel value="QUANTIDADE DE ALUNOS PRESENTES NA AVALIAÇÃO :#{alunoBean.cp}" />
 
-                    </p:panel>
-                </div>
+                </p:panel>
+            </div>
             </p:fieldset>
 
 
-
+            #{alunoBean.pesquisarFrequenciaPorMunicipio()}
 
             <br></br>
             <br></br>
-
-
+           
+            
 
 
 
@@ -179,7 +178,7 @@
                 <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
             </p:dialog>
 
-           
+
 
 
 
