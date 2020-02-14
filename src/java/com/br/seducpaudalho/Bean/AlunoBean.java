@@ -427,6 +427,24 @@ public class AlunoBean {
 
     public void listarTurmasParametro(Integer codigo, Integer inep) {
 
+       
+        System.out.println("olha o codigo da turma--------****----***----***------- " + codigo + " --- inep " + inep);
+        turmas.clear();
+        turmas = new ArrayList<>();
+        try {
+            turmas = turmaDao.listarTurmaParametro(codigo, inep);
+            //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            disciplinas.clear();
+            disciplinas = new ArrayList<>();
+
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+
+        disciplinas = new ArrayList<>();
+    }
+    public void listarTurmasCadResp(Integer codigo, Integer inep) {
+
         if (codigo != 18) {
             adicionarMensagem("ATENÇÃO!", "VOCÊ NÃO PODE ALTERAR O RESULTADO DESSA TURMA ELE JA FOI INSERIDO!", FacesMessage.SEVERITY_INFO);
            limpar();
@@ -457,6 +475,10 @@ public class AlunoBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
+    }
+    
+    public void atumonitoramento(){
+     System.out.println("entrou no monitoramento");
     }
 
     public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
