@@ -30,7 +30,7 @@
                             <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
                             <li><a href="cadastroAlunoEscola.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
                             <li><a href="listarAlunos.jsf" onclick="limpar()">LISTAR ALUNOS </a></li>
-                            <li><a href="retrem.jsf" onclick="limpar()" >RETREM </a></li>
+                            <li><a href="rastreamento.jsf" onclick="limpar()" >RETREM </a></li>
                             <li><a href="monitoramento.jsf" onclick="limpar()" >MONITORAMENTO </a></li>
 
                             <li><a href="avaliacoesEscola.jsf" onclick="limpar()">RESULTADO DAS AVALIAÇÕES </a></li>
@@ -80,7 +80,7 @@
 
 
 
-        <h:form> 
+        <h:form > 
 
             <p:growl id="growl" life="3500" />
 
@@ -149,36 +149,47 @@
 
                             </p:selectOneMenu>    
                         </div>
+                        
                     </div>
+
 
                     #{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie,session.getAttribute('instituicao'))}
 
 
                     <div class="ui-g-12 ui-md-3">
+
                         <div class="ui-inputgroup">
+
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+
                             <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
                                 <f:selectItem itemLabel="SELECIONE A TURMA" />       
                                 <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}" />      
                                 <p:ajax  event="change" listener="#{alunoBean.listarDisciplinasSerie(alunoBean.aluno.idSerie)}" update="@form"/>                            
                                 <!--  <p:ajax  event="change"  listener="{alunoBean.listarGabaritosAlunos(alunoBean.aluno.idTurma,alunoBean.aluno.inepEscola,alunoBean.aluno.idSerie)}" update="@form"/> -->
+                            </p:selectOneMenu> 
 
-                            </p:selectOneMenu>    
                         </div>
+
                     </div>
+
                     #{alunoBean.listarDisciplinasSerie(alunoBean.aluno.idSerie)}
 
                     <div class="ui-g-12 ui-md-4">
+                       
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            
                             <p:selectOneMenu id="disciplina" value="#{alunoBean.disciplina.codDisciplina}" >
+
                                 <f:selectItem itemLabel="SELECIONE A DISCIPLINA" />       
                                 <f:selectItems  value="#{alunoBean.disciplinas}"  var="disciplina" itemLabel="#{disciplina.nomeDisciplina}" itemValue="#{disciplina.codDisciplina}"/>      
                                 <!-- <p:ajax  event="change" listener="{alunoBean.listarDescritores(alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}" update="@all"/>-->
-                                <p:ajax  event="change"  listener="#{alunoBean.listarGabaritosDisciplina(alunoBean.aluno.idTurma,session.getAttribute('instituicao'),alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
+                                <p:ajax  event="change"  listener="#{alunoBean.listarResultadoMonitoramentoDisciplina(alunoBean.aluno.idTurma,session.getAttribute('instituicao'),alunoBean.aluno.idSerie,alunoBean.disciplina.codDisciplina)}"  update="@form"/>
                                 <!-- <p:ajax  event="change"  listener="{testeGraficos.gerarGrafico()}" update="@form"/>-->
 
-                            </p:selectOneMenu>    
+                            </p:selectOneMenu>  
+                            
                         </div>
                     </div>  
 
@@ -203,12 +214,21 @@
 
             </p:fieldset>
             <!--scrollable="true" scrollWidth="800"-->
-            <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
+  
+           
 
-            </p:inputSwitch>
 
-            <p:dataTable var="alunos" value="#{alunoBean.alunos}" rendered="true"  >
+
+
+
+
+ 
+
+
+            <p:dataTable var="alunos" value="#{alunoBean.alunos}"  >
+
                 <p:columnGroup type="header" >
+
                     <p:row >
                         <p:column rowspan="3" headerText="LISTA ALUNOS" style="width: 180px" />
                         <p:column colspan="7" headerText="LEITURA" />
@@ -216,6 +236,7 @@
                         <p:column colspan="5" headerText="ESCRITA" />
 
                     </p:row>
+
                     <p:row>
                         <p:column colspan="1" >
                             <f:facet name="header"    >
@@ -227,6 +248,7 @@
                         </p:column>
 
                         <p:column colspan="2" headerText="A"   >
+
                             <f:facet name="header" >
 
                                 <p:graphicImage library="images"  name="1.png"/>
@@ -235,6 +257,7 @@
                             </f:facet>
 
                         </p:column>
+
                         <p:column colspan="2" headerText="B" >
                             <f:facet name="header" >
                                 <p:graphicImage library="images"  name="2.png"/>
@@ -246,11 +269,13 @@
                                 <p:graphicImage library="images"  name="3.png"/>
                             </f:facet>
                         </p:column>
+
                         <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" >
 
                             <f:facet name="header" >
                                 <p:graphicImage library="images"  name="5.png"/>
                             </f:facet>
+
                         </p:column>
 
                         <p:column colspan="1" >
@@ -370,125 +395,130 @@
                 </p:column>
 
                 <p:column headerText="" priority="3" >
-                    <p:inputSwitch  value="#{pessoaBean.value1}" onLabel="SIM" offLabel="NÂO" style="width:60px">
-                        <p:ajax listener="#{pessoaBean.alterarRecebimento(pessoa)}"   /></p:inputSwitch>
+                    <!--<p:inputSwitch  value="{pessoaBean.value1}" onLabel="SIM" offLabel="NÂO" style="width:60px">
+                        <p:ajax listener="{pessoaBean.alterarRecebimento(pessoa)}"   /></p:inputSwitch>
                     <p:inputSwitch  value="" onLabel="OK" offLabel="NO"  >
 
-                    </p:inputSwitch>
+                    </p:inputSwitch>-->
+                       <p:selectBooleanButton id="value1" value="#{alunoBean.value1}" onLabel="sim" offLabel="não"  />
+                   
+                       <h:selectBooleanCheckbox value="#{alunoBean.value1}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </h:selectBooleanCheckbox>
+
                 </p:column>
 
 
                 <p:column headerText="" priority="3">
 
-                    <p:selectBooleanCheckbox value="#{alunos.nome}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento()}"   />
+                   
+                    
+                    <p:selectBooleanCheckbox value="#{alunoBean.value1}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
                     </p:selectBooleanCheckbox>
                 </p:column>
 
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp3}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp4}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp5}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp6}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunos.nome}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp7}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp8}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp9}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp10}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp11}"   >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp12}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
-
-                    </p:inputSwitch>
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp13}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
                 </p:column>
+
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp14}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
 
-                    </p:inputSwitch>
                 </p:column>
+
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp15}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
 
-                    </p:inputSwitch>
                 </p:column>
+
                 <p:column headerText="" priority="3">
 
-                    <p:inputSwitch  value="" onLabel="OK" offLabel="NO" >
+                    <p:selectBooleanCheckbox value="#{alunoBean.monitor.resp16}" >
+                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.idAluno)}"   />
+                    </p:selectBooleanCheckbox>
 
-                    </p:inputSwitch>
                 </p:column>
 
 
 
 
             </p:dataTable>
-
-
-
-
-
-
-
-
-
         </h:form>
 
 

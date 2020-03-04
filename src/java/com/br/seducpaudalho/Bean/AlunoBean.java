@@ -19,6 +19,7 @@ import com.br.seducpaudalho.Entidade.Correcao;
 import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
+import com.br.seducpaudalho.Entidade.MonitoramentoAluno;
 import com.br.seducpaudalho.Entidade.Serie;
 import com.br.seducpaudalho.Entidade.Turma;
 
@@ -65,6 +66,7 @@ import org.primefaces.model.chart.LineChartModel;
 public class AlunoBean {
 
     private Aluno aluno = new Aluno();
+    private MonitoramentoAluno monitor = new MonitoramentoAluno();
     private List<Aluno> alunos = new ArrayList<>();
     private Correcao correcao = new Correcao();
     private List<Correcao> correcoes = new ArrayList<>();
@@ -134,6 +136,7 @@ public class AlunoBean {
     private LineChartModel lineModel;
 
     private boolean visivel = false;
+    private boolean value1;
 
     public void limpar() {
 
@@ -427,7 +430,6 @@ public class AlunoBean {
 
     public void listarTurmasParametro(Integer codigo, Integer inep) {
 
-       
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo + " --- inep " + inep);
         turmas.clear();
         turmas = new ArrayList<>();
@@ -443,11 +445,12 @@ public class AlunoBean {
 
         disciplinas = new ArrayList<>();
     }
+
     public void listarTurmasCadResp(Integer codigo, Integer inep) {
 
         if (codigo != 18) {
             adicionarMensagem("ATENÇÃO!", "VOCÊ NÃO PODE ALTERAR O RESULTADO DESSA TURMA ELE JA FOI INSERIDO!", FacesMessage.SEVERITY_INFO);
-           limpar();
+            limpar();
             return;
         }
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo + " --- inep " + inep);
@@ -476,9 +479,9 @@ public class AlunoBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
     }
-    
-    public void atumonitoramento(){
-     System.out.println("entrou no monitoramento");
+
+    public void atumonitoramento(String a) {
+        System.out.println("entrou no monitoramento " + a);
     }
 
     public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
@@ -617,7 +620,7 @@ public class AlunoBean {
         //  barra.addSeries(serie);
         //  System.out.println("******************************************* 3");
         //  }
-        barra.setTitle("GRAFICO DE EVASÃO DA TURMA");
+        barra.setTitle("GRAFICO DE FREQUÊNCIA DA TURMA");
         barra.setLegendPosition("ne");
         barra.setAnimate(true);
 
@@ -718,10 +721,13 @@ public class AlunoBean {
         }
         
          */
+    }public void listarResultadoMonitoramentoDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+    
+    alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
     }
 
     public void listarGabaritosDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
-
+        value1 = true;
         System.out.println("olha o codigo --------" + inep + "****----***" + codDisciplina + "----***------- " + codSerie);
 
         try {
@@ -1262,7 +1268,7 @@ public class AlunoBean {
         presentes.set("", resulPreseTurma);
         horizontalEvasao.addSeries(presentes);
 
-        horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
+        horizontalEvasao.setTitle("GRAFICO DE FREQUÊNCIA ");
         horizontalEvasao.setSeriesColors("66ff33,ff0000");
         horizontalEvasao.setLegendPosition("e");
         horizontalEvasao.setStacked(true);
@@ -2308,7 +2314,7 @@ public class AlunoBean {
         presentes.set("EVASÃO", resulPreseTurma);
         horizontalEvasao.addSeries(presentes);
 
-        horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
+        horizontalEvasao.setTitle("GRAFICO DE FREQUÊNCIA ");
         horizontalEvasao.setSeriesColors("66ff33,ff0000");
         horizontalEvasao.setLegendPosition("e");
         horizontalEvasao.setStacked(true);
@@ -2781,7 +2787,7 @@ public class AlunoBean {
 
         // -----------------------------------------------------------\\
         //------------------------------------------------------------\\
-        horizontalBarAluno = new HorizontalBarChartModel();
+       /* horizontalBarAluno = new HorizontalBarChartModel();
 
         ChartSeries verm = new ChartSeries();
         ChartSeries am = new ChartSeries();
@@ -2862,7 +2868,7 @@ public class AlunoBean {
         xAAxis.setMax(150);
         xAAxis.setTickFormat("%1$.0f");
         Axis yAAxis = horizontalBarAluno.getAxis(AxisType.Y);
-        yAAxis.setLabel("ALUNOS");
+        yAAxis.setLabel("ALUNOS");*/
         //------------------------------------\\
         horizontalEvasao = new HorizontalBarChartModel();
         ChartSeries evasao = new ChartSeries();
@@ -2876,7 +2882,7 @@ public class AlunoBean {
         presentes.set("", resulPreseTurma);
         horizontalEvasao.addSeries(presentes);
 
-        horizontalEvasao.setTitle("GRAFICO DE EVASÃO ");
+        horizontalEvasao.setTitle("GRAFICO DE FREQUÊNCIA ");
         horizontalEvasao.setSeriesColors("66ff33,ff0000");
         horizontalEvasao.setLegendPosition("e");
         horizontalEvasao.setStacked(true);
@@ -3732,6 +3738,30 @@ public class AlunoBean {
 
     public void setCp(Integer cp) {
         this.cp = cp;
+    }
+
+    public double getResulPreseTurma() {
+        return resulPreseTurma;
+    }
+
+    public void setResulPreseTurma(double resulPreseTurma) {
+        this.resulPreseTurma = resulPreseTurma;
+    }
+
+    public MonitoramentoAluno getMonitor() {
+        return monitor;
+    }
+
+    public void setMonitor(MonitoramentoAluno monitor) {
+        this.monitor = monitor;
+    }
+
+    public boolean isValue1() {
+        return value1;
+    }
+
+    public void setValue1(boolean value1) {
+        this.value1 = value1;
     }
 
 }

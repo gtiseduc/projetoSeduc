@@ -26,7 +26,7 @@
                             <!-- <li><a href="">CADASTRO ESCOLA </a></li>-->
                             <li><a href="cadastroAlunoEscola.jsf" onclick="limpar()" >CADASTRO ALUNO </a></li>
                             <li><a href="listarAlunos.jsf" onclick="limpar()">LISTAR ALUNOS </a></li>
-                            <li><a href="retrem.jsf" onclick="limpar()" >RETREM </a></li>
+                            <li><a href="rastreamento.jsf" onclick="limpar()" >RETREM </a></li>
                             <li><a href="monitoramento.jsf" onclick="limpar()" >MONITORAMENTO </a></li>
 
                             <li><a href="avaliacoesEscola.jsf" onclick="limpar()">RESULTADO DAS AVALIAÇÕES</a></li>
@@ -142,8 +142,11 @@
             <p:dataTable var="alunos" value="#{alunoBean.alunos}" >
                 <p:column headerText="Lista de alunos">
                     <p:commandButton value="Editar"  update="@form"  />
-                    <!-- <p:commandButton value="Excluir" action="{alunoBean.excluir(alunos)}" update="@form" />-->
+                    <!-- <p:commandButton value="Excluir" action="{alunoBean.editar(alunos)}" update="@form" />-->
                     <p:commandButton value="Excluir" update="@form" />
+                    <!-- <p:commandButton value="Excluir" action="{alunoBean.excluir(alunos)}" update="@form" />-->
+                    <p:commandButton value="Aprovado" update="@form" />
+                     <!-- <p:commandButton value="Excluir" action="{alunoBean.aprovado(alunos)}" update="@form" />-->
                 </p:column>
 
                 <p:column headerText="Nome da Escola">
