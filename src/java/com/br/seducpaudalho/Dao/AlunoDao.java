@@ -12,6 +12,7 @@ import com.br.seducpaudalho.Entidade.Correcao;
 import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Fornecedor;
 import com.br.seducpaudalho.Entidade.FrequenciaTurma;
+import com.br.seducpaudalho.Entidade.MonitoramentoAluno;
 import com.br.seducpaudalho.Entidade.Produto;
 import com.br.seducpaudalho.Entidade.RendimentoTurma;
 import com.br.seducpaudalho.Entidade.Serie;
@@ -192,6 +193,153 @@ public class AlunoDao {
                 aluno.setCienciasHumanas((""));
                 aluno.setCienciasNatureza((""));
                 System.out.println("OLHA O NOME DO TURNO :" + aluno.getTurno());
+
+                alunos.add(aluno);
+            }
+
+        } catch (Exception e) {
+            System.out.println("erro ao listar produtos " + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+
+        }
+
+        FabricaConexao.fecharConexao();
+        return alunos;
+
+    }
+    public List<MonitoramentoAluno> imprimirMonitoramento(Integer codigoTurma, Integer inepEscola, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+
+        System.out.println("**************" + codigoTurma);
+        System.out.println("**************" + inepEscola);
+        String retorno = "";
+        // "Select uname, password from Users where uname = ? and password = ?"
+
+        String sql = "select * from monitoramento as a \n"
+                + "join escola e on e.inepEscola = a.inepEscola\n"
+                + "join aluno al on al.codAluno = a.codAluno\n"            
+                + "join serie s on s.codSerie = a.codSerie\n"
+                + "join turma t on t.codTurma = a.codTurma\n"
+                + "join disciplina d on d.codDisciplina = a.codDisciplina\n"
+                
+                + "WHERE a.inepEscola = ? && a.codserie = ? && a.codTurma = ? && a.codDisciplina = ? order by nomeAluno";
+        //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
+
+        List<MonitoramentoAluno> alunos = new ArrayList<>();
+
+        try {
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, inepEscola);
+            ps.setInt(2, codSerie);
+            ps.setInt(3, codigoTurma);
+            ps.setInt(4, codDisciplina);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                System.out.println("ENTROUUUUUUUUUUUUUUUU");
+                MonitoramentoAluno aluno = new MonitoramentoAluno();
+                aluno.setCodAluno(rs.getInt("codAluno"));
+                aluno.setCodSerie(rs.getInt("codSerie"));
+                aluno.setCodTurma(rs.getInt("codTurma"));
+                aluno.setInepEscola(rs.getInt("inepEscola"));
+                aluno.setNomeAluno(rs.getString("nomeAluno"));
+                aluno.setCodDisciplina(rs.getInt("codDisciplina"));
+                
+              if(rs.getBoolean("resp1") == true){
+                aluno.setResp1(true);
+              } else{
+               aluno.setResp1(false);
+              }
+              
+              if(rs.getBoolean("resp2") == true){
+                aluno.setResp2(true);
+              } else{
+               aluno.setResp2(false);
+              }
+              if(rs.getBoolean("resp3") == true){
+                aluno.setResp3(true);
+              } else{
+               aluno.setResp3(false);
+              }
+              if(rs.getBoolean("resp4") == true){
+                aluno.setResp4(true);
+              } else{
+               aluno.setResp4(false);
+              }
+              if(rs.getBoolean("resp5") == true){
+                aluno.setResp5(true);
+              } else{
+               aluno.setResp5(false);
+              }
+              if(rs.getBoolean("resp6") == true){
+                aluno.setResp6(true);
+              } else{
+               aluno.setResp6(false);
+              }
+              
+              if(rs.getBoolean("resp7") == true){
+                aluno.setResp7(true);
+              } else{
+               aluno.setResp7(false);
+              }
+              if(rs.getBoolean("resp8") == true){
+                aluno.setResp8(true);
+              } else{
+               aluno.setResp8(false);
+              }
+              if(rs.getBoolean("resp9") == true){
+                aluno.setResp9(true);
+              } else{
+               aluno.setResp9(false);
+              }
+              if(rs.getBoolean("resp10") == true){
+                aluno.setResp10(true);
+              } else{
+               aluno.setResp10(false);
+              }
+              if(rs.getBoolean("resp11") == true){
+                aluno.setResp11(true);
+              } else{
+               aluno.setResp11(false);
+              }
+              if(rs.getBoolean("resp12") == true){
+                aluno.setResp12(true);
+              } else{
+               aluno.setResp12(false);
+              }
+              if(rs.getBoolean("resp13") == true){
+                aluno.setResp13(true);
+              } else{
+               aluno.setResp13(false);
+              }
+              if(rs.getBoolean("resp14") == true){
+                aluno.setResp14(true);
+              } else{
+               aluno.setResp14(false);
+              }
+              if(rs.getBoolean("resp15") == true){
+                aluno.setResp15(true);
+              } else{
+               aluno.setResp15(false);
+              }
+              if(rs.getBoolean("resp16") == true){
+                aluno.setResp16(true);
+              } else{
+               aluno.setResp16(false);
+              }
+              if(rs.getBoolean("resp17") == true){
+                aluno.setResp17(true);
+              } else{
+               aluno.setResp17(false);
+              }
+              
+              
+
+              
+               // aluno.setNome(rs.getString("nomeAluno"));
+               
+              //  System.out.println("NOME DO ALUNO : " + aluno.getNomeAluno());
 
                 alunos.add(aluno);
             }

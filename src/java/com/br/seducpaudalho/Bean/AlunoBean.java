@@ -68,6 +68,7 @@ public class AlunoBean {
     private Aluno aluno = new Aluno();
     private MonitoramentoAluno monitor = new MonitoramentoAluno();
     private List<Aluno> alunos = new ArrayList<>();
+    private List<MonitoramentoAluno> monitoramentos = new ArrayList<>();
     private Correcao correcao = new Correcao();
     private List<Correcao> correcoes = new ArrayList<>();
     private AlunoDao alunoDao = new AlunoDao();
@@ -480,8 +481,8 @@ public class AlunoBean {
         }
     }
 
-    public void atumonitoramento(String a) {
-        System.out.println("entrou no monitoramento " + a);
+    public void atumonitoramento(Integer coAluno,Integer codDisciplana,String data,String resp1,String resp2,String resp3,String resp4,String resp5,String resp6,String resp7,String resp8,String resp9,String resp10,String resp11,String resp12,String resp13,String resp14,String resp15,String resp16,String resp17) {
+        System.out.println("entrou no monitoramento " + coAluno+ " - data  " + data +" - codDisciplina  " + codDisciplana+ " 1 -" +resp1+ " 2 -" +resp2+ " 3 -" +resp3+ " 4 -" +resp4+ " 5 -" +resp5+ " 6 -" +resp6+ " 7 -" +resp7+ " 8 -" +resp8+ " 9 -" +resp9+ " 10 -" +resp10+ " 11 -" +resp11+ " 12 -" +resp12+ " 13 -" +resp13+ " 14 -" +resp14+ " 15 -" +resp15+ " 16 -" +resp16+ " 17 -" +resp17);
     }
 
     public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
@@ -721,9 +722,13 @@ public class AlunoBean {
         }
         
          */
-    }public void listarResultadoMonitoramentoDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+    }
     
-    alunos = alunoDao.imprimirAlunos(codTurma, inep, codSerie);
+    public void listarResultadoMonitoramentoDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
+    
+    monitoramentos = alunoDao.imprimirMonitoramento(codTurma, inep, codSerie,codDisciplina);
+    
+            System.out.println("TAMANHO DA LISTA "+monitoramentos.size());
     }
 
     public void listarGabaritosDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
@@ -3764,6 +3769,16 @@ public class AlunoBean {
         this.value1 = value1;
     }
 
+    public List<MonitoramentoAluno> getMonitoramentos() {
+        return monitoramentos;
+    }
+
+    public void setMonitoramentos(List<MonitoramentoAluno> monitoramentos) {
+        this.monitoramentos = monitoramentos;
+    }
+
+    
+    
 }
 /*String frase = "00149/007587/10987";
         String array[] = new String[3];
