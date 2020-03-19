@@ -87,7 +87,7 @@
 
             <p:fieldset legend="AVALIAÇÃO DA LEITURA ESCRITA">
 
-
+                <h1> PÁGINA EM MANUTENÇÃO</h1>
 
 
 
@@ -244,308 +244,304 @@
 
 
 
-
-
-
-            <p:dataTable var="alunos" value="#{alunoBean.monitoramentos}" stickyHeader="true"  >
-
-                <p:columnGroup type="header" >
-
-                    <p:row >
-                        <p:column rowspan="3" headerText="LISTA ALUNOS" style="width: 180px" />
-                        <p:column colspan="7" headerText="LEITURA" />
-                        <p:column colspan="5" headerText="ESCRITA" />
-                        <p:column colspan="5" headerText="ESCRITA" />
-
-
-
-                    </p:row>
-
-                    <p:row>
-                        <p:column colspan="1"  >
-                            <f:facet name="header"    >
-
-                                <p:graphicImage library="images"  name="0.png"/>
-
-
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="2" headerText="A"   >
-
-                            <f:facet name="header" >
-
-                                <p:graphicImage library="images"  name="1.png"/>
-
-
-                            </f:facet>
-
-                        </p:column>
-
-                        <p:column colspan="2" headerText="B" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="2.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="2" headerText="C" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="3.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" >
-
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="5.png"/>
-                            </f:facet>
-
-                        </p:column>
-
-                        <p:column colspan="1" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="6.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column colspan="2" headerText="D" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="7.png"/>
-                            </f:facet>
-                        </p:column>
-
-
-                        <p:column colspan="2" headerText="E" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="8.png"/>
-                            </f:facet>
-                        </p:column>
-
-
-
-                    </p:row>
-
-                    <p:row>
-
-                        <p:column headerText="" />
-                        <p:column headerText="2" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="9.png"/>
-                            </f:facet>
-                        </p:column>
-
-                        <p:column headerText="3" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="10.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="4" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="9.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="5" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="10.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="6" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="9.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="7" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="10.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="8" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="11.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="9" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="12.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="10" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="13.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="11" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="15.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="12" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="14.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="" >
-                            <f:facet name="header" >
-
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="14" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="18.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="15" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="19.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="16" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="20.png"/>
-                            </f:facet>
-                        </p:column>
-                        <p:column headerText="17" >
-                            <f:facet name="header" >
-                                <p:graphicImage library="images"  name="21.png"/>
-                            </f:facet>
-                        </p:column>
-
-
-
-
-                    </p:row>
-
-                </p:columnGroup>
-
-                <p:column headerText="Nome do aluno" priority="3">
-                    <h:outputText value="#{alunos.nomeAluno}" />
-                </p:column>
-
-                <p:column headerText="" priority="3" >
-
-                    <!--<p:selectBooleanButton id="value1" value="{alunos.resp1}" onLabel="sim" offLabel="não"  />
-                   
-                       <h:selectBooleanCheckbox value="{alunos.resp1}" >
-                        <p:ajax listener="{alunoBean.atumonitoramento(alunos.idAluno)}"   />
-                    </h:selectBooleanCheckbox>-->
-                    
-                    <p:selectBooleanCheckbox value="#{alunos.resp1}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-
-                </p:column>
-
-
-                <p:column headerText="" priority="3">
-
-
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp2}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp3}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp4}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
-
-                    <p:selectBooleanCheckbox value="#{alunos.resp5}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp6}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp7}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp8}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp9}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp10}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp11}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
-
-                    <p:selectBooleanCheckbox value="#{alunos.resp12}"   >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp13}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-                <p:column headerText="" priority="3">
-
-                    <p:selectBooleanCheckbox value="#{alunos.resp14}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-                </p:column>
-
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp15}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-
-                </p:column>
-
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp16}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-
-                </p:column>
-
-                <p:column headerText="" priority="3">
- 
-                    <p:selectBooleanCheckbox value="#{alunos.resp17}" >
-                        <p:ajax listener="#{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
-                    </p:selectBooleanCheckbox>
-
-                </p:column>
-
-
-
-
-            </p:dataTable>
+            <!--
+            
+            
+                        <p:dataTable var="alunos" value="{alunoBean.monitoramentos}" stickyHeader="true"  >
+            
+                            <p:columnGroup type="header" >
+            
+                                <p:row >
+                                    <p:column rowspan="3" headerText="LISTA ALUNOS" style="width: 180px" />
+                                    <p:column colspan="7" headerText="LEITURA" />
+                                    <p:column colspan="5" headerText="ESCRITA" />
+                                    <p:column colspan="5" headerText="ESCRITA" />
+            
+            
+            
+                                </p:row>
+            
+                                <p:row>
+                                    <p:column colspan="1"  >
+                                        <f:facet name="header"    >
+            
+                                            <p:graphicImage library="images"  name="0.png"/>
+            
+            
+                                        </f:facet>
+                                    </p:column>
+            
+                                    <p:column colspan="2" headerText="A"   >
+            
+                                        <f:facet name="header" >
+            
+                                            <p:graphicImage library="images"  name="1.png"/>
+            
+            
+                                        </f:facet>
+            
+                                    </p:column>
+            
+                                    <p:column colspan="2" headerText="B" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="2.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+                                    <p:column colspan="2" headerText="C" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="3.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+                                    <p:column colspan="5" headerText="HIPÓTESE DA ESCRITA" >
+            
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="5.png"/>
+                                        </f:facet>
+            
+                                    </p:column>
+            
+                                    <p:column colspan="1" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="6.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+                                    <p:column colspan="2" headerText="D" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="7.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+            
+                                    <p:column colspan="2" headerText="E" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="8.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+            
+            
+                                </p:row>
+            
+                                <p:row>
+            
+                                    <p:column headerText="" />
+                                    <p:column headerText="2" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="9.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+                                    <p:column headerText="3" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="10.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="4" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="9.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="5" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="10.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="6" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="9.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="7" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="10.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="8" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="11.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="9" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="12.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="10" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="13.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="11" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="15.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="12" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="14.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="" >
+                                        <f:facet name="header" >
+            
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="14" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="18.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="15" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="19.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="16" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="20.png"/>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column headerText="17" >
+                                        <f:facet name="header" >
+                                            <p:graphicImage library="images"  name="21.png"/>
+                                        </f:facet>
+                                    </p:column>
+            
+            
+            
+            
+                                </p:row>
+            
+                            </p:columnGroup>
+            
+                            <p:column headerText="Nome do aluno" priority="3">
+                                <h:outputText value="{alunos.nomeAluno}" />
+                            </p:column>
+            
+                            <p:column headerText="" priority="3" >
+            
+                              
+                                
+                                <p:selectBooleanCheckbox value="{alunos.resp1}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+            
+                            </p:column>
+            
+            
+                            <p:column headerText="" priority="3">
+            
+            
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp2}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+            
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp3}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp4}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+            
+                                <p:selectBooleanCheckbox value="{alunos.resp5}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp6}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp7}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp8}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp9}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp10}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp11}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+            
+                                <p:selectBooleanCheckbox value="{alunos.resp12}"   >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp13}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column headerText="" priority="3">
+            
+                                <p:selectBooleanCheckbox value="{alunos.resp14}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+                            </p:column>
+            
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp15}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+            
+                            </p:column>
+            
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp16}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+            
+                            </p:column>
+            
+                            <p:column headerText="" priority="3">
+             
+                                <p:selectBooleanCheckbox value="{alunos.resp17}" >
+                                    <p:ajax listener="{alunoBean.atumonitoramento(alunos.codAluno,alunos.codDisciplina,alunoBean.monitor.data, alunos.resp1, alunos.resp2, alunos.resp3, alunos.resp4, alunos.resp5, alunos.resp6, alunos.resp7, alunos.resp8, alunos.resp9, alunos.resp10, alunos.resp11, alunos.resp12, alunos.resp13, alunos.resp14, alunos.resp15, alunos.resp16, alunos.resp17)}"   />
+                                </p:selectBooleanCheckbox>
+            
+                            </p:column>
+            
+            
+            
+            
+                        </p:dataTable> -->
 
             <br></br>
             <br></br>
@@ -554,10 +550,10 @@
             <p:dataTable var="alunos" value="#{alunoBean.monitoramentos}"  stickyHeader="true" >
 
                 <p:columnGroup type="header" >
-                  
-                     <p:row >
+
+                    <p:row >
                         <p:column rowspan="3" headerText="LISTA ALUNOS" style="width: 180px " />
-                       
+
 
 
 
@@ -566,7 +562,7 @@
                         <p:column colspan="1" >
                             <f:facet name="header"    >
 
-                                <p:graphicImage library="images"  name="m2.png"/>
+                                <p:graphicImage library="images"  name="#{alunoBean.imgM}"/>
 
 
                             </f:facet>

@@ -72,6 +72,8 @@ public class AlunoBean {
     private Correcao correcao = new Correcao();
     private List<Correcao> correcoes = new ArrayList<>();
     private AlunoDao alunoDao = new AlunoDao();
+    
+    private String imgM = "MP.png";
 
     private List<SelectItem> selectEscolas;
     private Escola escola;
@@ -726,6 +728,28 @@ public class AlunoBean {
     
     public void listarResultadoMonitoramentoDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
     
+        if(codDisciplina.equals(1)){
+        imgM = "MP.png";
+        }
+        
+        if(codDisciplina.equals(2) && codSerie.equals(1)){
+        imgM = "MA1.png";
+        }
+       
+        if(codDisciplina.equals(2) && codSerie.equals(2)){
+        imgM = "MA2.png";
+        }
+        if(codDisciplina.equals(2) && codSerie.equals(3)){
+        imgM = "MA3.png";
+        }
+        if(codDisciplina.equals(2) && codSerie.equals(4)){
+        imgM = "MA4.png";
+        }
+        if(codDisciplina.equals(2) && codSerie.equals(5)){
+        imgM = "MA5.png";
+        }
+        
+        
     monitoramentos = alunoDao.imprimirMonitoramento(codTurma, inep, codSerie,codDisciplina);
     
             System.out.println("TAMANHO DA LISTA "+monitoramentos.size());
@@ -3775,6 +3799,14 @@ public class AlunoBean {
 
     public void setMonitoramentos(List<MonitoramentoAluno> monitoramentos) {
         this.monitoramentos = monitoramentos;
+    }
+
+    public String getImgM() {
+        return imgM;
+    }
+
+    public void setImgM(String imgM) {
+        this.imgM = imgM;
     }
 
     

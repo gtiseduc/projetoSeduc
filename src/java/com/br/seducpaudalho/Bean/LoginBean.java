@@ -5,9 +5,6 @@ package com.br.seducpaudalho.Bean;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
 import com.br.seducpaudalho.Entidade.Login;
 import com.br.seducpaudalho.Dao.LoginDao;
 
@@ -42,12 +39,10 @@ public class LoginBean {
     private String estadoTela = "usuario";
     private String estadoLocalidade = "local";
     private String parametro;
-   
-    
-    
+
     public void adicionar() {
 
-      /*  try {
+        /*  try {
             
           
 
@@ -90,21 +85,41 @@ public class LoginBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-*/
+         */
     }
-    public void alterar() {
-/*
+
+    public void alterar(Login login) {
+        
+         if (login.getNovaSenha().equals("")){
+          adicionarMensagem("ATENÇÃO!", "O CAMPO NOVA SENHA É OBRIGATORIO", FacesMessage.SEVERITY_INFO);
+         return;
+        
+         }
+         if (login.getEmail().equals("")){
+          adicionarMensagem("ATENÇÃO!", "O CAMPO EMAIL É OBRIGATORIO", FacesMessage.SEVERITY_INFO);
+         return;
+        
+         }
+        
+        System.out.println("com.br.seducpaudalho.Bean.LoginBean.alterar() " + login.getEmail());
+
+        
         try {
-            loginDao.salvar(login);
-            login = new Login();
+            loginDao.alterar(login);
+            
             adicionarMensagem("SALVO!", "SALVO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-*/
+         
+        pesquisarCpf(login.getCpf());
+        
+        System.out.println("olha o cpf " + login.getCpf());
+        login = new Login();
     }
+
     public void excluir(Login l) {
-/*
+        /*
         try {
             loginDao.deletar(l);
             login = new Login();
@@ -112,7 +127,7 @@ public class LoginBean {
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
- */
+         */
     }
 
     public String getParametro() {
@@ -123,7 +138,6 @@ public class LoginBean {
         this.parametro = parametro;
     }
 
-    
     public Login getLogin() {
         return login;
     }
@@ -148,23 +162,20 @@ public class LoginBean {
         this.usuarioLogado = usuarioLogado;
     }
 
-  /*  public List<Auditoria> getAuditorias() {
+    /*  public List<Auditoria> getAuditorias() {
         return auditorias;
     }
 
     public void setAuditorias(List<Auditoria> auditorias) {
         this.auditorias = auditorias;
     }*/
-
-    
-    
-    
-     public void editar(Login entidade) {
+    public void editar(Login entidade) {
         this.login = entidade;
-       // mudarParaAltera(); 
+        // mudarParaAltera(); 
     }
+
     public void listar() {
-       
+
         /* System.out.println("entrou no metodo listar");
         try {
             logins = loginDao.buscar();
@@ -173,15 +184,32 @@ public class LoginBean {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }*/
     }
+
+    public void pesquisarCpf(String cpf) {
+       
+        System.out.println("entrou no metodo listar");
+
+        try {
+            
+            login = loginDao.buscarCpf(cpf);
+            adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
+            
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+        
+    }
+
     public void listarF(String parametro) {
-       /* try {
+        /* try {
             logins = loginDao.buscarF(parametro);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }*/
     }
-   /* public void listarA(String parametro) {
+
+    /* public void listarA(String parametro) {
         try {
             auditorias = loginDao.buscarAuditoria(parametro);
             adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
@@ -192,103 +220,105 @@ public class LoginBean {
 
     public String buscarLogin() {
 
-       
-       String retorno = "";
+        String retorno = "";
         System.out.println("entrou no buscar login");
         try {
 
-        
-          
-           login = loginDao.buscarLoginN(login);
-           
-           usuarioLogado = login.getNome();
-           usuarioCpf = login.getCpf();
+            login = loginDao.buscarLoginN(login);
 
-                   System.out.println("olha o nivel de acesso"+login.getNivel());
-                   
-                   
+            usuarioLogado = login.getNome();
+            usuarioCpf = login.getCpf();
+
+            System.out.println("olha o nivel de acesso" + login.getNivel());
+
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
-       
 
         if (usuarioLogado == null) {
             System.out.println("usuario nulo");
             adicionarMensagem("ACESSO NÃO AUTORIZADO TENTE NOVAMENTE!", "USUARIO OU SENHA INVALIDA", FacesMessage.SEVERITY_INFO);
-             
+
             return null;
         } else {
-          
-           
+
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-           
+
             if (session != null) {
 
-                session.setAttribute("nome", login.getNome());                          
-                session.setAttribute("cpf", login.getCpf());               
-                session.setAttribute("nivelAcesso", login.getNivel());               
-                session.setAttribute("url", login.getUrl());              
-                session.setAttribute("instituicao", login.getInstituicao());              
+                session.setAttribute("nome", login.getNome());
+                session.setAttribute("cpf", login.getCpf());
+                session.setAttribute("nivelAcesso", login.getNivel());
+                session.setAttribute("url", login.getUrl());
+                session.setAttribute("instituicao", login.getInstituicao());
                 session.setAttribute("login", login);
                 System.out.println("usuario logado" + login.getNome());
             }
+
+            if (login.getNivel().equals("A")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/nutricao?faces-redirect=true";
+            }
+            if (login.getNivel().equals("B")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/admgeral?faces-redirect=true";
+            }
+            if (login.getNivel().equals("C")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/gNecessidades?faces-redirect=true";
+            }
+            if (login.getNivel().equals("D")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/rastreamento?faces-redirect=true";
+            }
+            if (login.getNivel().equals("E")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/escola?faces-redirect=true";
+            }
+            if (login.getNivel().equals("F")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/saepa?faces-redirect=true";
+            }
+            if (login.getNivel().equals("T")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/saepaTec?faces-redirect=true";
+           
+            }
+            if (login.getNivel().equals("P")) {
+                // System.out.println("entrou na pagina de administrador");
+                //mudarParaAdmin();
+                // mudarParaLocalidade();
+                retorno = "/professor?faces-redirect=true";
+           
+            }
             
-            if(login.getNivel().equals("A")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/nutricao?faces-redirect=true";
-            }
-            if(login.getNivel().equals("B")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/admgeral?faces-redirect=true";
-            }
-            if(login.getNivel().equals("C")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/gNecessidades?faces-redirect=true";
-            }
-            if(login.getNivel().equals("D")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/rastreamento?faces-redirect=true";
-            }
-              if(login.getNivel().equals("E")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/escola?faces-redirect=true";
-            }
-              if(login.getNivel().equals("F")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/saepa?faces-redirect=true";
-            }
-              if(login.getNivel().equals("T")){
-           // System.out.println("entrou na pagina de administrador");
-            //mudarParaAdmin();
-           // mudarParaLocalidade();
-            retorno = "/saepaTec?faces-redirect=true";
-            }
             
-            else{
+            else {
                 //System.out.println("entrou na pagina index");
                 mudarParaUsuario();
-           // retorno = "/index?faces-redirect=true";
+                // retorno = "/index?faces-redirect=true";
             }
-           
-           login = new Login();
-           return retorno; 
-          // return retorno; 
-          
+
+            login = new Login();
+            return retorno;
+            // return retorno; 
+
         }
-    
-    
+
     }
 
     public String logOff() {
@@ -311,34 +341,28 @@ public class LoginBean {
     public void setLoginDao(LoginDao loginDao) {
         this.loginDao = loginDao;
     }
-    
-    
-    
-    
 
-    
-    
     public boolean isAdmin() {
         return "admin".equals(estadoTela);
-       
+
     }
 
     public void mudarParaAdmin() {
         estadoTela = "admin";
-      System.out.println("entrou no mudar para admin");
+        System.out.println("entrou no mudar para admin");
     }
+
     public boolean isUse() {
         return "usuario".equals(estadoTela);
-       
+
     }
 
     public void mudarParaUsuario() {
         estadoTela = "usuario";
-      System.out.println("entrou no mudar para usuario");
+        System.out.println("entrou no mudar para usuario");
     }
-    
-    
-     public boolean isInseri() {
+
+    public boolean isInseri() {
         return "inserir".equals(estadoTela);
     }
 
@@ -377,12 +401,12 @@ public class LoginBean {
     public void mudarParaBusca() {
         estadoTela = "buscar";
     }
-    
-     public boolean isLocalidade() {
+
+    public boolean isLocalidade() {
         return "localidade".equals(estadoLocalidade);
     }
-    
-     public void mudarParaLocalidade() {
+
+    public void mudarParaLocalidade() {
         estadoLocalidade = "localidade";
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="323c6ba5-03c5-4dac-b9de-be4ae045e488">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="281"/>
-	<property name="ireport.y" value="61"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<field name="idAluno" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="nomeEscola" class="java.lang.String"/>
@@ -128,10 +128,6 @@
 				</textElement>
 				<text><![CDATA[CODALUNO]]></text>
 			</staticText>
-			<image scaleImage="FillFrame">
-				<reportElement x="16" y="26" width="102" height="34" uuid="aab517e1-9f7c-4db5-9a2e-633ff007256c"/>
-				<imageExpression><![CDATA["C:\\Users\\SEC-EDUC02\\Documents\\NetBeansProjects\\projetoSeduc\\web\\WEB-INF\\relatorios\\logo.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="159" y="0" width="260" height="20" uuid="4978ded6-7887-4e69-a2c1-950997d26217"/>
 				<textElement>
@@ -179,6 +175,10 @@
 				</textElement>
 				<text><![CDATA[TURMA:]]></text>
 			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="16" y="20" width="101" height="31" uuid="90197179-29cc-44e8-81d3-ab52e1c218e2"/>
+				<imageExpression><![CDATA["C:\\Users\\VICTOR HUGO\\Documents\\NetBeansProjects\\Projeto\\projetoSeduc\\web\\WEB-INF\\relatorios\\logo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

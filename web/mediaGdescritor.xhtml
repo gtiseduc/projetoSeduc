@@ -69,8 +69,7 @@
 
     <ui:define name="formulario">
 
-
-        <script type="text/javascript">
+ <script type="text/javascript">
             //<![CDATA[
             function exportChart1() {
                 //export image
@@ -210,14 +209,14 @@
 
 
             <div align="center" >
-                <p:panel rendered="#{alunoBean.visivel}">
+               <!-- <p:panel rendered="{alunoBean.visivel}">
                     <table id="resultado1"  border="1px " width="850px" style="text-align: center" >
 
                         <thead style="font-size: 17px " >
                             <tr>
                                 <th style="text-align: center">DESCRITOES</th>  
-                                <ui:repeat value="#{alunoBean.descritores}" var="h">
-                                    <th title="#{h.especiDescritor}">#{h.siglaDescritor}</th>
+                                <ui:repeat value="{alunoBean.descritores}" var="h">
+                                    <th title="{h.especiDescritor}">{h.siglaDescritor}</th>
 
 
 
@@ -230,9 +229,9 @@
                         <thead id="resultado2" style="font-size: 15px">
                             <tr>
                                 <th style="text-align: center">GABARITO</th>  
-                                <ui:repeat value="#{alunoBean.descritores}" var="h" >
+                                <ui:repeat value="{alunoBean.descritores}" var="h" >
 
-                                    <th style="text-align: center">#{h.especiDescritor}</th>
+                                    <th style="text-align: center">{h.especiDescritor}</th>
 
                                 </ui:repeat>
                                 <th style="text-align: center">  GABARITO </th> 
@@ -243,10 +242,10 @@
 
                         <tbody  >
 
-                            <ui:repeat value="#{alunoBean.dados}" var="row">
+                            <ui:repeat value="{alunoBean.dados}" var="row">
                                 <tr>
-                                    <ui:repeat value="#{row}" var="cell">
-                                        <td>#{cell}</td>
+                                    <ui:repeat value="{row}" var="cell">
+                                        <td>{cell}</td>
                                     </ui:repeat>
                                 </tr>
                             </ui:repeat>
@@ -255,8 +254,8 @@
                         <tfoot style="font-size: 15px">
                             <tr>
                                 
-                                <ui:repeat value="#{alunoBean.resultdescritores}" var="r">
-                                    <th style="text-align: center">#{r}</th>
+                                <ui:repeat value="{alunoBean.resultdescritores}" var="r">
+                                    <th style="text-align: center">{r}</th>
 
 
                                 </ui:repeat>
@@ -264,7 +263,7 @@
                             </tr>
                         </tfoot>
                     </table>
-                </p:panel>
+                </p:panel>-->
             </div> 
 
             <br></br>
@@ -312,7 +311,7 @@
                 <p:outputPanel id="output" layout="block" style="width:50%;height:300px"/>
             </p:dialog>
             
-            <p:chart type="bar" model="#{alunoBean.horizontalBarAluno}" style="height:550em" responsive="true"  rendered="#{alunoBean.horizontalBarAluno != null}" />
+          <!--  <p:chart type="bar" model="{alunoBean.horizontalBarAluno}" style="height:550em" responsive="true"  rendered="{alunoBean.horizontalBarAluno != null}" />-->
             
         </h:form>
 
@@ -524,6 +523,7 @@
                         </h:panelGrid>
                     </div>
                 </div> -->
+
 
 
 

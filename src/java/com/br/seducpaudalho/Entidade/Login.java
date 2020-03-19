@@ -18,33 +18,34 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class Login {
 
+   
     private Integer idLogin;
     private String nome;
     private String cpf;
     private String senha;
+    private String novaSenha;
     private String mensagem;
     private String nivel;
     private String url;
     private String instituicao;
+    private String email;
+    
     private static final Logger LOG = Logger.getLogger(Login.class.getName());
 
     public Login() {
-
     }
 
-    public Login(String nome, String cpf, String senha, String localidade, String mensagem, String nivel) {
-
+    public Login(Integer idLogin, String nome, String cpf, String senha, String novaSenha, String mensagem, String nivel, String url, String instituicao, String email) {
+        this.idLogin = idLogin;
         this.nome = nome;
         this.cpf = cpf;
-        this.senha = new LoginUtil().MD5(senha);
-
+        this.senha = senha;
+        this.novaSenha = novaSenha;
         this.mensagem = mensagem;
-    }
-
-    public void exibir() {
-
-        mensagem = cpf + "" + senha;
-
+        this.nivel = nivel;
+        this.url = url;
+        this.instituicao = instituicao;
+        this.email = email;
     }
 
     public Integer getIdLogin() {
@@ -53,6 +54,14 @@ public class Login {
 
     public void setIdLogin(Integer idLogin) {
         this.idLogin = idLogin;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -71,20 +80,20 @@ public class Login {
         this.senha = senha;
     }
 
+    public String getNovaSenha() {
+        return novaSenha;
+    }
+
+    public void setNovaSenha(String novaSenha) {
+        this.novaSenha = novaSenha;
+    }
+
     public String getMensagem() {
         return mensagem;
     }
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getNivel() {
@@ -110,13 +119,19 @@ public class Login {
     public void setInstituicao(String instituicao) {
         this.instituicao = instituicao;
     }
-    
-    
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.cpf);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.cpf);
         return hash;
     }
 
@@ -138,12 +153,13 @@ public class Login {
         return true;
     }
 
-    
-
     @Override
     public String toString() {
-
-        return "Login{" + "nome=" + nome + '}';
+        return "Login{" + "idLogin=" + idLogin + ", nome=" + nome + ", cpf=" + cpf + ", senha=" + senha + ", novaSenha=" + novaSenha + ", mensagem=" + mensagem + ", nivel=" + nivel + ", url=" + url + ", instituicao=" + instituicao + ", email=" + email + '}';
     }
 
+    
+
+    
+   
 }

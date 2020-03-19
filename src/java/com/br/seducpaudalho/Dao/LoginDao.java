@@ -5,9 +5,6 @@ package com.br.seducpaudalho.Dao;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
-
 import com.br.seducpaudalho.Entidade.Login;
 import com.br.seducpaudalho.Util.Excepition.ErroSistema;
 import com.br.seducpaudalho.Util.FabricaConexao;
@@ -29,7 +26,7 @@ public class LoginDao {
 
     public String buscarLogin(Login login) throws ErroSistema {
 
-       /* System.out.println("entrou no pesquisar login" + login.getCpf() + login.getSenha());
+        /* System.out.println("entrou no pesquisar login" + login.getCpf() + login.getSenha());
         String retorno = "";
         // "Select uname, password from Users where uname = ? and password = ?"
 
@@ -123,9 +120,81 @@ public class LoginDao {
         return login;
     }
 
+    public Login buscarCpf(String cpf) throws ErroSistema {
+
+        // "Select uname, password from Users where uname = ? and password = ?"
+        String sql = "select * from login where cpf = ?";
+        //  Login logado = new Login();
+        
+        Login logi = new Login();
+        
+        try {
+            System.out.println("enontrou no try");
+            Connection conexao = FabricaConexao.getConnection();
+
+            PreparedStatement ps = conexao.prepareStatement(sql);
+
+            ps.setString(1, cpf);
+
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+
+                logi.setIdLogin(rs.getInt("idLogin"));
+                logi.setNome(rs.getString("nome"));
+                logi.setCpf(rs.getString("cpf"));
+                logi.setSenha(rs.getString("senha"));
+                logi.setNivel(rs.getString("nivel"));
+                logi.setUrl(rs.getString("url"));
+                logi.setInstituicao(rs.getString("instituicao"));
+                logi.setEmail(rs.getString("email"));
+                System.out.println("xxxxxxxxxxxxxxxxxxxxxxx");
+                System.out.println("--------xxxx--------" + logi.getNome());
+            }
+
+            
+
+        } catch (Exception e) {
+            System.out.println("erro --------------XXXXXXX-------------------" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+
+        FabricaConexao.fecharConexao();
+        
+        return logi;
+
+    }
+
+    public void alterar(Login login) throws ErroSistema {
+     try {
+            String sql = "";
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+            
+               
+                ps = conexao.prepareStatement("UPDATE login SET nome=?,senha=?,email=? where cpf=?");
+                ps.setString(4, login.getCpf());
+            
+
+          
+            ps.setString(1, login.getNome());
+            ps.setString(2, login.getNovaSenha());
+            ps.setString(3, login.getEmail());
+
+            ps.execute();
+            System.out.println("inserindo aluno---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+       
+    }
     public void salvar(Login login) throws ErroSistema {
 
-     /*   System.out.println("olha o login" + login.getCpf() + "e a senha" + login.getSenha() + "e o nome" + login.getNome() + "e o nivel" + login.getNivel());
+        /*   System.out.println("olha o login" + login.getCpf() + "e a senha" + login.getSenha() + "e o nome" + login.getNome() + "e o nivel" + login.getNivel());
 
         String sql = "INSERT INTO login(nome,cpf,senha,localidade,nivelAcesso)VALUES (?,?,?,?,?)";
 
@@ -147,12 +216,12 @@ public class LoginDao {
         } catch (Exception e) {
             throw new ErroSistema("erroooooo--------------------", e);
         }
-*/
+         */
     }
 
     public List<Login> buscar() throws ErroSistema {
 
-     /*   String sql = "select * from login";
+        /*   String sql = "select * from login";
 
         try {
             Connection conexao = FabricaConexao.getConnection();
@@ -177,13 +246,13 @@ public class LoginDao {
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
-*/
-     return null;
+         */
+        return null;
     }
 
     public List<Login> buscarF(String parametro) throws ErroSistema {
 
-       /* System.out.println("entrou no buscarF ----------" + parametro);
+        /* System.out.println("entrou no buscarF ----------" + parametro);
         String sql = "select * from login where cpf = ?";
 
         try {
@@ -209,10 +278,11 @@ public class LoginDao {
             throw new ErroSistema("erroooooo--------------------", e);
 
         }*/
-       return null;
+        return null;
 
     }
-   /* public List<Auditoria> buscarAuditoria(String parametro) throws ErroSistema {
+
+    /* public List<Auditoria> buscarAuditoria(String parametro) throws ErroSistema {
 
         System.out.println("entrou no buscarF ----------" + parametro);
         String sql = "select * from auditoria where cpf = ?";
@@ -242,9 +312,8 @@ public class LoginDao {
         }
 
     }*/
-
     public void deletar(Login login) throws ErroSistema {
-       /* String sql = "delete from login where cpf = ?";
+        /* String sql = "delete from login where cpf = ?";
 
         try {
             Connection conexao = FabricaConexao.getConnection();
@@ -257,8 +326,5 @@ public class LoginDao {
             throw new ErroSistema("ERRO AO DELETAR USUÁRIO");
         }*/
     }
-    
-    
-    
 
 }
