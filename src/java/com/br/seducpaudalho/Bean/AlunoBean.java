@@ -72,7 +72,7 @@ public class AlunoBean {
     private Correcao correcao = new Correcao();
     private List<Correcao> correcoes = new ArrayList<>();
     private AlunoDao alunoDao = new AlunoDao();
-    
+
     private String imgM = "MP.png";
 
     private List<SelectItem> selectEscolas;
@@ -188,7 +188,7 @@ public class AlunoBean {
 
     public void salvarAluno() throws ErroSistema {
 
-          //adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA REALIZAR O CADASTRAMENTO DE ALUNOS !", "", FacesMessage.SEVERITY_INFO);
+        //adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA REALIZAR O CADASTRAMENTO DE ALUNOS !", "", FacesMessage.SEVERITY_INFO);
         if (aluno.getNome().equals("")) {
 
             adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
@@ -197,7 +197,7 @@ public class AlunoBean {
         }
 
         if (aluno.getDataNascimento() == null) {
-            
+
             adicionarMensagem("O CAMPO DATA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
             return;
 
@@ -245,8 +245,7 @@ public class AlunoBean {
             return;
 
         }
-        
-        
+
         if (aluno.getInepEscola() == null) {
 
             adicionarMensagem("O NOME DA ESCOLA É OBRIGATÓRIO ! ", "", FacesMessage.SEVERITY_INFO);
@@ -254,10 +253,10 @@ public class AlunoBean {
             return;
 
         }
-        
-        System.out.println("o que esta chegando da escola"+ aluno.getInepEscola());
-       
-       /* if (aluno.getNomeEscola() == null) {
+
+        System.out.println("o que esta chegando da escola" + aluno.getInepEscola());
+
+        /* if (aluno.getNomeEscola() == null) {
 
             adicionarMensagem("O NOME DA ESCOLA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
@@ -279,13 +278,13 @@ public class AlunoBean {
         }
 
         try {
-        alunoDao.salvarAluno(aluno);
-        adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+            alunoDao.salvarAluno(aluno);
+            adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
 
-          aluno = new Aluno();
-         } catch (ErroSistema ex) {
-         adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
-          }
+            aluno = new Aluno();
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
     }
 
     public void salvarDescritor() throws ErroSistema {
@@ -400,16 +399,17 @@ public class AlunoBean {
 
     }
 
+    
+
     public void listarSerieParametro(Integer codigo) {
 
         System.out.println("--------****----***----***------- " + codigo);
         try {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
+
             series = serieDao.listarSerieParametro(codigo);
-            disciplinas.clear();
-            disciplinas = new ArrayList<>();
-            turmas.clear();
-            turmas = new ArrayList<>();
+            
+            
             // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -425,7 +425,7 @@ public class AlunoBean {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ");
             series = serieDao.listarSerieParametro(codigo);
 
-            disciplinas = new ArrayList<>();
+            
             // adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
@@ -460,19 +460,17 @@ public class AlunoBean {
     public void listarTurmasParametro(Integer codigo, Integer inep) {
 
         System.out.println("olha o codigo da turma--------****----***----***------- " + codigo + " --- inep " + inep);
-        turmas.clear();
-        turmas = new ArrayList<>();
+       
         try {
             turmas = turmaDao.listarTurmaParametro(codigo, inep);
             //adicionarMensagem("LISTADO!", "LISTADO COM SUCESSO", FacesMessage.SEVERITY_INFO);
-            disciplinas.clear();
-            disciplinas = new ArrayList<>();
+            
 
         } catch (ErroSistema ex) {
             adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }
 
-        disciplinas = new ArrayList<>();
+        
     }
 
     public void listarTurmasCadResp(Integer codigo, Integer inep) {
@@ -509,8 +507,8 @@ public class AlunoBean {
         }
     }
 
-    public void atumonitoramento(Integer coAluno,Integer codDisciplana,String data,String resp1,String resp2,String resp3,String resp4,String resp5,String resp6,String resp7,String resp8,String resp9,String resp10,String resp11,String resp12,String resp13,String resp14,String resp15,String resp16,String resp17) {
-        System.out.println("entrou no monitoramento " + coAluno+ " - data  " + data +" - codDisciplina  " + codDisciplana+ " 1 -" +resp1+ " 2 -" +resp2+ " 3 -" +resp3+ " 4 -" +resp4+ " 5 -" +resp5+ " 6 -" +resp6+ " 7 -" +resp7+ " 8 -" +resp8+ " 9 -" +resp9+ " 10 -" +resp10+ " 11 -" +resp11+ " 12 -" +resp12+ " 13 -" +resp13+ " 14 -" +resp14+ " 15 -" +resp15+ " 16 -" +resp16+ " 17 -" +resp17);
+    public void atumonitoramento(Integer coAluno, Integer codDisciplana, String data, String resp1, String resp2, String resp3, String resp4, String resp5, String resp6, String resp7, String resp8, String resp9, String resp10, String resp11, String resp12, String resp13, String resp14, String resp15, String resp16, String resp17) {
+        System.out.println("entrou no monitoramento " + coAluno + " - data  " + data + " - codDisciplina  " + codDisciplana + " 1 -" + resp1 + " 2 -" + resp2 + " 3 -" + resp3 + " 4 -" + resp4 + " 5 -" + resp5 + " 6 -" + resp6 + " 7 -" + resp7 + " 8 -" + resp8 + " 9 -" + resp9 + " 10 -" + resp10 + " 11 -" + resp11 + " 12 -" + resp12 + " 13 -" + resp13 + " 14 -" + resp14 + " 15 -" + resp15 + " 16 -" + resp16 + " 17 -" + resp17);
     }
 
     public void listarAlunos(Integer codTurma, Integer inep, Integer codSerie) throws ErroSistema {
@@ -751,34 +749,33 @@ public class AlunoBean {
         
          */
     }
-    
+
     public void listarResultadoMonitoramentoDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
-    
-        if(codDisciplina.equals(1)){
-        imgM = "MP.png";
+
+        if (codDisciplina.equals(1)) {
+            imgM = "MP.png";
         }
-        
-        if(codDisciplina.equals(2) && codSerie.equals(1)){
-        imgM = "MA1.png";
+
+        if (codDisciplina.equals(2) && codSerie.equals(1)) {
+            imgM = "MA1.png";
         }
-       
-        if(codDisciplina.equals(2) && codSerie.equals(2)){
-        imgM = "MA2.png";
+
+        if (codDisciplina.equals(2) && codSerie.equals(2)) {
+            imgM = "MA2.png";
         }
-        if(codDisciplina.equals(2) && codSerie.equals(3)){
-        imgM = "MA3.png";
+        if (codDisciplina.equals(2) && codSerie.equals(3)) {
+            imgM = "MA3.png";
         }
-        if(codDisciplina.equals(2) && codSerie.equals(4)){
-        imgM = "MA4.png";
+        if (codDisciplina.equals(2) && codSerie.equals(4)) {
+            imgM = "MA4.png";
         }
-        if(codDisciplina.equals(2) && codSerie.equals(5)){
-        imgM = "MA5.png";
+        if (codDisciplina.equals(2) && codSerie.equals(5)) {
+            imgM = "MA5.png";
         }
-        
-        
-    monitoramentos = alunoDao.imprimirMonitoramento(codTurma, inep, codSerie,codDisciplina);
-    
-            System.out.println("TAMANHO DA LISTA "+monitoramentos.size());
+
+        monitoramentos = alunoDao.imprimirMonitoramento(codTurma, inep, codSerie, codDisciplina);
+
+        System.out.println("TAMANHO DA LISTA " + monitoramentos.size());
     }
 
     public void listarGabaritosDisciplina(Integer codTurma, Integer inep, Integer codSerie, Integer codDisciplina) throws ErroSistema {
@@ -2842,7 +2839,7 @@ public class AlunoBean {
 
         // -----------------------------------------------------------\\
         //------------------------------------------------------------\\
-       /* horizontalBarAluno = new HorizontalBarChartModel();
+        /* horizontalBarAluno = new HorizontalBarChartModel();
 
         ChartSeries verm = new ChartSeries();
         ChartSeries am = new ChartSeries();
@@ -3835,8 +3832,6 @@ public class AlunoBean {
         this.imgM = imgM;
     }
 
-    
-    
 }
 /*String frase = "00149/007587/10987";
         String array[] = new String[3];
