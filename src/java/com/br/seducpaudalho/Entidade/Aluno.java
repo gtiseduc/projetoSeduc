@@ -5,7 +5,10 @@
  */
 package com.br.seducpaudalho.Entidade;
 
+
+import java.util.Date;
 import java.util.Objects;
+import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -28,11 +31,12 @@ public class Aluno {
     private String matematica;
     private String cienciasHumanas;
     private String cienciasNatureza;
-    private String dataNascimento;
+    private Date dataNascimento;
+    
     private String nomePai;
     private String nomeMae;
     private String nomeResponsavel;
-    private String anoCadastro;
+    private Date anoCadastro;
     private String instituicao;
 
     public Integer getIdAluno() {
@@ -139,13 +143,15 @@ public class Aluno {
         this.cienciasNatureza = cienciasNatureza;
     }
 
-    public String getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+   
 
     public String getNomePai() {
         return nomePai;
@@ -179,13 +185,15 @@ public class Aluno {
         this.codInep = codInep;
     }
 
-    public String getAnoCadastro() {
+    public Date getAnoCadastro() {
         return anoCadastro;
     }
 
-    public void setAnoCadastro(String anoCadastro) {
+    public void setAnoCadastro(Date anoCadastro) {
         this.anoCadastro = anoCadastro;
     }
+
+   
 
     public String getInstituicao() {
         return instituicao;
@@ -221,6 +229,8 @@ public class Aluno {
         }
         return true;
     }
+
+    
     
     
     

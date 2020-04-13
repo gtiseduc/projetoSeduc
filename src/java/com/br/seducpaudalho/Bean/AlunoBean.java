@@ -188,78 +188,104 @@ public class AlunoBean {
 
     public void salvarAluno() throws ErroSistema {
 
-        adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA REALIZAR O CADASTRAMENTO DE ALUNOS !", "", FacesMessage.SEVERITY_INFO);
+          //adicionarMensagem("VOCÊ NÃO TEM PERMISSÃO PARA REALIZAR O CADASTRAMENTO DE ALUNOS !", "", FacesMessage.SEVERITY_INFO);
+        if (aluno.getNome().equals("")) {
 
-        /*  try {
+            adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-            if (aluno.getNome().equals("")) {
+        }
 
-                adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
+        if (aluno.getDataNascimento() == null) {
+            
+            adicionarMensagem("O CAMPO DATA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-            }
+        }
 
-            System.out.println("com.br.seducpaudalho.Bean.AlunoBean.salvarAluno() " + aluno.getIdSerie());
+        if (aluno.getNomePai().equals("")) {
 
-            if (aluno.getDataNascimento().equals("")) {
+            adicionarMensagem("O NOME DO PAI É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("O CAMPO DATA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
-                return;
+            return;
 
-            }
+        }
+        if (aluno.getNomeMae().equals("")) {
 
-            if (aluno.getNomePai().equals("")) {
+            adicionarMensagem("O NOME DA MÃE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("O NOME DO PAI É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-                return;
+        }
+        if (aluno.getNomeResponsavel().equals("")) {
 
-            }
-            if (aluno.getNomeMae().equals("")) {
+            adicionarMensagem("O NOME DO RESPONSÁVEL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("O NOME DA MÃE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-                return;
+        }
+        if (aluno.getAnoCadastro() == null) {
 
-            }
-            if (aluno.getNomeResponsavel().equals("")) {
+            adicionarMensagem("O CAMPO ANO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("O NOME DO RESPONSÁVEL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-                return;
+        }
+        if (aluno.getTurno().equals("")) {
 
-            }
-            if (aluno.getInepEscola() == null) {
+            adicionarMensagem("O CAMPO TURNO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-                return;
+        }
+        if (aluno.getInstituicao().equals("")) {
 
-            }
-            if (aluno.getIdSerie() == null) {
+            adicionarMensagem("O CAMPO INSTITUIÇÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-                return;
+        }
+        
+        
+        if (aluno.getInepEscola() == null) {
 
-            }
-            if (aluno.getIdTurma() == null) {
+            adicionarMensagem("O NOME DA ESCOLA É OBRIGATÓRIO ! ", "", FacesMessage.SEVERITY_INFO);
 
-                adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
 
-                return;
+        }
+        
+        System.out.println("o que esta chegando da escola"+ aluno.getInepEscola());
+       
+       /* if (aluno.getNomeEscola() == null) {
 
-            } else {
+            adicionarMensagem("O NOME DA ESCOLA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
 
-                alunoDao.salvarAluno(aluno);
+            return;
 
-                adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
-
-                aluno = new Aluno();
-            }
-        } catch (ErroSistema ex) {
-            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
         }*/
+        if (aluno.getIdSerie() == null) {
+
+            adicionarMensagem("A SÉRIE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+
+            return;
+
+        }
+        if (aluno.getIdTurma() == null) {
+
+            adicionarMensagem("A TURMA É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+
+            return;
+        }
+
+        try {
+        alunoDao.salvarAluno(aluno);
+        adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+
+          aluno = new Aluno();
+         } catch (ErroSistema ex) {
+         adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+          }
     }
 
     public void salvarDescritor() throws ErroSistema {

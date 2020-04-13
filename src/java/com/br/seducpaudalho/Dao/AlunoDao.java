@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +44,11 @@ public class AlunoDao {
 
             if (aluno.getIdAluno() == null) {
                 System.out.println("--------- entrou no if cadastro aluno");
-                ps = conexao.prepareStatement("INSERT INTO aluno(codSerie,codTurma,inepEscola,nomeAluno,turno)VALUES (?,?,?,?,?)");
+                ps = conexao.prepareStatement("INSERT INTO aluno(codSerie,codTurma,inepEscola,nomeAluno,turno,nomePai,nomeMae,nomeResponsavel,instituicao,dataNascimento,ano)VALUES (?,?,?,?,?,?,?,?,?,?,?)");
             } else {
                 System.out.println("--------- entrou no else cadastro aluno" + aluno.getIdAluno());
-                ps = conexao.prepareStatement("UPDATE aluno SET codSerie=?,codTurma=?,inepEscola=?,nomeAluno=?,turno=? where codAluno=?");
-                ps.setInt(6, aluno.getIdAluno());
+                ps = conexao.prepareStatement("UPDATE aluno SET codSerie=?,codTurma=?,inepEscola=?,nomeAluno=?,turno=?,nomePai=?,nomeMae=?,nomeResponsavel=?,instituicao=?,dataNascimento,ano=?=? where codAluno=?");
+                ps.setInt(12, aluno.getIdAluno());
             }
 
             ps.setInt(1, aluno.getIdSerie());
@@ -55,6 +56,12 @@ public class AlunoDao {
             ps.setInt(3, aluno.getInepEscola());
             ps.setString(4, aluno.getNome());
             ps.setString(5, aluno.getTurno());
+            ps.setString(6, aluno.getNomePai());
+            ps.setString(7, aluno.getNomeMae());
+            ps.setString(8, aluno.getNomeResponsavel());
+            ps.setString(9, aluno.getInstituicao());
+            ps.setDate(10, new Date(aluno.getDataNascimento().getTime()));
+            ps.setDate(11, new Date(aluno.getAnoCadastro().getTime()));
 
             ps.execute();
             System.out.println("inserindo aluno---------------------------------------");

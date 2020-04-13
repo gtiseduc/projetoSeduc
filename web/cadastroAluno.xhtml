@@ -49,7 +49,8 @@
 
     <ui:define name="formulario">
 
-        <h:form>
+        <h:form id="formCadastroAluno">
+            
             <p:growl id="growl" life="3500" />
             <p:messages  id="messages" showDetail="true"  closable="true"></p:messages>
             <p:fieldset legend="Cadastro Aluno">
@@ -79,7 +80,8 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
-                            <p:inputText placeholder="Data Nascimento" value="#{alunoBean.aluno.dataNascimento}"/>      
+                            <p:datePicker id="dateTemplate" placeholder="Data Nascimento" value="#{alunoBean.aluno.dataNascimento}" />      
+
                         </div>
                     </div>
 
@@ -110,57 +112,76 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
-                            <p:inputText placeholder="Ano" value="#{alunoBean.aluno.anoCadastro}"/>      
+                            <p:calendar placeholder="Ano" value="#{alunoBean.aluno.anoCadastro}"/>      
                         </div>
                     </div>
                     <br/>
                     <br/>
                     <br/>
 
-                    <div class="ui-g-12 ui-md-4">
+                    <div class="ui-g-12 ui-md-2">
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                            <p:selectOneMenu id="turno" value="#{alunoBean.aluno.turno}" >
+                                <f:selectItem itemLabel="Turno" />       
+
+                                <f:selectItem itemLabel="MANHÃ" itemValue="MANHÃ" />
+                                <f:selectItem itemLabel="TARDE" itemValue="TARDE" />
+                                <f:selectItem itemLabel="NOITE" itemValue="NOITE" />
+                            </p:selectOneMenu>    
+                        </div>
+
+
+                    </div> 
+                    <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
                             <p:selectOneMenu id="instituicao" value="#{alunoBean.aluno.instituicao}" >
-                                <f:selectItem itemLabel="Instituição" />       
-                                <f:selectItems   value="#{alunoBean.aluno.instituicao}" var="instituicao" itemLabel="#{alunoBean.aluno.instituicao}" itemValue="#{alunoBean.aluno.instituicao}"/>         
-                            </p:selectOneMenu>    
-                        </div>
-                    </div> 
 
-                    <div class="ui-g-12 ui-md-6">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
-                                <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
-                                <f:selectItems   value="#{alunoBean.escolas}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola.inepEscola}" />         
-                                <p:ajax  event="change" listener="#{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form"/>
-                            </p:selectOneMenu>     
-                        </div>
-                    </div> 
-
-                    <div class="ui-g-12 ui-md-3">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon"><i class="fa fa-book"></i></span>
-                            <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
-                                <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
-                                <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
-                                <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie,alunoBean.aluno.inepEscola)}" update="@form"/>
-                            </p:selectOneMenu> 
-                        </div>
-                    </div> 
-
-                    <div class="ui-g-12 ui-md-3">
-                        <div class="ui-inputgroup">
-                            <span class="ui-inputgroup-addon"><i class="fa fa-mortar-board"></i></span>
-                            <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
-                                <f:selectItem itemLabel="SELECIONE A TURMA" />       
-                                <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
+                                <f:selectItem itemLabel="Instituição" />
+                                <f:selectItem itemLabel="PUBLICA" itemValue="PUBLICA" />
+                                <f:selectItem itemLabel="PRIVADA" itemValue="PRIVADA" />
 
                             </p:selectOneMenu>    
                         </div>
                     </div> 
 
+                 
 
+                        <div class="ui-g-12 ui-md-6">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
+                                <p:selectOneMenu id="escola" value="#{alunoBean.aluno.inepEscola}"  >
+                                    <f:selectItem itemLabel="SELECIONE A ESCOLA" />       
+                                    <f:selectItems   value="#{alunoBean.escolas}" var="escola" itemLabel="#{escola.nome}" itemValue="#{escola.inepEscola}" />         
+                                    <p:ajax  event="change" listener="#{alunoBean.listarSerieParametro(alunoBean.aluno.inepEscola)}" update="@form:serie"/>
+                                </p:selectOneMenu>     
+                            </div>
+                        </div> 
+
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-book"></i></span>
+                                <p:selectOneMenu id="serie" value="#{alunoBean.aluno.idSerie}" >
+                                    <f:selectItem itemLabel="SELECIONE A SÉRIE" />       
+                                    <f:selectItems   value="#{alunoBean.series}" var="serie" itemLabel="#{serie.nome}" itemValue="#{serie.idSerie}"/>      
+                                    <p:ajax  event="change" listener="#{alunoBean.listarTurmasParametro(alunoBean.aluno.idSerie,alunoBean.aluno.inepEscola)}" update="@form:turma"/>
+                                </p:selectOneMenu> 
+                            </div>
+                        </div> 
+
+                        <div class="ui-g-12 ui-md-3">
+                            <div class="ui-inputgroup">
+                                <span class="ui-inputgroup-addon"><i class="fa fa-mortar-board"></i></span>
+                                <p:selectOneMenu id="turma" value="#{alunoBean.aluno.idTurma}" >
+                                    <f:selectItem itemLabel="SELECIONE A TURMA" />       
+                                    <f:selectItems  value="#{alunoBean.turmas}" var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.idTurma}"/>      
+
+                                </p:selectOneMenu>    
+                            </div>
+                        </div> 
+
+                  
 
 
 
