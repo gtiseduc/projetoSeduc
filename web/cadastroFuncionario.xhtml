@@ -80,26 +80,26 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
-                            <p:inputText placeholder="Código funcionário" value="#{alunoBean.aluno.idAluno}" disabled="true"/>      
+                            <p:inputText placeholder="Código funcionário" value="#{alunoBean.funcionario.codFuncionario}" disabled="true"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i  class="fa fa-key"></i></span>
-                            <p:inputText placeholder="Código inep" value="#{alunoBean.aluno.codInep}" disabled="true"/>      
+                            <p:inputText placeholder="Código inep" value="#{alunoBean.funcionario.codInep}" disabled="true"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                            <p:inputText placeholder="Nome Funcionário" value="#{alunoBean.aluno.nome}" />      
+                            <p:inputText placeholder="Nome Funcionário" value="#{alunoBean.funcionario.nomeFuncionario}" />      
                         </div>
                     </div>
 
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
-                            <p:inputText placeholder="Data Nascimento" value="#{alunoBean.aluno.dataNascimento}"/>      
+                            <p:datePicker placeholder="Data Nascimento" value="#{alunoBean.funcionario.dataNascimento}"/>      
                         </div>
                     </div>
 
@@ -109,25 +109,25 @@
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-home"></i></span>
-                            <p:inputText placeholder="Endereço" value="#{alunoBean.aluno.nomePai}"/>      
+                            <p:inputText placeholder="Endereço" value="#{alunoBean.funcionario.endereco}"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-institution"></i></span>
-                            <p:inputText placeholder="Cidade" value="#{alunoBean.aluno.nomeMae}"/>      
+                            <p:inputText placeholder="Cidade" value="#{alunoBean.funcionario.cidade}"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-phone-square"></i></span>
-                            <p:inputMask mask="(99) 99999-9999" placeholder="Telefone" value="#{alunoBean.aluno.nomeMae}"/>      
+                            <p:inputMask mask="(99) 99999-9999" placeholder="Telefone" value="#{alunoBean.funcionario.telefone}"/>      
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
-                            <p:inputMask mask="999.999.999-99" placeholder="Cpf" value="#{alunoBean.aluno.nomeMae}"/>      
+                            <p:inputMask mask="999.999.999-99" placeholder="Cpf" value="#{alunoBean.funcionario.cpf}"/>      
                         </div>
                     </div>
                     
@@ -138,14 +138,14 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-key"></i></span>
-                            <p:inputMask  mask="9999999" placeholder="Rg" value="#{alunoBean.aluno.nomeMae}"/>      
+                            <p:inputMask  mask="9999999" placeholder="Rg" value="#{alunoBean.funcionario.rg}"/>      
                                   
                         </div>
                     </div>
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-send"></i></span>
-                            <p:inputText placeholder="Email" value="#{alunoBean.aluno.nomeMae}"/>      
+                            <p:inputText placeholder="Email" value="#{alunoBean.funcionario.email}"/>      
                         </div>
                     </div>
                     <br/>
@@ -154,7 +154,7 @@
                     <div class="ui-g-12 ui-md-2">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-calendar"></i></span>
-                            <p:inputText placeholder="Data admissão" value="#{alunoBean.aluno.anoCadastro}"/>      
+                            <p:datePicker placeholder="Data admissão" value="#{alunoBean.funcionario.dataAdmissao}"/>      
                         </div>
                     </div>
 
@@ -164,11 +164,11 @@
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-group"></i></span>
-                            <p:selectOneMenu id="cargo" value="" >
+                            <p:selectOneMenu id="cargo" value="#{alunoBean.funcionario.cargo}" >
                                 <f:selectItem itemLabel="SELECIONE O CARGO" />       
-                                <f:selectItem itemLabel="EFETIVO" />       
-                                <f:selectItem itemLabel="COMISSIONADO" />       
-                                <f:selectItem itemLabel="CONTRATO" />       
+                                <f:selectItem itemLabel="EFETIVO" itemValue="EFETIVO"/>       
+                                <f:selectItem itemLabel="COMISSIONADO" itemValue="COMISSIONADO" />       
+                                <f:selectItem itemLabel="CONTRATO"  itemValue="CONTRATO"/>       
 
                              
                             </p:selectOneMenu>    
@@ -178,19 +178,19 @@
                     <div class="ui-g-12 ui-md-3">
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon"><i class="fa fa-group"></i></span>
-                            <p:selectOneMenu id="funcao" value="" >
+                            <p:selectOneMenu id="funcao" value="#{alunoBean.funcionario.funcao}" >
                                 
                                 <f:selectItem itemLabel="SELECIONE A FUNÇÃO" />       
-                                <f:selectItem itemLabel="PROFESSOR" />       
-                                <f:selectItem itemLabel="CUIDADOR" />       
-                                <f:selectItem itemLabel="COORDENADOR" />       
-                                <f:selectItem itemLabel="GESTOR" />       
-                                <f:selectItem itemLabel="GESTOR - ADJUNTO" />       
-                                <f:selectItem itemLabel="SECRETÁRIO" />       
-                                <f:selectItem itemLabel="CHEFE DE DISCIPLINA" />       
-                                <f:selectItem itemLabel="PORTEIRO" />       
-                                <f:selectItem itemLabel="SERVIÇO GERAIS" />       
-                                <f:selectItem itemLabel="AUXILIAR DE SECRETARIA" />       
+                                <f:selectItem itemLabel="PROFESSOR" itemValue="PROFESSOR"/>       
+                                <f:selectItem itemLabel="CUIDADOR" itemValue="CUIDADOR"/>       
+                                <f:selectItem itemLabel="COORDENADOR" itemValue="COORDENADOR"/>       
+                                <f:selectItem itemLabel="GESTOR" itemValue="GESTOR"/>       
+                                <f:selectItem itemLabel="GESTOR - ADJUNTO" itemValue="GESTOR - ADJUNTO"/>       
+                                <f:selectItem itemLabel="SECRETÁRIO" itemValue="SECRETÁRIO"/>       
+                                <f:selectItem itemLabel="CHEFE DE DISCIPLINA" itemValue="CHEFE DE DISCIPLINA"/>       
+                                <f:selectItem itemLabel="PORTEIRO" itemValue="PORTEIRO"/>       
+                                <f:selectItem itemLabel="SERVIÇO GERAIS" itemValue="SERVIÇO GERAIS"/>       
+                                <f:selectItem itemLabel="AUXILIAR DE SECRETARIA" itemValue="AUXILIAR DE SECRETARIA"/>       
 
                                
                             </p:selectOneMenu>    
@@ -208,7 +208,7 @@
 
 
 
-                    <p:commandButton value="Salvar" update="@form"/>
+                    <p:commandButton value="Salvar" action="#{alunoBean.salvarFuncionario()}" update="@form"/>
 
 
 
@@ -218,6 +218,38 @@
                 </div>
 
             </p:fieldset>
+            
+            <br></br>
+            <br></br>
+          
+            
+            <p:dataTable var="funcionarios" value="#{alunoBean.funcionarios}">
+                
+                <p:column headerText="Lista de Funcionários">
+                    <p:commandButton value="Editar"  update="@form"  />         
+                    <p:commandButton value="Excluir" update="@form" />
+                </p:column>
+                
+                <p:column headerText="Nome">
+                    <h:outputText value="#{funcionarios.nomeFuncionario}" />
+                </p:column>
+                
+                <p:column headerText="Endereco">
+                    <h:outputText value="#{funcionarios.endereco}" />
+                </p:column>
+                
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{funcionarios.telefone}" />
+                </p:column>
+                
+                <p:column headerText="Email">
+                    <h:outputText value="#{funcionarios.email}" />
+                </p:column>
+                <p:column headerText="Cargo">
+                    <h:outputText value="#{funcionarios.cargo}" />
+                </p:column>
+                
+            </p:dataTable>
 
 
 

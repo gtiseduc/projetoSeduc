@@ -19,6 +19,7 @@ import com.br.seducpaudalho.Entidade.Correcao;
 import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Disciplina;
 import com.br.seducpaudalho.Entidade.Escola;
+import com.br.seducpaudalho.Entidade.Funcionario;
 import com.br.seducpaudalho.Entidade.MonitoramentoAluno;
 import com.br.seducpaudalho.Entidade.Serie;
 import com.br.seducpaudalho.Entidade.Turma;
@@ -66,6 +67,8 @@ import org.primefaces.model.chart.LineChartModel;
 public class AlunoBean {
 
     private Aluno aluno = new Aluno();
+    private Funcionario funcionario = new Funcionario();
+    private List<Funcionario> funcionarios = new ArrayList<>();
     private MonitoramentoAluno monitor = new MonitoramentoAluno();
     private List<Aluno> alunos = new ArrayList<>();
     private List<MonitoramentoAluno> monitoramentos = new ArrayList<>();
@@ -184,6 +187,91 @@ public class AlunoBean {
         horizontalBarModel = null;
         horizontalEvasao = null;
         horizontalRendimento = null;
+    }
+    
+    public void salvarFuncionario(){
+    
+         if (funcionario.getNomeFuncionario().equals("")) {
+
+            adicionarMensagem("O CAMPO NOME É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         
+          if (funcionario.getDataNascimento() == null) {
+
+            adicionarMensagem("O CAMPO DATA de NASCIMENTO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+
+            return;
+
+        }
+         
+         if (funcionario.getEndereco().equals("")) {
+
+            adicionarMensagem("O CAMPO ENDEREÇO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getCidade().equals("")) {
+
+            adicionarMensagem("O CAMPO CIDADE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getTelefone().equals("")) {
+
+            adicionarMensagem("O CAMPO TELEFONE É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getRg().equals("")) {
+
+            adicionarMensagem("O CAMPO RG É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getCpf().equals("")) {
+
+            adicionarMensagem("O CAMPO CPF É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getEmail().equals("")) {
+
+            adicionarMensagem("O CAMPO EMAIL É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getDataAdmissao() == null) {
+
+            adicionarMensagem("O CAMPO DATA DE ADMISSÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+
+         if (funcionario.getCargo().equals("")) {
+
+            adicionarMensagem("O CAMPO CARGO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         if (funcionario.getFuncao().equals("")) {
+
+            adicionarMensagem("O CAMPO FUNÇÃO É OBRIGATÓRIO !", "", FacesMessage.SEVERITY_INFO);
+            return;
+
+        }
+         
+         try {
+            alunoDao.salvarFuncionario(funcionario);
+            adicionarMensagem("SALVO COM SUCESSO!", "", FacesMessage.SEVERITY_INFO);
+
+            funcionario = new Funcionario();
+           
+        } catch (ErroSistema ex) {
+            adicionarMensagem(ex.getMessage(), ex.getCause().getMessage(), FacesMessage.SEVERITY_ERROR);
+        }
+        
     }
 
     public void salvarAluno() throws ErroSistema {
@@ -3831,6 +3919,26 @@ public class AlunoBean {
     public void setImgM(String imgM) {
         this.imgM = imgM;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+    
+    
+    
+    
 
 }
 /*String frase = "00149/007587/10987";

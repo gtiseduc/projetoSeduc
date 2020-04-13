@@ -12,6 +12,7 @@ import com.br.seducpaudalho.Entidade.Correcao;
 import com.br.seducpaudalho.Entidade.Descritor;
 import com.br.seducpaudalho.Entidade.Fornecedor;
 import com.br.seducpaudalho.Entidade.FrequenciaTurma;
+import com.br.seducpaudalho.Entidade.Funcionario;
 import com.br.seducpaudalho.Entidade.MonitoramentoAluno;
 import com.br.seducpaudalho.Entidade.Produto;
 import com.br.seducpaudalho.Entidade.RendimentoTurma;
@@ -72,6 +73,46 @@ public class AlunoDao {
             throw new ErroSistema("erroooooo--------------------", e);
         }
         System.out.println("com.br.seducpaudalho.Dao.AlunoDao.salvarAluno()" + aluno.getNome());
+    }
+
+    public void salvarFuncionario(Funcionario funcionario) throws ErroSistema {
+        try {
+            String sql = "";
+            Connection conexao = FabricaConexao.getConnection();
+            PreparedStatement ps;
+
+           if(funcionario.getCodFuncionario() == 0){
+                System.out.println("--------- entrou no if cadastro aluno");
+                ps = conexao.prepareStatement("INSERT INTO funcionario(codFuncionario,inepEscola,nomeFuncionario,endereco,cidade,telefone,cpf,rg,email,cargo,funcao,dataNascimento,dataAdmissao)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            } else {
+                System.out.println("--------- entrou no else cadastro aluno" + funcionario.getCodFuncionario());
+                ps = conexao.prepareStatement("UPDATE funcionario SET codFuncionario=?,inepEscola=?,nomeFuncionario=?,endereco=?,cidade=?,telefone=?,cpf=?,rg=?,email=?,cargo=?,funcao=?,dataNascimento=?,dataAdmissao=? where codFuncionario=?");
+                ps.setInt(14, funcionario.getCodFuncionario());
+            }
+
+            ps.setInt(1, funcionario.getCodFuncionario());
+            ps.setInt(2, funcionario.getCodInep());
+            
+            ps.setString(3, funcionario.getNomeFuncionario());
+            ps.setString(4, funcionario.getEndereco());
+            ps.setString(5, funcionario.getCidade());
+            ps.setString(6, funcionario.getTelefone());
+            ps.setString(7, funcionario.getCpf());
+            ps.setString(8, funcionario.getRg());
+            ps.setString(9, funcionario.getEmail());
+            ps.setString(10, funcionario.getCargo());
+            ps.setString(11, funcionario.getFuncao());
+            ps.setDate(12, new Date(funcionario.getDataNascimento().getTime()));
+            ps.setDate(13, new Date(funcionario.getDataAdmissao().getTime()));
+            ps.execute();
+            System.out.println("inserindo funcionario---------------------------------------");
+            FabricaConexao.fecharConexao();
+
+        } catch (Exception e) {
+            System.out.println("#########################" + e);
+            throw new ErroSistema("erroooooo--------------------", e);
+        }
+        
     }
 
     public List<Aluno> listarAlunos() throws ErroSistema {
@@ -214,6 +255,7 @@ public class AlunoDao {
         return alunos;
 
     }
+
     public List<MonitoramentoAluno> imprimirMonitoramento(Integer codigoTurma, Integer inepEscola, Integer codSerie, Integer codDisciplina) throws ErroSistema {
 
         System.out.println("**************" + codigoTurma);
@@ -223,11 +265,10 @@ public class AlunoDao {
 
         String sql = "select * from monitoramento as a \n"
                 + "join escola e on e.inepEscola = a.inepEscola\n"
-                + "join aluno al on al.codAluno = a.codAluno\n"            
+                + "join aluno al on al.codAluno = a.codAluno\n"
                 + "join serie s on s.codSerie = a.codSerie\n"
                 + "join turma t on t.codTurma = a.codTurma\n"
                 + "join disciplina d on d.codDisciplina = a.codDisciplina\n"
-                
                 + "WHERE a.inepEscola = ? && a.codserie = ? && a.codTurma = ? && a.codDisciplina = ? order by nomeAluno";
         //String sql = "select * from aluno where codSerie = ? && inepescola = ? && codTurma = ?  ";
 
@@ -252,102 +293,97 @@ public class AlunoDao {
                 aluno.setInepEscola(rs.getInt("inepEscola"));
                 aluno.setNomeAluno(rs.getString("nomeAluno"));
                 aluno.setCodDisciplina(rs.getInt("codDisciplina"));
-                
-              if(rs.getBoolean("resp1") == true){
-                aluno.setResp1(true);
-              } else{
-               aluno.setResp1(false);
-              }
-              
-              if(rs.getBoolean("resp2") == true){
-                aluno.setResp2(true);
-              } else{
-               aluno.setResp2(false);
-              }
-              if(rs.getBoolean("resp3") == true){
-                aluno.setResp3(true);
-              } else{
-               aluno.setResp3(false);
-              }
-              if(rs.getBoolean("resp4") == true){
-                aluno.setResp4(true);
-              } else{
-               aluno.setResp4(false);
-              }
-              if(rs.getBoolean("resp5") == true){
-                aluno.setResp5(true);
-              } else{
-               aluno.setResp5(false);
-              }
-              if(rs.getBoolean("resp6") == true){
-                aluno.setResp6(true);
-              } else{
-               aluno.setResp6(false);
-              }
-              
-              if(rs.getBoolean("resp7") == true){
-                aluno.setResp7(true);
-              } else{
-               aluno.setResp7(false);
-              }
-              if(rs.getBoolean("resp8") == true){
-                aluno.setResp8(true);
-              } else{
-               aluno.setResp8(false);
-              }
-              if(rs.getBoolean("resp9") == true){
-                aluno.setResp9(true);
-              } else{
-               aluno.setResp9(false);
-              }
-              if(rs.getBoolean("resp10") == true){
-                aluno.setResp10(true);
-              } else{
-               aluno.setResp10(false);
-              }
-              if(rs.getBoolean("resp11") == true){
-                aluno.setResp11(true);
-              } else{
-               aluno.setResp11(false);
-              }
-              if(rs.getBoolean("resp12") == true){
-                aluno.setResp12(true);
-              } else{
-               aluno.setResp12(false);
-              }
-              if(rs.getBoolean("resp13") == true){
-                aluno.setResp13(true);
-              } else{
-               aluno.setResp13(false);
-              }
-              if(rs.getBoolean("resp14") == true){
-                aluno.setResp14(true);
-              } else{
-               aluno.setResp14(false);
-              }
-              if(rs.getBoolean("resp15") == true){
-                aluno.setResp15(true);
-              } else{
-               aluno.setResp15(false);
-              }
-              if(rs.getBoolean("resp16") == true){
-                aluno.setResp16(true);
-              } else{
-               aluno.setResp16(false);
-              }
-              if(rs.getBoolean("resp17") == true){
-                aluno.setResp17(true);
-              } else{
-               aluno.setResp17(false);
-              }
-              
-              
 
-              
-               // aluno.setNome(rs.getString("nomeAluno"));
-               
-              //  System.out.println("NOME DO ALUNO : " + aluno.getNomeAluno());
+                if (rs.getBoolean("resp1") == true) {
+                    aluno.setResp1(true);
+                } else {
+                    aluno.setResp1(false);
+                }
 
+                if (rs.getBoolean("resp2") == true) {
+                    aluno.setResp2(true);
+                } else {
+                    aluno.setResp2(false);
+                }
+                if (rs.getBoolean("resp3") == true) {
+                    aluno.setResp3(true);
+                } else {
+                    aluno.setResp3(false);
+                }
+                if (rs.getBoolean("resp4") == true) {
+                    aluno.setResp4(true);
+                } else {
+                    aluno.setResp4(false);
+                }
+                if (rs.getBoolean("resp5") == true) {
+                    aluno.setResp5(true);
+                } else {
+                    aluno.setResp5(false);
+                }
+                if (rs.getBoolean("resp6") == true) {
+                    aluno.setResp6(true);
+                } else {
+                    aluno.setResp6(false);
+                }
+
+                if (rs.getBoolean("resp7") == true) {
+                    aluno.setResp7(true);
+                } else {
+                    aluno.setResp7(false);
+                }
+                if (rs.getBoolean("resp8") == true) {
+                    aluno.setResp8(true);
+                } else {
+                    aluno.setResp8(false);
+                }
+                if (rs.getBoolean("resp9") == true) {
+                    aluno.setResp9(true);
+                } else {
+                    aluno.setResp9(false);
+                }
+                if (rs.getBoolean("resp10") == true) {
+                    aluno.setResp10(true);
+                } else {
+                    aluno.setResp10(false);
+                }
+                if (rs.getBoolean("resp11") == true) {
+                    aluno.setResp11(true);
+                } else {
+                    aluno.setResp11(false);
+                }
+                if (rs.getBoolean("resp12") == true) {
+                    aluno.setResp12(true);
+                } else {
+                    aluno.setResp12(false);
+                }
+                if (rs.getBoolean("resp13") == true) {
+                    aluno.setResp13(true);
+                } else {
+                    aluno.setResp13(false);
+                }
+                if (rs.getBoolean("resp14") == true) {
+                    aluno.setResp14(true);
+                } else {
+                    aluno.setResp14(false);
+                }
+                if (rs.getBoolean("resp15") == true) {
+                    aluno.setResp15(true);
+                } else {
+                    aluno.setResp15(false);
+                }
+                if (rs.getBoolean("resp16") == true) {
+                    aluno.setResp16(true);
+                } else {
+                    aluno.setResp16(false);
+                }
+                if (rs.getBoolean("resp17") == true) {
+                    aluno.setResp17(true);
+                } else {
+                    aluno.setResp17(false);
+                }
+
+                // aluno.setNome(rs.getString("nomeAluno"));
+                //  System.out.println("NOME DO ALUNO : " + aluno.getNomeAluno());
                 alunos.add(aluno);
             }
 
@@ -856,12 +892,13 @@ public class AlunoDao {
         return t;
 
     }
-    public List<Serie> listarRendimentoSerie( Integer codSerie, Integer disciplina) throws ErroSistema {
+
+    public List<Serie> listarRendimentoSerie(Integer codSerie, Integer disciplina) throws ErroSistema {
 
         String sql = "select * from rendimentoserie as a \n"
                 + "                join escola e on e.inepEscola = a.inepEscola\n"
                 + "                join serie s on s.codSerie = a.codSerie\n"
-                + "                WHERE  a.codserie = ? && a.codDisciplina = ? order by rendimento desc"  ;
+                + "                WHERE  a.codserie = ? && a.codDisciplina = ? order by rendimento desc";
 
         List<Serie> t = new ArrayList<>();
 
@@ -869,7 +906,7 @@ public class AlunoDao {
             Connection conexao = FabricaConexao.getConnection();
 
             PreparedStatement ps = conexao.prepareStatement(sql);
-            
+
             ps.setInt(1, codSerie);
             ps.setInt(2, disciplina);
 
@@ -1617,7 +1654,7 @@ public class AlunoDao {
     }
 
     public void deletar(Aluno p) throws ErroSistema {
-        
+
         System.out.println("com.br.seducpaudalho.Dao.FornecedorDao.deletar()" + p.getIdAluno());
 
         String sql = "delete from aluno where codAluno = ?";
@@ -1632,12 +1669,12 @@ public class AlunoDao {
 
             throw new ErroSistema("ERRO AO DELETAR PRODUTO");
         }
-        
+
     }
 
     public void inserirRendimentoSerie(Integer inep, Integer serie, Integer disciplina, double rendSerie) throws ErroSistema {
-       
-         try {
+
+        try {
 
             Integer codRendimento = pesquisarRendimentoSerie(inep, serie, disciplina);
 
@@ -1654,7 +1691,6 @@ public class AlunoDao {
                 ps.setInt(5, codRendimento);
             }
 
-          
             ps.setInt(1, inep);
             ps.setInt(2, serie);
             ps.setInt(3, disciplina);
@@ -1669,12 +1705,10 @@ public class AlunoDao {
             throw new ErroSistema("erroooooo--------------------", e);
         }
 
-        
-        
     }
 
     private Integer pesquisarRendimentoSerie(Integer inep, Integer serie, Integer disciplina) throws ErroSistema {
-      
+
         String sql = "select * from rendimentoserie where inepEscola = ? && codSerie = ?  && codDisciplina = ?";
         Integer a = null;
         try {
@@ -1683,7 +1717,7 @@ public class AlunoDao {
             PreparedStatement ps = conexao.prepareStatement(sql);
 
             ps.setInt(1, inep);
-          
+
             ps.setInt(2, serie);
             ps.setInt(3, disciplina);
             ResultSet rs = ps.executeQuery();
@@ -1699,7 +1733,7 @@ public class AlunoDao {
             throw new ErroSistema("erroooooo--------------------", e);
 
         }
-        return a; 
+        return a;
     }
 
 }
